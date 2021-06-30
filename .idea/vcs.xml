@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/Makeus/Eatoo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Project/Duke/SearchCelebrities" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Project/Duke/WhoRU" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Project/WhoRU" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Soomgo/soomgo_mock_android_duke" vcs="Git" />
+  </component>
+</project>

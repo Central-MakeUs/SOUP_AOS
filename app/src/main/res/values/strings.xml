@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Eatoo</string>
+
+
+    <!-- bottom navigation -->
+    <string name="home">홈</string>
+    <string name="suggestion">제안</string>
+    <string name="wishlist">찜</string>
+    <string name="myPage">My</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
