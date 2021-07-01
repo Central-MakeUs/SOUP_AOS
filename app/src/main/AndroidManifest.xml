@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Eatoo">
-        <activity android:name=".src.explanation.ExplanationActivity"></activity>
+        <activity android:name=".src.main.create_group.CreateGroupActivity"></activity>
+        <activity android:name=".src.explanation.ExplanationActivity" />
         <activity android:name=".src.splash.SplashActivity"> <!-- 스플래시 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
