@@ -1,6 +1,5 @@
 package com.example.eatoo.src.main.create_group
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityCreateGroupBinding

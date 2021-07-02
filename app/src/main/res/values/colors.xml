@@ -17,4 +17,10 @@
     <color name="gray_200">#a0a0a0</color>
     <color name="gray_100">#d8d8d8</color>
     <color name="gray_000">#f1f1f1</color>
+
+
+
+
+    <!--make group-->
+    <color name="chip_ripple_color">#10FFFFFF</color>
 </resources>

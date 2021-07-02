@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,10 +21,6 @@
             app:titleText="@string/create_group_toolbar" />
 
     </androidx.cardview.widget.CardView>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,6 +53,72 @@
             android:text="@string/create_group_color"
             android:textColor="@color/black" />
 
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_group_color1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CustomChipStyle"
+                app:chipIcon="@drawable/color_chip1"
+                app:checkedIconEnabled="false"
+                app:closeIconEnabled="false"
+                app:chipStartPadding="4dp"
+                app:chipEndPadding="-10dp"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_group_color2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CustomChipStyle"
+                app:chipIcon="@drawable/color_chip2"
+                app:checkedIconEnabled="false"
+                app:closeIconEnabled="false"
+                app:chipStartPadding="4dp"
+                app:chipEndPadding="-10dp"
+                />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_group_color3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CustomChipStyle"
+                app:chipIcon="@drawable/color_chip3"
+                app:checkedIconEnabled="false"
+                app:closeIconEnabled="false"
+                app:chipStartPadding="4dp"
+                app:chipEndPadding="-10dp"
+                />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_group_color4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CustomChipStyle"
+                app:chipIcon="@drawable/color_chip4"
+                app:checkedIconEnabled="false"
+                app:closeIconEnabled="false"
+                app:chipStartPadding="4dp"
+                app:chipEndPadding="-10dp"
+                />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_group_color5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CustomChipStyle"
+                app:chipIcon="@drawable/color_chip5"
+                app:checkedIconEnabled="false"
+                app:closeIconEnabled="false"
+                app:chipStartPadding="4dp"
+                app:chipEndPadding="-10dp"
+                />
+
+
+        </com.google.android.material.chip.ChipGroup>
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,8 +144,4 @@
                 android:textColor="@color/white" />
 
         </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
-
 </LinearLayout>

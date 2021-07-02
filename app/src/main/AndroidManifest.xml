@@ -26,11 +26,7 @@
         <activity android:name=".src.signinlogin.signin.SignInActivity" />
         <activity android:name=".src.signinlogin.login.LoginActivity" />
         <activity android:name=".src.main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
