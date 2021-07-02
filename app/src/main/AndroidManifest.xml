@@ -5,13 +5,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".config.ApplicationClass"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Eatoo">
-        <activity android:name=".src.explanation.ExplanationActivity"></activity>
+        <activity android:name=".src.signinlogin.signin.SignInActivity3"></activity>
+        <activity android:name=".src.signinlogin.signin.SignInActivity2" />
+        <activity android:name=".src.explanation.ExplanationActivity" />
         <activity android:name=".src.splash.SplashActivity"> <!-- 스플래시 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
