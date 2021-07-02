@@ -7,7 +7,25 @@
     <string name="suggestion">제안</string>
     <string name="wishlist">찜</string>
     <string name="myPage">My</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--create group-->
+    <string name="create_group_toolbar">그룹 만들기</string>
+    <string name="create_group_suggest1">님의 MATE</string>
+    <string name="create_group_suggest2">GROUP을 만들어보세요!</string>
+    <string name="create_group_name">그룹명</string>
+    <string name="create_group_name_suggest">그룹 이름을 입력해주세요</string>
+    <string name="create_group_color">색상</string>
+    <string name="create_group_keyword">키워드</string>
+    <string name="create_group_location">위치</string>
+    <string name="create_group_register">등록하기</string>
+    <string name="create_group_change_location">변경하기</string>
+
+    <!--group main-->
+    <string name="group_main">MAIN</string>
+    <string name="group_category">카테고리</string>
+    <string name="group_vote">투표</string>
+    <string name="group_member">멤버</string>
+    <string name="group_diet">오늘의 식단</string>
+    <string name="group_finding_mate">MATE를 찾아요!</string>
 
 </resources>
