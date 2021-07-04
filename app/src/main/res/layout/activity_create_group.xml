@@ -151,10 +151,10 @@
 
         </LinearLayout>
 
-    <fragment
-        android:id="@+id/frag_create_group_map"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+<!--    <fragment-->
+<!--        android:id="@+id/frag_create_group_map"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:name="com.google.android.gms.maps.SupportMapFragment"/>-->
 
 </LinearLayout>
