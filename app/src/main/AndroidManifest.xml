@@ -15,23 +15,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".src.main.create_group.GroupLocationActivity"/>
-        <activity android:name=".src.signinlogin.signin.SignInActivity3" />
-        <activity android:name=".src.signinlogin.signin.SignInActivity2" />
-        <activity android:name=".src.explanation.ExplanationActivity" />
-        <activity android:name=".src.splash.SplashActivity"> <!-- 스플래시 -->
-
-        </activity>
-        <activity android:name=".src.main.create_group.CreateGroupActivity">
+        <activity android:name=".src.main.create_group.GroupLocationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".src.signinlogin.signin.SignInActivity3" />
+        <activity android:name=".src.signinlogin.signin.SignInActivity2" />
+        <activity android:name=".src.explanation.ExplanationActivity" />
+        <activity android:name=".src.splash.SplashActivity">
+
+        </activity>
+        <activity android:name=".src.main.create_group.CreateGroupActivity">
+
+        </activity>
         <activity android:name=".src.signinlogin.signin.SignInActivity" />
         <activity android:name=".src.signinlogin.login.LoginActivity" />
         <activity android:name=".src.main.MainActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_map" />
     </application>
 
 </manifest>

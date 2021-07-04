@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityCreateGroupBinding
 import com.example.eatoo.databinding.ActivityGroupLocationBinding
+import com.example.eatoo.src.main.create_group.CreateGroupActivity.Companion.SEARCH_RESULT_EXTRA_KEY
 import com.example.eatoo.src.main.create_group.adapter.LocationSearchRvAdapter
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
 import com.example.googlemapsapiprac.model.SearchResultEntity
@@ -71,9 +72,9 @@ class GroupLocationActivity : BaseActivity<ActivityGroupLocationBinding>(Activit
                 "빌딩이름 : ${it.buildingName}, 주소: ${it.fullAddress}, 위도/경도: ${it.locationLatLng}",
                 Toast.LENGTH_SHORT
             ).show()
-//            startActivity(Intent(this, MapActivity::class.java).apply {
-//                putExtra(SEARCH_RESULT_EXTRA_KEY, it)
-//            })
+            startActivity(Intent(this, CreateGroupActivity::class.java).apply {
+                putExtra(SEARCH_RESULT_EXTRA_KEY, it)
+            })
         }
     }
 
