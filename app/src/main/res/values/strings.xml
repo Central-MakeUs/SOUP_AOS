@@ -28,4 +28,7 @@
     <string name="group_diet">오늘의 식단</string>
     <string name="group_finding_mate">MATE를 찾아요!</string>
 
+    <!--group location-->
+    <string name="search_location_fail">검색 결과를 가져오지 못 했습니다.</string>
+
 </resources>

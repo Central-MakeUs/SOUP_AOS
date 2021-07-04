@@ -131,6 +131,12 @@
             android:text="@string/create_group_location"
             android:textColor="@color/black" />
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="주소를 입력해주세요."
+        android:id="@+id/et_create_group_location"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -144,4 +150,11 @@
                 android:textColor="@color/white" />
 
         </LinearLayout>
+
+    <fragment
+        android:id="@+id/frag_create_group_map"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
 </LinearLayout>
