@@ -31,4 +31,24 @@
     <!--group location-->
     <string name="search_location_fail">검색 결과를 가져오지 못 했습니다.</string>
 
+
+    <!-- login_sign_in-->
+    <string name="login">로그인</string>
+    <string name="sign_in">회원가입</string>
+    <string name="name">이름</string>
+    <string name="phone_number">휴대폰 번호</string>
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+    <string name="password_check">비밀번호 확인</string>
+    <string name="nickname">닉네임</string>
+    <string name="next">다음으로</string>
+    <string name="sign_in_check">가입하기</string>
+    <string name="sign_in_hint">회원가입</string>
+    <string name="name_hint">이름을 입력해주세요</string>
+    <string name="phone_number_hint">\'-\'를 제외하고 입력해주세요</string>
+    <string name="email_hint">이메일을 입력해주세요</string>
+    <string name="password_hint">비밀번호를 입력해주세요</string>
+    <string name="password_check_hint">비밀번호를 다시 입력해주세요</string>
+    <string name="nickname_hint">닉네임을 입력해주세요</string>
+
 </resources>

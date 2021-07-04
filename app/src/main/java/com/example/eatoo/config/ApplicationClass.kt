@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 // 앱이 실행될때 1번만 실행이 됩니다.
 class ApplicationClass : Application() {
-    val API_URL = ""
+    val API_URL = "https://www.eatoo.site/"
 
     // 테스트 서버 주소
     // val API_URL = "http://dev-api.test.com/"
@@ -23,7 +23,9 @@ class ApplicationClass : Application() {
         lateinit var sSharedPreferences: SharedPreferences
 
         // JWT Token Header 키 값
-        val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
+        var X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
+
+        var TOKEN = ""
 
         // Retrofit 인스턴스, 앱 실행시 한번만 생성하여 사용합니다.
         lateinit var sRetrofit: Retrofit
@@ -38,6 +40,7 @@ class ApplicationClass : Application() {
         sSharedPreferences =
             applicationContext.getSharedPreferences("SOFTSQUARED_TEMPLATE_APP", MODE_PRIVATE)
         // 레트로핏 인스턴스 생성
+
         initRetrofitInstance()
 
         applicationResources = resources
@@ -51,7 +54,7 @@ class ApplicationClass : Application() {
         // sRetrofit 이라는 전역변수에 API url, 인터셉터, Gson을 넣어주고 빌드해주는 코드
         // 이 전역변수로 http 요청을 서버로 보내면 됩니다.
         sRetrofit = Retrofit.Builder()
-            .baseUrl(API_URL)
+            .baseUrl("https://www.eatoo.site/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
