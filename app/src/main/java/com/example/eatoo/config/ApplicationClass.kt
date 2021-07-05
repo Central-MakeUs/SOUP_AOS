@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.properties.Delegates
 
 
 // 앱이 실행될때 1번만 실행이 됩니다.
@@ -32,6 +33,8 @@ class ApplicationClass : Application() {
 
         //application resource
         lateinit var applicationResources: Resources
+
+
     }
 
     // 앱이 처음 생성되는 순간, SP를 새로 만들어주고, 레트로핏 인스턴스를 생성합니다.

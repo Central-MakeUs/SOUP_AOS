@@ -22,6 +22,20 @@
     <string name="input_location">위치를 직접 입력해주세요</string>
     <string name="set_current_location">현 위치로 주소 설정하기</string>
     <string name="search_address_fail">현 위치 주소를 가져오지 못 했습니다.</string>
+    <string name="input_jwt_request">JWT를 입력해주세요.</string>
+    <string name="invalid_jwt">유효하지 않은 JWT입니다.</string>
+    <string name="invalid_account">현재 존재하지 않는 계정입니다.</string>
+    <string name="input_group_name_request">그룹명을 입력해주세요.</string>
+    <string name="input_color_request">색상을 입력해주세요.</string>
+    <string name="input_latitude">위도를 입력해주세요.</string>
+    <string name="input_longitude">경도를 입력해주세요.</string>
+    <string name="check_group_name">그룹명 형식을 확인해주세요.</string>
+    <string name="check_color_range">색상 입력 범위를 확인해주세요.</string>
+    <string name="check_latitude">위도 입력 범위를 확인해주세요.</string>
+    <string name="check_longitude">경도 입력 범위를 확인해주세요.</string>
+    <string name="check_keyword_count">키워드 글자수를 확인해주세요.</string>
+    <string name="failed_db_connection">데이터베이스 연결에 실패하였습니다.</string>
+
 
 
     <!--group location-->

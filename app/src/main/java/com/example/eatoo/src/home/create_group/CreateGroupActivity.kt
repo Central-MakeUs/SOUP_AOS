@@ -8,18 +8,30 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
+import android.util.TypedValue
+import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.eatoo.R
+import com.example.eatoo.config.ApplicationClass
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityCreateGroupBinding
 import com.example.eatoo.src.home.create_group.group_location.GroupLocationActivity
+import com.example.eatoo.src.home.create_group.model.CreateGroupRequest
+import com.example.eatoo.src.home.create_group.model.CreateGroupResponse
+import com.example.eatoo.src.home.create_group.model.Keyword
 import com.example.eatoo.src.home.group.GroupActivity
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
 import com.example.googlemapsapiprac.model.SearchResultEntity
 import com.example.googlemapsapiprac.response.address.AddressInfoResponse
+import com.google.android.flexbox.FlexboxLayout
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -27,6 +39,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.chip.Chip
+import kotlin.math.roundToInt
 
 class CreateGroupActivity :
     BaseActivity<ActivityCreateGroupBinding>(ActivityCreateGroupBinding::inflate),
@@ -38,6 +52,8 @@ class CreateGroupActivity :
     private lateinit var locationManager: LocationManager
     private lateinit var myLocationListener: MyLocationListener
     private lateinit var locationLatLngEntity: LocationLatLngEntity
+    var latitude: Double = 0.0
+    var longitude: Double = 0.0
     val PERMISSION_REQUEST_CODE = 101
     var mapShowing = false
 
@@ -50,7 +66,9 @@ class CreateGroupActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initKeywordChips()
 
+        getSearchIntent()
         enableMap()
         closeMap()
 
@@ -60,6 +78,58 @@ class CreateGroupActivity :
         registerGroup()
 
 
+    }
+
+    /*
+
+    keyword chips
+
+     */
+    private fun initKeywordChips() {
+        binding.etKeyword.setOnKeyListener { v, i, keyEvent ->
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                val et = v as EditText
+                val keyword = et.text.toString()
+                binding.flexboxMakeGroup.addChip(keyword)
+                et.text.clear()
+
+            }
+            false
+        }
+    }
+
+    @SuppressLint("InflateParams")
+    private fun FlexboxLayout.addChip(keyword: String) {
+        val chip = LayoutInflater.from(context).inflate(R.layout.view_chip, null) as Chip
+        chip.text = keyword
+        val layoutParams = ViewGroup.MarginLayoutParams(
+            ViewGroup.MarginLayoutParams.WRAP_CONTENT,
+            ViewGroup.MarginLayoutParams.WRAP_CONTENT
+        )
+        layoutParams.rightMargin = dpToPx(4)
+        chip.setOnCloseIconClickListener {
+            removeView(chip as View)
+        }
+        addView(chip, childCount - 1, layoutParams)
+    }
+
+    fun Context.dpToPx(dp: Int): Int = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        dp.toFloat(),
+        resources.displayMetrics
+    ).roundToInt()
+
+    private fun FlexboxLayout.getAllChips(): List<Keyword> {
+        var keywordList : MutableList<Keyword> = mutableListOf()
+        (0 until childCount-1).mapNotNull { index ->
+            val childChip = getChildAt(index) as? Chip
+            keywordList.add(Keyword(name = childChip?.text.toString()))
+        }
+        return keywordList
+    }
+
+
+    private fun getSearchIntent() {
         val intentResult = intent.getParcelableExtra<SearchResultEntity>(SEARCH_RESULT_EXTRA_KEY)
         if (intentResult != null) { //위치를 검색해서 다시 돌아온 경우
             searchResult = intentResult
@@ -67,12 +137,44 @@ class CreateGroupActivity :
             mapShowing = true
             setupGoogleMap()
         }
-
     }
+
+    /*
+
+    get color chips
+
+     */
+
+    private fun getGroupColor(): Int{
+        val checkedChip
+        = binding.chipgroupMakegroup.findViewById<Chip>(binding.chipgroupMakegroup.checkedChipId).tag
+
+        return checkedChip.toString().toInt()
+    }
+
+    /*
+
+    register
+
+     */
 
     private fun registerGroup() {
         binding.llMakegroupRegister.setOnClickListener {
-            startActivity(Intent(this, GroupActivity::class.java))
+
+            val keywordList = binding.flexboxMakeGroup.getAllChips()
+            val groupColor = getGroupColor()
+
+            val group = CreateGroupRequest(
+                name = binding.etGroupName.text.toString(),
+                color = groupColor ,
+                latitude = latitude,
+                longitude = longitude,
+                keyword = keywordList
+            )
+            val userIdx = ApplicationClass.sSharedPreferences.getInt("USER_INDEX", -1)
+
+            CreateGroupService(this).tryPostGroup(userIdx = userIdx, createGroup = group)
+
         }
     }
 
@@ -101,7 +203,7 @@ class CreateGroupActivity :
             startActivity(Intent(this, GroupLocationActivity::class.java))
         }
         binding.btnChangeLocation.setOnClickListener {
-            if(mapShowing) startActivity(Intent(this, GroupLocationActivity::class.java))
+            if (mapShowing) startActivity(Intent(this, GroupLocationActivity::class.java))
         }
 
     }
@@ -131,18 +233,21 @@ class CreateGroupActivity :
     }
 
     private fun setupMarker(searchResult: SearchResultEntity): Marker? { //검색한 위도경도
-        val positionLatLng = LatLng(
-            searchResult.locationLatLng.latitude.toDouble(),
-            searchResult.locationLatLng.longitude.toDouble()
-        )
+        latitude = searchResult.locationLatLng.latitude.toDouble()
+        longitude = searchResult.locationLatLng.longitude.toDouble()
+
+        val positionLatLng = LatLng(latitude, longitude)
         val markerOptions = MarkerOptions().apply {
             position(positionLatLng)
             title(searchResult.buildingName)
             snippet(searchResult.fullAddress)
         }
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(positionLatLng,
-           CAMERA_ZOOM_LEVEL
-        ))
+        map.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                positionLatLng,
+                CAMERA_ZOOM_LEVEL
+            )
+        )
 
         return map.addMarker(markerOptions)
     }
@@ -222,21 +327,18 @@ class CreateGroupActivity :
     }
 
     private fun onCurrentLocationChanged(locationLatLngEntity: LocationLatLngEntity) {
+        latitude = locationLatLngEntity.latitude.toDouble()
+        longitude = locationLatLngEntity.longitude.toDouble()
+
         map.moveCamera(
-            CameraUpdateFactory.newLatLngZoom(
-                LatLng(
-                    locationLatLngEntity.latitude.toDouble(),
-                    locationLatLngEntity.longitude.toDouble()
-                ),
-               CAMERA_ZOOM_LEVEL
-            )
+            CameraUpdateFactory.newLatLngZoom(LatLng(latitude, longitude), CAMERA_ZOOM_LEVEL)
         )
         loadReverseGeoInfo(locationLatLngEntity)
         removeLocationListener()
     }
 
     private fun loadReverseGeoInfo(locationLatLngEntity: LocationLatLngEntity) {
-       CreateGroupService(this).tryGetCurrentAddress(
+        CreateGroupService(this).tryGetCurrentAddress(
             locationLatLngEntity.latitude.toDouble(),
             locationLatLngEntity.longitude.toDouble()
         )
@@ -263,6 +365,15 @@ class CreateGroupActivity :
     }
 
     override fun onGetCurrentAddressFail(message: String?) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPostGroupSuccess(response: CreateGroupResponse) {
+        Log.d("createGroup", response.toString())
+        startActivity(Intent(this, GroupActivity::class.java))
+    }
+
+    override fun onPostGroupFail(message: String?) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 

@@ -76,11 +76,10 @@ dependencies {
     // DotsIndicator Github Library
     implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
 
-    //coroutines
-//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
-//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
-
     //google maps
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+    //flex box
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 }

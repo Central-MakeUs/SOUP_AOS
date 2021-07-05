@@ -2,11 +2,11 @@ package com.example.eatoo.src.home.create_group
 
 import com.example.eatoo.src.home.create_group.api_util.TmapKey
 import com.example.eatoo.src.home.create_group.api_util.TmapUrl
+import com.example.eatoo.src.home.create_group.model.CreateGroupRequest
+import com.example.eatoo.src.home.create_group.model.CreateGroupResponse
 import com.example.googlemapsapiprac.response.address.AddressInfoResponse
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface CreateGroupRetrofitInterface {
     @GET(TmapUrl.GET_TMAP_REVERSE_GEO_CODE)
@@ -19,4 +19,12 @@ interface CreateGroupRetrofitInterface {
         @Query("coordType") coordType: String? = null,
         @Query("addressType") addressType: String? = null
     ): Call<AddressInfoResponse>
+
+
+    @POST("/app/groups/{userIdx}")
+    fun postGroup(
+        @Body createGroupRequest: CreateGroupRequest,
+        @Path("userIdx") userIdx: Int
+    ) : Call<CreateGroupResponse>
+
 }
