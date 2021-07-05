@@ -23,7 +23,8 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="36dp"
-        android:paddingStart="12dp"        android:fontFamily="sans-serif"
+        android:paddingStart="12dp"
+        android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textSize="15sp"
         android:textColor="#000000"
@@ -36,7 +37,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+        tools:ignore="Autofill,RtlSymmetry" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView7"
@@ -52,7 +54,8 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/email_edt"
         app:layout_constraintTop_toBottomOf="@+id/email_edt"
-        tools:text="이메일은 중복이 불가능합니다." />
+        android:text="이메일은 중복이 불가능합니다."
+        tools:ignore="HardcodedText,SmallSp" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -91,11 +94,13 @@
         android:lineSpacingExtra="9sp"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
-        android:paddingStart="12dp"        android:singleLine="true"
+        android:paddingStart="12dp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7" />
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7"
+        tools:ignore="Autofill,MissingPrefix,RtlSymmetry" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -112,7 +117,8 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/password_edt"
         app:layout_constraintTop_toBottomOf="@+id/password_edt"
-        tools:text="영문, 숫자 포함 8자 이상" />
+        android:text="영문, 숫자 포함 8자 이상"
+        tools:ignore="HardcodedText,SmallSp" />
 
 
 
@@ -156,7 +162,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8" />
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8"
+        tools:ignore="Autofill,RtlSymmetry" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -173,7 +180,8 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/password_check_edt"
         app:layout_constraintTop_toBottomOf="@+id/password_check_edt"
-        tools:text="영문, 숫자 포함 8자 이상" />
+        android:text="영문, 숫자 포함 8자 이상"
+        tools:ignore="HardcodedText,SmallSp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/password_check_txt"
