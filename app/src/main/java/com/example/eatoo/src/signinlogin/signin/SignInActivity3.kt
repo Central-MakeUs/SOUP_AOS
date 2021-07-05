@@ -15,7 +15,7 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.signInCheckBtn.setOnClickListener {
+        binding.nextBtn.setOnClickListener {
             if(intent.hasExtra("name") &&intent.hasExtra("phone")&&intent.hasExtra("email")&&intent.hasExtra("password")&&intent.hasExtra("password_check")){
 
                 val name = intent.getStringExtra("name")

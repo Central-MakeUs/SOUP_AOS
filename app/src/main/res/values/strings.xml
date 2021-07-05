@@ -30,4 +30,18 @@
     <string name="password_check_hint">비밀번호를 다시 입력해주세요</string>
     <string name="nickname_hint">닉네임을 입력해주세요</string>
 
+
+    <!--my_page-->
+    <string name="my_page">마이페이지</string>
+    <string name="profile">프로필</string>
+    <string name="review">후기</string>
+    <string name="invite">초대</string>
+    <string name="my_member">My 멤버</string>
+    <string name="find_invite">초대장 찾기</string>
+    <string name="questions">문의사항</string>
+    <string name="account_secession">계정탈퇴</string>
+    <string name="logout">로그아웃</string>
+    <string name="edit">편집</string>
+    <string name="taste_keyword">식성 키워드</string>
+
 </resources>

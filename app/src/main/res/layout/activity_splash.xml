@@ -7,11 +7,10 @@
     tools:context=".src.splash.SplashActivity">
 
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="임시 스플래시 액티비티!"
-        android:textSize="30sp"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="105.4109115600586dp"
+        android:layout_height="29.99999237060547dp"
+        android:src="@drawable/ic_eatoo_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

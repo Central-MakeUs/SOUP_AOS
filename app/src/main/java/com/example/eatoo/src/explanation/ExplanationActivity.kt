@@ -16,17 +16,7 @@ class ExplanationActivity : BaseActivity<ActivityExplanationBinding>(ActivityExp
         pagerAdapter.addFragment(GuideFragment2())
         pagerAdapter.addFragment(GuideFragment3())
         binding.photoGuideVp.adapter = pagerAdapter
-        binding.pplFragDotsIndicator.setViewPager2(binding.photoGuideVp)
 
-
-        binding.signInBtn.setOnClickListener {
-            startActivity(Intent(this, SignInActivity::class.java))
-            finish()
-        }
-        binding.loginBtn.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
 
     }
 }

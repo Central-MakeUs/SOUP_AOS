@@ -16,7 +16,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.logoutBtn.setOnClickListener {
+        binding.logoutLayout.setOnClickListener {
 
             ApplicationClass.sSharedPreferences.edit().putString("TOKEN", "").apply()
             ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, "").apply()

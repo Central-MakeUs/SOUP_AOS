@@ -1,13 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatTextView"
+        android:layout_width="84.32875061035156dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_eatoo_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_guide1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="53dp"
+        android:layout_height="9dp"
+        android:layout_marginTop="452dp"
+        android:layout_marginBottom="260dp"
+        android:src="@drawable/ic_indicator_left"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="가이드 예시1"
-        style="@style/Head1Style"
-        android:gravity="center"/>
+        android:id="@+id/explanation_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="473dp"
+        android:layout_marginBottom="187dp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="14sp"
+        android:gravity="center_horizontal"
+        android:text="자유롭고 명확한 의사표현을 통해"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="14sp"
+        android:text="같이 또는 혼자 자유로운 식사"
+        android:textColor="#ff4e16"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@+id/explanation_txt"
+        app:layout_constraintStart_toStartOf="@+id/explanation_txt"
+        app:layout_constraintTop_toBottomOf="@+id/explanation_txt" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/skip_btn"
+        android:layout_width="22dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="609dp"
+        android:layout_marginBottom="97dp"
+        android:fontFamily="sans-serif"
+        android:textColor="#a8a8a8"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        android:text="skip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
