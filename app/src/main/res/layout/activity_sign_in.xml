@@ -37,7 +37,8 @@
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+        tools:ignore="RtlSymmetry" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView6"
@@ -53,7 +54,8 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/name_edt"
         app:layout_constraintTop_toBottomOf="@+id/name_edt"
-        tools:text="한글, 영문 입력 가능합니다. " />
+        android:text="한글, 영문 입력 가능합니다. "
+        tools:ignore="HardcodedText,SmallSp" />
 
 
 
@@ -98,7 +100,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6" />
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6"
+        tools:ignore="RtlSymmetry" />
 
 
 
@@ -116,7 +119,8 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/phone_number_edt"
         app:layout_constraintTop_toBottomOf="@+id/phone_number_edt"
-        tools:text="본인 명의의 휴대폰 번호를 입력해주세요." />
+        android:text="본인 명의의 휴대폰 번호를 입력해주세요."
+        tools:ignore="HardcodedText,SmallSp" />
 
 
     <androidx.appcompat.widget.AppCompatTextView

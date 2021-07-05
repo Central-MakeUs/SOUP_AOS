@@ -32,7 +32,8 @@
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -48,7 +49,8 @@
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="@+id/explanation_txt"
         app:layout_constraintStart_toStartOf="@+id/explanation_txt"
-        app:layout_constraintTop_toBottomOf="@+id/explanation_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/explanation_txt"
+        tools:ignore="HardcodedText" />
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -76,7 +78,8 @@
         app:layout_constraintBottom_toTopOf="@+id/next_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="닉네임 등 프로필은 마이페이지에서  수정이 가능합니다." />
+        tools:text="닉네임 등 프로필은 마이페이지에서  수정이 가능합니다."
+        tools:ignore="SmallSp" />
 
     <EditText
         android:id="@+id/nick_name_edt"
@@ -98,7 +101,8 @@
         app:layout_constraintBottom_toTopOf="@+id/appCompatTextView7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="Autofill" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -116,7 +120,8 @@
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
         app:layout_constraintStart_toStartOf="@+id/nick_name_edt"
-        tools:text="한글, 영문, 숫자 사용가능" />
+        android:text="한글, 영문, 숫자 사용가능"
+        tools:ignore="HardcodedText,SmallSp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/nick_name_edt_txt"
