@@ -15,12 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".src.main.create_group.GroupLocationActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".src.main.create_group.group_location.GroupLocationActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".src.signinlogin.signin.SignInActivity3" />
         <activity android:name=".src.signinlogin.signin.SignInActivity2" />
@@ -29,7 +25,11 @@
 
         </activity>
         <activity android:name=".src.main.create_group.CreateGroupActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".src.signinlogin.signin.SignInActivity" />
         <activity android:name=".src.signinlogin.login.LoginActivity" />

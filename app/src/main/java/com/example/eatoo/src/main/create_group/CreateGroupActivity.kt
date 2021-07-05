@@ -8,14 +8,17 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityCreateGroupBinding
+import com.example.eatoo.src.main.create_group.group_location.GroupLocationActivity
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
 import com.example.googlemapsapiprac.model.SearchResultEntity
+import com.example.googlemapsapiprac.response.address.AddressInfoResponse
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -23,18 +26,19 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import java.lang.Exception
 
 class CreateGroupActivity :
     BaseActivity<ActivityCreateGroupBinding>(ActivityCreateGroupBinding::inflate),
-    OnMapReadyCallback {
+    OnMapReadyCallback, CreateGroupView {
 
     private lateinit var map: GoogleMap
     private lateinit var searchResult: SearchResultEntity
     private var currentSelectMarker: Marker? = null
     private lateinit var locationManager: LocationManager
     private lateinit var myLocationListener: MyLocationListener
+    private lateinit var locationLatLngEntity: LocationLatLngEntity
     val PERMISSION_REQUEST_CODE = 101
+    var mapShowing = false
 
     companion object {
         val SEARCH_RESULT_EXTRA_KEY: String = "SEARCH_RESULT_EXTRA_KEY"
@@ -45,25 +49,60 @@ class CreateGroupActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        getCurrentLocation()
+
+        enableMap()
+        closeMap()
 
         searchLocation()
+        getCurrentLocation()
 
-        if (::searchResult.isInitialized.not()) {
-            intent?.let { //위치를 검색해서 다시 돌아온 경우
-                searchResult = it.getParcelableExtra<SearchResultEntity>(SEARCH_RESULT_EXTRA_KEY)
-                    ?: throw Exception("데이터가 존재하지 않습니다.")
-                setupGoogleMap()
-            }
+
+        val intentResult = intent.getParcelableExtra<SearchResultEntity>(SEARCH_RESULT_EXTRA_KEY)
+        if (intentResult != null) { //위치를 검색해서 다시 돌아온 경우
+            searchResult = intentResult
+            setAddressTv(intentResult.fullAddress)
+            mapShowing = true
+            setupGoogleMap()
         }
 
     }
 
+    private fun setAddressTv(fullAddress: String) {
+        binding.tvSearchLocation.text = fullAddress
+    }
+
+    private fun enableMap() {
+        setupGoogleMap()
+    }
+
+    private fun showMap() {
+        binding.llContainerMap.isVisible = false
+        mapShowing = true
+        binding.btnChangeLocation.isVisible = true
+    }
+
+    private fun closeMap() {
+        binding.llContainerMap.isVisible = true
+        mapShowing = false
+        binding.btnChangeLocation.isVisible = false
+    }
+
     private fun searchLocation() {
-        binding.etSearchLocation.setOnClickListener {
+        binding.tvSearchLocation.setOnClickListener {
             startActivity(Intent(this, GroupLocationActivity::class.java))
         }
+        binding.btnChangeLocation.setOnClickListener {
+            if(mapShowing) startActivity(Intent(this, GroupLocationActivity::class.java))
+        }
 
+    }
+
+    private fun getCurrentLocation() = with(binding) {
+        if (!mapShowing) { //첫 방문
+            llContainerMap.setOnClickListener {
+                requestPermission()
+            }
+        }
     }
 
     private fun setupGoogleMap() {
@@ -72,19 +111,14 @@ class CreateGroupActivity :
         mapFragment.getMapAsync(this)
     }
 
-//    private fun getCurrentLocation() = with(binding) {
-//        if(!llContainerMap.isVisible) { //첫 방문.
-//            llContainerMap.setOnClickListener {
-//                llContainerMap.isVisible = true
-//                requestPermission() //현재위치 가져오기
-//            }
-//        }
-//    }
 
     override fun onMapReady(map: GoogleMap) { //구글맵 객체 //아래 내용 없으면 세계지도 나옴.
         this.map = map
-        currentSelectMarker = setupMarker(searchResult)
-        currentSelectMarker?.showInfoWindow()
+        if (mapShowing) {
+            currentSelectMarker = setupMarker(searchResult)
+            currentSelectMarker?.showInfoWindow()
+            showMap()
+        }
     }
 
     private fun setupMarker(searchResult: SearchResultEntity): Marker? { //검색한 위도경도
@@ -124,7 +158,24 @@ class CreateGroupActivity :
                     ),
                     PERMISSION_REQUEST_CODE
                 )
-            } else  setMyLocationListener()
+            } else setMyLocationListener()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED
+                && grantResults[1] == PackageManager.PERMISSION_GRANTED
+            ) {
+                setMyLocationListener()
+            } else {
+                Toast.makeText(this, "권한을 받지 못 했습니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -136,7 +187,7 @@ class CreateGroupActivity :
         if (::myLocationListener.isInitialized.not()) {
             myLocationListener = MyLocationListener()
         }
-        with(locationManager) { //현재 내 위치 업데이트
+        with(locationManager) { //현재 내 위치 가져오기
             requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
                 minTime, minDistance, myLocationListener
@@ -150,11 +201,11 @@ class CreateGroupActivity :
 
     inner class MyLocationListener : LocationListener { //현재 위치에 대한 콜백을 받는다.
         override fun onLocationChanged(location: Location) {
-            val locationLatLngEntity = LocationLatLngEntity(
+            locationLatLngEntity = LocationLatLngEntity(
                 location.latitude.toFloat(),
                 location.longitude.toFloat()
             )
-//            onCurrentLocationChanged(locationLatLngEntity)
+            onCurrentLocationChanged(locationLatLngEntity)
         }
 
     }
@@ -168,8 +219,39 @@ class CreateGroupActivity :
                 ), CAMERA_ZOOM_LEVEL
             )
         )
-//        loadReverseGeoInfo(locationLatLngEntity)
-//        removeLocationListener()
+        loadReverseGeoInfo(locationLatLngEntity)
+        removeLocationListener()
+    }
+
+    private fun loadReverseGeoInfo(locationLatLngEntity: LocationLatLngEntity) {
+        CreateGroupService(this).tryGetCurrentAddress(
+            locationLatLngEntity.latitude.toDouble(),
+            locationLatLngEntity.longitude.toDouble()
+        )
+    }
+
+    private fun removeLocationListener() {
+        if (::locationManager.isInitialized && ::myLocationListener.isInitialized) {
+            locationManager.removeUpdates(myLocationListener)
+        }
+    }
+
+    override fun onGetCurrentAddressSuccess(response: AddressInfoResponse) {
+        currentSelectMarker = setupMarker(
+            SearchResultEntity(
+                fullAddress = response.addressInfo.fullAddress ?: "주소정보 없음",
+                buildingName = "내 위치",
+                locationLatLng = locationLatLngEntity
+            )
+        )
+        setAddressTv(response.addressInfo.fullAddress ?: "주소정보 없음")
+        showMap()
+        mapShowing = true
+        currentSelectMarker?.showInfoWindow()
+    }
+
+    override fun onGetCurrentAddressFail(message: String?) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
 

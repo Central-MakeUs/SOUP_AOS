@@ -1,23 +1,23 @@
-package com.example.eatoo.src.main.create_group
+package com.example.eatoo.src.main.create_group.group_location
 
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eatoo.config.BaseActivity
-import com.example.eatoo.databinding.ActivityCreateGroupBinding
 import com.example.eatoo.databinding.ActivityGroupLocationBinding
+import com.example.eatoo.src.main.create_group.CreateGroupActivity
 import com.example.eatoo.src.main.create_group.CreateGroupActivity.Companion.SEARCH_RESULT_EXTRA_KEY
 import com.example.eatoo.src.main.create_group.adapter.LocationSearchRvAdapter
+import com.example.eatoo.util.makeMainAdress
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
 import com.example.googlemapsapiprac.model.SearchResultEntity
 import com.example.googlemapsapiprac.response.search.Pois
 import com.example.googlemapsapiprac.response.search.SearchResponse
 
-class GroupLocationActivity : BaseActivity<ActivityGroupLocationBinding>(ActivityGroupLocationBinding::inflate), GroupLocationView{
+class GroupLocationActivity : BaseActivity<ActivityGroupLocationBinding>(ActivityGroupLocationBinding::inflate),
+    GroupLocationView {
 
     lateinit var locationAdapter : LocationSearchRvAdapter
     lateinit var mlayoutManager: LinearLayoutManager
@@ -59,7 +59,7 @@ class GroupLocationActivity : BaseActivity<ActivityGroupLocationBinding>(Activit
         val dataList = pois.poi.map {
             SearchResultEntity(
                 buildingName = it.name ?: "빌딩명 없음",
-                fullAddress = it.fullAddressRoad ?:"도로명 주소 없음",
+                fullAddress = makeMainAdress(it),
                 locationLatLng = LocationLatLngEntity(
                     it.noorLat,
                     it.noorLon

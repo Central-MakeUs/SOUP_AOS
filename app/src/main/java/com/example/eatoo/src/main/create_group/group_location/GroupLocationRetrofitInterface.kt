@@ -1,10 +1,9 @@
-package com.example.eatoo.src.main.create_group
+package com.example.eatoo.src.main.create_group.group_location
 
 import com.example.eatoo.src.main.create_group.api_util.TmapKey
 import com.example.eatoo.src.main.create_group.api_util.TmapUrl
 import com.example.googlemapsapiprac.response.search.SearchResponse
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -29,5 +28,6 @@ interface GroupLocationRetrofitInterface {
         @Query("centerLon") centerLon: String? = null,
         @Query("centerLat") centerLat: String? = null
     ): Call<SearchResponse>
+
 
 }

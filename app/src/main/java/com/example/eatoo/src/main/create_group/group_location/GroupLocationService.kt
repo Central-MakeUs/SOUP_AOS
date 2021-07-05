@@ -1,6 +1,5 @@
-package com.example.eatoo.src.main.create_group
+package com.example.eatoo.src.main.create_group.group_location
 
-import android.util.Log
 import com.example.eatoo.R
 import com.example.eatoo.config.ApplicationClass
 import com.example.eatoo.src.main.create_group.api_util.TmapRetrofit
@@ -13,7 +12,7 @@ class GroupLocationService(val view: GroupLocationActivity) {
 
     fun tryGetLocation(keyword: String) {
 
-        TmapRetrofit.apiService.getSearchLocation(keyword = keyword).enqueue(object :
+        TmapRetrofit.locationService.getSearchLocation(keyword = keyword).enqueue(object :
             Callback<SearchResponse> {
             override fun onResponse(
                 call: Call<SearchResponse>,

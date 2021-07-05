@@ -1,7 +1,8 @@
 package com.example.eatoo.src.main.create_group.api_util
 
 import com.example.eatoo.BuildConfig
-import com.example.eatoo.src.main.create_group.GroupLocationRetrofitInterface
+import com.example.eatoo.src.main.create_group.CreateGroupRetrofitInterface
+import com.example.eatoo.src.main.create_group.group_location.GroupLocationRetrofitInterface
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -11,7 +12,11 @@ import java.util.concurrent.TimeUnit
 
 object TmapRetrofit {
 
-    val apiService: GroupLocationRetrofitInterface by lazy { getRetrofit().create(GroupLocationRetrofitInterface::class.java) }
+    val locationService: GroupLocationRetrofitInterface by lazy { getRetrofit().create(
+        GroupLocationRetrofitInterface::class.java) }
+
+    val addressService: CreateGroupRetrofitInterface by lazy { getRetrofit().create(
+        CreateGroupRetrofitInterface::class.java) }
 
     private fun getRetrofit(): Retrofit {
 

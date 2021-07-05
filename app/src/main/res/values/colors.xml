@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="main_orange">#FF4E16</color>
 
     <!-- Custom colors -->transparent
     <color name="transparent">#00000000</color>
@@ -24,4 +25,5 @@
 
     <!--make group-->
     <color name="chip_ripple_color">#10FFFFFF</color>
+    <color name="input_gray">#A8A8A8</color>
 </resources>
