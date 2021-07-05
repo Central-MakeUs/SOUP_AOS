@@ -4,6 +4,7 @@ package com.example.eatoo.src.signinlogin.signin
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import com.example.eatoo.config.ApplicationClass
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivitySingIn3Binding
 import com.example.eatoo.src.signinlogin.login.LoginActivity
@@ -46,6 +47,7 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
     }
 
     override fun onPostSignUpSuccess(response: SignInResponse) {
+        ApplicationClass.sSharedPreferences.edit().putInt("USER_INDEX", response.result.userIdx).apply()
         dismissLoadingDialog()
         showCustomToast(response.message)
         startActivity(Intent(this, LoginActivity::class.java))

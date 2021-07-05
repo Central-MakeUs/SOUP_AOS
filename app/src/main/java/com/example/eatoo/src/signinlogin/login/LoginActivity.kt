@@ -36,9 +36,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         showCustomToast(response.message)
         if(response.code == 1000){
             X_ACCESS_TOKEN =  response.result.jwt
-            Log.d("토큰 값", response.result.jwt)
+            Log.d("login", response.result.jwt)
+            Log.d("login", response.result.userIdx.toString())
             TOKEN = response.result.jwt
 
+
+            sSharedPreferences.edit().putInt("USER_INDEX", response.result.userIdx).apply()
             sSharedPreferences.edit().putString(X_ACCESS_TOKEN, response.result.jwt).apply()
             sSharedPreferences.edit().putString("TOKEN", response.result.jwt).apply()
             startActivity(Intent(this, MainActivity::class.java))

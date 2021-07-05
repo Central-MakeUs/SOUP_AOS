@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import com.example.eatoo.config.ApplicationClass
 import com.example.eatoo.config.ApplicationClass.Companion.TOKEN
 
@@ -18,7 +19,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //debugging purpose
+        ApplicationClass.sSharedPreferences.edit().putString("TOKEN", null).apply()
+
         val Token = ApplicationClass.sSharedPreferences.getString("TOKEN", "").toString()
+        Log.d("jwt", Token)
 
         Handler(Looper.getMainLooper()).postDelayed({
 
