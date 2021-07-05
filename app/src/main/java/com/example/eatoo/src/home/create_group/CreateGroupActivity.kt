@@ -1,4 +1,4 @@
-package com.example.eatoo.src.main.create_group
+package com.example.eatoo.src.home.create_group
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -15,7 +15,8 @@ import androidx.core.view.isVisible
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityCreateGroupBinding
-import com.example.eatoo.src.main.create_group.group_location.GroupLocationActivity
+import com.example.eatoo.src.home.create_group.group_location.GroupLocationActivity
+import com.example.eatoo.src.home.group.GroupActivity
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
 import com.example.googlemapsapiprac.model.SearchResultEntity
 import com.example.googlemapsapiprac.response.address.AddressInfoResponse
@@ -56,6 +57,8 @@ class CreateGroupActivity :
         searchLocation()
         getCurrentLocation()
 
+        registerGroup()
+
 
         val intentResult = intent.getParcelableExtra<SearchResultEntity>(SEARCH_RESULT_EXTRA_KEY)
         if (intentResult != null) { //위치를 검색해서 다시 돌아온 경우
@@ -65,6 +68,12 @@ class CreateGroupActivity :
             setupGoogleMap()
         }
 
+    }
+
+    private fun registerGroup() {
+        binding.llMakegroupRegister.setOnClickListener {
+            startActivity(Intent(this, GroupActivity::class.java))
+        }
     }
 
     private fun setAddressTv(fullAddress: String) {
@@ -131,7 +140,9 @@ class CreateGroupActivity :
             title(searchResult.buildingName)
             snippet(searchResult.fullAddress)
         }
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(positionLatLng, CAMERA_ZOOM_LEVEL))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(positionLatLng,
+           CAMERA_ZOOM_LEVEL
+        ))
 
         return map.addMarker(markerOptions)
     }
@@ -216,7 +227,8 @@ class CreateGroupActivity :
                 LatLng(
                     locationLatLngEntity.latitude.toDouble(),
                     locationLatLngEntity.longitude.toDouble()
-                ), CAMERA_ZOOM_LEVEL
+                ),
+               CAMERA_ZOOM_LEVEL
             )
         )
         loadReverseGeoInfo(locationLatLngEntity)
@@ -224,7 +236,7 @@ class CreateGroupActivity :
     }
 
     private fun loadReverseGeoInfo(locationLatLngEntity: LocationLatLngEntity) {
-        CreateGroupService(this).tryGetCurrentAddress(
+       CreateGroupService(this).tryGetCurrentAddress(
             locationLatLngEntity.latitude.toDouble(),
             locationLatLngEntity.longitude.toDouble()
         )

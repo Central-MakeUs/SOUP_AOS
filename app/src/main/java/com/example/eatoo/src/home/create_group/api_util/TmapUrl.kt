@@ -1,4 +1,4 @@
-package com.example.eatoo.src.main.create_group.api_util
+package com.example.eatoo.src.home.create_group.api_util
 
 object TmapUrl {
     const val TMAP_URL = "https://apis.openapi.sk.com"

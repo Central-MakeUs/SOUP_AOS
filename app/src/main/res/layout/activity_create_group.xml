@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".src.main.create_group.CreateGroupActivity">
+    tools:context=".src.home.create_group.CreateGroupActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_toolbar"
@@ -30,6 +30,7 @@
         android:text="@string/create_group_suggest1"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:fontFamily="@font/roboto_regular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardview_toolbar" />
 
@@ -40,6 +41,7 @@
         android:text="@string/create_group_suggest2"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:fontFamily="@font/roboto_regular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_makegroup_mate_name" />
 
@@ -50,6 +52,7 @@
         android:text="@string/create_group_name"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:fontFamily="@font/roboto_regular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_makegroup_suggest" />
 
@@ -60,7 +63,9 @@
         android:hint="@string/create_group_name_suggest"
         android:inputType="text"
         android:textSize="14sp"
-        android:textColor="@color/input_gray"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/black"
+        android:textColorHint="@color/input_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_makegroup_group_name" />
 
@@ -71,6 +76,7 @@
         android:text="@string/create_group_color"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:fontFamily="@font/roboto_regular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_group_name" />
 
@@ -92,7 +98,8 @@
             app:chipEndPadding="-10dp"
             app:chipIcon="@drawable/color_chip1"
             app:chipStartPadding="4dp"
-            app:closeIconEnabled="false" />
+            app:closeIconEnabled="false"
+            />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_group_color2"
@@ -149,6 +156,7 @@
         android:text="@string/create_group_keyword"
         android:textSize="16sp"
         android:textColor="@color/black"
+        android:fontFamily="@font/roboto_regular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chipgroup_makegroup" />
 
@@ -158,6 +166,7 @@
         android:layout_height="wrap_content"
         android:text="@string/create_group_location"
         android:textSize="16sp"
+        android:fontFamily="@font/roboto_regular"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_makegroup_keyword" />
@@ -169,6 +178,7 @@
         android:text="@string/input_location"
         android:textColor="@color/input_gray"
         android:textSize="14sp"
+        android:fontFamily="@font/roboto_regular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_makegroup_location" />
 
@@ -199,6 +209,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/set_current_location"
                 android:textSize="13sp"
+                android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/input_gray"/>
         </LinearLayout>
 
@@ -210,6 +221,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_group_change_location"
+        android:fontFamily="@font/roboto_regular"
         app:layout_constraintBottom_toBottomOf="@id/fl_creategroup"
         app:layout_constraintEnd_toEndOf="@+id/fl_creategroup"/>
 
@@ -227,6 +239,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/create_group_register"
+            android:fontFamily="@font/roboto_regular"
             android:textColor="@color/black"
             android:textSize="14sp"/>
 

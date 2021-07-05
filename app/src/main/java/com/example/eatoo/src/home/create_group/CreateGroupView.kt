@@ -1,4 +1,4 @@
-package com.example.eatoo.src.main.create_group
+package com.example.eatoo.src.home.create_group
 
 import com.example.googlemapsapiprac.response.address.AddressInfoResponse
 

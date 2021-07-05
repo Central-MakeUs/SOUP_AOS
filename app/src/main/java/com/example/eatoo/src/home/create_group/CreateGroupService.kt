@@ -1,16 +1,15 @@
-package com.example.eatoo.src.main.create_group
+package com.example.eatoo.src.home.create_group
 
 import android.util.Log
 import com.example.eatoo.R
 import com.example.eatoo.config.ApplicationClass
-import com.example.eatoo.src.main.create_group.api_util.TmapRetrofit
+import com.example.eatoo.src.home.create_group.api_util.TmapRetrofit
 import com.example.googlemapsapiprac.response.address.AddressInfoResponse
-import com.example.googlemapsapiprac.response.search.SearchResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CreateGroupService(val view : CreateGroupActivity) {
+class CreateGroupService(val view :CreateGroupActivity) {
 
     fun tryGetCurrentAddress(lat : Double, lon: Double) {
 

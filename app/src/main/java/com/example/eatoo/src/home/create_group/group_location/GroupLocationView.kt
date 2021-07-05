@@ -1,4 +1,4 @@
-package com.example.eatoo.src.main.create_group.group_location
+package com.example.eatoo.src.home.create_group.group_location
 
 import com.example.googlemapsapiprac.response.search.SearchResponse
 

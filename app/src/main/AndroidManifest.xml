@@ -3,9 +3,8 @@
     package="com.example.eatoo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".config.ApplicationClass"
@@ -15,16 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".src.main.create_group.group_location.GroupLocationActivity">
-
-        </activity>
+        <activity android:name=".src.home.group.GroupActivity"></activity>
+        <activity android:name=".src.home.create_group.group_location.GroupLocationActivity"></activity>
         <activity android:name=".src.signinlogin.signin.SignInActivity3" />
         <activity android:name=".src.signinlogin.signin.SignInActivity2" />
         <activity android:name=".src.explanation.ExplanationActivity" />
-        <activity android:name=".src.splash.SplashActivity">
-
-        </activity>
-        <activity android:name=".src.main.create_group.CreateGroupActivity">
+        <activity android:name=".src.splash.SplashActivity"></activity>
+        <activity android:name=".src.home.create_group.CreateGroupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

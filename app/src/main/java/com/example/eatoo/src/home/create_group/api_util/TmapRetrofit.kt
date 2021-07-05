@@ -1,9 +1,8 @@
-package com.example.eatoo.src.main.create_group.api_util
+package com.example.eatoo.src.home.create_group.api_util
 
 import com.example.eatoo.BuildConfig
-import com.example.eatoo.src.main.create_group.CreateGroupRetrofitInterface
-import com.example.eatoo.src.main.create_group.group_location.GroupLocationRetrofitInterface
-
+import com.example.eatoo.src.home.create_group.CreateGroupRetrofitInterface
+import com.example.eatoo.src.home.create_group.group_location.GroupLocationRetrofitInterface
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

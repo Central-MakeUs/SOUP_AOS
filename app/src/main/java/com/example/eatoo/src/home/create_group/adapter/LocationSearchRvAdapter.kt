@@ -1,7 +1,6 @@
-package com.example.eatoo.src.main.create_group.adapter
+package com.example.eatoo.src.home.create_group.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eatoo.databinding.ItemLocationSearchResultBinding

@@ -1,4 +1,4 @@
-package com.example.eatoo.src.main.create_group.group_location
+package com.example.eatoo.src.home.create_group.group_location
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +7,9 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityGroupLocationBinding
-import com.example.eatoo.src.main.create_group.CreateGroupActivity
-import com.example.eatoo.src.main.create_group.CreateGroupActivity.Companion.SEARCH_RESULT_EXTRA_KEY
-import com.example.eatoo.src.main.create_group.adapter.LocationSearchRvAdapter
+import com.example.eatoo.src.home.create_group.CreateGroupActivity
+import com.example.eatoo.src.home.create_group.CreateGroupActivity.Companion.SEARCH_RESULT_EXTRA_KEY
+import com.example.eatoo.src.home.create_group.adapter.LocationSearchRvAdapter
 import com.example.eatoo.util.makeMainAdress
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
 import com.example.googlemapsapiprac.model.SearchResultEntity

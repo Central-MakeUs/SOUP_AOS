@@ -1,7 +1,7 @@
-package com.example.eatoo.src.main.create_group
+package com.example.eatoo.src.home.create_group
 
-import com.example.eatoo.src.main.create_group.api_util.TmapKey
-import com.example.eatoo.src.main.create_group.api_util.TmapUrl
+import com.example.eatoo.src.home.create_group.api_util.TmapKey
+import com.example.eatoo.src.home.create_group.api_util.TmapUrl
 import com.example.googlemapsapiprac.response.address.AddressInfoResponse
 import retrofit2.Call
 import retrofit2.http.GET

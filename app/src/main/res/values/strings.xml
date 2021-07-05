@@ -23,19 +23,17 @@
     <string name="set_current_location">현 위치로 주소 설정하기</string>
     <string name="search_address_fail">현 위치 주소를 가져오지 못 했습니다.</string>
 
-    <!--group main-->
+
+    <!--group location-->
+    <string name="search_location_fail">검색 결과를 가져오지 못 했습니다.</string>
+
+    <!--group-->
     <string name="group_main">MAIN</string>
     <string name="group_category">카테고리</string>
     <string name="group_vote">투표</string>
     <string name="group_member">멤버</string>
     <string name="group_diet">오늘의 식단</string>
     <string name="group_finding_mate">MATE를 찾아요!</string>
-
-
-    <!--group location-->
-    <string name="search_location_fail">검색 결과를 가져오지 못 했습니다.</string>
-
-
 
     <!-- login_sign_in-->
     <string name="login">로그인</string>

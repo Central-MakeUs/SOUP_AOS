@@ -1,8 +1,8 @@
-package com.example.eatoo.src.main.create_group.group_location
+package com.example.eatoo.src.home.create_group.group_location
 
 import com.example.eatoo.R
 import com.example.eatoo.config.ApplicationClass
-import com.example.eatoo.src.main.create_group.api_util.TmapRetrofit
+import com.example.eatoo.src.home.create_group.api_util.TmapRetrofit
 import com.example.googlemapsapiprac.response.search.SearchResponse
 import retrofit2.Call
 import retrofit2.Callback
