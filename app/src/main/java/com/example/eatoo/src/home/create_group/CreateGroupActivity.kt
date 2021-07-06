@@ -29,6 +29,7 @@ import com.example.eatoo.src.home.create_group.model.CreateGroupRequest
 import com.example.eatoo.src.home.create_group.model.CreateGroupResponse
 import com.example.eatoo.src.home.create_group.model.Keyword
 import com.example.eatoo.src.home.group.GroupActivity
+import com.example.eatoo.util.getUserIdx
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
 import com.example.googlemapsapiprac.model.SearchResultEntity
 import com.example.googlemapsapiprac.response.address.AddressInfoResponse
@@ -173,7 +174,7 @@ class CreateGroupActivity :
                 longitude = longitude,
                 keyword = keywordList
             )
-            val userIdx = ApplicationClass.sSharedPreferences.getInt(USER_IDX, -1)
+            val userIdx = getUserIdx()
 
             CreateGroupService(this).tryPostGroup(userIdx = userIdx, createGroup = group)
 
@@ -372,6 +373,9 @@ class CreateGroupActivity :
 
     override fun onPostGroupSuccess(response: CreateGroupResponse) {
         Log.d("createGroup", response.toString())
+        Toast.makeText(this, "요청에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+        ApplicationClass.sSharedPreferences.edit()
+            .putInt(ApplicationClass.GROUP_IDX, response.result.groupIdx).apply()
         startActivity(Intent(this, GroupActivity::class.java))
     }
 

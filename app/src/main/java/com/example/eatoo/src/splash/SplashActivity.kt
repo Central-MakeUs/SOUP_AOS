@@ -26,7 +26,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
             if(ApplicationClass.sSharedPreferences.contains(X_ACCESS_TOKEN)) {
                 //디버깅용
                 val useridx = ApplicationClass.sSharedPreferences.getInt(ApplicationClass.USER_IDX, -1)
-                val jwt = ApplicationClass.sSharedPreferences.getInt(X_ACCESS_TOKEN, -1)
+                val jwt = ApplicationClass.sSharedPreferences.getString(X_ACCESS_TOKEN, null)
                 Log.d("splashactivity", "jwt : $jwt useridx : $useridx")
 
                 startActivity(Intent(this, MainActivity::class.java))

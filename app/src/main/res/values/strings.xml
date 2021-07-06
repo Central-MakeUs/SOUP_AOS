@@ -49,6 +49,9 @@
     <string name="group_member">멤버</string>
     <string name="group_diet">오늘의 식단</string>
     <string name="group_finding_mate">MATE를 찾아요!</string>
+
+    <!--group member-->
+    <string name="invalid_group">현재 존재하지 않는 그룹입니다.</string>
     
     
     <!--main home -->
