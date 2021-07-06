@@ -1,5 +1,6 @@
 package com.example.eatoo.config
 
+import android.util.Log
 import com.example.eatoo.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.example.eatoo.config.ApplicationClass.Companion.sSharedPreferences
 import okhttp3.Interceptor

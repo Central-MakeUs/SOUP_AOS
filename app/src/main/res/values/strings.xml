@@ -40,6 +40,7 @@
 
     <!--group location-->
     <string name="search_location_fail">검색 결과를 가져오지 못 했습니다.</string>
+    <string name="group_location">위치</string>
 
     <!--group-->
     <string name="group_main">MAIN</string>
@@ -48,6 +49,14 @@
     <string name="group_member">멤버</string>
     <string name="group_diet">오늘의 식단</string>
     <string name="group_finding_mate">MATE를 찾아요!</string>
+    
+    
+    <!--main home -->
+    <string name="eatoo">EATOO</string>
+    <string name="user_name_title">님의</string>
+    <string name="mate_group">"MATE GROUP"</string>
+    <string name="today">Today</string>
+    <string name="my_mate_suggest">내가 제안한 MATE</string>
 
     <!-- login_sign_in-->
     <string name="login">로그인</string>

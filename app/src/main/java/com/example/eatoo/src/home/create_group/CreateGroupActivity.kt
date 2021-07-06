@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.eatoo.R
 import com.example.eatoo.config.ApplicationClass
+import com.example.eatoo.config.ApplicationClass.Companion.USER_IDX
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityCreateGroupBinding
 import com.example.eatoo.src.home.create_group.group_location.GroupLocationActivity
@@ -172,7 +173,7 @@ class CreateGroupActivity :
                 longitude = longitude,
                 keyword = keywordList
             )
-            val userIdx = ApplicationClass.sSharedPreferences.getInt("USER_INDEX", -1)
+            val userIdx = ApplicationClass.sSharedPreferences.getInt(USER_IDX, -1)
 
             CreateGroupService(this).tryPostGroup(userIdx = userIdx, createGroup = group)
 

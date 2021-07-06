@@ -6,8 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import com.example.eatoo.config.ApplicationClass
-import com.example.eatoo.config.ApplicationClass.Companion.TOKEN
-
+import com.example.eatoo.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivitySplashBinding
 import com.example.eatoo.src.explanation.ExplanationActivity
@@ -19,22 +18,23 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //debugging purpose
-        ApplicationClass.sSharedPreferences.edit().putString("TOKEN", null).apply()
-
-        val Token = ApplicationClass.sSharedPreferences.getString("TOKEN", "").toString()
-        Log.d("jwt", Token)
+        //디버깅용
+       //ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
 
         Handler(Looper.getMainLooper()).postDelayed({
 
-            if(Token == "") {
-                startActivity(Intent(this, ExplanationActivity::class.java))
-                finish()
+            if(ApplicationClass.sSharedPreferences.contains(X_ACCESS_TOKEN)) {
+                //디버깅용
+                val useridx = ApplicationClass.sSharedPreferences.getInt(ApplicationClass.USER_IDX, -1)
+                val jwt = ApplicationClass.sSharedPreferences.getInt(X_ACCESS_TOKEN, -1)
+                Log.d("splashactivity", "jwt : $jwt useridx : $useridx")
+
+                startActivity(Intent(this, MainActivity::class.java))
             }
             else{
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                startActivity(Intent(this, ExplanationActivity::class.java))
             }
+            finish()
         }, 3000)
     }
 

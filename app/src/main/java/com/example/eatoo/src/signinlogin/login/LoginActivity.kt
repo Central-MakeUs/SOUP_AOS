@@ -3,14 +3,12 @@ package com.example.eatoo.src.signinlogin.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.example.eatoo.config.ApplicationClass.Companion.TOKEN
-import com.example.eatoo.config.ApplicationClass.Companion.X_ACCESS_TOKEN
-import com.example.eatoo.config.ApplicationClass.Companion.sSharedPreferences
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityLoginBinding
 import com.example.eatoo.src.main.MainActivity
 import com.example.eatoo.src.signinlogin.login.model.LoginRequest
 import com.example.eatoo.src.signinlogin.login.model.LoginResponse
+import com.example.eatoo.util.putSharedPref
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate),LoginActivityView {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,15 +33,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         dismissLoadingDialog()
         showCustomToast(response.message)
         if(response.code == 1000){
-            X_ACCESS_TOKEN =  response.result.jwt
+
             Log.d("login", response.result.jwt)
             Log.d("login", response.result.userIdx.toString())
-            TOKEN = response.result.jwt
 
-
-            sSharedPreferences.edit().putInt("USER_INDEX", response.result.userIdx).apply()
-            sSharedPreferences.edit().putString(X_ACCESS_TOKEN, response.result.jwt).apply()
-            sSharedPreferences.edit().putString("TOKEN", response.result.jwt).apply()
+            putSharedPref(response.result.jwt, response.result.userIdx)
             startActivity(Intent(this, MainActivity::class.java))
         }
     }

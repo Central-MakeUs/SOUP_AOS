@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.eatoo.R
-import com.example.eatoo.config.ApplicationClass.Companion.TOKEN
-import com.example.eatoo.config.ApplicationClass.Companion.sSharedPreferences
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityMainBinding
 

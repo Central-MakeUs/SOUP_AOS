@@ -2,6 +2,8 @@ package com.example.eatoo.src.home.create_group.group_location
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,9 +42,12 @@ class GroupLocationActivity : BaseActivity<ActivityGroupLocationBinding>(Activit
         }
     }
 
-    private fun initSearchListener() =with(binding){
-        btnSearch.setOnClickListener {
-            searchLocation(etSearchLocation.text.toString())
+    private fun initSearchListener() =with(binding) {
+        etSearchLocation.setOnKeyListener { v, i, keyEvent ->
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                searchLocation(etSearchLocation.text.toString())
+            }
+            false
         }
     }
 
