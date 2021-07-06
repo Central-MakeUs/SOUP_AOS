@@ -13,7 +13,7 @@ class SignInActivity2 : BaseActivity<ActivitySingIn2Binding>(ActivitySingIn2Bind
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.signInNextBtn.setOnClickListener {
+        binding.nextBtn.setOnClickListener {
 
             val intent1 = Intent(this, SignInActivity3::class.java)
             val name = intent.getStringExtra("name")

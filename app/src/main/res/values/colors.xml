@@ -9,6 +9,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main_orange">#FF4E16</color>
 
+
+
+
+    <color name="main_color">#ff4e16</color>
+
+
     <!-- Custom colors -->transparent
     <color name="transparent">#00000000</color>
     <color name="custom_purple">#6c82d8</color>

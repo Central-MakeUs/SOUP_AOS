@@ -8,78 +8,15 @@
     tools:context=".src.explanation.ExplanationActivity">
 
 <!--    이거 앱로고 생기면 이미지뷰로 바꿀거에요!-->
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="앱로고"
-        style="@style/Head1Style"
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/photo_guide_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/photo_guide_vp"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
-
-
-    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-        android:id="@+id/ppl_frag_dots_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        app:dotsColor="@color/gray_000"
-        app:dotsCornerRadius="8dp"
-        app:dotsSize="16dp"
-        app:dotsSpacing="4dp"
-        app:dotsWidthFactor="2.5"
-        app:layout_constraintEnd_toEndOf="@+id/photo_guide_vp"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/photo_guide_vp"
-        app:layout_constraintTop_toBottomOf="@+id/photo_guide_vp"
-        app:progressMode="true"
-        app:selectedDotColor="@color/custom_purple" />
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/explanation_txt"
-        style="@style/Body1Style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="잇투의 오신 걸 환영합니다."
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ppl_frag_dots_indicator" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/sign_in_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/sign_in"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/explanation_txt" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/login_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
