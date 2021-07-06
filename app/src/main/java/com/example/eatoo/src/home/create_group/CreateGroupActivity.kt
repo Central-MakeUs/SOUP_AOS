@@ -86,7 +86,7 @@ class CreateGroupActivity :
 
      */
     private fun initKeywordChips() {
-        binding.etKeyword.setOnKeyListener { v, i, keyEvent ->
+        binding.keywordPlusBtn.setOnKeyListener { v, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
                 val et = v as EditText
                 val keyword = et.text.toString()
@@ -159,7 +159,7 @@ class CreateGroupActivity :
      */
 
     private fun registerGroup() {
-        binding.llMakegroupRegister.setOnClickListener {
+        binding.registerGroupBtn.setOnClickListener {
 
             val keywordList = binding.flexboxMakeGroup.getAllChips()
             val groupColor = getGroupColor()

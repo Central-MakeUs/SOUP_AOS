@@ -31,5 +31,9 @@
 
     <!--make group-->
     <color name="chip_ripple_color">#10FFFFFF</color>
-    <color name="input_gray">#A8A8A8</color>
+    <color name="group_red">#ff0000</color>
+    <color name="group_orange">#ff4e16</color>
+    <color name="group_orange_litle">#ff8126</color>
+    <color name="group_yellow">#ffb800</color>
+    <color name="group_yellow_litle">#ffde70</color>
 </resources>

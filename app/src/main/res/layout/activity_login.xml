@@ -58,7 +58,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/email_edt"
         app:layout_constraintTop_toBottomOf="@+id/email_edt"
-        android:text="이메일은 중복이 불가능합니다."
+        android:text="@string/sign_in_email_bottom"
         tools:ignore="HardcodedText,SmallSp" />
 
 
@@ -121,7 +121,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/password_edt"
         app:layout_constraintTop_toBottomOf="@+id/password_edt"
-        android:text="한글, 영문, 숫자 포함 8자 이상"
+        android:text="@string/sign_in_password_bottom"
         tools:ignore="HardcodedText,SmallSp" />
 
     <androidx.appcompat.widget.AppCompatTextView

@@ -54,7 +54,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/name_edt"
         app:layout_constraintTop_toBottomOf="@+id/name_edt"
-        tools:text="한글, 영문 입력 가능합니다. "
+        tools:text="@string/sign_in_name_bottom"
         tools:ignore="SmallSp" />
 
 
@@ -120,7 +120,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/phone_number_edt"
         app:layout_constraintTop_toBottomOf="@+id/phone_number_edt"
-        android:text="본인 명의의 휴대폰 번호를 입력해주세요."
+        android:text="@string/sign_in_password_bottom"
         tools:ignore="HardcodedText,SmallSp" />
 
 
