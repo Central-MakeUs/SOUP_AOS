@@ -52,10 +52,10 @@ class CreateGroupActivity :
     private lateinit var locationManager: LocationManager
     private lateinit var myLocationListener: MyLocationListener
     private lateinit var locationLatLngEntity: LocationLatLngEntity
-    var latitude: Double = 0.0
-    var longitude: Double = 0.0
-    val PERMISSION_REQUEST_CODE = 101
-    var mapShowing = false
+    private var latitude: Double = 0.0
+    private var longitude: Double = 0.0
+    private val PERMISSION_REQUEST_CODE = 101
+    private var mapShowing = false
 
     companion object {
         val SEARCH_RESULT_EXTRA_KEY: String = "SEARCH_RESULT_EXTRA_KEY"
@@ -66,11 +66,11 @@ class CreateGroupActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        enableMap()
+        closeMap()
         initKeywordChips()
 
         getSearchIntent()
-        enableMap()
-        closeMap()
 
         searchLocation()
         getCurrentLocation()
@@ -132,11 +132,12 @@ class CreateGroupActivity :
     private fun getSearchIntent() {
         val intentResult = intent.getParcelableExtra<SearchResultEntity>(SEARCH_RESULT_EXTRA_KEY)
         if (intentResult != null) { //위치를 검색해서 다시 돌아온 경우
+            mapShowing = true
             searchResult = intentResult
             setAddressTv(intentResult.fullAddress)
-            mapShowing = true
             setupGoogleMap()
         }
+
     }
 
     /*
