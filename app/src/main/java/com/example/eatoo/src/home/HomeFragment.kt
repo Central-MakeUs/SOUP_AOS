@@ -31,7 +31,7 @@ class HomeFragment
 
     private fun initSingleStatusListener() {
         binding.toolbarHome.rightIcon.setOnClickListener {
-            it.isActivated = !it.isActivated
+            it.isSelected = !it.isSelected
             SingleService(this).tryPatchGroup(userIdx)
         }
     }

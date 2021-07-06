@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             app:contentInsetStart="0dp"
             app:leftIcon="@drawable/ic_baseline_notifications_none_24"
-            app:rightIcon="@drawable/ic_baseline_remove_red_eye_24"
+            app:rightIcon="@drawable/selector_single_status"
             app:titleText="@string/eatoo" />
 
     </androidx.cardview.widget.CardView>
