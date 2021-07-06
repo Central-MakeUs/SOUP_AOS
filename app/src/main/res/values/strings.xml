@@ -60,6 +60,16 @@
     <string name="mate_group">"MATE GROUP"</string>
     <string name="today">Today</string>
     <string name="my_mate_suggest">내가 제안한 MATE</string>
+    <string name="welcoming">안녕하세요,&#160;</string>
+    <string name="welcome_user_name_title">님!&#9995;</string>
+    <string name="no_mate_group">MATE GROUP이 없어요</string>
+    <string name="press_plus_suggest1">+를 눌러 새로운 그룹을 만들어보세요!</string>
+    <string name="press_plus_suggest2">더 다양한 기능을 사용할 수 있어요</string>
+    <string name="make_group_suggest1">다양한 GROUP을</string>
+    <string name="make_group_suggest2">만들어&#160;</string>
+    <string name="make_group_suggest3">EAT-TOO&#160;</string>
+    <string name="make_group_suggest4">해보세요&#160;</string>
+    <string name="many_groups_possible">여러개의 그룹을 만들 수 있어요!</string>
 
     <!-- login_sign_in-->
     <string name="login">로그인</string>

@@ -6,5 +6,6 @@ data class GroupMember(
     @SerializedName("characters") val characters: Int,
     @SerializedName("color") val color: Int,
     @SerializedName("nickName") val nickName: String,
-    @SerializedName("userIdx") val userIdx: Int
+    @SerializedName("userIdx") val userIdx: Int,
+    @SerializedName("singleStatus") val singleStatus: String
 )
