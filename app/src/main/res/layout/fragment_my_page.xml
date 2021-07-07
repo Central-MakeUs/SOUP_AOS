@@ -20,11 +20,16 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView3"
-        style="@style/Head1Style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/my_page"
+        android:fontFamily="sans-serif-black"
+        android:textStyle="normal"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,124 +43,169 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3" />
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3"
+        tools:ignore="PxUsage" />
 
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/user_profile_img"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:src="@drawable/ic_user"
+        android:src="@drawable/ic_mypage_icon_backgroud"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/nick_name_txt"
-        style="@style/Body1Style"
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="OO 님"
+        android:src="@drawable/ic_mypage_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/user_profile_img"
         app:layout_constraintEnd_toEndOf="@+id/user_profile_img"
         app:layout_constraintStart_toStartOf="@+id/user_profile_img"
-        app:layout_constraintTop_toBottomOf="@+id/user_profile_img" />
+        app:layout_constraintTop_toTopOf="@+id/user_profile_img" />
 
-    <LinearLayout
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/nick_name_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:fontFamily="sans-serif-black"
+        android:text="OO 님"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="@+id/user_profile_img"
+        app:layout_constraintStart_toStartOf="@+id/user_profile_img"
+        app:layout_constraintTop_toBottomOf="@+id/user_profile_img"
+        tools:ignore="HardcodedText" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/background_gray_color_radius"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingStart="50dp"
-        android:paddingTop="10dp"
+        android:paddingTop="15dp"
         android:paddingEnd="50dp"
         android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nick_name_txt">
 
         <LinearLayout
+            android:id="@+id/linearLayout4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginEnd="83dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout3">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/profile_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_user" />
+                android:src="@drawable/ic_profile_main_color" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/Body3Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/profile" />
+                android:layout_marginTop="14dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/profile"
+                android:textColor="@color/main_color"
+                android:textSize="12sp"
+                android:textStyle="normal" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="70dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/review_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_user" />
+                android:src="@drawable/ic_review_main_color" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/Body3Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/review" />
+                android:layout_marginTop="14dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/review"
+                android:textColor="@color/main_color"
+                android:textSize="12sp"
+                android:textStyle="normal" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginStart="83dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout3"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout3">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/invite_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_user" />
+                android:src="@drawable/ic_invite_main_color" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/Body3Style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/invite" />
+                android:layout_marginTop="14dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/invite"
+                android:textColor="@color/main_color"
+                android:textSize="12sp"
+                android:textStyle="normal" />
 
         </LinearLayout>
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView4"
-        style="@style/Head1Style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/black"
+        android:textStyle="normal"
+        android:textSize="17sp"
         android:text="@string/taste_keyword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -165,51 +215,16 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:text="@string/edit"
-        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textSize="12sp"
+        android:textColor="#000000"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/appCompatTextView4" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/my_member_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/find_invite_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
 
-        <View
-            android:id="@+id/view5"
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:background="@color/gray_300"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/my_member_txt"
-            style="@style/Head3Style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/my_member"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/my_member_txt"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/my_member_txt" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/find_invite_layout"
@@ -227,16 +242,20 @@
             android:background="@color/gray_300"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="PxUsage" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/find_invite_txt"
-            style="@style/Head3Style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="26dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="15sp"
+            android:textColor="@color/black"
             android:text="@string/find_invite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -246,6 +265,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_right_btn"
+            android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/find_invite_txt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/find_invite_txt" />
@@ -269,17 +290,21 @@
             android:background="@color/gray_300"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="PxUsage" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/questions_txt"
-            style="@style/Head3Style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="26dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="@string/questions"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -288,6 +313,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_right_btn"
+            android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/questions_txt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/questions_txt" />
@@ -309,17 +336,21 @@
             android:background="@color/gray_300"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="PxUsage" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/account_secession_txt"
-            style="@style/Head3Style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="26dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="@string/account_secession"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -328,6 +359,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_right_btn"
+            android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/account_secession_txt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/account_secession_txt" />
@@ -349,17 +382,22 @@
             android:layout_height="2px"
             android:background="@color/gray_300"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="PxUsage" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/logout_txt"
-            style="@style/Head3Style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="26dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textSize="15sp"
+            android:textColor="@color/black"
             android:text="@string/logout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -369,6 +407,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_right_btn"
+            android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/logout_txt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/logout_txt" />
