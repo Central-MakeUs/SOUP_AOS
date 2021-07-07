@@ -2,7 +2,6 @@ package com.example.eatoo.src.mypage
 
 import android.content.Intent
 import android.os.Bundle
-import com.example.eatoo.config.ApplicationClass.Companion.TOKEN
 import android.view.View
 import com.example.eatoo.R
 import com.example.eatoo.config.ApplicationClass
@@ -18,7 +17,6 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding
 
         binding.logoutLayout.setOnClickListener {
 
-            ApplicationClass.sSharedPreferences.edit().putString("TOKEN", "").apply()
             ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, "").apply()
             startActivity(Intent(activity, SplashActivity::class.java))
         }

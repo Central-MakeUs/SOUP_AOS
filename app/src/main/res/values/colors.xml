@@ -9,9 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main_orange">#FF4E16</color>
 
-
-
-
     <color name="main_color">#ff4e16</color>
 
 
@@ -36,4 +33,5 @@
     <color name="group_orange_litle">#ff8126</color>
     <color name="group_yellow">#ffb800</color>
     <color name="group_yellow_litle">#ffde70</color>
+    <color name="change_location">#80FFFFFF</color>
 </resources>

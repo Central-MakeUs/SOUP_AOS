@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.eatoo.R
 import com.example.eatoo.config.ApplicationClass
+import com.example.eatoo.config.ApplicationClass.Companion.USER_IDX
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityCreateGroupBinding
 import com.example.eatoo.src.home.create_group.group_location.GroupLocationActivity
@@ -28,6 +29,7 @@ import com.example.eatoo.src.home.create_group.model.CreateGroupRequest
 import com.example.eatoo.src.home.create_group.model.CreateGroupResponse
 import com.example.eatoo.src.home.create_group.model.Keyword
 import com.example.eatoo.src.home.group.GroupActivity
+import com.example.eatoo.util.getUserIdx
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
 import com.example.googlemapsapiprac.model.SearchResultEntity
 import com.example.googlemapsapiprac.response.address.AddressInfoResponse
@@ -52,10 +54,10 @@ class CreateGroupActivity :
     private lateinit var locationManager: LocationManager
     private lateinit var myLocationListener: MyLocationListener
     private lateinit var locationLatLngEntity: LocationLatLngEntity
-    var latitude: Double = 0.0
-    var longitude: Double = 0.0
-    val PERMISSION_REQUEST_CODE = 101
-    var mapShowing = false
+    private var latitude: Double = 0.0
+    private var longitude: Double = 0.0
+    private val PERMISSION_REQUEST_CODE = 101
+    private var mapShowing = false
 
     companion object {
         val SEARCH_RESULT_EXTRA_KEY: String = "SEARCH_RESULT_EXTRA_KEY"
@@ -66,11 +68,11 @@ class CreateGroupActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initKeywordChips()
-
-        getSearchIntent()
         enableMap()
         closeMap()
+        setKeyword()
+
+        getSearchIntent()
 
         searchLocation()
         getCurrentLocation()
@@ -85,14 +87,31 @@ class CreateGroupActivity :
     keyword chips
 
      */
-    private fun initKeywordChips() {
-        binding.keywordPlusBtn.setOnKeyListener { v, i, keyEvent ->
-            if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
-                val et = v as EditText
-                val keyword = et.text.toString()
-                binding.flexboxMakeGroup.addChip(keyword)
-                et.text.clear()
 
+    private fun setKeyword() {
+        binding.keywordPlusBtn.setOnClickListener {
+            binding.keywordPlusBtn.visibility = View.GONE
+            binding.etKeyword.visibility = View.VISIBLE
+            initKeywordChips()
+        }
+    }
+
+    private fun initKeywordChips() {
+        binding.etKeyword.isFocusable = true
+        binding.etKeyword.isCursorVisible = true
+        binding.etKeyword.setOnKeyListener { v, i, keyEvent ->
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                val keywordList = binding.flexboxMakeGroup.getAllChips()
+                if (keywordList.size-1 == 6) showCustomToast("키워드는 최대 다섯 개 입력 가능합니다.")
+                else {
+                    val et = v as EditText
+                    val keyword = et.text.toString()
+                    if (keyword.length >= 11) showCustomToast("키워드는 최대 10 글자 입력 가능합니다.")
+                    else{
+                        binding.flexboxMakeGroup.addChip(keyword)
+                        et.text.clear()
+                    }
+                }
             }
             false
         }
@@ -120,8 +139,8 @@ class CreateGroupActivity :
     ).roundToInt()
 
     private fun FlexboxLayout.getAllChips(): List<Keyword> {
-        var keywordList : MutableList<Keyword> = mutableListOf()
-        (0 until childCount-1).mapNotNull { index ->
+        var keywordList: MutableList<Keyword> = mutableListOf()
+        (0 until childCount - 1).mapNotNull { index ->
             val childChip = getChildAt(index) as? Chip
             keywordList.add(Keyword(name = childChip?.text.toString()))
         }
@@ -132,11 +151,12 @@ class CreateGroupActivity :
     private fun getSearchIntent() {
         val intentResult = intent.getParcelableExtra<SearchResultEntity>(SEARCH_RESULT_EXTRA_KEY)
         if (intentResult != null) { //위치를 검색해서 다시 돌아온 경우
+            mapShowing = true
             searchResult = intentResult
             setAddressTv(intentResult.fullAddress)
-            mapShowing = true
             setupGoogleMap()
         }
+
     }
 
     /*
@@ -145,9 +165,9 @@ class CreateGroupActivity :
 
      */
 
-    private fun getGroupColor(): Int{
-        val checkedChip
-        = binding.chipgroupMakegroup.findViewById<Chip>(binding.chipgroupMakegroup.checkedChipId).tag
+    private fun getGroupColor(): Int {
+        val checkedChip =
+            binding.chipgroupMakegroup.findViewById<Chip>(binding.chipgroupMakegroup.checkedChipId).tag
 
         return checkedChip.toString().toInt()
     }
@@ -166,12 +186,12 @@ class CreateGroupActivity :
 
             val group = CreateGroupRequest(
                 name = binding.etGroupName.text.toString(),
-                color = groupColor ,
+                color = groupColor,
                 latitude = latitude,
                 longitude = longitude,
                 keyword = keywordList
             )
-            val userIdx = ApplicationClass.sSharedPreferences.getInt("USER_INDEX", -1)
+            val userIdx = getUserIdx()
 
             CreateGroupService(this).tryPostGroup(userIdx = userIdx, createGroup = group)
 
@@ -370,6 +390,9 @@ class CreateGroupActivity :
 
     override fun onPostGroupSuccess(response: CreateGroupResponse) {
         Log.d("createGroup", response.toString())
+        Toast.makeText(this, "요청에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+        ApplicationClass.sSharedPreferences.edit()
+            .putInt(ApplicationClass.GROUP_IDX, response.result.groupIdx).apply()
         startActivity(Intent(this, GroupActivity::class.java))
     }
 
