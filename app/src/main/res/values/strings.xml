@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Eatoo</string>
 
 
@@ -60,8 +60,18 @@
     <string name="group_category">카테고리</string>
     <string name="group_vote">투표</string>
     <string name="group_member">멤버</string>
-    <string name="group_diet">오늘의 식단</string>
+    <string name="group_diet">오늘의 식단✨</string>
+    <string name="group_date">날짜</string>
+    <string name="group_diet_kind">잡곡밥 | 호박잎된장국 | 꽁치구이 | 미역초무침 | 배추김치</string>
     <string name="group_finding_mate">MATE를 찾아요!</string>
+    <string name="group_mate_title">국밥 드실분</string>
+    <string name="group_mate_restaurant">할매 국밥</string>
+    <string name="group_time" tools:ignore="TypographyDashes">12:00-12:40</string>
+    <string name="group_mate_limit_people">5</string>
+    <string name="group_member_review">멤버 후기</string>
+    <string name="group_recommend_restaurant">추천 맛집!</string>
+    <string name="group_view_more">더보기</string>
+
 
     <!--group member-->
     <string name="invalid_group">현재 존재하지 않는 그룹입니다.</string>

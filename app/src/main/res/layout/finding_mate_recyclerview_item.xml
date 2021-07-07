@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/mate_suggestion_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="52dp"
+            android:src="@drawable/ic_main_user_icon_backround"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mate_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:fontFamily="sans-serif-black"
+            android:lineSpacingExtra="13sp"
+            android:text="@string/group_mate_title"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="@+id/mate_suggestion_img"
+            app:layout_constraintStart_toStartOf="@+id/mate_suggestion_img"
+            app:layout_constraintTop_toBottomOf="@+id/mate_suggestion_img" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mate_resraurant_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_keyword"
+            android:fontFamily="sans-serif-black"
+            android:lineSpacingExtra="9sp"
+            android:padding="3dp"
+            android:text="@string/group_mate_restaurant"
+            android:textColor="@color/main_color"
+            android:textSize="8sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@+id/mate_title"
+            app:layout_constraintStart_toStartOf="@+id/mate_title"
+            app:layout_constraintTop_toBottomOf="@+id/mate_title"
+            tools:ignore="SmallSp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mate_time_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_keyword"
+            android:fontFamily="sans-serif-black"
+            android:lineSpacingExtra="9sp"
+            android:padding="3dp"
+            android:text="@string/group_time"
+            android:textColor="@color/main_color"
+            android:textSize="8sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="@+id/mate_title"
+            app:layout_constraintStart_toEndOf="@+id/mate_title"
+            app:layout_constraintTop_toBottomOf="@+id/mate_title"
+            tools:ignore="SmallSp" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mate_limit_people_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="37dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="sans-serif-black"
+            android:lineSpacingExtra="12sp"
+            android:text="@string/group_mate_limit_people"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/mate_title"
+            app:layout_constraintStart_toStartOf="@+id/mate_title"
+            app:layout_constraintTop_toBottomOf="@+id/mate_title"
+            tools:ignore="SmallSp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
