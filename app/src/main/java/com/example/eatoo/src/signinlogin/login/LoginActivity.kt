@@ -1,8 +1,12 @@
 package com.example.eatoo.src.signinlogin.login
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityLoginBinding
 import com.example.eatoo.src.main.MainActivity
@@ -21,6 +25,72 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             showLoadingDialog(this)
             LoginService(this).tryPostLogin(postRequest)
         }
+
+
+        binding.emailEdt.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                //텍스트를 입력 후
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                // 텍스트 입력 전
+            }
+            //
+            @SuppressLint("ResourceAsColor")
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //텍스트 입력 중
+
+                if(binding.emailEdt.text.length > 6 && binding.passwordEdt.text.length > 7){
+
+                    binding.loginBtn.isClickable = true // 버튼 클릭할수 있게
+                    binding.loginBtn.isEnabled = true // 버튼 활성화
+                    binding.loginBtn.setBackgroundColor(binding.loginBtn.context.resources.getColor(R.color.main_color))
+
+                }
+                else {
+                    binding.loginBtn.setBackgroundColor(binding.loginBtn.context.resources.getColor(R.color.gray_100))
+                }
+
+                Log.v( "email 텍스트 길이", " : "+binding.emailEdt.text.length )
+                Log.v( "password 텍스트 길이", " : "+binding.passwordEdt.text.length )
+                Log.d("버튼 클릭 여부",""+binding.loginBtn.isClickable)
+                Log.d("버튼 활성화 여부",""+binding.loginBtn.isEnabled)
+
+            }
+        })
+
+        binding.passwordEdt.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                //텍스트를 입력 후
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                // 텍스트 입력 전
+            }
+            //
+            @SuppressLint("ResourceAsColor")
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //텍스트 입력 중
+
+                Log.v( "email 텍스트 길이", " : "+binding.emailEdt.text.length )
+                Log.v( "password 텍스트 길이", " : "+binding.passwordEdt.text.length )
+
+                if(binding.emailEdt.text.length > 6 && binding.passwordEdt.text.length > 7){
+
+
+                    binding.loginBtn.isClickable = true // 버튼 클릭할수 있게
+                    binding.loginBtn.isEnabled = true // 버튼 활성화
+                    binding.loginBtn.setBackgroundColor(binding.loginBtn.getContext().getResources().getColor(
+                        R.color.main_color))
+
+                }
+                else {
+                    binding.loginBtn.setBackgroundColor(binding.loginBtn.getContext().getResources().getColor(R.color.gray_100))
+                }
+                Log.v( "email 텍스트 길이", " : "+binding.emailEdt.text.length )
+                Log.v( "password 텍스트 길이", " : "+binding.passwordEdt.text.length )
+                Log.d("버튼 클릭 여부",""+binding.loginBtn.isClickable)
+                Log.d("버튼 활성화 여부",""+binding.loginBtn.isEnabled)
+            }
+        })
     }
 
     override fun onGetUserSuccess(response: LoginResponse) {

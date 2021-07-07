@@ -26,7 +26,7 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="14sp"
-        android:text="위치기반 맛집 추천, 그룹 추천으로"
+        android:text="@string/sign_in_last_top1"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="normal"
@@ -43,7 +43,7 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="14sp"
-        android:text="쉽고 빠른 식사메뉴 선택!"
+        android:text="@string/sign_in_last_top2"
         android:textColor="#ff4e16"
         android:textSize="16sp"
         android:textStyle="normal"
@@ -60,9 +60,10 @@
         android:src="@drawable/ic_eatoo_character"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="151dp"
@@ -77,9 +78,10 @@
         android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/next_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="닉네임 등 프로필은 마이페이지에서  수정이 가능합니다."
-        tools:ignore="SmallSp" />
+        tools:ignore="SmallSp"
+        android:text="@string/sign_in_explan_bottom2" />
 
     <EditText
         android:id="@+id/nick_name_edt"
@@ -120,7 +122,7 @@
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
         app:layout_constraintStart_toStartOf="@+id/nick_name_edt"
-        android:text="한글, 영문, 숫자 사용가능"
+        android:text="@string/sign_in_nickname_bottom"
         tools:ignore="HardcodedText,SmallSp" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -154,7 +156,7 @@
         android:background="@drawable/sign_in_btn_background_gray"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="@string/sign_in_check"
+        android:text="@string/sign_in_start"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="normal"

@@ -34,4 +34,10 @@
         <item name="chipStrokeWidth">1dp</item>
     </style>
 
+    <style name="CustomKeywordChipStyle" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipBackgroundColor">@color/white</item>
+        <item name="chipStrokeColor">@color/main_orange</item>
+        <item name="chipStrokeWidth">1dp</item>
+    </style>
+
 </resources>

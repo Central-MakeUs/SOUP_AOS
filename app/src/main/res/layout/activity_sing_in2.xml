@@ -54,7 +54,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/email_edt"
         app:layout_constraintTop_toBottomOf="@+id/email_edt"
-        android:text="이메일은 중복이 불가능합니다."
+        android:text="@string/sign_in_email_bottom"
         tools:ignore="HardcodedText,SmallSp" />
 
 
@@ -94,14 +94,13 @@
         android:lineSpacingExtra="9sp"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
-        android:paddingStart="12dp"        android:singleLine="true"
+        android:paddingStart="12dp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7"
-        tools:ignore="RtlSymmetry"
-        android:autofillHints="" />
-
+        tools:ignore="Autofill,MissingPrefix,RtlSymmetry" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView8"
@@ -117,7 +116,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/password_edt"
         app:layout_constraintTop_toBottomOf="@+id/password_edt"
-        android:text="영문, 숫자 포함 8자 이상"
+        android:text="@string/sign_in_password_bottom"
         tools:ignore="HardcodedText,SmallSp" />
 
 
@@ -163,9 +162,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8"
-        tools:ignore="RtlSymmetry"
-        android:autofillHints="" />
-
+        tools:ignore="Autofill,RtlSymmetry" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView9"
@@ -181,7 +178,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/password_check_edt"
         app:layout_constraintTop_toBottomOf="@+id/password_check_edt"
-        android:text="영문, 숫자 포함 8자 이상"
+        android:text="@string/sign_in_password_bottom"
         tools:ignore="HardcodedText,SmallSp" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -202,6 +199,26 @@
         app:layout_constraintBottom_toTopOf="@+id/password_check_edt"
         app:layout_constraintStart_toStartOf="@+id/password_check_edt"
         app:layout_constraintTop_toTopOf="@+id/password_check_edt"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="151dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center_horizontal"
+        android:letterSpacing="0.02"
+        android:lineSpacingExtra="8sp"
+        android:textColor="@color/main_color"
+        android:textSize="10sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/next_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SmallSp"
+        android:text="@string/sign_in_explan_bottom" />
+
 
 
     <androidx.appcompat.widget.AppCompatButton

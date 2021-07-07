@@ -54,11 +54,8 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/name_edt"
         app:layout_constraintTop_toBottomOf="@+id/name_edt"
-        android:text="한글, 영문 입력 가능합니다. "
-        tools:ignore="HardcodedText,SmallSp" />
-
-
-
+        tools:text="@string/sign_in_name_bottom"
+        tools:ignore="SmallSp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/name_txt"
@@ -96,12 +93,13 @@
         android:lineSpacingExtra="9sp"
         android:hint="@string/phone_number_hint"
         android:inputType="phone"
-        android:paddingStart="12dp"        android:singleLine="true"
+        android:paddingStart="12dp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6"
-        tools:ignore="RtlSymmetry" />
+        tools:ignore="Autofill,RtlSymmetry" />
 
 
 
@@ -119,7 +117,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/phone_number_edt"
         app:layout_constraintTop_toBottomOf="@+id/phone_number_edt"
-        android:text="본인 명의의 휴대폰 번호를 입력해주세요."
+        android:text="@string/sign_in_password_bottom"
         tools:ignore="HardcodedText,SmallSp" />
 
 

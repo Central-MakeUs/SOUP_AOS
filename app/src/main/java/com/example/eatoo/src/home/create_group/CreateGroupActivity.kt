@@ -70,7 +70,7 @@ class CreateGroupActivity :
 
         enableMap()
         closeMap()
-        initKeywordChips()
+        setKeyword()
 
         getSearchIntent()
 
@@ -87,14 +87,31 @@ class CreateGroupActivity :
     keyword chips
 
      */
+
+    private fun setKeyword() {
+        binding.keywordPlusBtn.setOnClickListener {
+            binding.keywordPlusBtn.visibility = View.GONE
+            binding.etKeyword.visibility = View.VISIBLE
+            initKeywordChips()
+        }
+    }
+
     private fun initKeywordChips() {
+        binding.etKeyword.isFocusable = true
+        binding.etKeyword.isCursorVisible = true
         binding.etKeyword.setOnKeyListener { v, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
-                val et = v as EditText
-                val keyword = et.text.toString()
-                binding.flexboxMakeGroup.addChip(keyword)
-                et.text.clear()
-
+                val keywordList = binding.flexboxMakeGroup.getAllChips()
+                if (keywordList.size-1 == 6) showCustomToast("키워드는 최대 다섯 개 입력 가능합니다.")
+                else {
+                    val et = v as EditText
+                    val keyword = et.text.toString()
+                    if (keyword.length >= 11) showCustomToast("키워드는 최대 10 글자 입력 가능합니다.")
+                    else{
+                        binding.flexboxMakeGroup.addChip(keyword)
+                        et.text.clear()
+                    }
+                }
             }
             false
         }
@@ -122,8 +139,8 @@ class CreateGroupActivity :
     ).roundToInt()
 
     private fun FlexboxLayout.getAllChips(): List<Keyword> {
-        var keywordList : MutableList<Keyword> = mutableListOf()
-        (0 until childCount-1).mapNotNull { index ->
+        var keywordList: MutableList<Keyword> = mutableListOf()
+        (0 until childCount - 1).mapNotNull { index ->
             val childChip = getChildAt(index) as? Chip
             keywordList.add(Keyword(name = childChip?.text.toString()))
         }
@@ -148,9 +165,9 @@ class CreateGroupActivity :
 
      */
 
-    private fun getGroupColor(): Int{
-        val checkedChip
-        = binding.chipgroupMakegroup.findViewById<Chip>(binding.chipgroupMakegroup.checkedChipId).tag
+    private fun getGroupColor(): Int {
+        val checkedChip =
+            binding.chipgroupMakegroup.findViewById<Chip>(binding.chipgroupMakegroup.checkedChipId).tag
 
         return checkedChip.toString().toInt()
     }
@@ -162,14 +179,14 @@ class CreateGroupActivity :
      */
 
     private fun registerGroup() {
-        binding.llMakegroupRegister.setOnClickListener {
+        binding.registerGroupBtn.setOnClickListener {
 
             val keywordList = binding.flexboxMakeGroup.getAllChips()
             val groupColor = getGroupColor()
 
             val group = CreateGroupRequest(
                 name = binding.etGroupName.text.toString(),
-                color = groupColor ,
+                color = groupColor,
                 latitude = latitude,
                 longitude = longitude,
                 keyword = keywordList

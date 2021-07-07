@@ -8,6 +8,19 @@
     <string name="wishlist">찜</string>
     <string name="myPage">My</string>
 
+
+    <!--main_home-->
+    <string name="user_groups">잇투님의\n"MATE GROUP"</string>
+
+    <string name="user_groups_create">안녕하세요, 잇투님 ! 🖐\nMATE GROUP이 없어요</string>
+    <string name="user_groups_create2">+ 를 눌러 새로운 그룹을 만들어보세요!\n더 다양한 기능을 사용할 수 있어요</string>
+    <string name="main_today">Today</string>
+    <string name="main_my_suggestion_mate">내가 제안한 MATE</string>
+    <string name="main_my_suggestion_mate_together">함께 밥먹을 MATE를 제안해주세요!</string>
+    <string name="main_review_food1">후기를 작성해주세요</string>
+    <string name="main_review_food2">방문했던 가게에 대한\n별점 및 후기를 입력해주세요</string>
+
+
     <!--create group-->
     <string name="create_group_toolbar">그룹 만들기</string>
     <string name="create_group_suggest1">님의 MATE</string>
@@ -83,12 +96,37 @@
     <string name="next">다음으로</string>
     <string name="sign_in_check">가입하기</string>
     <string name="sign_in_hint">회원가입</string>
+    <string name="sign_in_start">시작하기</string>
     <string name="name_hint">이름을 입력해주세요</string>
     <string name="phone_number_hint">\'-\'를 제외하고 입력해주세요</string>
     <string name="email_hint">이메일을 입력해주세요</string>
     <string name="password_hint">비밀번호를 입력해주세요</string>
     <string name="password_check_hint">비밀번호를 다시 입력해주세요</string>
     <string name="nickname_hint">닉네임을 입력해주세요</string>
+    <string name="explanation1_1">자유롭고 명확한 의사표현을 통해</string>
+    <string name="explanation1_2">같이 또는 혼자 자유로운 식사</string>
+    <string name="explanation2_1">위치기반 맛집 추천,그룹 추천으로</string>
+    <string name="explanation2_2">쉽고 빠른 식사메뉴 선택</string>
+    <string name="explanation3">EATOO에서 함께해요 :)</string>
+    <string name="sign_in_name_bottom">한글, 영문 입력 가능합니다.</string>
+    <string name="sign_in_phone_bottom">본인 명의의 휴대폰 번호를 입력해주세요.</string>
+    <string name="sign_in_email_bottom">이메일은 중복이 불가능합니다.</string>
+    <string name="sign_in_password_bottom">영문, 숫자 포함 8자 이상</string>
+    <string name="sign_in_nickname_bottom">한글, 영문, 숫자 사용가능</string>
+    <string name="sign_in_explan_bottom">이메일과 비밀번호는 어플 로그인에 사용됩니다 :)</string>
+    <string name="sign_in_explan_bottom2">닉네임 등 프로필은 마이페이지에서\n수정이 가능합니다.</string>
+    <string name="sign_in_last_top1">환영합니다!</string>
+    <string name="sign_in_last_top2">회원가입이 완료되었습니다.</string>
+    <string name="thank_input">입력 감사합니다!</string>
+    <string name="duplicate_email">중복된 이메일입니다!</string>
+    <string name="thank_input_password">비밀번호 입력 감사합니다!</string>
+    <string name="available_nickname">사용가능한 닉네임입니다!</string>
+    <string name="thank_input_email">이메일 입력 감사합니다.</string>
+    <string name="unregistered_email">등록되지 않은 이메일입니다.</string>
+    <string name="unregistered_password">비밀번호가 맞지 않습니다.</string>
+    <string name="go_to_sign_in">회원가입 바로가기></string>
+
+
 
 
     <!--my_page-->
