@@ -6,16 +6,130 @@
     android:layout_height="match_parent"
     tools:context=".src.suggestion.SuggestionFragment">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        style="@style/Head1Style"
-        android:layout_width="match_parent"
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="제안화면입니다."
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="20dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appCompatTextView3" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/user_my_suggestion"
+        android:fontFamily="sans-serif-black"
+        android:textStyle="normal"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginTop="20dp"
+        android:background="@color/gray_300"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3"
+        tools:ignore="PxUsage" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/user_name_suggestion_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="34dp"
+                android:fontFamily="sans-serif-black"
+                android:lineSpacingExtra="10sp"
+                android:text="@string/user_suggestion"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/my_suggestion_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_name_suggestion_txt" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="sans-serif-black"
+                android:lineSpacingExtra="8sp"
+                android:text="@string/main_review_food1"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toTopOf="@+id/appCompatTextView14"
+                app:layout_constraintStart_toStartOf="@+id/appCompatTextView14"
+                app:layout_constraintTop_toBottomOf="@+id/my_suggestion_recyclerview" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:fontFamily="sans-serif-black"
+                android:lineSpacingExtra="8sp"
+                android:text="@string/main_review_food2"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_review_create"
+                app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/appCompatTextView13" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

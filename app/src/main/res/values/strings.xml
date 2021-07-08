@@ -20,6 +20,15 @@
     <string name="main_review_food1">후기를 작성해주세요</string>
     <string name="main_review_food2">방문했던 가게에 대한\n별점 및 후기를 입력해주세요</string>
 
+    <!--main_suggestion-->
+    <string name="user_suggestion">님이 제안하신\nMATE 입니다:)</string>
+    <string name="user_my_suggestion">내 제안</string>
+    <string name="mate_suggestion_title">국밥 드실분</string>
+    <string name="mate_suggestion_date">2021.06.21</string>
+    <string name="mate_suggestion_restaurant">| 할머니 갈비탕</string>
+    <string name="mate_suggestion_time" tools:ignore="TypographyDashes">| 12:00-12:40</string>
+    <string name="mate_suggestion_limit_people">5</string>
+
 
     <!--create group-->
     <string name="create_group_toolbar">그룹 만들기</string>

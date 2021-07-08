@@ -23,5 +23,9 @@ class HomeFragment
         binding.groupPlusBtn.setOnClickListener {
             startActivity(Intent(activity, CreateGroupActivity::class.java))
         }
+
+        binding.matePlusBtn.setOnClickListener {
+
+        }
     }
 }

@@ -254,7 +254,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView11">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/appCompatImageView14"
+                        android:id="@+id/mate_plus_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
@@ -277,7 +277,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView14" />
+                        app:layout_constraintTop_toBottomOf="@+id/mate_plus_btn" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
