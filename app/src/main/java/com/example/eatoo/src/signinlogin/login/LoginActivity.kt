@@ -104,8 +104,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         showCustomToast(response.message)
         if(response.code == 1000){
 
-            Log.d("login", response.result.jwt)
-            Log.d("login", response.result.userIdx.toString())
+            Log.d("jwt", response.result.jwt)
+            Log.d("userIdx", response.result.userIdx.toString())
 
             putSharedPref(response.result.jwt, response.result.userIdx)
             startActivity(Intent(this, MainActivity::class.java))

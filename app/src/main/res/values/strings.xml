@@ -30,6 +30,30 @@
     <string name="mate_suggestion_limit_people">5</string>
 
 
+    <!--review-->
+    <string name="create_review">후기 작성하기</string>
+    <string name="store_location">가게 위치</string>
+    <string name="input_store_location">가게 위치를 입력해주세요</string>
+    <string name="find_store_via_map">지도에서 가게 위치 찾기</string>
+    <string name="store_name">가게명</string>
+    <string name="input_store_name">가게명을 입력해주세요</string>
+    <string name="category">카테고리</string>
+    <string name="category_chinese_food">중식</string>
+    <string name="category_japanese_food">일식</string>
+    <string name="category_western_food">양식</string>
+    <string name="category_street_food">분식</string>
+    <string name="category_korean_food">한식</string>
+    <string name="category_asian_food">아시아</string>
+    <string name="category_desert_food">디저트</string>
+    <string name="category_etc_food">기타</string>
+    <string name="next_step">다음으로</string>
+    <string name="review_exp">이미 등록된 가게를 선택한 경우 가게명과 카테고리는 자동으로 입력됩니다. 새로운 가게의 경우, 직접 입력해주세요!</string>
+    <string name="try_write_review">후기를 작성해보세요!</string>
+    <string name="try_write_review_exp1">다녀왔던 가게에 대한 정보와</string>
+    <string name="try_write_review_exp2">평점, 후기를 꼭 작성해주세요 :)</string>
+    <string name="my_review">내 후기</string>
+
+
     <!--create group-->
     <string name="create_group_toolbar">그룹 만들기</string>
     <string name="create_group_suggest1">님의 MATE</string>
@@ -59,7 +83,6 @@
     <string name="failed_db_connection">데이터베이스 연결에 실패하였습니다.</string>
 
 
-
     <!--group location-->
     <string name="search_location_fail">검색 결과를 가져오지 못 했습니다.</string>
     <string name="group_location">위치</string>
@@ -84,8 +107,8 @@
 
     <!--group member-->
     <string name="invalid_group">현재 존재하지 않는 그룹입니다.</string>
-    
-    
+
+
     <!--main home -->
     <string name="eatoo">EATOO</string>
     <string name="user_name_title">님의</string>
@@ -144,8 +167,6 @@
     <string name="unregistered_email">등록되지 않은 이메일입니다.</string>
     <string name="unregistered_password">비밀번호가 맞지 않습니다.</string>
     <string name="go_to_sign_in">회원가입 바로가기></string>
-
-
 
 
     <!--my_page-->

@@ -24,8 +24,6 @@
     <color name="gray_000">#f1f1f1</color>
 
 
-
-
     <!--make group-->
     <color name="chip_ripple_color">#10FFFFFF</color>
     <color name="group_red">#ff0000</color>
@@ -34,4 +32,9 @@
     <color name="group_yellow">#ffb800</color>
     <color name="group_yellow_litle">#ffde70</color>
     <color name="change_location">#80FFFFFF</color>
+
+    <!--create review-->
+    <color name="input_background">#dcdcdc</color>
+    <color name="input_hint">#a8a8a8</color>
+    <color name="next_btn">#dadada</color>
 </resources>

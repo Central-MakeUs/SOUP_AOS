@@ -20,6 +20,8 @@
 
         <!-- Customize your theme here. -->
         <item name="colorAccent">@color/custom_purple</item>
+
+
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -39,5 +41,15 @@
         <item name="chipStrokeColor">@color/main_orange</item>
         <item name="chipStrokeWidth">1dp</item>
     </style>
+
+
+    <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.FloatingActionButton</item>
+    </style>
+
+    <style name="ThemeOverlay.App.FloatingActionButton" parent="">
+        <item name="srcCompat">@drawable/ic_fab</item>
+    </style>
+
 
 </resources>

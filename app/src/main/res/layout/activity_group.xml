@@ -24,7 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:contentInsetStart="0dp"
-                app:leftIcon="@drawable/ic_baseline_arrow_back_24"
+                app:leftIcon="@drawable/ic_vector"
+                android:layout_marginHorizontal="20dp"
                 app:titleText="그룹이름" />
 
             <com.google.android.material.tabs.TabLayout

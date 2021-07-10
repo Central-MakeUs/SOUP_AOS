@@ -81,6 +81,16 @@ class CreateGroupActivity :
 
 
     }
+    private fun getSearchIntent() {
+        val intentResult = intent.getParcelableExtra<SearchResultEntity>(SEARCH_RESULT_EXTRA_KEY)
+        if (intentResult != null) { //위치를 검색해서 다시 돌아온 경우
+            mapShowing = true
+            searchResult = intentResult
+            setAddressTv(intentResult.fullAddress)
+            setupGoogleMap()
+        }
+
+    }
 
     /*
 
@@ -145,18 +155,6 @@ class CreateGroupActivity :
             keywordList.add(Keyword(name = childChip?.text.toString()))
         }
         return keywordList
-    }
-
-
-    private fun getSearchIntent() {
-        val intentResult = intent.getParcelableExtra<SearchResultEntity>(SEARCH_RESULT_EXTRA_KEY)
-        if (intentResult != null) { //위치를 검색해서 다시 돌아온 경우
-            mapShowing = true
-            searchResult = intentResult
-            setAddressTv(intentResult.fullAddress)
-            setupGoogleMap()
-        }
-
     }
 
     /*
@@ -238,7 +236,7 @@ class CreateGroupActivity :
 
     private fun setupGoogleMap() {
         val mapFragment =
-            supportFragmentManager.findFragmentById(R.id.frag_create_group_map) as SupportMapFragment
+            supportFragmentManager.findFragmentById(R.id.frag_store_location_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 

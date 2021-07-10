@@ -8,6 +8,7 @@ import com.example.eatoo.config.ApplicationClass
 import com.example.eatoo.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.example.eatoo.config.BaseFragment
 import com.example.eatoo.databinding.FragmentMyPageBinding
+import com.example.eatoo.src.review.my_review.MyReviewActivity
 import com.example.eatoo.src.splash.SplashActivity
 
 
@@ -20,5 +21,10 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding
             ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, "").apply()
             startActivity(Intent(activity, SplashActivity::class.java))
         }
+
+        binding.linearLayout3.setOnClickListener {
+            startActivity(Intent(requireContext(), MyReviewActivity::class.java))
+        }
     }
+
 }
