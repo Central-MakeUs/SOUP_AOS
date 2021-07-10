@@ -2,12 +2,14 @@ package com.example.eatoo.src.review.store_map
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -15,6 +17,8 @@ import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityStoreMapBinding
 import com.example.eatoo.src.home.create_group.CreateGroupActivity
+import com.example.eatoo.src.review.create_review.CreateReviewActivity
+import com.example.eatoo.util.dialog.RegisterNewStoreDialog
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
 import com.example.googlemapsapiprac.model.SearchResultEntity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -26,10 +30,13 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapBinding::inflate),
-    OnMapReadyCallback, GoogleMap.OnMapClickListener {
+    OnMapReadyCallback, GoogleMap.OnMapClickListener,
+    GoogleMap.OnMarkerClickListener, View.OnClickListener, RegisterNewStoreDialogInterface {
 
     val CAMERA_ZOOM_LEVEL = 17f
     val PERMISSION_REQUEST_CODE = 101
+
+    private lateinit var storeRegisterDialog : RegisterNewStoreDialog
 
     private lateinit var map: GoogleMap
     private var currentSelectMarker: Marker? = null
@@ -42,6 +49,11 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
 
         //현재 위치 맵 띄우기!!!!!!!!!!!!!!
         requestPermission()
+        bindView()
+    }
+
+    private fun bindView() {
+        binding.btnRegisterNewStore.setOnClickListener(this)
     }
 
     private fun setupGoogleMap() {
@@ -51,9 +63,11 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     }
 
     override fun onMapReady(map: GoogleMap) {
+        showLoadingDialog(this)
         this.map = map
         setMyLocationListener() //나중에는 서버로 대체?
         this.map.setOnMapClickListener(this)
+        this.map.setOnMarkerClickListener(this)
 //        currentSelectMarker = setupMarker(searchResult)
 //        currentSelectMarker?.showInfoWindow()
     }
@@ -68,8 +82,8 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         )
         val markerOptions = MarkerOptions().apply {
             position(positionLatLng)
-//            title( locationLatLngEntity.latitude.toString())
-//            snippet(locationLatLngEntity.longitude.toString())
+            title( locationLatLngEntity.latitude.toString())
+            snippet(locationLatLngEntity.longitude.toString())
         }
         map.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
@@ -77,7 +91,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
                 CreateGroupActivity.CAMERA_ZOOM_LEVEL
             )
         )
-
+        dismissLoadingDialog()
         return map.addMarker(markerOptions)
     }
 
@@ -185,9 +199,31 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     override fun onMapClick(latlng: LatLng) {
         val markerOptions = MarkerOptions().apply {
             position(latlng)
+            title("hello world!")
         }
         map.clear()
         map.addMarker(markerOptions)
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        marker.title?.let {
+            showCustomToast(it)
+        }
+        return false
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0?.id){
+            R.id.btn_register_new_store -> {
+                storeRegisterDialog = RegisterNewStoreDialog(this)
+                storeRegisterDialog.show()
+            }
+        }
+    }
+
+    override fun onRegisterNewStoreConfirm() {
+        //서버 통신 성공하면 화면이동.
+        startActivity(Intent(this, CreateReviewActivity::class.java))
     }
 
 

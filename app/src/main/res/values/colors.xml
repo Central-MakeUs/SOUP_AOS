@@ -37,4 +37,8 @@
     <color name="input_background">#dcdcdc</color>
     <color name="input_hint">#a8a8a8</color>
     <color name="next_btn">#dadada</color>
+
+    <!--dialog-->
+    <color name="dialog_cancel_background">#f3f3f3</color>
+    <color name="dialog_cancel_text">#a8a8a8</color>
 </resources>

@@ -1,0 +1,35 @@
+package com.example.eatoo.util.dialog
+
+import android.app.Dialog
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
+import android.widget.Toast
+import com.example.eatoo.databinding.DialogRegisterNewStoreBinding
+import com.example.eatoo.src.review.store_map.StoreMapActivity
+
+class RegisterNewStoreDialog(val view : StoreMapActivity) : Dialog(view)  {
+
+    private lateinit var binding : DialogRegisterNewStoreBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding = DialogRegisterNewStoreBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        this.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        setCanceledOnTouchOutside(false)
+        setCancelable(false)
+
+        binding.btnDialogConfirm.setOnClickListener {
+            view.onRegisterNewStoreConfirm()
+        }
+        binding.btnDialogCancel.setOnClickListener {
+            dismiss()
+        }
+
+    }
+}

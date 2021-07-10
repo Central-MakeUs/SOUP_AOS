@@ -52,6 +52,12 @@
     <string name="try_write_review_exp1">다녀왔던 가게에 대한 정보와</string>
     <string name="try_write_review_exp2">평점, 후기를 꼭 작성해주세요 :)</string>
     <string name="my_review">내 후기</string>
+    <string name="register_new_store">새로운 가게 등록</string>
+    <string name="dialog_register_new_store_query1">표시된 위치에 새로운 가게를</string>
+    <string name="dialog_register_new_store_query2">등록하시겠습니까?</string>
+    <string name="dialog_register_new_store_exp1">이미 등록된 동일 가게가 없는 경우, 새로운 가게</string>
+    <string name="dialog_register_new_store_exp2">등록 후 계속해서 후기를 남길 수 있습니다</string>
+
 
 
     <!--create group-->
@@ -181,5 +187,9 @@
     <string name="logout">로그아웃</string>
     <string name="edit">편집</string>
     <string name="taste_keyword">식성 키워드</string>
+
+    <!--dialog-->
+    <string name="dialog_confirm">확인</string>
+    <string name="dialog_cancel">취소</string>
 
 </resources>
