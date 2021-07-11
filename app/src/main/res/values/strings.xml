@@ -22,6 +22,9 @@
     <string name="main_group_member_count">+11</string>
     <string name="main_group_none_group_txt1">다양한 GROUP을\n만들어 EAT-TOO 해보세요</string>
     <string name="main_group_none_group_txt2">여러개의 그룹을 만들 수 있어요!</string>
+
+
+
     <!--main_suggestion-->
     <string name="user_suggestion">님이 제안하신\nMATE 입니다:)</string>
     <string name="user_my_suggestion">내 제안</string>
@@ -30,6 +33,25 @@
     <string name="mate_suggestion_restaurant">| 할머니 갈비탕</string>
     <string name="mate_suggestion_time" tools:ignore="TypographyDashes">| 12:00-12:40</string>
     <string name="mate_suggestion_limit_people">5</string>
+
+    <!--main_mate_suggestion -->
+    <string name="main_mate_suggestion">메이트 제안</string>
+    <string name="main_mate_group">MATE GROUP</string>
+    <string name="main_mate_suggestion_name">제안명</string>
+    <string name="main_mate_suggestion_name_hint">제안명을 입력해주세요</string>
+    <string name="main_mate_suggestion_store">가게</string>
+    <string name="main_mate_suggestion_store_hint">가게를 입력해주세요</string>
+    <string name="main_mate_suggestion_store_none_store">입력된 가게가 없습니다.</string>
+    <string name="main_mate_suggestion_store_none_img">입력된 가게의 이미지가 없습니다.</string>
+    <string name="main_mate_suggestion_meal_time">식사 시간</string>
+    <string name="main_mate_suggestion_meal_time_hint">시간 입력</string>
+    <string name="main_mate_suggestion_limit_people">제한 인원</string>
+    <string name="main_mate_suggestion_limit_people_hint">제한인원을 입력해주세요</string>
+    <string name="main_mate_suggestion_limit_time">제한마감 시간</string>
+    <string name="main_mate_suggestion_limit_time_hint">시간을 입력해주세요</string>
+    <string name="main_mate_suggestion_limit_time_hint2">마감시간이 되면 제안참여가 불가능하며, MATE 확정\n알림을 보내드립니다.</string>
+    <string name="main_mate_suggestion_registration">등록하기</string>
+
 
 
     <!--create group-->
@@ -61,7 +83,6 @@
     <string name="failed_db_connection">데이터베이스 연결에 실패하였습니다.</string>
 
 
-
     <!--group location-->
     <string name="search_location_fail">검색 결과를 가져오지 못 했습니다.</string>
     <string name="group_location">위치</string>
@@ -86,8 +107,8 @@
 
     <!--group member-->
     <string name="invalid_group">현재 존재하지 않는 그룹입니다.</string>
-    
-    
+
+
     <!--main home -->
     <string name="eatoo">EATOO</string>
     <string name="user_name_title">님의</string>
@@ -146,8 +167,6 @@
     <string name="unregistered_email">등록되지 않은 이메일입니다.</string>
     <string name="unregistered_password">비밀번호가 맞지 않습니다.</string>
     <string name="go_to_sign_in">회원가입 바로가기></string>
-
-
 
 
     <!--my_page-->

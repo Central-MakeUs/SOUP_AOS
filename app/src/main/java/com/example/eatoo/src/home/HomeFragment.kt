@@ -1,5 +1,6 @@
 package com.example.eatoo.src.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +12,7 @@ import com.example.eatoo.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.example.eatoo.config.BaseFragment
 import com.example.eatoo.databinding.FragmentHomeBinding
 import com.example.eatoo.src.home.adapter.Home_Group_Kind_RecyclerviewAdapter
+import com.example.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
 import com.example.eatoo.src.home.model.GroupResponse
 import com.example.eatoo.util.getUserIdx
 
@@ -35,7 +37,7 @@ class HomeFragment
 //        }
 
         binding.matePlusBtn.setOnClickListener {
-
+            startActivity(Intent(activity, Group_Mate_Suggetsion_Activity::class.java))
         }
     }
 
