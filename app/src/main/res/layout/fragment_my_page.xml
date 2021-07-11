@@ -92,9 +92,7 @@
         android:background="@drawable/background_gray_color_radius"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingStart="50dp"
         android:paddingTop="15dp"
-        android:paddingEnd="50dp"
         android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -105,10 +103,12 @@
             android:id="@+id/linearLayout4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="51dp"
             android:layout_marginEnd="83dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/linearLayout3">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -167,8 +167,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="83dp"
+            android:layout_marginEnd="51dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/linearLayout3"
             app:layout_constraintTop_toTopOf="@+id/linearLayout3">
 

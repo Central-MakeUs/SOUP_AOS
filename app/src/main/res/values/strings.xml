@@ -19,7 +19,9 @@
     <string name="main_my_suggestion_mate_together">함께 밥먹을 MATE를 제안해주세요!</string>
     <string name="main_review_food1">후기를 작성해주세요</string>
     <string name="main_review_food2">방문했던 가게에 대한\n별점 및 후기를 입력해주세요</string>
-
+    <string name="main_group_member_count">+11</string>
+    <string name="main_group_none_group_txt1">다양한 GROUP을\n만들어 EAT-TOO 해보세요</string>
+    <string name="main_group_none_group_txt2">여러개의 그룹을 만들 수 있어요!</string>
     <!--main_suggestion-->
     <string name="user_suggestion">님이 제안하신\nMATE 입니다:)</string>
     <string name="user_my_suggestion">내 제안</string>

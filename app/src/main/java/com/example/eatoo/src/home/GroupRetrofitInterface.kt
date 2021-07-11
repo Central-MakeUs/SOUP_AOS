@@ -1,13 +1,19 @@
 package com.example.eatoo.src.home
 
+import com.example.eatoo.config.ApplicationClass.Companion.X_ACCESS_TOKEN
+import com.example.eatoo.config.XAccessTokenInterceptor
 import com.example.eatoo.src.home.model.GroupResponse
+import okhttp3.internal.connection.ConnectInterceptor.intercept
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Path
 
 interface GroupRetrofitInterface {
 
-    @GET("/app/users/{userIdx}/invitation") //여기 아님. 메인홈 그룹조회는 아직 구현 안 됨.
-    fun getGroup(@Path ("userIdx") userIdx : Int)
+    @GET("/app/homes/{userIdx}") //여기 아님. 메인홈 그룹조회는 아직 구현 안 됨.
+    fun getGroup(
+        @Path ("userIdx") userIdx : Int
+    )
     : Call<GroupResponse>
 }

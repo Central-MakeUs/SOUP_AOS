@@ -4,10 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/background_3_radius"
+    android:paddingEnd="12dp"
     android:layout_marginBottom="23dp"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
+    android:layout_height="wrap_content"
+    tools:ignore="RtlSymmetry">
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -31,7 +32,7 @@
         android:textColor="@color/white"
         android:textSize="10sp"
         android:textStyle="bold"
-        android:padding="1dp"
+        android:padding="1.5dp"
         app:layout_constraintBottom_toTopOf="@+id/food_img"
         app:layout_constraintStart_toStartOf="@+id/food_img"
         app:layout_constraintTop_toTopOf="@+id/food_img"
@@ -115,11 +116,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="16dp"
         android:src="@drawable/ic_hello"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/limit_people_txt"
         app:layout_constraintStart_toEndOf="@+id/limit_people_txt"
         app:layout_constraintTop_toTopOf="@+id/limit_people_txt" />
 
