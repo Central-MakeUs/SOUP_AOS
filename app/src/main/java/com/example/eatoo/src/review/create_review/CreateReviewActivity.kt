@@ -3,6 +3,7 @@ package com.example.eatoo.src.review.create_review
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
@@ -13,10 +14,24 @@ import com.example.eatoo.src.review.store_map.StoreMapActivity
 
 class CreateReviewActivity :  BaseActivity<ActivityCreateReviewBinding>(ActivityCreateReviewBinding::inflate),
 View.OnClickListener{
+
+    private var lat : Double = 0.0
+    private var lng : Double = 0.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         bindViews()
+        getIntentExtras()
+    }
+
+    private fun getIntentExtras() {
+        val roadAddress = intent.getStringExtra("address")
+        lat = intent.getDoubleExtra("lat", 0.0)
+        lng = intent.getDoubleExtra("lng", 0.0)
+        roadAddress?.let {
+            binding.tvSearchLocation.text = roadAddress
+        }
+
     }
 
     private fun bindViews() {

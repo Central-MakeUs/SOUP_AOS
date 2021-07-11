@@ -4,7 +4,7 @@ import com.example.eatoo.src.home.create_group.api_util.TmapKey
 import com.example.eatoo.src.home.create_group.api_util.TmapUrl
 import com.example.eatoo.src.home.create_group.model.CreateGroupRequest
 import com.example.eatoo.src.home.create_group.model.CreateGroupResponse
-import com.example.googlemapsapiprac.response.address.AddressInfoResponse
+import com.example.eatoo.src.home.create_group.model.address.AddressInfoResponse
 import retrofit2.Call
 import retrofit2.http.*
 

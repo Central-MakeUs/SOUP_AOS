@@ -1,4 +1,4 @@
-package com.example.eatoo.src.review.store_map.domain
+package com.example.eatoo.src.review.store_map.model
 
 import com.example.eatoo.config.BaseResponse
 import com.google.gson.annotations.SerializedName

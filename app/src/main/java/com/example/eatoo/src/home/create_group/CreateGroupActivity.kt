@@ -21,7 +21,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.eatoo.R
 import com.example.eatoo.config.ApplicationClass
-import com.example.eatoo.config.ApplicationClass.Companion.USER_IDX
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityCreateGroupBinding
 import com.example.eatoo.src.home.create_group.group_location.GroupLocationActivity
@@ -32,7 +31,7 @@ import com.example.eatoo.src.home.group.GroupActivity
 import com.example.eatoo.util.getUserIdx
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
 import com.example.googlemapsapiprac.model.SearchResultEntity
-import com.example.googlemapsapiprac.response.address.AddressInfoResponse
+import com.example.eatoo.src.home.create_group.model.address.AddressInfoResponse
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap

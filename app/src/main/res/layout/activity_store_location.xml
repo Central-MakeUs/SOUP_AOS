@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-                android:src="@drawable/ic_group_164"
+                android:src="@drawable/ic_group_137"
                 app:layout_constraintBottom_toBottomOf="@id/iv_search"
                 app:layout_constraintEnd_toEndOf="@id/toolbar_custom"
                 app:layout_constraintTop_toTopOf="@id/iv_search" />

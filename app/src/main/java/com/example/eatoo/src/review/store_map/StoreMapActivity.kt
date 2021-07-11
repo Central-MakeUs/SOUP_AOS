@@ -7,13 +7,13 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
@@ -21,11 +21,12 @@ import com.example.eatoo.databinding.ActivityStoreMapBinding
 import com.example.eatoo.src.home.create_group.CreateGroupActivity
 import com.example.eatoo.src.review.create_review.CreateReviewActivity
 import com.example.eatoo.src.review.store_map.adapter.ExistingStoreRVAdapter
-import com.example.eatoo.src.review.store_map.domain.StoreResponse
+import com.example.eatoo.src.review.store_map.model.StoreResponse
 import com.example.eatoo.util.dialog.RegisterNewStoreDialog
 import com.example.eatoo.util.getUserIdx
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
-import com.example.googlemapsapiprac.model.SearchResultEntity
+import com.example.eatoo.src.home.create_group.model.address.AddressInfoResponse
+import com.example.eatoo.src.review.store_map.model.KakaoAddressResponse
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -52,6 +53,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     private var storeLng : Double = 0.0
     private  var storeLat : Double = 0.0
     private lateinit var storeAdapter : ExistingStoreRVAdapter
+    private var roadAddress : String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -224,6 +226,12 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         }
         map.clear()
         map.addMarker(markerOptions)
+
+        storeLng = latlng.longitude
+        storeLat = latlng.latitude
+
+        Log.d("storeMapactivity", "lng : ${latlng.longitude}, lat : ${latlng.latitude}")
+        StoreMapService(this).tryGetStore(getUserIdx(), latlng.longitude, latlng.latitude )
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
@@ -233,8 +241,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         }
         storeLng = marker.position.longitude
         storeLat = marker.position.latitude
-        print(storeLat)
-        print(storeLng)
+
         Log.d("storeMapactivity", "lng : $storeLng, lat : $storeLat")
 
         StoreMapService(this).tryGetStore(getUserIdx(), storeLng, storeLat )
@@ -257,26 +264,45 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         //result 가 있으면 recyclerview 로 보여준다.
 
         //정말로 기존 등록이 없는지 다시 확인.
-        StoreMapService(this).tryGetStore(getUserIdx(), storeLng, storeLat )
+//        StoreMapService(this).tryGetStore(getUserIdx(), storeLng, storeLat )
+
+        val intent = Intent(this, CreateReviewActivity::class.java)
+        intent.apply {
+            putExtra("address", roadAddress)
+            putExtra("lat", storeLat)
+            putExtra("lng", storeLng)
+        }
+        startActivity(intent)
 
     }
 
     override fun onGetStoreSuccess(response: StoreResponse) {
         //recyclerview 로 등록 스토어 보여주기.
+        binding.btnRegisterNewStore.isVisible = false
         Log.d("storeMapactivity", response.toString())
         storeAdapter = ExistingStoreRVAdapter(this, response.result)
         binding.rvExistingStore.apply {
             adapter = storeAdapter
             layoutManager = LinearLayoutManager(this@StoreMapActivity, LinearLayoutManager.HORIZONTAL, false)
         }
-
     }
 
     override fun onGetStoreFail(message: String?, code: Int) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        binding.btnRegisterNewStore.isVisible = true
         if(code == 2010){
-            startActivity(Intent(this, CreateReviewActivity::class.java))
+            StoreMapService(this).tryGetAddress(storeLat, storeLng)
         }
+    }
+
+    override fun onGetAddressSuccess(response: KakaoAddressResponse?) {
+        //도로명 주소 변환!
+        Log.d("storeMapactivity", response.toString())
+        roadAddress = response?.documents?.get(0)?.road_address?.address_name
+    }
+
+    override fun onGetAddressFail(message: String?) {
+        startActivity(Intent(this, CreateReviewActivity::class.java))
     }
 
 

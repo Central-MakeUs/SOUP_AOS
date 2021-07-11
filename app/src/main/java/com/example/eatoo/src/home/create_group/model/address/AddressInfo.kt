@@ -1,4 +1,4 @@
-package com.example.googlemapsapiprac.response.address
+package com.example.eatoo.src.home.create_group.model.address
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

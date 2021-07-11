@@ -19,19 +19,18 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
         super.onCreate(savedInstanceState)
 
         //디버깅용
-       //ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
-
+        //ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
         Handler(Looper.getMainLooper()).postDelayed({
 
-            if(ApplicationClass.sSharedPreferences.contains(X_ACCESS_TOKEN)) {
+            if (ApplicationClass.sSharedPreferences.contains(X_ACCESS_TOKEN)) {
                 //디버깅용
-                val useridx = ApplicationClass.sSharedPreferences.getInt(ApplicationClass.USER_IDX, -1)
+                val useridx =
+                    ApplicationClass.sSharedPreferences.getInt(ApplicationClass.USER_IDX, -1)
                 val jwt = ApplicationClass.sSharedPreferences.getString(X_ACCESS_TOKEN, null)
                 Log.d("jwt", "jwt : $jwt useridx : $useridx")
 
                 startActivity(Intent(this, MainActivity::class.java))
-            }
-            else{
+            } else {
                 startActivity(Intent(this, ExplanationActivity::class.java))
             }
             finish()

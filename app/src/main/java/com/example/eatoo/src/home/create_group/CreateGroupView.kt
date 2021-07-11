@@ -1,7 +1,7 @@
 package com.example.eatoo.src.home.create_group
 
 import com.example.eatoo.src.home.create_group.model.CreateGroupResponse
-import com.example.googlemapsapiprac.response.address.AddressInfoResponse
+import com.example.eatoo.src.home.create_group.model.address.AddressInfoResponse
 
 interface CreateGroupView {
 

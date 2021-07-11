@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eatoo.databinding.ItemExistingStoreBinding
-import com.example.eatoo.src.review.store_map.domain.Store
+import com.example.eatoo.src.review.store_map.model.Store
 import com.example.eatoo.util.glideUtil
 
 class ExistingStoreRVAdapter(val context : Context, val storeList : List<Store>) : RecyclerView.Adapter<ExistingStoreRVAdapter.ViewHolder>() {
