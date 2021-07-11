@@ -55,12 +55,11 @@ class CreateGroupActivity :
     private lateinit var locationLatLngEntity: LocationLatLngEntity
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
-    private val PERMISSION_REQUEST_CODE = 101
     private var mapShowing = false
 
     companion object {
-        val SEARCH_RESULT_EXTRA_KEY: String = "SEARCH_RESULT_EXTRA_KEY"
-        val CAMERA_ZOOM_LEVEL = 17f
+        const val SEARCH_RESULT_EXTRA_KEY: String = "SEARCH_RESULT_EXTRA_KEY"
+        const val CAMERA_ZOOM_LEVEL = 17f
         const val PERMISSION_REQUEST_CODE = 101
     }
 

@@ -48,7 +48,7 @@
     <string name="category_western_food">양식</string>
     <string name="category_street_food">분식</string>
     <string name="category_korean_food">한식</string>
-    <string name="category_asian_food">아시아</string>
+    <string name="category_asian_food">아시안</string>
     <string name="category_desert_food">디저트</string>
     <string name="category_etc_food">기타</string>
     <string name="next_step">다음으로</string>
@@ -73,6 +73,7 @@
     <string name="try_search_again">검색어를 다시 입력해주세요!</string>
     <string name="search_example">예) 잇투동 12-13, 잇투로 456, 잇투아파트</string>
     <string name="goto_map">지도에서 찾기 ></string>
+    <string name="nothing" />
 
 
     <string name="dialog_register_new_store_query1">표시된 위치에 새로운 가게를</string>

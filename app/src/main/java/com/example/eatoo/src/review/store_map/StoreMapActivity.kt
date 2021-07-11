@@ -19,6 +19,7 @@ import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityStoreMapBinding
 import com.example.eatoo.src.home.create_group.CreateGroupActivity
+import com.example.eatoo.src.home.create_group.CreateGroupActivity.Companion.PERMISSION_REQUEST_CODE
 import com.example.eatoo.src.review.create_review.CreateReviewActivity
 import com.example.eatoo.src.review.store_map.adapter.ExistingStoreRVAdapter
 import com.example.eatoo.src.review.store_map.model.StoreResponse
@@ -39,8 +40,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     OnMapReadyCallback, GoogleMap.OnMapClickListener,
     GoogleMap.OnMarkerClickListener, View.OnClickListener, RegisterNewStoreDialogInterface , StoreMapView{
 
-    val CAMERA_ZOOM_LEVEL = 17f
-    val PERMISSION_REQUEST_CODE = 101
+
 
     private lateinit var storeRegisterDialog : RegisterNewStoreDialog
 

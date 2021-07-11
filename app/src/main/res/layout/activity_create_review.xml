@@ -26,6 +26,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardview_toolbar">
 
@@ -56,8 +57,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/ll_store_location_review1"
+            <RelativeLayout
+                android:id="@+id/rl_store_location_review1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
@@ -71,23 +72,28 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_review_store_location">
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="13dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
                     android:src="@drawable/ic_group_search_location" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_search_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_marginStart="11dp"
+                    android:layout_toEndOf="@id/iv_search"
+                    android:layout_centerVertical="true"
                     android:fontFamily="@font/roboto_regular"
                     android:text="@string/input_location"
                     android:textColor="@color/input_hint"
                     android:textSize="14sp" />
-            </LinearLayout>
+
+            </RelativeLayout>
 
             <FrameLayout
                 android:id="@+id/fl_create_review"
@@ -98,14 +104,14 @@
                 android:background="@drawable/edittext_background_radius_litle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_review_store_location"
-                app:layout_constraintTop_toBottomOf="@id/ll_store_location_review1">
+                app:layout_constraintTop_toBottomOf="@id/rl_store_location_review1">
 
-<!--                <fragment-->
-<!--                    android:id="@+id/frag_create_review_map"-->
-<!--                    android:name="com.google.android.gms.maps.SupportMapFragment"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_margin="3dp" />-->
+                <fragment
+                    android:id="@+id/frag_create_review_map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="3dp" />
 
                 <LinearLayout
                     android:id="@+id/ll_container_review_map"
@@ -147,27 +153,50 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_review_store_location"
                 app:layout_constraintTop_toBottomOf="@id/fl_create_review" />
 
-            <EditText
-                android:id="@+id/et_store_name"
+            <RelativeLayout
+                android:id="@+id/rl_store_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="9dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edittext_background_radius_litle"
-                android:fontFamily="@font/roboto_regular"
-                android:hint="@string/input_store_name"
-                android:maxLength="20"
-                android:inputType="text"
-                android:paddingStart="6dp"
+                android:orientation="horizontal"
                 android:paddingTop="13dp"
-                android:paddingBottom="14dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/input_hint"
-                android:textSize="14sp"
+                android:paddingBottom="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_review_store_location"
-                app:layout_constraintTop_toBottomOf="@id/tv_review_store_name"
-                tools:ignore="Autofill,RtlSymmetry" />
+                app:layout_constraintTop_toBottomOf="@id/tv_review_store_name">
+
+                <EditText
+                    android:id="@+id/et_store_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@id/iv_store_name_delete"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="@string/input_store_name"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:textColorHint="@color/input_hint"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_store_name_delete"
+                    android:visibility="invisible"
+                    tools:visibility="visible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_group_137"
+                    android:layout_marginEnd="14dp"
+                    android:layout_centerVertical="true"
+                    />
+
+            </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_review_category"
@@ -179,7 +208,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/tv_review_store_location"
-                app:layout_constraintTop_toBottomOf="@id/et_store_name" />
+                app:layout_constraintTop_toBottomOf="@id/rl_store_name" />
 
             <HorizontalScrollView
                 android:id="@+id/hsv_create_review"
@@ -193,108 +222,99 @@
                 app:layout_constraintStart_toStartOf="@id/tv_review_store_location"
                 app:layout_constraintTop_toBottomOf="@id/tv_review_category">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
+                    <RadioGroup
+                        android:id="@+id/rd_group"
+                        android:checkedButton="@id/rd_btn_ko"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_category_korean"
-                        android:layout_width="53dp"
-                        android:layout_height="53dp"
-                        android:layout_marginEnd="11dp"
-                        android:background="@drawable/selector_category"
-                        android:fontFamily="@font/roboto_regular"
-                        android:stateListAnimator="@null"
-                        android:text="@string/category_korean_food"
-                        android:textColor="@color/input_hint"
-                        android:textSize="15sp" />
+                        <RadioButton
+                            android:id="@+id/rd_btn_ko"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_korean_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_category_chinese"
-                        android:layout_width="53dp"
-                        android:layout_height="53dp"
-                        android:layout_marginEnd="11dp"
-                        android:background="@drawable/background_category"
-                        android:fontFamily="@font/roboto_regular"
-                        android:stateListAnimator="@null"
-                        android:text="@string/category_chinese_food"
-                        android:textColor="@color/input_hint"
-                        android:textSize="15sp" />
+                        <RadioButton
+                            android:id="@+id/rd_btn_ch"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_chinese_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_category_japanese"
-                        android:layout_width="53dp"
-                        android:layout_height="53dp"
-                        android:layout_marginEnd="11dp"
-                        android:background="@drawable/background_category"
-                        android:fontFamily="@font/roboto_regular"
-                        android:stateListAnimator="@null"
-                        android:text="@string/category_japanese_food"
-                        android:textColor="@color/input_hint"
-                        android:textSize="15sp" />
+                        <RadioButton
+                            android:id="@+id/rd_btn_jp"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_japanese_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
+                        <RadioButton
+                            android:id="@+id/rd_btn_western"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_western_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
+                        <RadioButton
+                            android:id="@+id/rd_btn_street"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_street_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
+                        <RadioButton
+                            android:id="@+id/rd_btn_asian"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_asian_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
+                        <RadioButton
+                            android:id="@+id/rd_btn_desert"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_desert_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_category_western"
-                        android:layout_width="53dp"
-                        android:layout_height="53dp"
-                        android:layout_marginEnd="11dp"
-                        android:background="@drawable/background_category"
-                        android:fontFamily="@font/roboto_regular"
-                        android:stateListAnimator="@null"
-                        android:text="@string/category_western_food"
-                        android:textColor="@color/input_hint"
-                        android:textSize="15sp" />
+                        <RadioButton
+                            android:id="@+id/rd_btn_etc"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_etc_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_category_street"
-                        android:layout_width="53dp"
-                        android:layout_height="53dp"
-                        android:layout_marginEnd="11dp"
-                        android:background="@drawable/background_category"
-                        android:fontFamily="@font/roboto_regular"
-                        android:stateListAnimator="@null"
-                        android:text="@string/category_street_food"
-                        android:textColor="@color/input_hint"
-                        android:textSize="15sp" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_category_asian"
-                        android:layout_width="53dp"
-                        android:layout_height="53dp"
-                        android:layout_marginEnd="11dp"
-                        android:background="@drawable/background_category"
-                        android:fontFamily="@font/roboto_regular"
-                        android:stateListAnimator="@null"
-                        android:text="@string/category_asian_food"
-                        android:textColor="@color/input_hint"
-                        android:textSize="15sp" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_category_desert"
-                        android:layout_width="53dp"
-                        android:layout_height="53dp"
-                        android:layout_marginEnd="11dp"
-                        android:background="@drawable/background_category"
-                        android:fontFamily="@font/roboto_regular"
-                        android:stateListAnimator="@null"
-                        android:text="@string/category_desert_food"
-                        android:textColor="@color/input_hint"
-                        android:textSize="15sp" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_category_etc"
-                        android:layout_width="53dp"
-                        android:layout_height="53dp"
-                        android:layout_marginEnd="11dp"
-                        android:background="@drawable/background_category"
-                        android:fontFamily="@font/roboto_regular"
-                        android:stateListAnimator="@null"
-                        android:text="@string/category_etc_food"
-                        android:textColor="@color/input_hint"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                    </RadioGroup>
             </HorizontalScrollView>
 
             <LinearLayout
@@ -327,7 +347,9 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_review_store_location"
-                app:layout_constraintTop_toBottomOf="@id/ll_create_review_exp" />
+                app:layout_constraintTop_toBottomOf="@id/ll_create_review_exp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="20dp"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
