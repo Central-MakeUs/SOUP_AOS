@@ -25,13 +25,79 @@
     </androidx.cardview.widget.CardView>
 
 
+
+    <TextView
+        android:id="@+id/tv_my_review_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="잇투"
+        android:textSize="20sp"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/cardview_myreview"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="34dp"/>
+
+    <TextView
+        android:id="@+id/tv_my_review_user_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/my_review_user_title"
+        android:textSize="20sp"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/tv_my_review_user_name"
+       app:layout_constraintTop_toTopOf="@id/tv_my_review_user_name"/>
+
+
+
+    <TextView
+        android:id="@+id/tv_is_my_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/is_review"
+        android:textSize="20sp"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tv_my_review_user_name"
+        app:layout_constraintStart_toStartOf="@id/tv_my_review_user_name"
+        />
+
+    <ImageView
+        android:id="@+id/iv_no_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_group_239"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardview_myreview"
+        app:layout_constraintBottom_toTopOf="@id/cardview_review_suggest"/>
+
+
+    <TextView
+        android:id="@+id/tv_no_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_review"
+        android:textSize="10sp"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/input_hint"
+        app:layout_constraintTop_toBottomOf="@+id/iv_no_review"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        />
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_myreview"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginEnd="17dp"
         android:layout_marginBottom="23dp"
-        app:background="@drawable/ic_fab"
+        android:src="@drawable/ic_baseline_add_24"
+        android:background="@color/white"
         app:backgroundTint="@color/main_orange"
         app:layout_constraintBottom_toTopOf="@+id/cardview_review_suggest"
         app:layout_constraintEnd_toEndOf="parent"

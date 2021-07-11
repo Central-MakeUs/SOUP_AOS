@@ -9,16 +9,21 @@ import android.location.LocationListener
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityStoreMapBinding
 import com.example.eatoo.src.home.create_group.CreateGroupActivity
 import com.example.eatoo.src.review.create_review.CreateReviewActivity
+import com.example.eatoo.src.review.store_map.adapter.ExistingStoreRVAdapter
+import com.example.eatoo.src.review.store_map.domain.StoreResponse
 import com.example.eatoo.util.dialog.RegisterNewStoreDialog
+import com.example.eatoo.util.getUserIdx
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
 import com.example.googlemapsapiprac.model.SearchResultEntity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -31,7 +36,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapBinding::inflate),
     OnMapReadyCallback, GoogleMap.OnMapClickListener,
-    GoogleMap.OnMarkerClickListener, View.OnClickListener, RegisterNewStoreDialogInterface {
+    GoogleMap.OnMarkerClickListener, View.OnClickListener, RegisterNewStoreDialogInterface , StoreMapView{
 
     val CAMERA_ZOOM_LEVEL = 17f
     val PERMISSION_REQUEST_CODE = 101
@@ -43,6 +48,10 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     private lateinit var locationManager: LocationManager
     private lateinit var myLocationListener: StoreMapActivity.MyLocationListener
     private lateinit var locationLatLngEntity: LocationLatLngEntity
+
+    private var storeLng : Double = 0.0
+    private  var storeLat : Double = 0.0
+    private lateinit var storeAdapter : ExistingStoreRVAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,9 +74,21 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     override fun onMapReady(map: GoogleMap) {
         showLoadingDialog(this)
         this.map = map
-        setMyLocationListener() //나중에는 서버로 대체?
+
+        //테스트
+        val markeroptions = MarkerOptions().apply {
+            position(LatLng(37.27427291870117, 127.15801239013672))
+        }
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+            LatLng(37.27427291870117, 127.15801239013672),
+            CreateGroupActivity.CAMERA_ZOOM_LEVEL
+        ))
+        dismissLoadingDialog()
+        map.addMarker(markeroptions)
+//        setMyLocationListener() //나중에는 서버로 대체?
         this.map.setOnMapClickListener(this)
         this.map.setOnMarkerClickListener(this)
+
 //        currentSelectMarker = setupMarker(searchResult)
 //        currentSelectMarker?.showInfoWindow()
     }
@@ -206,9 +227,18 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
+        //클릭확인
         marker.title?.let {
             showCustomToast(it)
         }
+        storeLng = marker.position.longitude
+        storeLat = marker.position.latitude
+        print(storeLat)
+        print(storeLng)
+        Log.d("storeMapactivity", "lng : $storeLng, lat : $storeLat")
+
+        StoreMapService(this).tryGetStore(getUserIdx(), storeLng, storeLat )
+
         return false
     }
 
@@ -223,7 +253,30 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
 
     override fun onRegisterNewStoreConfirm() {
         //서버 통신 성공하면 화면이동.
-        startActivity(Intent(this, CreateReviewActivity::class.java))
+        //code -> 2010 존재 하지 않는 스토어 : 지도를 보여준다.
+        //result 가 있으면 recyclerview 로 보여준다.
+
+        //정말로 기존 등록이 없는지 다시 확인.
+        StoreMapService(this).tryGetStore(getUserIdx(), storeLng, storeLat )
+
+    }
+
+    override fun onGetStoreSuccess(response: StoreResponse) {
+        //recyclerview 로 등록 스토어 보여주기.
+        Log.d("storeMapactivity", response.toString())
+        storeAdapter = ExistingStoreRVAdapter(this, response.result)
+        binding.rvExistingStore.apply {
+            adapter = storeAdapter
+            layoutManager = LinearLayoutManager(this@StoreMapActivity, LinearLayoutManager.HORIZONTAL, false)
+        }
+
+    }
+
+    override fun onGetStoreFail(message: String?, code: Int) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        if(code == 2010){
+            startActivity(Intent(this, CreateReviewActivity::class.java))
+        }
     }
 
 

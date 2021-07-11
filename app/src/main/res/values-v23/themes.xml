@@ -51,5 +51,12 @@
         <item name="srcCompat">@drawable/ic_fab</item>
     </style>
 
+    <style name="ShapeAppearanceOverlay.App.SelectedCornerRadius" parent="">
+        <item name="cornerSizeTopLeft">75dp</item>
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerSizeBottomLeft">75dp</item>
+        <item name="cornerFamilyBottomLeft">rounded</item>
+    </style>
+
 
 </resources>

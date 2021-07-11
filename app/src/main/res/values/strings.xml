@@ -31,7 +31,12 @@
 
 
     <!--review-->
+    <string name="my_review_user_title">님이 작성하신</string>
+    <string name="is_review">후기입니다 :)</string>
+    <string name="no_review">작성하신 후기가 없습니다.</string>
     <string name="create_review">후기 작성하기</string>
+    <string name="one_over_two">1/2</string>
+    <string name="two_over_two">2/2</string>
     <string name="store_location">가게 위치</string>
     <string name="input_store_location">가게 위치를 입력해주세요</string>
     <string name="find_store_via_map">지도에서 가게 위치 찾기</string>
@@ -53,11 +58,27 @@
     <string name="try_write_review_exp2">평점, 후기를 꼭 작성해주세요 :)</string>
     <string name="my_review">내 후기</string>
     <string name="register_new_store">새로운 가게 등록</string>
+    <string name="menu_name">메뉴명</string>
+    <string name="input_menu_name">메뉴명을 작성해주세요</string>
+    <string name="one_sentence_review">한줄평</string>
+    <string name="input_review">30자 이내로 짧게 적어주세요</string>
+    <string name="review_img">이미지</string>
+    <string name="input_review_img">사진을 첨부해주세요</string>
+    <string name="rating">별점</string>
+    <string name="optional">(선택)</string>
+    <string name="store_link">가게 정보 링크</string>
+    <string name="input_store_link">가게링크를 입력해주세요</string>
+    <string name="register">등록하기</string>
+    <string name="no_search_result">검색 결과가 없습니다.</string>
+    <string name="try_search_again">검색어를 다시 입력해주세요!</string>
+    <string name="search_example">예) 잇투동 12-13, 잇투로 456, 잇투아파트</string>
+    <string name="goto_map">지도에서 찾기 ></string>
+
+
     <string name="dialog_register_new_store_query1">표시된 위치에 새로운 가게를</string>
     <string name="dialog_register_new_store_query2">등록하시겠습니까?</string>
     <string name="dialog_register_new_store_exp1">이미 등록된 동일 가게가 없는 경우, 새로운 가게</string>
     <string name="dialog_register_new_store_exp2">등록 후 계속해서 후기를 남길 수 있습니다</string>
-
 
 
     <!--create group-->

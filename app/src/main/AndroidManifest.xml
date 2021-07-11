@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".src.review.store_map.StoreMapActivity"></activity>
+        <activity android:name=".src.review.store_location.StoreLocationActivity"></activity>
+        <activity android:name=".src.review.create_review.CreateReview2Activity" />
+        <activity android:name=".src.review.store_map.StoreMapActivity" />
         <activity android:name=".src.review.my_review.MyReviewActivity" />
         <activity android:name=".src.review.create_review.CreateReviewActivity" />
         <activity android:name=".src.home.group.GroupActivity" />
