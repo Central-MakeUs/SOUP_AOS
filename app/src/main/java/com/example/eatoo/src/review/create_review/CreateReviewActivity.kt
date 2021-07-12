@@ -32,7 +32,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
     private var mapShowing = false
 
     private lateinit var map: GoogleMap
-    private var categoryIdx = 1
+    private var categoryIdx = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
         lat = intent.getDoubleExtra("lat", -1.0)
         lng = intent.getDoubleExtra("lng", -1.0)
         if(roadAddress != "null") binding.tvSearchLocation.text = roadAddress
-
+        Log.d("createReviewAct", "roadaddress : $roadAddress, lat : $lat, lng : $lng")
         if(lat >0 && lng >0) {
             mapShowing = true
             setupGoogleMap()
@@ -84,22 +84,42 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
             R.id.ll_container_review_map -> {
                 startActivity(Intent(this, StoreMapActivity::class.java))
             }
-            R.id.btn_create_review_next -> {
-                val intent = Intent(this, CreateReview2Activity::class.java)
-                intent.apply {
-                    putExtra("road_address", roadAddress)
-                    putExtra("lat", lat)
-                    putExtra("lng", lng)
-                    putExtra("store_name", binding.etStoreName.text.toString())
-                    putExtra("categoryIdx", categoryIdx)
-                }
-                startActivity(intent)
-            }
+            R.id.btn_create_review_next ->  validityTest()
             R.id.rl_store_location_review1 -> {
                 startActivity(Intent(this, StoreLocationActivity::class.java))
             }
             R.id.iv_store_name_delete -> binding.etStoreName.text.clear()
         }
+    }
+
+    private fun validityTest() {
+
+        var storeLocation = ""
+        if(binding.tvReviewStoreName.text.isEmpty()){
+            showCustomToast("가게 주소를 입력해주세요")
+            return
+        }else storeLocation = binding.tvReviewStoreName.text.toString()
+
+        var storeName = ""
+        if(binding.etStoreName.text.isEmpty()){
+            showCustomToast("가게명을 입력해주세요")
+            return
+        }else storeName = binding.etStoreName.text.toString()
+
+        if(categoryIdx == 0){
+            showCustomToast("카테고리를 입력해주세요")
+            return
+        }
+
+        val intent = Intent(this, CreateReview2Activity::class.java)
+        intent.apply {
+            putExtra("road_address", storeLocation)
+            putExtra("lat", lat)
+            putExtra("lng", lng)
+            putExtra("store_name", storeName)
+            putExtra("categoryIdx", categoryIdx)
+        }
+        startActivity(intent)
     }
 
     private fun setupGoogleMap() {

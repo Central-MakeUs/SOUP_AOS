@@ -73,9 +73,10 @@
 
                 <EditText
                     android:id="@+id/et_menu_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@+id/iv_menu_name_delete"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="5dp"
                     android:background="@color/transparent"
@@ -114,7 +115,7 @@
             <RelativeLayout
                 android:id="@+id/rl_review"
                 android:layout_width="0dp"
-                android:layout_height="88dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edittext_background_radius_litle"
@@ -123,19 +124,22 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_one_sentence_review">
 
                 <EditText
-                    android:id="@+id/et_store_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/et_short_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="13dp"
+                    android:layout_marginEnd="5dp"
                     android:background="@color/transparent"
                     android:fontFamily="@font/roboto_regular"
                     android:hint="@string/input_review"
-                    android:inputType="text"
-                    android:maxLength="20"
+                    android:inputType="text|textMultiLine"
                     android:maxLines="3"
+                    android:maxLength="30"
                     android:textColor="@color/black"
                     android:textColorHint="@color/input_hint"
                     android:textSize="14sp"
@@ -159,7 +163,7 @@
             <RelativeLayout
                 android:id="@+id/rl_review_img"
                 android:layout_width="0dp"
-                android:layout_height="88dp"
+                android:layout_height="150dp"
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edittext_background_radius_litle"
@@ -168,14 +172,24 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_review_img">
 
                 <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/iv_review_img"
+                    android:scaleType="fitXY"
+                    android:visibility="invisible"
+                    tools:visibility="visible"/>
+
+
+                <ImageView
                     android:id="@+id/iv_review_img_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="40dp"
                     android:src="@drawable/ic_eva_image_outline" />
 
                 <TextView
+                    android:id="@+id/tv_input_review_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/iv_review_img_icon"
@@ -205,8 +219,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:singleSelection="false"
                 app:layout_constraintStart_toStartOf="@id/tv_review2_menu_name"
                 app:layout_constraintTop_toBottomOf="@id/tv_rating">
+
 
 
                     <androidx.appcompat.widget.AppCompatToggleButton
@@ -215,6 +232,7 @@
                         android:layout_height="25dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/selector_rating_star"
+                        android:button="@color/transparent"
                         android:textOff="@string/nothing"
                         android:textOn="@string/nothing"
                         app:layout_constraintEnd_toStartOf="@id/btn_star2"
@@ -226,6 +244,7 @@
                         android:layout_width="27dp"
                         android:layout_height="25dp"
                         android:layout_marginEnd="18dp"
+                        android:button="@color/transparent"
                         android:background="@drawable/selector_rating_star"
                         android:textOff="@string/nothing"
                         android:textOn="@string/nothing"
@@ -237,6 +256,7 @@
                         android:layout_width="27dp"
                         android:layout_height="25dp"
                         android:layout_marginEnd="18dp"
+                        android:button="@color/transparent"
                         android:background="@drawable/selector_rating_star"
                         android:textOff="@string/nothing"
                         android:textOn="@string/nothing"
@@ -248,6 +268,7 @@
                         android:layout_width="27dp"
                         android:layout_height="25dp"
                         android:layout_marginEnd="18dp"
+                        android:button="@color/transparent"
                         android:background="@drawable/selector_rating_star"
                         android:textOff="@string/nothing"
                         android:textOn="@string/nothing"
@@ -258,6 +279,7 @@
                         android:id="@+id/btn_star5"
                         android:layout_width="27dp"
                         android:layout_height="25dp"
+                        android:button="@color/transparent"
                         android:background="@drawable/selector_rating_star"
                         android:textOff="@string/nothing"
                         android:textOn="@string/nothing"
@@ -321,6 +343,7 @@
                     android:background="@color/transparent"
                     android:gravity="top"
                     android:maxLines="1"
+                    android:maxLength="10"
                     android:singleLine="true"
                     android:textSize="14sp"
                     android:visibility="gone"

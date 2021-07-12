@@ -21,7 +21,6 @@
         <!-- Customize your theme here. -->
         <item name="colorAccent">@color/custom_purple</item>
 
-
     </style>
 
     <style name="AppTheme.NoActionBar">

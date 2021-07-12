@@ -225,7 +225,6 @@
 
                     <RadioGroup
                         android:id="@+id/rd_group"
-                        android:checkedButton="@id/rd_btn_ko"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">

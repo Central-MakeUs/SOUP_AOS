@@ -33,10 +33,9 @@ fun glideUtil(context: Context, imageUrl: String?, iv: ImageView) {
             .load(imgUrl)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.ic_launcher_background)
                     .fitCenter()
             )
             .into(iv)
     }
-    iv.clipToOutline = true
+//    iv.clipToOutline = true
 }

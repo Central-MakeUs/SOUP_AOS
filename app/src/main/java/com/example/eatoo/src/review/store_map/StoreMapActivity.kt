@@ -297,7 +297,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
 
     override fun onGetAddressSuccess(response: KakaoAddressResponse?) {
         //도로명 주소 변환!
-        Log.d("storeMapactivity", response.toString())
+        Log.d("storeMapactivity", "kakaomap address : ${response}")
         roadAddress = response?.documents?.get(0)?.road_address?.address_name
     }
 
