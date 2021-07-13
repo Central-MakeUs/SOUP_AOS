@@ -5,22 +5,27 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
-import android.view.WindowManager
+import android.util.Log
+import android.view.*
 import com.example.eatoo.R
 import com.example.eatoo.databinding.ActivityTimeDialogBinding
+import com.example.eatoo.databinding.DialogTimeBinding
 
-class TimeDialogActivity (context: Context) : Dialog(context) {
-    private lateinit var binding: ActivityTimeDialogBinding
-    private lateinit var hour : String
+
+class TimeDialog(context: Context, val dialogInteface : TimeDialogInterface) : Dialog(context) {
+
+    private lateinit var binding : DialogTimeBinding
+
+    private lateinit var Hour : String
     private lateinit var minute : String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityTimeDialogBinding.inflate(layoutInflater)
+        binding = DialogTimeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         var mContext = context
         setCancelable(false)
@@ -31,39 +36,39 @@ class TimeDialogActivity (context: Context) : Dialog(context) {
             window.setBackgroundDrawable(ColorDrawable(Color.WHITE))
             window.statusBarColor = Color.WHITE
             val params = window.attributes
-
             params.width = WindowManager.LayoutParams.MATCH_PARENT
             params.height = WindowManager.LayoutParams.WRAP_CONTENT
-
             // 열기&닫기 시 애니메이션 설정
             params.windowAnimations = R.style.AnimationPopupStyle
             window.attributes = params
             // UI 상단 정렬
             window.setGravity(Gravity.CENTER)
         }
-
         val mTimePicker = binding.startTimePicker
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            hour = "" + mTimePicker.hour
+            Hour = "" + mTimePicker.hour
             minute = "" + mTimePicker.minute
         } else {
-            hour = mTimePicker.currentHour.toString()
+            Hour = mTimePicker.currentHour.toString()
             minute = mTimePicker.currentMinute.toString()
         }
-
-        mTimePicker.setOnTimeChangedListener { timePicker, hour, min ->
-
+        binding.cancleBtn.setOnClickListener {
+            dismiss()
         }
-
-
-
-
+        binding.checkBtn.setOnClickListener {
+            //startActivityForResult()
+            Log.d("선택된 시간",Hour + minute)
+            dialogInteface.onSetTime(Hour, minute)
+            dismiss()
+        }
+        mTimePicker.setOnTimeChangedListener { timePicker, hour, min ->
+            Hour = hour.toString()
+            minute = min.toString()
+        }
     }
-
     private fun getAmPm(hour: Int): String? {
         return if (hour >= 12) "AM" else "PM"
     }
-
     private fun setMinute(min: Int) {
         if (min >= 10) minute = min.toString() + "" else minute = "0$min"
     }

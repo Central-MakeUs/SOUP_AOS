@@ -12,9 +12,12 @@ import com.example.eatoo.src.home.group.groupmatesuggestion.model.CreateMateResp
 import com.example.eatoo.src.home.model.GroupResponse
 import com.example.eatoo.util.getUserIdx
 import com.google.android.material.chip.Chip
+import kotlin.math.min
 
 
-class Group_Mate_Suggetsion_Activity : BaseActivity<ActivityGroupMateSuggetsionBinding>(ActivityGroupMateSuggetsionBinding::inflate) ,GroupView,Mate_Suggestion_ActivityView{
+class Group_Mate_Suggetsion_Activity
+    : BaseActivity<ActivityGroupMateSuggetsionBinding>(ActivityGroupMateSuggetsionBinding::inflate)
+    ,GroupView,Mate_Suggestion_ActivityView, TimeDialogInterface{
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +39,7 @@ class Group_Mate_Suggetsion_Activity : BaseActivity<ActivityGroupMateSuggetsionB
         }
 
         binding.statrTimeBtn.setOnClickListener{
-            val dialog = TimeDialogActivity(this)
+            val dialog = TimeDialog(this, this)
             dialog.show()
         }
 
@@ -81,5 +84,9 @@ class Group_Mate_Suggetsion_Activity : BaseActivity<ActivityGroupMateSuggetsionB
 
     override fun onPostMateCreateFailure(message: String) {
 
+    }
+
+    override fun onSetTime(hour: String, minute: String) {
+        showCustomToast("$hour $minute")
     }
 }

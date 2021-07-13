@@ -6,12 +6,13 @@ import com.example.eatoo.src.home.create_group.api_util.TmapRetrofit
 import com.example.eatoo.src.review.store_map.model.StoreResponse
 import com.example.eatoo.src.home.create_group.model.address.AddressInfoResponse
 import com.example.eatoo.src.review.store_map.kakao_api.KakaoRetrofit
+import com.example.eatoo.src.review.store_map.model.AllStoreResponse
 import com.example.eatoo.src.review.store_map.model.KakaoAddressResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class StoreMapService(val view: StoreMapActivity) {
+class StoreMapService(val view: StoreMapView) {
 
     fun tryGetStore(userIdx: Int, longitude: Double, latitude: Double) {
         val storeMapRetrofitInterface = ApplicationClass.sRetrofit.create(
@@ -58,6 +59,30 @@ class StoreMapService(val view: StoreMapActivity) {
             }
 
         })
+    }
+
+    fun tryGetAllStore(userIdx: Int) {
+        val storeMapRetrofitInterface = ApplicationClass.sRetrofit.create(
+            StoreMapRetrofitInterface::class.java
+        )
+        storeMapRetrofitInterface.getAllStore(userIdx)
+            .enqueue(object :
+                Callback<AllStoreResponse> {
+                override fun onResponse(
+                    call: Call<AllStoreResponse>,
+                    response: Response<AllStoreResponse>
+                ) {
+                    response.body()?.let {
+                        if (it.isSuccess) view.onGetAllStoreSuccess(response.body() as AllStoreResponse)
+                        else view.onGetAllStoreFail(it.message)
+                    }
+                }
+
+                override fun onFailure(call: Call<AllStoreResponse>, t: Throwable) {
+                    view.onGetAllStoreFail(t.message)
+                }
+
+            })
     }
 
 }

@@ -18,6 +18,7 @@ import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityCreateReview2Binding
 import com.example.eatoo.src.home.create_group.model.Keyword
+import com.example.eatoo.src.review.create_review.model.Review1Request
 import com.example.eatoo.src.review.create_review.model.Review2Request
 import com.example.eatoo.src.review.create_review.model.ReviewResponse
 import com.example.eatoo.src.review.my_review.MyReviewActivity
@@ -31,7 +32,7 @@ import kotlin.math.roundToInt
 
 class CreateReview2Activity
     : BaseActivity<ActivityCreateReview2Binding>(ActivityCreateReview2Binding::inflate),
-    View.OnClickListener , CreateReviewView{
+    View.OnClickListener ,CreateReview2View{
 
     private var reviewImage = ""
     private var rating = 0.0
@@ -105,11 +106,21 @@ class CreateReview2Activity
             showCustomToast("별점을 입력해주세요")
             return
         }
-
-        showLoadingDialog(this)
-        CreateReviewService(this).tryPostReview2(
-            getUserIdx(),
-            Review2Request(
+        val storeIdx = intent.getIntExtra("storeIdx", -1)
+        if( storeIdx != -1){
+            val review1 = Review1Request(
+                storeIdx = storeIdx,
+                storeCategoryIdx =  intent.getIntExtra("categoryIdx", 8),
+                menuName = menuName,
+                contents = shortReview,
+                imgUrl = reviewImage,
+                rating = finalRating,
+                postReviewKeywordReq = binding.flexboxReview.getAllChips(),
+                link = link
+            )
+            registerReview1(review1)
+        }else {
+            val review2 = Review2Request(
                 latitude = intent.getDoubleExtra("lat", -1.0),
                 longitude = intent.getDoubleExtra("lng", -1.0),
                 address = intent.getStringExtra("address")?:"",
@@ -121,18 +132,25 @@ class CreateReview2Activity
                 rating = finalRating,
                 link = link,
                 postReviewKeywordReq = binding.flexboxReview.getAllChips()
-        ))
+            )
+            registerReview2(review2)
+        }
 
         resetRating()
     }
 
+    private fun registerReview1(review1: Review1Request) {
+        showLoadingDialog(this)
+        CreateReview2Service(this).tryPostReview1(getUserIdx(), review1)
+    }
+
+    private fun registerReview2(review2: Review2Request) {
+        showLoadingDialog(this)
+        CreateReview2Service(this).tryPostReview2(getUserIdx(), review2)
+    }
+
     private fun resetRating() {
         rating = 0.0
-        binding.btnStar1.isChecked = false
-        binding.btnStar2.isChecked = false
-        binding.btnStar3.isChecked = false
-        binding.btnStar4.isChecked = false
-        binding.btnStar5.isChecked = false
     }
 
     //keyword
@@ -226,6 +244,17 @@ class CreateReview2Activity
         }
     }
 
+    override fun onPostReview1Success(response: ReviewResponse) {
+        dismissLoadingDialog()
+        Log.d("createReview", response.toString())
+    }
+
+    override fun onPostReview1Fail(message: String?) {
+        dismissLoadingDialog()
+        message?.let {
+            showCustomToast(it)
+        }
+    }
     override fun onPostReview2Success(response: ReviewResponse) {
         Log.d("createReview", response.toString())
         dismissLoadingDialog()
@@ -233,18 +262,6 @@ class CreateReview2Activity
     }
 
     override fun onPostReview2Fail(message: String?) {
-        dismissLoadingDialog()
-        message?.let {
-            showCustomToast(it)
-        }
-    }
-
-    override fun onPostReview1Success(response: ReviewResponse) {
-        dismissLoadingDialog()
-        Log.d("createReview", response.toString())
-    }
-
-    override fun onPostReview1Fail(message: String?) {
         dismissLoadingDialog()
         message?.let {
             showCustomToast(it)

@@ -1,11 +1,9 @@
-package com.example.eatoo.util.dialog
+package com.example.eatoo.src.review.store_map.dialog
 
 import android.app.Dialog
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.widget.Toast
 import com.example.eatoo.databinding.DialogRegisterNewStoreBinding
 import com.example.eatoo.src.review.store_map.StoreMapActivity
 

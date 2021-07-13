@@ -23,11 +23,12 @@ import com.example.eatoo.src.home.create_group.CreateGroupActivity.Companion.PER
 import com.example.eatoo.src.review.create_review.CreateReviewActivity
 import com.example.eatoo.src.review.store_map.adapter.ExistingStoreRVAdapter
 import com.example.eatoo.src.review.store_map.model.StoreResponse
-import com.example.eatoo.util.dialog.RegisterNewStoreDialog
+import com.example.eatoo.src.review.store_map.dialog.RegisterNewStoreDialog
+import com.example.eatoo.src.review.store_map.model.AllStoreResponse
 import com.example.eatoo.util.getUserIdx
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
-import com.example.eatoo.src.home.create_group.model.address.AddressInfoResponse
 import com.example.eatoo.src.review.store_map.model.KakaoAddressResponse
+import com.example.eatoo.src.review.store_map.model.Store
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -38,7 +39,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapBinding::inflate),
     OnMapReadyCallback, GoogleMap.OnMapClickListener,
-    GoogleMap.OnMarkerClickListener, View.OnClickListener, RegisterNewStoreDialogInterface , StoreMapView{
+    GoogleMap.OnMarkerClickListener, View.OnClickListener, RegisterNewStoreDialogInterface ,
+    StoreMapView, ExistingStoreRVAdapter.OnReviewClickListener{
 
 
 
@@ -61,6 +63,11 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         //현재 위치 맵 띄우기!!!!!!!!!!!!!!
         requestPermission()
         bindView()
+        getAllReviewLocation()
+    }
+
+    private fun getAllReviewLocation() {
+        StoreMapService(this).tryGetAllStore(getUserIdx())
     }
 
     private fun bindView() {
@@ -224,7 +231,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
             position(latlng)
             title("hello world!")
         }
-        map.clear()
+//        map.clear()
         map.addMarker(markerOptions)
 
         storeLng = latlng.longitude
@@ -259,12 +266,6 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     }
 
     override fun onRegisterNewStoreConfirm() {
-        //서버 통신 성공하면 화면이동.
-        //code -> 2010 존재 하지 않는 스토어 : 지도를 보여준다.
-        //result 가 있으면 recyclerview 로 보여준다.
-
-        //정말로 기존 등록이 없는지 다시 확인.
-//        StoreMapService(this).tryGetStore(getUserIdx(), storeLng, storeLat )
 
         val intent = Intent(this, CreateReviewActivity::class.java)
         intent.apply {
@@ -280,7 +281,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         //recyclerview 로 등록 스토어 보여주기.
         binding.btnRegisterNewStore.isVisible = false
         Log.d("storeMapactivity", response.toString())
-        storeAdapter = ExistingStoreRVAdapter(this, response.result)
+        storeAdapter = ExistingStoreRVAdapter(this, response.result, this)
         binding.rvExistingStore.apply {
             adapter = storeAdapter
             layoutManager = LinearLayoutManager(this@StoreMapActivity, LinearLayoutManager.HORIZONTAL, false)
@@ -303,6 +304,33 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
 
     override fun onGetAddressFail(message: String?) {
         startActivity(Intent(this, CreateReviewActivity::class.java))
+    }
+
+    override fun onGetAllStoreSuccess(response: AllStoreResponse) {
+        Log.d("storeMapactivity", response.toString())
+        response.result.forEach {
+            val markerOptions = MarkerOptions().apply {
+                position(LatLng(it.latitude, it.longitude))
+                title(it.name)
+            }
+            map.addMarker(markerOptions)
+        }
+    }
+
+    override fun onGetAllStoreFail(message: String?) {
+        showCustomToast(message?:"통신오류가 발생했습니다.")
+    }
+
+    //adapter click listener
+    override fun onReviewClicked(item : Store) {
+        val intent = Intent(this, CreateReviewActivity::class.java)
+        intent.apply {
+            putExtra("storeIdx", item.storeIdx)
+            putExtra("imgUrl", item.imgUrl)
+            putExtra("address", item.address)
+        }
+
+        startActivity(intent)
     }
 
 

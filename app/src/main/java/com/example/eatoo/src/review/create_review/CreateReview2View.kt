@@ -1,8 +1,9 @@
 package com.example.eatoo.src.review.create_review
 
+import com.example.eatoo.src.review.create_review.model.ExistingStoreReviewResponse
 import com.example.eatoo.src.review.create_review.model.ReviewResponse
 
-interface CreateReviewView {
+interface CreateReview2View {
 
     fun onPostReview2Success(response : ReviewResponse)
     fun onPostReview2Fail(message : String?)

@@ -113,6 +113,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="3dp" />
 
+
                 <LinearLayout
                     android:id="@+id/ll_container_review_map"
                     android:layout_width="match_parent"
@@ -138,6 +139,13 @@
                         android:textSize="13sp" />
 
                 </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_review1_img"
+                    android:visibility="invisible"
+                    android:scaleType="fitXY"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
             </FrameLayout>
 

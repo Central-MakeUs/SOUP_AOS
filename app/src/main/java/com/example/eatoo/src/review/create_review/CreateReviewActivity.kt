@@ -1,7 +1,6 @@
 package com.example.eatoo.src.review.create_review
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,10 +11,12 @@ import androidx.core.view.isVisible
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityCreateReviewBinding
-import com.example.eatoo.databinding.ActivityMyReviewBinding
 import com.example.eatoo.src.home.create_group.CreateGroupActivity
+import com.example.eatoo.src.review.create_review.model.ExistingStoreReviewResponse
 import com.example.eatoo.src.review.store_location.StoreLocationActivity
 import com.example.eatoo.src.review.store_map.StoreMapActivity
+import com.example.eatoo.util.getUserIdx
+import com.example.eatoo.util.glideUtil
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -24,7 +25,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 class CreateReviewActivity :  BaseActivity<ActivityCreateReviewBinding>(ActivityCreateReviewBinding::inflate),
-View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
+View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, CreateReview1View {
 
     private var lat : Double = 0.0
     private var lng : Double = 0.0
@@ -33,6 +34,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
 
     private lateinit var map: GoogleMap
     private var categoryIdx = 0
+    private var storeIdx = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,16 +46,31 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
     }
 
     private fun getIntentExtras() {
+        storeIdx = intent.getIntExtra("storeIdx", -1)
+
+        if(storeIdx != -1) {
+            showLoadingDialog(this)
+            getStoreInfo(storeIdx)
+            binding.ivReview1Img.isVisible = true
+            glideUtil(this, intent.getStringExtra("imgUrl")?:"", binding.ivReview1Img)
+
+        }else {
+            lat = intent.getDoubleExtra("lat", -1.0)
+            lng = intent.getDoubleExtra("lng", -1.0)
+            if(lat >0 && lng >0) {
+                mapShowing = true
+                setupGoogleMap()
+            }
+        }
         roadAddress = intent.getStringExtra("address").toString()
-        lat = intent.getDoubleExtra("lat", -1.0)
-        lng = intent.getDoubleExtra("lng", -1.0)
         if(roadAddress != "null") binding.tvSearchLocation.text = roadAddress
         Log.d("createReviewAct", "roadaddress : $roadAddress, lat : $lat, lng : $lng")
-        if(lat >0 && lng >0) {
-            mapShowing = true
-            setupGoogleMap()
-        }
 
+    }
+
+    private fun getStoreInfo(storeIdx : Int) {
+
+        CreateReview1Service(this).tryGetStoreInfo(getUserIdx(), storeIdx)
     }
 
     private fun setOnClickListeners() {
@@ -118,6 +135,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
             putExtra("lng", lng)
             putExtra("store_name", storeName)
             putExtra("categoryIdx", categoryIdx)
+            putExtra("storeIdx", storeIdx)
         }
         startActivity(intent)
     }
@@ -147,11 +165,13 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
 
     private fun showMap() {
         binding.llContainerReviewMap.isVisible = false
+        binding.ivReview1Img.isVisible = false
         mapShowing = true
     }
 
     private fun closeMap() {
         binding.llContainerReviewMap.isVisible = true
+        binding.ivReview1Img.isVisible = false
         mapShowing = false
     }
 
@@ -166,6 +186,30 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
             R.id.rd_btn_desert -> categoryIdx = 7
             R.id.rd_btn_etc -> categoryIdx = 8
 
+        }
+    }
+
+    override fun onGetStoreInfoSuccess(response: ExistingStoreReviewResponse) {
+        dismissLoadingDialog()
+        binding.etStoreName.setText(response.result.storeName)
+        setCategoryIdx(response.result.storeCategoryIdx)
+    }
+
+    override fun onGetStoreInfoFail(message: String?) {
+        dismissLoadingDialog()
+        showCustomToast(message?:"통신오류가 발생했습니다.")
+    }
+
+    private fun setCategoryIdx(storeCategoryIdx: Int) {
+        when(storeCategoryIdx){
+            1 -> binding.rdBtnKo.isChecked = true
+            2 -> binding.rdBtnCh.isChecked = true
+            3 -> binding.rdBtnJp.isChecked = true
+            4 -> binding.rdBtnWestern.isChecked = true
+            5 -> binding.rdBtnStreet.isChecked = true
+            6 -> binding.rdBtnAsian.isChecked = true
+            7 -> binding.rdBtnDesert.isChecked = true
+            8 -> binding.rdBtnEtc.isChecked = true
         }
     }
 }
