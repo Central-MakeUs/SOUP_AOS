@@ -24,7 +24,6 @@
     <string name="main_group_none_group_txt2">여러개의 그룹을 만들 수 있어요!</string>
 
 
-
     <!--main_suggestion-->
     <string name="user_suggestion">님이 제안하신\nMATE 입니다:)</string>
     <string name="user_my_suggestion">내 제안</string>
@@ -51,7 +50,6 @@
     <string name="main_mate_suggestion_limit_time_hint">시간을 입력해주세요</string>
     <string name="main_mate_suggestion_limit_time_hint2">마감시간이 되면 제안참여가 불가능하며, MATE 확정\n알림을 보내드립니다.</string>
     <string name="main_mate_suggestion_registration">등록하기</string>
-
 
 
     <!--create group-->

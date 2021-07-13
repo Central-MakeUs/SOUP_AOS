@@ -74,14 +74,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup"
+
+            <HorizontalScrollView
+                android:id="@+id/gourp_chipGroup_scrollview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:overScrollMode="never"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="23dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView15" />
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView15"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/gourp_chipGroup"
+                    app:singleLine="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="UsingOnClickInXml" />
+
+
+            </HorizontalScrollView>
+
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView17"
@@ -95,7 +110,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+                app:layout_constraintTop_toBottomOf="@+id/gourp_chipGroup_scrollview" />
 
             <EditText
                 android:id="@+id/suggestion_name_edt"
@@ -120,7 +135,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView17"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="Autofill,RtlSymmetry" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -171,7 +186,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="RtlSymmetry" />
+                    tools:ignore="Autofill,RtlSymmetry" />
 
 
                 <View
@@ -233,8 +248,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
-            <EditText
-                android:id="@+id/time_edt"
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/statr_time_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -271,7 +288,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/time_edt" />
+                app:layout_constraintTop_toBottomOf="@+id/statr_time_btn" />
 
             <!--spinner 구현 예정-->
             <EditText
@@ -358,6 +375,7 @@
                 tools:ignore="SmallSp" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/register_mate_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
