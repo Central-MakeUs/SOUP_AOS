@@ -19,6 +19,8 @@
         <activity android:name=".src.review.store_map.StoreMapActivity" />
         <activity android:name=".src.review.my_review.MyReviewActivity" />
         <activity android:name=".src.review.create_review.CreateReviewActivity" />
+<!--        <activity android:name=".src.home.group.groupmatesuggestion.TimeDialogActivity"></activity>-->
+        <activity android:name=".src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity"/>
         <activity android:name=".src.home.group.GroupActivity" />
         <activity android:name=".src.home.create_group.group_location.GroupLocationActivity" />
         <activity android:name=".src.signinlogin.signin.SignInActivity3" />

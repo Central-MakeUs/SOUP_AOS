@@ -19,7 +19,8 @@
     <color name="gray_400">#313131</color>
     <color name="gray_300">#545454</color>
     <color name="gray_200">#a0a0a0</color>
-    <color name="gray_100">#d8d8d8</color>
+    <color name="gray_150">#d8d8d8</color>
+    <color name="gray_100">#a8a8a8</color>
     <color name="gray_000">#f1f1f1</color>
 
 

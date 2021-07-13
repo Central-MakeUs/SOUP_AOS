@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Chip_no_select_Style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray_100</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:lineSpacingExtra">14sp</item>
+
+
+    </style>
+
+    <style name="Chip_select_Style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:lineSpacingExtra">14sp</item>
+    </style>
+
+    <style name="AnimationPopupStyle">
+        <item name="android:windowEnterAnimation">@anim/open</item>
+        <item name="android:windowExitAnimation">@anim/close</item>
+    </style>
+
+
+</resources>
