@@ -42,7 +42,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
 
         closeMap()
         setupGoogleMap()
-        setOnClickListeners()
+        setViewListeners()
         getIntentExtras()
     }
 
@@ -74,7 +74,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
         CreateReview1Service(this).tryGetStoreInfo(getUserIdx(), storeIdx)
     }
 
-    private fun setOnClickListeners() {
+    private fun setViewListeners() {
         binding.flCreateReview.setOnClickListener(this)
         binding.llContainerReviewMap.setOnClickListener(this)
         binding.rlStoreLocationReview1.setOnClickListener(this)

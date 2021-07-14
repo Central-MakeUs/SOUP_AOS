@@ -84,6 +84,7 @@
                     android:hint="@string/input_menu_name"
                     android:maxLength="20"
                     android:maxLines="1"
+                    android:inputType="text"
                     android:textColor="@color/black"
                     android:textColorHint="@color/input_hint"
                     android:textSize="14sp" />
@@ -95,6 +96,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="14dp"
+                    android:visibility="invisible"
+                    tools:visibility="visible"
                     android:src="@drawable/ic_group_137" />
 
             </RelativeLayout>
@@ -175,7 +178,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/iv_review_img"
-                    android:scaleType="fitXY"
                     android:visibility="invisible"
                     tools:visibility="visible"/>
 

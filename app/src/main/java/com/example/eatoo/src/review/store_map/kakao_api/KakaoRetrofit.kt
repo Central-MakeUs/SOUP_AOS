@@ -3,6 +3,7 @@ package com.example.eatoo.src.review.store_map.kakao_api
 import com.example.eatoo.BuildConfig
 import com.example.eatoo.src.home.create_group.CreateGroupRetrofitInterface
 import com.example.eatoo.src.home.create_group.api_util.TmapUrl
+import com.example.eatoo.src.review.store_location.StoreLocationRetrofitInterface
 import com.example.eatoo.src.review.store_map.StoreMapRetrofitInterface
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,6 +15,10 @@ object KakaoRetrofit {
 
     val kakaoAddressService: StoreMapRetrofitInterface by lazy { getRetrofit().create(
         StoreMapRetrofitInterface::class.java) }
+
+    val kakaoSearchService : StoreLocationRetrofitInterface by lazy { getRetrofit().create(
+        StoreLocationRetrofitInterface::class.java
+    ) }
 
     private fun getRetrofit(): Retrofit {
 

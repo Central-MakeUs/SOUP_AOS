@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.util.TypedValue
 import android.view.KeyEvent
@@ -24,6 +26,7 @@ import com.example.eatoo.src.review.create_review.model.ReviewResponse
 import com.example.eatoo.src.review.my_review.MyReviewActivity
 import com.example.eatoo.util.getUserIdx
 import com.example.eatoo.util.glideUtil
+import com.example.eatoo.util.roundAll
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.chip.Chip
 import com.google.firebase.storage.FirebaseStorage
@@ -41,14 +44,21 @@ class CreateReview2Activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setOnClickListeners()
+        setViewListeners()
     }
 
-    private fun setOnClickListeners() {
+    private fun setViewListeners() {
         binding.ivMenuNameDelete.setOnClickListener(this)
         binding.rlReviewImg.setOnClickListener(this)
         binding.btnRegisterReview.setOnClickListener(this)
         binding.ivKeyword.setOnClickListener(this)
+        binding.etMenuName.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                binding.ivMenuNameDelete.isVisible = p0.toString().isNotEmpty()
+            }
+            override fun afterTextChanged(p0: Editable?) {}
+        })
     }
 
     override fun onClick(p0: View?) {
@@ -235,7 +245,7 @@ class CreateReview2Activity
             ref.downloadUrl
         }.addOnCompleteListener {
             reviewImage = it.result.toString()
-            glideUtil(this, reviewImage, binding.ivReviewImg)
+            glideUtil(this, reviewImage, roundAll(binding.ivReviewImg, 5f))
 
             binding.ivReviewImg.isVisible = true
             binding.ivReviewImgIcon.isVisible = false

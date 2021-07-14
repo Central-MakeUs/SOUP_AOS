@@ -109,15 +109,14 @@
                 android:fontFamily="@font/roboto_regular" />
         </LinearLayout>
 
-<!--        <ImageView-->
-<!--            android:layout_width="15dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/tv_rating"-->
-<!--            app:layout_constraintEnd_toStartOf="@id/tv_rating"-->
-<!--            app:layout_constraintTop_toTopOf="@id/tv_rating"-->
-<!--            android:src="@drawable/ic_star_32"-->
-<!--            android:layout_marginEnd="8dp"-->
-<!--            />-->
+        <ImageView
+            android:id="@+id/iv_myreview_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/tv_myreview_createdAt"
+            app:layout_constraintStart_toStartOf="@id/ll_myreview_menu_name"
+            android:layout_marginEnd="8dp"
+            />
 
         <TextView
             android:id="@+id/tv_myreview_createdAt"

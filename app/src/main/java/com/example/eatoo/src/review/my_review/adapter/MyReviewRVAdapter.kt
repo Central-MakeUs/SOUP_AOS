@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eatoo.R
 import com.example.eatoo.databinding.ItemExistingStoreBinding
@@ -26,12 +27,22 @@ class MyReviewRVAdapter(
         fun bindItem(item : MyReviewResult) {
             binding.tvMyreviewStoreName.text = item.storeName
             binding.tvMyreviewStoreLocation.text = item.address
-//            binding.tvRating.text = item.rating.toString()
+            setRatingStarIv(item)
             binding.tvMyreviewMenuName.text = item.menuName
             binding.tvMyreviewCreatedAt.text = item.createdAt
             glideUtil(context, item.imgUrl, binding.ivMyreview)
             binding.cardviewMyreview.setOnClickListener{
                 listener.onMyReviewClicked(item)
+            }
+        }
+
+        private fun setRatingStarIv(item: MyReviewResult) {
+            when(item.rating.toInt()){
+                1 -> binding.ivMyreviewRating.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.group_369))
+                2-> binding.ivMyreviewRating.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.group_368))
+                3 -> binding.ivMyreviewRating.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.group_367))
+                4 -> binding.ivMyreviewRating.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.group_366))
+                5 -> binding.ivMyreviewRating.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.group_365))
             }
         }
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
@@ -46,12 +47,19 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
 
     override fun onGetMyReviewSuccess(response: MyReviewResponse) {
         dismissLoadingDialog()
-        Log.d("myreviewactivity", response.toString())
-        myReviewAdapter = MyReviewRVAdapter(this, response.result, this)
-        binding.rvMyreview.apply {
-            adapter = myReviewAdapter
-            layoutManager = LinearLayoutManager(this@MyReviewActivity)
+        if(response.result.isNotEmpty()){
+            binding.tvNoReview.isVisible = false
+            binding.ivNoReview.isVisible = false
+            myReviewAdapter = MyReviewRVAdapter(this, response.result, this)
+            binding.rvMyreview.apply {
+                adapter = myReviewAdapter
+                layoutManager = LinearLayoutManager(this@MyReviewActivity)
+            }
+        }else {
+            binding.tvNoReview.isVisible = true
+            binding.ivNoReview.isVisible = true
         }
+
     }
 
     override fun onGetMyReviewFail(message: String?) {

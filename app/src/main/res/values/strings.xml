@@ -96,6 +96,7 @@
     <string name="search_example">예) 잇투동 12-13, 잇투로 456, 잇투아파트</string>
     <string name="goto_map">지도에서 찾기 ></string>
     <string name="nothing" />
+    <string name="road_address">도로명</string>
 
 
     <string name="dialog_register_new_store_query1">표시된 위치에 새로운 가게를</string>
@@ -115,6 +116,7 @@
     <string name="create_group_location">위치</string>
     <string name="create_group_register">등록하기</string>
     <string name="create_group_change_location">변경하기</string>
+    <string name="input_store_keyword">가게를 직접 입력해주세요</string>
     <string name="input_location">위치를 직접 입력해주세요</string>
     <string name="set_current_location">현 위치로 주소 설정하기</string>
     <string name="search_address_fail">현 위치 주소를 가져오지 못 했습니다.</string>
