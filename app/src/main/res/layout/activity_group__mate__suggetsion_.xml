@@ -75,6 +75,8 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
+
+
             <HorizontalScrollView
                 android:id="@+id/gourp_chipGroup_scrollview"
                 android:layout_width="wrap_content"
@@ -91,8 +93,7 @@
                     android:id="@+id/gourp_chipGroup"
                     app:singleLine="true"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:ignore="UsingOnClickInXml" />
+                    android:layout_height="wrap_content" />
 
 
             </HorizontalScrollView>
@@ -205,7 +206,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
-                    android:src="@drawable/ic_user"
+                    android:src="@drawable/ic_no_input_store_img"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view1" />
@@ -249,31 +250,137 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
 
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/statr_time_btn"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/time_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/edittext_background_radius"
-                android:fontFamily="sans-serif"
-                android:hint="@string/main_mate_suggestion_meal_time_hint"
-                android:inputType="text"
-                android:letterSpacing="0.01"
-                android:lineSpacingExtra="9sp"
-                android:paddingStart="12dp"
-                android:paddingTop="13dp"
-                android:paddingBottom="13dp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView19"
-                tools:ignore="RtlSymmetry" />
+                android:background="@drawable/edittext_background_radius">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/start_time_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:background="@color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/appCompatImageView8"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/start_time_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:clickable="false"
+                        android:fontFamily="sans-serif"
+                        android:hint="@string/main_mate_suggestion_meal_time_hint"
+                        android:inputType="text"
+                        android:letterSpacing="0.01"
+                        android:lineSpacingExtra="9sp"
+                        android:paddingStart="12dp"
+                        android:paddingTop="13dp"
+                        android:paddingBottom="13dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="normal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:ignore="RtlSymmetry" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="48dp"
+                        android:layout_marginEnd="21dp"
+                        android:src="@drawable/ic_down_btn"
+                        app:layout_constraintBottom_toBottomOf="@+id/start_time_btn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/start_time_btn"
+                        app:layout_constraintTop_toTopOf="@+id/start_time_btn" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/appCompatImageView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_division"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/end_time_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:background="@color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/appCompatImageView8"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/end_time_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:fontFamily="sans-serif"
+                        android:clickable="false"
+                        android:hint="@string/main_mate_suggestion_meal_time_hint"
+                        android:inputType="text"
+                        android:letterSpacing="0.01"
+                        android:lineSpacingExtra="9sp"
+                        android:paddingStart="12dp"
+                        android:paddingTop="13dp"
+                        android:paddingBottom="13dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="normal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:ignore="RtlSymmetry" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="48dp"
+                        android:layout_marginEnd="21dp"
+                        android:src="@drawable/ic_down_btn"
+                        app:layout_constraintBottom_toBottomOf="@+id/end_time_btn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/end_time_btn"
+                        app:layout_constraintTop_toTopOf="@+id/end_time_btn" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -288,7 +395,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/statr_time_btn" />
+                app:layout_constraintTop_toBottomOf="@+id/time_layout" />
 
             <!--spinner 구현 예정-->
             <EditText
@@ -301,7 +408,7 @@
                 android:background="@drawable/edittext_background_radius"
                 android:fontFamily="sans-serif"
                 android:hint="@string/main_mate_suggestion_limit_people_hint"
-                android:inputType="text"
+                android:inputType="number"
                 android:letterSpacing="0.01"
                 android:lineSpacingExtra="9sp"
                 android:paddingStart="12dp"
@@ -314,7 +421,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView20"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="Autofill,RtlSymmetry" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -332,30 +439,56 @@
                 app:layout_constraintTop_toBottomOf="@+id/limit_people_edt" />
 
             <!--spinner 구현 예정-->
-            <EditText
-                android:id="@+id/limit_time_edt"
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/limit_time_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edittext_background_radius"
-                android:fontFamily="sans-serif"
-                android:hint="@string/main_mate_suggestion_limit_time_hint"
-                android:inputType="text"
-                android:letterSpacing="0.01"
-                android:lineSpacingExtra="9sp"
-                android:paddingStart="12dp"
-                android:paddingTop="13dp"
-                android:paddingBottom="13dp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView21"
-                tools:ignore="RtlSymmetry" />
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView21">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/limit_time_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contextClickable="false"
+                    android:background="@color/transparent"
+                    android:clickable="false"
+                    android:fontFamily="sans-serif"
+                    android:hint="@string/main_mate_suggestion_limit_time_hint"
+                    android:inputType="text"
+                    android:letterSpacing="0.01"
+                    android:lineSpacingExtra="9sp"
+                    android:paddingStart="12dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="11dp"
+                    android:src="@drawable/ic_down_btn"
+                    app:layout_constraintBottom_toBottomOf="@+id/limit_time_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/limit_time_tv" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -371,7 +504,7 @@
                 android:textSize="11sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/limit_time_edt"
+                app:layout_constraintTop_toBottomOf="@+id/limit_time_layout"
                 tools:ignore="SmallSp" />
 
             <androidx.appcompat.widget.AppCompatButton

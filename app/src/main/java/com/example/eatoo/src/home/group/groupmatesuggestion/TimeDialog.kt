@@ -9,11 +9,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import com.example.eatoo.R
-import com.example.eatoo.databinding.ActivityTimeDialogBinding
 import com.example.eatoo.databinding.DialogTimeBinding
 
 
-class TimeDialog(context: Context, val dialogInteface : TimeDialogInterface) : Dialog(context) {
+class TimeDialog(context: Context, val dialogInteface : TimeDialogInterface, val Type  : String) : Dialog(context) {
 
     private lateinit var binding : DialogTimeBinding
 
@@ -58,12 +57,31 @@ class TimeDialog(context: Context, val dialogInteface : TimeDialogInterface) : D
         binding.checkBtn.setOnClickListener {
             //startActivityForResult()
             Log.d("선택된 시간",Hour + minute)
-            dialogInteface.onSetTime(Hour, minute)
+            if(Type == "start"){
+                dialogInteface.onSetStartTime(Hour, minute)
+            }
+            else if(Type == "end"){
+                dialogInteface.onSetEndTime(Hour, minute)
+            }
+            else if(Type == "limit"){
+                dialogInteface.onSetLimitTime(Hour, minute)
+            }
             dismiss()
         }
         mTimePicker.setOnTimeChangedListener { timePicker, hour, min ->
-            Hour = hour.toString()
-            minute = min.toString()
+            if(hour < 10){
+                Hour = "0$hour"
+            }
+            else{
+                Hour = hour.toString()
+            }
+            if(min < 10){
+                minute = "0$min"
+            }
+            else{
+                minute = min.toString()
+            }
+
         }
     }
     private fun getAmPm(hour: Int): String? {
