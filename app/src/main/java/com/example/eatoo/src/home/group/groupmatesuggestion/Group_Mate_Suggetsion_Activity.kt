@@ -12,6 +12,7 @@ import com.example.eatoo.src.home.GroupView
 import com.example.eatoo.src.home.group.groupmatesuggestion.model.CreateMateRequest
 import com.example.eatoo.src.home.group.groupmatesuggestion.model.CreateMateResponse
 import com.example.eatoo.src.home.model.GroupResponse
+import com.example.eatoo.src.home.model.MateResponse
 import com.example.eatoo.util.getUserIdx
 import com.google.android.material.chip.Chip
 import kotlin.math.min
@@ -28,7 +29,7 @@ class Group_Mate_Suggetsion_Activity
         super.onCreate(savedInstanceState)
 
 
-        GroupService(this).tryGetData(getUserIdx())
+        GroupService(this).tryGetGroupData(getUserIdx())
 
         binding.gourpChipGroup.isSingleSelection = true
         binding.gourpChipGroup.isSelectionRequired = true
@@ -106,9 +107,14 @@ class Group_Mate_Suggetsion_Activity
 
     override fun onGetGroupFail(message: String) {
     }
+//Mate 보이기
+    override fun onGetMateSuccess(response: MateResponse) {
+    }
 
+    override fun onGetMateFail(message: String) {
+    }
+//그룹 생성하기
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {
-        showCustomToast("요청 완료")
     }
 
     override fun onPostMateCreateFailure(message: String) {

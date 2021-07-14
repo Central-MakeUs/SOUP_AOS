@@ -34,6 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:overScrollMode="never"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -127,6 +129,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/mate_overview_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
@@ -135,47 +138,65 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/appCompatTextView11" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout"
+
+                <LinearLayout
+                    android:id="@+id/mate_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="23dp"
                     android:layout_marginEnd="20dp"
-                    android:background="@drawable/rectangle_box_main_home"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView11">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/mate_plus_btn"
-                        android:layout_width="wrap_content"
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/mate_plus_layout"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/ic_plus_main_color"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
+                        android:background="@drawable/rectangle_box_main_home">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/mate_plus_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:src="@drawable/ic_plus_main_color"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="16dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:lineSpacingExtra="6sp"
+                            android:text="@string/main_my_suggestion_mate_together"
+                            android:textColor="#ff4e16"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/mate_plus_btn" />
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/home_mate_recylerview"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="16dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:lineSpacingExtra="6sp"
-                        android:text="@string/main_my_suggestion_mate_together"
-                        android:textColor="#ff4e16"
-                        android:textSize="14sp"
-                        android:textStyle="normal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/mate_plus_btn" />
+                        android:scrollbars="none"
 
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
+                        android:overScrollMode="never"/>
+                </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/appCompatTextView13"
@@ -190,7 +211,7 @@
                     android:textSize="17sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/mate_layout" />
 
 
                 <androidx.appcompat.widget.AppCompatTextView

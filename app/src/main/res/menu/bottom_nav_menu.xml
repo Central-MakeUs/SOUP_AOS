@@ -2,19 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_home_no_select"
+        android:enabled="true"
         android:title="@string/home" />
     <item
         android:id="@+id/suggestionFragment"
-        android:icon="@drawable/ic_suggestion"
+        android:icon="@drawable/ic_suggestion_no_select"
         android:title="@string/suggestion" />
     <item
         android:id="@+id/wishlistFragment"
-        android:icon="@drawable/ic_favorite_unchecked"
+        android:icon="@drawable/ic_wishlist_no_select"
         android:title="@string/wishlist" />
     <item
         android:id="@+id/myPageFragment"
-        android:icon="@drawable/ic_my_page"
+        android:icon="@drawable/ic_my_no_select"
         android:title="@string/myPage" />
 
 </menu>

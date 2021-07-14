@@ -31,6 +31,8 @@
     <string name="mate_suggestion_date">2021.06.21</string>
     <string name="mate_suggestion_restaurant">| 할머니 갈비탕</string>
     <string name="mate_suggestion_time" tools:ignore="TypographyDashes">| 12:00-12:40</string>
+    <string name="mate_suggestion_start_time" tools:ignore="TypographyDashes">| 12:00</string>
+    <string name="mate_suggestion_end_time" tools:ignore="TypographyDashes">-12:40</string>
     <string name="mate_suggestion_limit_people">5</string>
 
     <!--main_mate_suggestion -->
