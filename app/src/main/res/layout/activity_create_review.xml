@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".src.review.create_review.CreateReviewActivity">
+    tools:context=".src.review.create_review.CreateReview1Activity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_toolbar"
@@ -89,7 +89,7 @@
                     android:layout_toEndOf="@id/iv_search"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="@string/input_location"
+                    android:text="@string/input_store_location"
                     android:textColor="@color/input_hint"
                     android:textSize="14sp" />
 
@@ -143,7 +143,6 @@
                 <ImageView
                     android:id="@+id/iv_review1_img"
                     android:visibility="invisible"
-                    android:scaleType="fitXY"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 

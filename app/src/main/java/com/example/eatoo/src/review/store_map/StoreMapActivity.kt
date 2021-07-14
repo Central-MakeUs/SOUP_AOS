@@ -20,7 +20,7 @@ import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityStoreMapBinding
 import com.example.eatoo.src.home.create_group.CreateGroupActivity
 import com.example.eatoo.src.home.create_group.CreateGroupActivity.Companion.PERMISSION_REQUEST_CODE
-import com.example.eatoo.src.review.create_review.CreateReviewActivity
+import com.example.eatoo.src.review.create_review.CreateReview1Activity
 import com.example.eatoo.src.review.store_map.adapter.ExistingStoreRVAdapter
 import com.example.eatoo.src.review.store_map.model.StoreResponse
 import com.example.eatoo.src.review.store_map.dialog.RegisterNewStoreDialog
@@ -267,7 +267,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
 
     override fun onRegisterNewStoreConfirm() {
 
-        val intent = Intent(this, CreateReviewActivity::class.java)
+        val intent = Intent(this, CreateReview1Activity::class.java)
         intent.apply {
             putExtra("address", roadAddress)
             putExtra("lat", storeLat)
@@ -297,13 +297,18 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     }
 
     override fun onGetAddressSuccess(response: KakaoAddressResponse?) {
-        //도로명 주소 변환!
-        Log.d("storeMapactivity", "kakaomap address : ${response}")
-        roadAddress = response?.documents?.get(0)?.road_address?.address_name
+        //도로명 주소 변환! 도로명 주소가 없다면 지번 주소로 설정.
+        Log.d("storeMapactivity", "kakaomap address : $response")
+        roadAddress = if(response?.documents?.get(0)?.road_address == null){
+            response?.documents?.get(0)?.address?.address_name
+        }else {
+            response.documents[0].road_address.address_name
+        }
+
     }
 
     override fun onGetAddressFail(message: String?) {
-        startActivity(Intent(this, CreateReviewActivity::class.java))
+        startActivity(Intent(this, CreateReview1Activity::class.java))
     }
 
     override fun onGetAllStoreSuccess(response: AllStoreResponse) {
@@ -323,7 +328,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
 
     //adapter click listener
     override fun onReviewClicked(item : Store) {
-        val intent = Intent(this, CreateReviewActivity::class.java)
+        val intent = Intent(this, CreateReview1Activity::class.java)
         intent.apply {
             putExtra("storeIdx", item.storeIdx)
             putExtra("imgUrl", item.imgUrl)

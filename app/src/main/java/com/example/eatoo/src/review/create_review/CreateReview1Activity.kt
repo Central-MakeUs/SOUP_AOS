@@ -17,6 +17,7 @@ import com.example.eatoo.src.review.store_location.StoreLocationActivity
 import com.example.eatoo.src.review.store_map.StoreMapActivity
 import com.example.eatoo.util.getUserIdx
 import com.example.eatoo.util.glideUtil
+import com.example.eatoo.util.roundAll
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -24,7 +25,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class CreateReviewActivity :  BaseActivity<ActivityCreateReviewBinding>(ActivityCreateReviewBinding::inflate),
+class CreateReview1Activity :  BaseActivity<ActivityCreateReviewBinding>(ActivityCreateReviewBinding::inflate),
 View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, CreateReview1View {
 
     private var lat : Double = 0.0
@@ -52,7 +53,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
             showLoadingDialog(this)
             getStoreInfo(storeIdx)
             binding.ivReview1Img.isVisible = true
-            glideUtil(this, intent.getStringExtra("imgUrl")?:"", binding.ivReview1Img)
+            glideUtil(this, intent.getStringExtra("imgUrl")?:"", roundAll(binding.ivReview1Img, 5f))
 
         }else {
             lat = intent.getDoubleExtra("lat", -1.0)
@@ -111,11 +112,13 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
 
     private fun validityTest() {
 
+        Log.d("createReviewActivity", binding.tvSearchLocation.text.toString())
         var storeLocation = ""
-        if(binding.tvReviewStoreName.text.isEmpty()){
-            showCustomToast("가게 주소를 입력해주세요")
+        if(binding.tvSearchLocation.text == resources.getString(R.string.input_store_location)
+            || binding.tvSearchLocation.text.isEmpty()){
+            showCustomToast("가게 위치를 입력해주세요")
             return
-        }else storeLocation = binding.tvReviewStoreName.text.toString()
+        }else storeLocation = binding.tvSearchLocation.text.toString()
 
         var storeName = ""
         if(binding.etStoreName.text.isEmpty()){
@@ -130,7 +133,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
 
         val intent = Intent(this, CreateReview2Activity::class.java)
         intent.apply {
-            putExtra("road_address", storeLocation)
+            putExtra("address", storeLocation)
             putExtra("lat", lat)
             putExtra("lng", lng)
             putExtra("store_name", storeName)

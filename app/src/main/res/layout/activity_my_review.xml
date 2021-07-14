@@ -64,11 +64,24 @@
         app:layout_constraintStart_toStartOf="@id/tv_my_review_user_name"
         />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_myreview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginHorizontal="25dp"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@id/tv_is_my_review"
+        app:layout_constraintBottom_toTopOf="@id/cardview_review_suggest"/>
+
+
     <ImageView
         android:id="@+id/iv_no_review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_group_239"
+        tools:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardview_myreview"
@@ -79,6 +92,8 @@
         android:id="@+id/tv_no_review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        tools:visibility="visible"
+        android:visibility="invisible"
         android:text="@string/no_review"
         android:textSize="10sp"
         android:fontFamily="@font/roboto_medium"

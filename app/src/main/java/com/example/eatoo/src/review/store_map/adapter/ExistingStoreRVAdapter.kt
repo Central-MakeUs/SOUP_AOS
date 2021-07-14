@@ -9,6 +9,7 @@ import com.example.eatoo.R
 import com.example.eatoo.databinding.ItemExistingStoreBinding
 import com.example.eatoo.src.review.store_map.model.Store
 import com.example.eatoo.util.glideUtil
+import com.example.eatoo.util.roundLeft
 
 class ExistingStoreRVAdapter(
     val context : Context,
@@ -24,7 +25,7 @@ class ExistingStoreRVAdapter(
             binding.tvStoreName.text = item.name
             binding.tvStoreLocation.text = item.address
             binding.tvRating.text = item.rating.toString()
-            glideUtil(context, item.imgUrl, binding.ivStore)
+            glideUtil(context, item.imgUrl, roundLeft(binding.ivStore, 20f))
             binding.clExistingStore.setOnClickListener{
                 listener.onReviewClicked(item)
             }

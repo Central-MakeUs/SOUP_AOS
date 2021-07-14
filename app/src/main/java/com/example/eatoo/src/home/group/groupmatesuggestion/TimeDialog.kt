@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import com.example.eatoo.R
-import com.example.eatoo.databinding.ActivityTimeDialogBinding
 import com.example.eatoo.databinding.DialogTimeBinding
 
 
