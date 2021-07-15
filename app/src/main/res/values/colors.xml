@@ -41,4 +41,14 @@
     <!--dialog-->
     <color name="dialog_cancel_background">#f3f3f3</color>
     <color name="dialog_cancel_text">#a8a8a8</color>
+
+    <!--group vote -->
+
+    <color name="group_vote_rv">#f2b46b</color>
+
+    <array name="groupVoteRVColor">
+        <item>@color/main_orange</item>
+        <item>@color/group_orange_litle</item>
+        <item>@color/group_vote_rv</item>
+    </array>
 </resources>

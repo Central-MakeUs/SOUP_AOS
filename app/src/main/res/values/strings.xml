@@ -165,6 +165,11 @@
     <string name="keyword_num_limit">키워드는 최대 다섯 개 입력 가능합니다.</string>
     <string name="keyword_length_limit">키워드는 최대 10 글자 입력 가능합니다.</string>
     <string name="failed_connection">통신오류가 발생했습니다</string>
+    <string name="dialog_vote_confirm">투표완료</string>
+    <string name="dialog_vote_num">%d명</string>
+    <string name="dialog_vote_retry">재투표</string>
+    <string name="dialog_vote_add_item">+항목추가하기</string>
+    <string name="vote_num">투표인원</string>
 
     <!--group-->
     <string name="group_main">MAIN</string>

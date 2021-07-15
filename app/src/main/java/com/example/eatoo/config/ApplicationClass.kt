@@ -30,8 +30,10 @@ class ApplicationClass : Application() {
         var X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
 
         var USER_IDX = "USER_IDX"
-
         var GROUP_IDX = "GROUP_IDX"
+
+        var USER_NAME = "USER_NAME"
+        var GROUP_NAME = "GROUP_NAME"
 
         // Retrofit 인스턴스, 앱 실행시 한번만 생성하여 사용합니다.
         lateinit var sRetrofit: Retrofit

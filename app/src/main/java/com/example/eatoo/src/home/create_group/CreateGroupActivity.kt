@@ -189,6 +189,9 @@ class CreateGroupActivity :
             )
             val userIdx = getUserIdx()
 
+            ApplicationClass.sSharedPreferences.edit()
+                .putString(ApplicationClass.GROUP_NAME, binding.etGroupName.text.toString()).apply()
+
             CreateGroupService(this).tryPostGroup(userIdx = userIdx, createGroup = group)
 
         }
