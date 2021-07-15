@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/group_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="40dp"
@@ -54,6 +55,7 @@
 
 
     <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/group_plus_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"

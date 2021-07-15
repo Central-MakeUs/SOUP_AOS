@@ -1,12 +1,10 @@
 package com.example.eatoo.src.home
 
-import com.example.eatoo.config.ApplicationClass.Companion.X_ACCESS_TOKEN
-import com.example.eatoo.config.XAccessTokenInterceptor
+
 import com.example.eatoo.src.home.model.GroupResponse
-import okhttp3.internal.connection.ConnectInterceptor.intercept
+import com.example.eatoo.src.home.model.MateResponse
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Path
 
 interface GroupRetrofitInterface {
@@ -16,4 +14,10 @@ interface GroupRetrofitInterface {
         @Path ("userIdx") userIdx : Int
     )
     : Call<GroupResponse>
+
+
+    @GET("/app/homes/{userIdx}/mates")
+    fun getMate(
+        @Path ("userIdx") userIdx : Int
+    ): Call<MateResponse>
 }

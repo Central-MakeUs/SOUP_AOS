@@ -11,7 +11,7 @@ import com.example.eatoo.R
 
 class MateSuggestionRecyclerviewAdapter (val NameList: ArrayList<String>) : RecyclerView.Adapter<MateSuggestionRecyclerviewAdapter.Viewholder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
-        val inflaterview = LayoutInflater.from(parent.context).inflate(R.layout.item_my_suggestions,parent,false)
+        val inflaterview = LayoutInflater.from(parent.context).inflate(R.layout.item_my_suggestion,parent,false)
 
         return Viewholder(inflaterview)
     }

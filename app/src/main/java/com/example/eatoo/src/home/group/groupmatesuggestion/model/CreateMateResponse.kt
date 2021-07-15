@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 
 data class CreateMateResponse(
         @SerializedName("result")
-        val result : Result
+        val result : Result_Mate_Create
 ):BaseResponse()
 
-data class Result(
+data class Result_Mate_Create(
         @SerializedName("mateIdx")
         val mateIdx : Int
 )

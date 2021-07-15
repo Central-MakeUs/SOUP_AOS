@@ -10,11 +10,9 @@ import retrofit2.Response
 class MateCreateService (val view : Mate_Suggestion_ActivityView){
 
 
-
-
-    fun postCreateMate(postCreateMateRequest: CreateMateRequest){
+    fun postCreateMate(postCreateMateRequest: CreateMateRequest,userIdx : Int){
         val createmateinerface = ApplicationClass.sRetrofit.create(MateCreateInterface::class.java)
-        createmateinerface.postCreateMate(postCreateMateRequest).enqueue(object :
+        createmateinerface.postCreateMate(postCreateMateRequest,userIdx).enqueue(object :
                 Callback<CreateMateResponse> {
             override fun onResponse(call: Call<CreateMateResponse>, response: Response<CreateMateResponse>) {
                 view.onPostMateCreateSuccess(response.body() as CreateMateResponse)

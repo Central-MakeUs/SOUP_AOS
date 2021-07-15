@@ -1,5 +1,6 @@
 package com.example.eatoo.src.home.group.groupmatesuggestion
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -8,8 +9,10 @@ import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityGroupMateSuggetsionBinding
 import com.example.eatoo.src.home.GroupService
 import com.example.eatoo.src.home.GroupView
+import com.example.eatoo.src.home.group.groupmatesuggestion.model.CreateMateRequest
 import com.example.eatoo.src.home.group.groupmatesuggestion.model.CreateMateResponse
 import com.example.eatoo.src.home.model.GroupResponse
+import com.example.eatoo.src.home.model.MateResponse
 import com.example.eatoo.util.getUserIdx
 import com.google.android.material.chip.Chip
 import kotlin.math.min
@@ -20,11 +23,13 @@ class Group_Mate_Suggetsion_Activity
     ,GroupView,Mate_Suggestion_ActivityView, TimeDialogInterface{
 
 
+    private var GroupIndex : Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
-        GroupService(this).tryGetData(getUserIdx())
+        GroupService(this).tryGetGroupData(getUserIdx())
 
         binding.gourpChipGroup.isSingleSelection = true
         binding.gourpChipGroup.isSelectionRequired = true
@@ -33,13 +38,28 @@ class Group_Mate_Suggetsion_Activity
 
 
         binding.registerMateBtn.setOnClickListener {
-           // val postRequest = CreateMateRequest(name = binding.suggestionNameEdt.text.toString(), storeName = binding.storeEdt.text.toString(), startTime = ,endTime = ,headCount = ,timeLimit = ,imgUrl = )
-            //Log.d("요청사항", ""+ postRequest)
-            //MateCreateService(this).postCreateMate(postRequest)
+            val postRequest = CreateMateRequest(groupIdx = GroupIndex,name = binding.suggestionNameEdt.text.toString(), storeName = binding.storeEdt.text.toString(), startTime = binding.startTimeBtn.text.toString() ,endTime = binding.startTimeBtn.text.toString() ,headCount = Integer.parseInt(binding.limitPeopleEdt.text.toString()),timeLimit = binding.limitTimeTv.text.toString() ,imgUrl = "" )
+
+            Log.d("요청사항", ""+ postRequest)
+            MateCreateService(this).postCreateMate(postRequest,getUserIdx())
         }
 
-        binding.statrTimeBtn.setOnClickListener{
-            val dialog = TimeDialog(this, this)
+        binding.startTimeLayout.setOnClickListener{
+            val dialog = TimeDialog(this, this,"start")
+            dialog.show()
+        }
+
+        binding.endTimeLayout.setOnClickListener {
+            val dialog = TimeDialog(this, this,"end")
+            dialog.show()
+        }
+
+        binding.endTimeLayout.setOnClickListener{
+            val dialog = TimeDialog(this, this,"end")
+            dialog.show()
+        }
+        binding.limitTimeLayout.setOnClickListener {
+            val dialog = TimeDialog(this, this,"limit")
             dialog.show()
         }
 
@@ -65,6 +85,16 @@ class Group_Mate_Suggetsion_Activity
             chip.setOnCheckedChangeListener { buttonView, isChecked ->
                 if(chip.isChecked) {
                     chip.setTextAppearanceResource(R.style.Chip_select_Style)
+                    var GroupName = chip.text.toString()
+                    var count : Int = 0
+                    for(j in 0..GroupListtSize){
+                        if(GroupList[j].name == GroupName){
+                            GroupIndex = GroupList[j].groupIdx
+                            count++
+                            Log.d("그룹 인덱스",""+GroupIndex)
+                        }
+
+                    }
                 }
                 else{
                     chip.setTextAppearanceResource(R.style.Chip_no_select_Style)
@@ -77,16 +107,33 @@ class Group_Mate_Suggetsion_Activity
 
     override fun onGetGroupFail(message: String) {
     }
+//Mate 보이기
+    override fun onGetMateSuccess(response: MateResponse) {
+    }
 
+    override fun onGetMateFail(message: String) {
+    }
+//그룹 생성하기
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {
-
     }
 
     override fun onPostMateCreateFailure(message: String) {
 
     }
 
-    override fun onSetTime(hour: String, minute: String) {
-        showCustomToast("$hour $minute")
+
+    @SuppressLint("SetTextI18n")
+    override fun onSetStartTime(hour: String, minute: String) {
+        binding.startTimeBtn.text = "$hour:$minute"
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onSetEndTime(hour: String, minute: String) {
+        binding.endTimeBtn.text = "$hour:$minute"
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onSetLimitTime(hour: String, minute: String) {
+        binding.limitTimeTv.text = "$hour:$minute"
     }
 }
