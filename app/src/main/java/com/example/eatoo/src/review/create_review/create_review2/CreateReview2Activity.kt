@@ -172,11 +172,11 @@ class CreateReview2Activity
         binding.etKeyword.setOnKeyListener { v, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
                 val keywordList = binding.flexboxReview.getAllChips()
-                if (keywordList.size-1 == 6) showCustomToast("키워드는 최대 다섯 개 입력 가능합니다.")
+                if (keywordList.size-1 == 6) showCustomToast(resources.getString(R.string.keyword_num_limit))
                 else {
                     val et = v as EditText
                     val keyword = et.text.toString()
-                    if (keyword.length >= 11) showCustomToast("키워드는 최대 10 글자 입력 가능합니다.")
+                    if (keyword.length >= 11) showCustomToast(resources.getString(R.string.keyword_length_limit))
                     else{
                         binding.flexboxReview.addChip(keyword)
                         et.text.clear()

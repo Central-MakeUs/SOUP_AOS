@@ -165,7 +165,7 @@
                     android:hint="@string/input_vote_item"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:maxLength="20"
+                    android:maxLength="23"
                     android:paddingStart="9dp"
                     android:paddingTop="13dp"
                     android:paddingBottom="14dp"
@@ -185,7 +185,7 @@
                     android:hint="@string/input_vote_item"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:maxLength="20"
+                    android:maxLength="23"
                     android:paddingStart="9dp"
                     android:paddingTop="13dp"
                     android:paddingBottom="14dp"
@@ -194,6 +194,14 @@
                     android:textSize="14sp"
                     android:imeOptions="actionNext"
                     tools:ignore="Autofill,RtlSymmetry" />
+
+                <LinearLayout
+                    android:id="@+id/ll_dynamic_vote_item_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_vote_item_plus"
@@ -342,7 +350,7 @@
                     app:layout_constraintStart_toStartOf="@id/rl_vote_due_date"
                     app:layout_constraintTop_toBottomOf="@id/rl_vote_due_date"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    tools:text="2059년 12월 25일"
+                    android:text="2059년 12월 25일"
                     android:textSize="13sp"
                     android:fontFamily="@font/roboto_medium"
                     android:textColor="@color/main_orange"
@@ -358,7 +366,7 @@
                     app:layout_constraintTop_toBottomOf="@id/rl_vote_due_date"
                     app:layout_constraintStart_toEndOf="@id/tv_due_date_date"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    tools:text="오후 4:00"
+                    android:text="오후 4:00"
                     android:textSize="13sp"
                     android:fontFamily="@font/roboto_medium"
                     android:textColor="@color/main_orange"
