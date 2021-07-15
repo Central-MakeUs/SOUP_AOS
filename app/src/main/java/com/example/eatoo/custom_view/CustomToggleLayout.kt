@@ -69,8 +69,11 @@ class CustomToggleLayout : RelativeLayout {
         typedArray.recycle()
     }
 
-    fun setToggleClickListener(listener: OnClickListener) {
-        toggleBtn.setOnClickListener(listener)
+    fun setToggleClickListener() {
+        toggleBtn.setOnClickListener{
+            if(toggleBtn.isChecked) title.setTextColor(ContextCompat.getColor(context, R.color.black))
+            else title.setTextColor(ContextCompat.getColor(context, R.color.input_hint))
+        }
 
         rlToggle.setOnClickListener {
             toggleBtn.isChecked = !toggleBtn.isChecked

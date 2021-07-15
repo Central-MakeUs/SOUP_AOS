@@ -18,9 +18,9 @@ View.OnClickListener{
     }
 
     private fun setOnClickListeners() {
-        binding.customToggleVoteItem.setToggleClickListener(this)
-        binding.customToggleMultiVote.setToggleClickListener(this)
-        binding.customToggleAnonymousVote.setToggleClickListener(this)
+        binding.customToggleVoteItem.setToggleClickListener()
+        binding.customToggleMultiVote.setToggleClickListener()
+        binding.customToggleAnonymousVote.setToggleClickListener()
         binding.btnRegisterVote.setOnClickListener(this)
     }
 

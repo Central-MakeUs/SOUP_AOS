@@ -234,7 +234,7 @@ class CreateGroupActivity :
 
     private fun setupGoogleMap() {
         val mapFragment =
-            supportFragmentManager.findFragmentById(R.id.frag_store_location_map) as SupportMapFragment
+            supportFragmentManager.findFragmentById(R.id.frag_create_group_map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
