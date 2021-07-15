@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".src.review.create_review.CreateReview2Activity">
+    tools:context=".src.review.create_review.create_review2.CreateReview2Activity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_toolbar"

@@ -1,7 +1,6 @@
 package com.example.eatoo.src.review.store_location
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,11 +9,10 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityStoreLocationBinding
-import com.example.eatoo.src.review.create_review.CreateReview1Activity
+import com.example.eatoo.src.review.create_review.create_review1.CreateReview1Activity
 import com.example.eatoo.src.review.store_location.adaper.StoreSearchRVAdapter
 import com.example.eatoo.src.review.store_location.model.KakaoSearchDoc
 import com.example.eatoo.src.review.store_location.model.KakaoSearchResponse

@@ -20,7 +20,7 @@ import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityStoreMapBinding
 import com.example.eatoo.src.home.create_group.CreateGroupActivity
 import com.example.eatoo.src.home.create_group.CreateGroupActivity.Companion.PERMISSION_REQUEST_CODE
-import com.example.eatoo.src.review.create_review.CreateReview1Activity
+import com.example.eatoo.src.review.create_review.create_review1.CreateReview1Activity
 import com.example.eatoo.src.review.store_map.adapter.ExistingStoreRVAdapter
 import com.example.eatoo.src.review.store_map.model.StoreResponse
 import com.example.eatoo.src.review.store_map.dialog.RegisterNewStoreDialog

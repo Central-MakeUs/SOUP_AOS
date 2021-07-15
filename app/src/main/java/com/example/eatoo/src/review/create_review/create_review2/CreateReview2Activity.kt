@@ -1,4 +1,4 @@
-package com.example.eatoo.src.review.create_review
+package com.example.eatoo.src.review.create_review.create_review2
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -35,7 +35,7 @@ import kotlin.math.roundToInt
 
 class CreateReview2Activity
     : BaseActivity<ActivityCreateReview2Binding>(ActivityCreateReview2Binding::inflate),
-    View.OnClickListener ,CreateReview2View{
+    View.OnClickListener , CreateReview2View {
 
     private var reviewImage = ""
     private var rating = 0.0

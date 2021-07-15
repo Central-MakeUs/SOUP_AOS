@@ -1,4 +1,4 @@
-package com.example.eatoo.src.review.create_review
+package com.example.eatoo.src.review.create_review.create_review1
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,7 @@ import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityCreateReviewBinding
 import com.example.eatoo.src.home.create_group.CreateGroupActivity
+import com.example.eatoo.src.review.create_review.create_review2.CreateReview2Activity
 import com.example.eatoo.src.review.create_review.model.ExistingStoreReviewResponse
 import com.example.eatoo.src.review.store_location.StoreLocationActivity
 import com.example.eatoo.src.review.store_map.StoreMapActivity

@@ -1,7 +1,7 @@
-package com.example.eatoo.src.review.create_review
+package com.example.eatoo.src.review.create_review.create_review2
 
 import com.example.eatoo.config.ApplicationClass
-import com.example.eatoo.src.review.create_review.model.ExistingStoreReviewResponse
+import com.example.eatoo.src.review.create_review.CreateReviewRetrofitInterface
 import com.example.eatoo.src.review.create_review.model.Review1Request
 import com.example.eatoo.src.review.create_review.model.Review2Request
 import com.example.eatoo.src.review.create_review.model.ReviewResponse

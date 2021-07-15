@@ -2,14 +2,13 @@ package com.example.eatoo.src.review.my_review
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityMyReviewBinding
-import com.example.eatoo.src.review.create_review.CreateReview1Activity
+import com.example.eatoo.src.review.create_review.create_review1.CreateReview1Activity
 import com.example.eatoo.src.review.my_review.adapter.MyReviewRVAdapter
 import com.example.eatoo.src.review.my_review.model.MyReviewResponse
 import com.example.eatoo.src.review.my_review.model.MyReviewResult
