@@ -87,5 +87,8 @@ dependencies {
     //firebase storage
     implementation 'com.google.firebase:firebase-storage'
 
+//    //toggle_btn_library
+//    implementation 'com.nex3z:toggle-button-group:1.1.9'
+
 }
 apply plugin: 'com.google.gms.google-services'

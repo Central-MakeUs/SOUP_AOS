@@ -1,16 +1,10 @@
 package com.example.eatoo.src.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.navigation.fragment.NavHostFragment
-import androidx.core.view.ViewCompat.canScrollVertically
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.FragmentNavigator
-import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eatoo.R
 import com.example.eatoo.config.ApplicationClass
@@ -24,10 +18,9 @@ import com.example.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsio
 import com.example.eatoo.src.home.model.GroupResponse
 import com.example.eatoo.src.home.model.MateResponse
 import com.example.eatoo.util.getUserIdx
-import com.example.eatoo.src.home.CustomLinearLayoutManager
 import com.example.eatoo.src.home.create_group.CreateGroupActivity
-import com.example.eatoo.src.suggestion.SuggestionFragment
-import com.google.android.gms.maps.SupportMapFragment
+import com.example.eatoo.src.review.create_review.create_review1.CreateReview1Activity
+import com.example.eatoo.util.getUserNickName
 
 
 class HomeFragment
@@ -35,6 +28,7 @@ class HomeFragment
 
     val userIdx = ApplicationClass.sSharedPreferences.getInt(USER_IDX, -1)
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -56,6 +50,12 @@ class HomeFragment
 
         binding.mateOverviewBtn.setOnClickListener {
         }
+
+        binding.cardviewReviewSuggest.setOnClickListener {
+            startActivity(Intent(activity, CreateReview1Activity::class.java))
+        }
+
+        binding.usetNameHomeTv.text = getUserNickName() + binding.usetNameHomeTv.text
     }
 
     override fun onGetGroupSuccess(response: GroupResponse) {

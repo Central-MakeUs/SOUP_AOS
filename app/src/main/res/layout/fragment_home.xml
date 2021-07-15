@@ -36,209 +36,271 @@
         android:orientation="vertical"
         android:overScrollMode="never"
         android:scrollbars="none"
+        android:descendantFocusability="blocksDescendants"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
-            android:orientation="vertical">
+            android:layout_marginTop="34dp">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/uset_name_home_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:fontFamily="sans-serif-black"
+                android:lineSpacingExtra="10sp"
+                android:text="@string/user_groups"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_main_user_icon_backround"
+                app:layout_constraintBottom_toBottomOf="@+id/uset_name_home_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/uset_name_home_tv"
+                app:layout_constraintVertical_bias="0.48" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_main_user_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView6"
+                app:layout_constraintEnd_toEndOf="@+id/appCompatImageView6"
+                app:layout_constraintStart_toStartOf="@+id/appCompatImageView6"
+                app:layout_constraintTop_toTopOf="@+id/appCompatImageView6" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/group_recyclerview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/uset_name_home_tv" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="34dp"
+                android:fontFamily="sans-serif"
+                android:lineSpacingExtra="17sp"
+                android:text="@string/main_today"
+                android:textColor="#ff4e16"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/group_recyclerview" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-black"
+                android:lineSpacingExtra="13sp"
+                android:text="@string/main_my_suggestion_mate"
+                android:textColor="#000000"
+                android:textSize="17sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@+id/appCompatTextView10"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView10" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/mate_overview_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_right_btn"
+                app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView11"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/appCompatTextView11" />
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mate_plus_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="23dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView11"
+                android:background="@drawable/rectangle_box_main_home">
 
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/appCompatTextView2"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/mate_plus_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:fontFamily="sans-serif-black"
-                    android:lineSpacingExtra="10sp"
-                    android:text="@string/user_groups"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:textStyle="normal"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/ic_plus_main_color"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:src="@drawable/ic_main_user_icon_backround"
-                    app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView2"
-                    app:layout_constraintVertical_bias="0.48" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_main_user_icon"
-                    app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView6"
-                    app:layout_constraintEnd_toEndOf="@+id/appCompatImageView6"
-                    app:layout_constraintStart_toStartOf="@+id/appCompatImageView6"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatImageView6" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/group_recyclerview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="24dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
-
-
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/appCompatTextView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="34dp"
-                    android:fontFamily="sans-serif"
-                    android:lineSpacingExtra="17sp"
-                    android:text="@string/main_today"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:lineSpacingExtra="6sp"
+                    android:text="@string/main_my_suggestion_mate_together"
                     android:textColor="#ff4e16"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/group_recyclerview" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/appCompatTextView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="sans-serif-black"
-                    android:lineSpacingExtra="13sp"
-                    android:text="@string/main_my_suggestion_mate"
-                    android:textColor="#000000"
-                    android:textSize="17sp"
-                    android:textStyle="normal"
-                    app:layout_constraintStart_toStartOf="@+id/appCompatTextView10"
-                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView10" />
-
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/mate_overview_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:src="@drawable/ic_right_btn"
-                    app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView11"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView11" />
-
-
-                <LinearLayout
-                    android:id="@+id/mate_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:orientation="vertical"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="23dp"
-                    android:layout_marginEnd="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView11">
-
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/mate_plus_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:background="@drawable/rectangle_box_main_home">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/mate_plus_btn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:src="@drawable/ic_plus_main_color"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="16dp"
-                            android:fontFamily="sans-serif-medium"
-                            android:lineSpacingExtra="6sp"
-                            android:text="@string/main_my_suggestion_mate_together"
-                            android:textColor="#ff4e16"
-                            android:textSize="14sp"
-                            android:textStyle="normal"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/mate_plus_btn" />
-
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/home_mate_recylerview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scrollbars="none"
-
-                        android:overScrollMode="never"/>
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/appCompatTextView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="26dp"
-                    android:fontFamily="sans-serif-black"
-                    android:lineSpacingExtra="8sp"
-                    android:text="@string/main_review_food1"
-                    android:textColor="#000000"
-                    android:textSize="17sp"
-                    android:textStyle="normal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/mate_layout" />
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/appCompatTextView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="sans-serif-black"
-                    android:lineSpacingExtra="8sp"
-                    android:text="@string/main_review_food2"
-                    android:textColor="#000000"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@+id/appCompatTextView13"
-                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView13" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:src="@drawable/ic_review_create"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView13" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mate_plus_btn" />
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_mate_recylerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="23dp"
+                android:layout_marginEnd="20dp"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView11" />
 
-        </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview_review_suggest"
+                android:layout_width="match_parent"
+                android:layout_height="107dp"
+                android:layout_marginTop="279dp"
+                android:elevation="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView11">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_write_review"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="sans-serif-black"
+                        android:lineSpacingExtra="8sp"
+                        android:text="@string/main_review_food1"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="normal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_write_review_exp1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="sans-serif-black"
+                        android:lineSpacingExtra="8sp"
+                        android:text="@string/main_review_food2"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_write_review"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_write_review" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_review_char"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:src="@drawable/ic_review_create"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatTextView13" />
+
+
+                    <!--        <androidx.appcompat.widget.AppCompatTextView-->
+                    <!--            android:id="@+id/tv_write_review"-->
+                    <!--            android:layout_width="wrap_content"-->
+                    <!--            android:layout_height="wrap_content"-->
+                    <!--            android:layout_marginStart="20dp"-->
+                    <!--            android:layout_marginTop="20dp"-->
+                    <!--            android:fontFamily="@font/roboto_bold"-->
+                    <!--            android:lineSpacingExtra="8sp"-->
+                    <!--            android:text="@string/try_write_review"-->
+                    <!--            android:textColor="@color/black"-->
+                    <!--            android:textSize="14sp"-->
+                    <!--            app:layout_constraintStart_toStartOf="parent"-->
+                    <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+
+                    <!--        <androidx.appcompat.widget.AppCompatTextView-->
+                    <!--            android:id="@+id/tv_write_review_exp1"-->
+                    <!--            android:layout_width="wrap_content"-->
+                    <!--            android:layout_height="wrap_content"-->
+                    <!--            android:layout_marginTop="11dp"-->
+                    <!--            android:fontFamily="@font/roboto_regular"-->
+                    <!--            android:text="@string/try_write_review_exp1"-->
+                    <!--            android:textColor="@color/black"-->
+                    <!--            android:textSize="12sp"-->
+                    <!--            app:layout_constraintStart_toStartOf="@+id/tv_write_review"-->
+                    <!--            app:layout_constraintTop_toBottomOf="@+id/tv_write_review" />-->
+
+                    <!--            <androidx.appcompat.widget.AppCompatTextView-->
+                    <!--                android:id="@+id/tv_write_review_exp2"-->
+                    <!--                android:layout_width="wrap_content"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:layout_marginTop="2dp"-->
+                    <!--                android:fontFamily="@font/roboto_regular"-->
+                    <!--                android:text="@string/try_write_review_exp2"-->
+                    <!--                android:textColor="@color/black"-->
+                    <!--                android:textSize="12sp"-->
+                    <!--                app:layout_constraintStart_toStartOf="@+id/tv_write_review"-->
+                    <!--                app:layout_constraintTop_toBottomOf="@+id/tv_write_review_exp1" />-->
+
+                    <!--        <androidx.appcompat.widget.AppCompatImageView-->
+                    <!--            android:id="@+id/iv_review_char"-->
+                    <!--            android:layout_width="wrap_content"-->
+                    <!--            android:layout_height="wrap_content"-->
+                    <!--            android:layout_marginEnd="20dp"-->
+                    <!--            android:src="@drawable/ic_group_271"-->
+                    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+                    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--            app:layout_constraintTop_toTopOf="parent"/>-->
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
     </androidx.core.widget.NestedScrollView>
