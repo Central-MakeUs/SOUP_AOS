@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".src.mypage.profile.ProfileActivity">
+
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_back_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appCompatTextView3" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/profile_setting"
+        android:fontFamily="sans-serif-black"
+        android:textStyle="normal"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginTop="20dp"
+        android:background="@color/gray_300"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3"
+        tools:ignore="PxUsage" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/user_profile_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_mypage_icon_backgroud"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_mypage_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/user_profile_img"
+                app:layout_constraintEnd_toEndOf="@+id/user_profile_img"
+                app:layout_constraintStart_toStartOf="@+id/user_profile_img"
+                app:layout_constraintTop_toTopOf="@+id/user_profile_img" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="27dp"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/nickname"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_profile_img" />
+
+            <EditText
+                android:id="@+id/nick_name_edt"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edittext_background_radius"
+                android:fontFamily="sans-serif"
+                android:hint="@string/nickname_hint"
+                android:inputType="text"
+                android:letterSpacing="0.01"
+                android:lineSpacingExtra="9sp"
+                android:paddingStart="12dp"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4"
+                tools:ignore="Autofill,RtlSymmetry" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView7"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="11dp"
+                android:fontFamily="sans-serif"
+                android:letterSpacing="0.05"
+                android:lineSpacingExtra="10sp"
+                android:padding="2dp"
+                android:text="@string/sign_in_nickname_bottom"
+                android:textColor="@color/gray_100"
+                android:textSize="10sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@+id/nick_name_edt"
+                app:layout_constraintTop_toBottomOf="@+id/nick_name_edt"
+                tools:ignore="HardcodedText,SmallSp" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="25dp"
+                android:background="@color/gray_300"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7"
+                tools:ignore="PxUsage" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_makegroup_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/create_group_color"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipgroup_makegroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_makegroup_color"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_1"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:tag="1"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="-10dp"
+                    app:chipIcon="@drawable/color_chip1"
+                    app:chipStartPadding="4dp"
+                    app:closeIconEnabled="false" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_2"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="2"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="-10dp"
+                    app:chipIcon="@drawable/color_chip2"
+                    app:chipStartPadding="4dp"
+                    app:closeIconEnabled="false" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_3"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="3"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="-10dp"
+                    app:chipIcon="@drawable/color_chip3"
+                    app:chipStartPadding="4dp"
+                    app:closeIconEnabled="false" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_4"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="4"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="-10dp"
+                    app:chipIcon="@drawable/color_chip4"
+                    app:chipStartPadding="4dp"
+                    app:closeIconEnabled="false" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_5"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tag="5"
+                    app:checkedIconEnabled="false"
+                    app:chipEndPadding="-10dp"
+                    app:chipIcon="@drawable/color_chip5"
+                    app:chipStartPadding="4dp"
+                    app:closeIconEnabled="false" />
+
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="25dp"
+                android:background="@color/gray_300"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipgroup_makegroup"
+                tools:ignore="PxUsage" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/character_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/character"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/character_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/character_tv"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/character1"
+                    style="@style/CustomCharacterStyle"
+                    android:layout_width="42.6dp"
+                    android:layout_height="42.6dp"
+                    android:checked="true"
+                    android:tag="1"
+                    app:checkedIconEnabled="false"
+                    app:chipIcon="@drawable/ic_eatoo_character"
+                    app:closeIconEnabled="false" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/character2"
+                    style="@style/CustomCharacterStyle"
+                    android:layout_width="42.6dp"
+                    android:layout_height="42.6dp"
+                    android:tag="2"
+                    app:checkedIconEnabled="false"
+                    app:chipIcon="@drawable/ic_eatoo_character"
+                    app:closeIconEnabled="false" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/character3"
+                    style="@style/CustomCharacterStyle"
+                    android:layout_width="42.6dp"
+                    android:layout_height="42.6dp"
+                    android:tag="3"
+                    app:checkedIconEnabled="false"
+                    app:chipIcon="@drawable/ic_eatoo_character"
+                    app:closeIconEnabled="false" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/character4"
+                    style="@style/CustomCharacterStyle"
+                    android:layout_width="42.6dp"
+                    android:layout_height="42.6dp"
+                    android:tag="4"
+                    app:checkedIconEnabled="false"
+                    app:chipIcon="@drawable/ic_eatoo_character"
+                    app:closeIconEnabled="false" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/character5"
+                    style="@style/CustomCharacterStyle"
+                    android:layout_width="42.6dp"
+                    android:layout_height="42.6dp"
+                    android:tag="5"
+                    app:checkedIconEnabled="false"
+                    app:chipIcon="@drawable/ic_eatoo_character"
+                    app:closeIconEnabled="false" />
+
+
+            </com.google.android.material.chip.ChipGroup>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/login_btn"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/sign_in_btn_background_gray"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="@string/dialog_confirm"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/character_group" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

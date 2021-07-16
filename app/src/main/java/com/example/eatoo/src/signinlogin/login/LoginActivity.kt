@@ -13,6 +13,7 @@ import com.example.eatoo.src.main.MainActivity
 import com.example.eatoo.src.signinlogin.login.model.LoginRequest
 import com.example.eatoo.src.signinlogin.login.model.LoginResponse
 import com.example.eatoo.util.putSharedPref
+import com.example.eatoo.util.putSharedPrefUser
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate),LoginActivityView {
     override fun onCreate(savedInstanceState: Bundle?) {

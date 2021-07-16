@@ -10,7 +10,7 @@
 
 
     <!--main_home-->
-    <string name="user_groups">잇투님의\n"MATE GROUP"</string>
+    <string name="user_groups">님의\n"MATE GROUP"</string>
 
     <string name="user_groups_create">안녕하세요, 잇투님 ! 🖐\nMATE GROUP이 없어요</string>
     <string name="user_groups_create2">+ 를 눌러 새로운 그룹을 만들어보세요!\n더 다양한 기능을 사용할 수 있어요</string>
@@ -78,7 +78,7 @@
     <string name="next_step">다음으로</string>
     <string name="review_exp">이미 등록된 가게를 선택한 경우 가게명과 카테고리는 자동으로 입력됩니다. 새로운 가게의 경우, 직접 입력해주세요!</string>
     <string name="try_write_review">후기를 작성해보세요!</string>
-    <string name="try_write_review_exp1">다녀왔던 가게에 대한 정보와</string>
+    <string name="try_write_review_exp1">다녀왔던 가게에 대한 정보와\n평점, 후기를 꼭 작성해주세요 :)</string>
     <string name="try_write_review_exp2">평점, 후기를 꼭 작성해주세요 :)</string>
     <string name="my_review">내 후기</string>
     <string name="register_new_store">새로운 가게 등록</string>
@@ -256,6 +256,8 @@
     <!--my_page-->
     <string name="my_page">마이페이지</string>
     <string name="profile">프로필</string>
+    <string name="nickname_plus">님</string>
+    <string name="profile_setting">프로필 설정</string>
     <string name="review">후기</string>
     <string name="invite">초대</string>
     <string name="my_member">My 멤버</string>
@@ -265,6 +267,8 @@
     <string name="logout">로그아웃</string>
     <string name="edit">편집</string>
     <string name="taste_keyword">식성 키워드</string>
+    <string name="character">캐릭터</string>
+
 
     <!--dialog-->
     <string name="dialog_confirm">확인</string>

@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".src.home.group.vote.create_vote.CreateVoteActivity"></activity>
+        <activity android:name=".src.mypage.profile.ProfileActivity"></activity>
+        <activity android:name=".src.home.group.vote.create_vote.CreateVoteActivity" />
         <activity android:name=".src.review.store_location.StoreLocationActivity" />
         <activity android:name=".src.review.create_review.create_review2.CreateReview2Activity" />
         <activity android:name=".src.review.store_map.StoreMapActivity" />

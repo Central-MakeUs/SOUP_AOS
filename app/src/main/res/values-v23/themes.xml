@@ -44,6 +44,13 @@
     </style>
 
 
+    <style name="CustomCharacterStyle" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="chipBackgroundColor">@color/white</item>
+        <item name="rippleColor">@color/main_color</item>
+        <item name="chipStrokeColor">@color/chip_stroke_color</item>
+    </style>
+
+
     <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.FloatingActionButton</item>
     </style>

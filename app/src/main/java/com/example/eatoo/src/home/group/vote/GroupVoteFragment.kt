@@ -17,6 +17,7 @@ import com.example.eatoo.src.home.group.vote.get_vote.adapter.GroupVoteRVAdapter
 import com.example.eatoo.src.home.group.vote.get_vote.model.GroupVoteResponse
 import com.example.eatoo.src.home.group.vote.get_vote.model.GroupVoteResult
 import com.example.eatoo.util.getGroupIdx
+import com.example.eatoo.util.getGroupName
 import com.example.eatoo.util.getUserIdx
 
 class GroupVoteFragment
@@ -43,7 +44,12 @@ View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener{
         super.onViewCreated(view, savedInstanceState)
 
         setOnClickListeners()
+        setGroupName()
 
+    }
+
+    private fun setGroupName() {
+        binding.tvGroupName.text = getGroupName()
     }
 
     private fun setOnClickListeners() {

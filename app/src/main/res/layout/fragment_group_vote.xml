@@ -13,9 +13,10 @@
         android:textColor="@color/black"
         android:fontFamily="@font/roboto_bold"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toStartOf="@id/tv_group_vote_call"
+        app:layout_constraintStart_toStartOf="@id/tv_vote_suggest"
         android:layout_marginTop="18dp"
-        android:layout_marginStart="21dp"
+        android:layout_marginEnd="6dp"
         tools:text="잇투그룹"/>
 
     <TextView
@@ -26,9 +27,9 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         android:fontFamily="@font/roboto_bold"
-        app:layout_constraintStart_toEndOf="@id/tv_group_name"
         app:layout_constraintTop_toTopOf="@id/tv_group_name"
         app:layout_constraintBottom_toBottomOf="@id/tv_group_name"
+        app:layout_constraintStart_toEndOf="@id/tv_group_name"
         android:layout_marginStart="6dp"
         />
 
@@ -40,9 +41,11 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         android:fontFamily="@font/roboto_bold"
-        app:layout_constraintStart_toStartOf="@id/tv_group_name"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_group_name"
         android:layout_marginTop="5dp"
+        android:layout_marginStart="21dp"
+
         />
 
     <androidx.recyclerview.widget.RecyclerView
