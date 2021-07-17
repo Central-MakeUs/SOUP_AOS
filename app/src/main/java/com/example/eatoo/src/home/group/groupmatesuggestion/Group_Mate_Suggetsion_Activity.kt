@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityGroupMateSuggetsionBinding
@@ -75,7 +76,7 @@ class Group_Mate_Suggetsion_Activity
         val GroupList = response.result.getGroupsRes
         val GroupListtSize = GroupList.size - 1
         for(i in 0..GroupListtSize){
-            var chip = Chip(this) // Must contain context in parameter
+            val chip  = LayoutInflater.from(this).inflate(R.layout.view_chip_2, null) as Chip
             chip.text =  GroupList[i].name
             Log.d("그룹 이름들", GroupList[i].name)
             chip.isCheckable = true
@@ -88,6 +89,7 @@ class Group_Mate_Suggetsion_Activity
                     chip.setTextAppearanceResource(R.style.Chip_select_Style)
                     var GroupName = chip.text.toString()
                     var count : Int = 0
+                    //groupidx 부분 수정해야해요
                     for(j in 0..GroupListtSize){
                         if(GroupList[j].name == GroupName){
                             GroupIndex = GroupList[j].groupIdx

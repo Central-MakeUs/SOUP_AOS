@@ -1,6 +1,7 @@
 package com.example.eatoo.src.suggestion
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.example.eatoo.R
 import com.example.eatoo.config.BaseFragment
 import com.example.eatoo.databinding.FragmentMyPageBinding
 import com.example.eatoo.databinding.FragmentSuggestionBinding
+import com.example.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
 import com.example.eatoo.src.suggestion.adpater.MateSuggestionRecyclerviewAdapter
 import com.example.eatoo.util.getUserIdx
 import com.example.eatoo.util.getUserNickName
@@ -25,6 +27,10 @@ class SuggestionFragment : BaseFragment<FragmentSuggestionBinding>(FragmentSugge
 
 
         binding.userNameSuggestionTxt.text = getUserNickName() + binding.userNameSuggestionTxt.text
+
+        binding.plusBtn.setOnClickListener {
+            startActivity(Intent(activity, Group_Mate_Suggetsion_Activity::class.java))
+        }
 
 
        val SearchAdapter = MateSuggestionRecyclerviewAdapter(Celebnames)

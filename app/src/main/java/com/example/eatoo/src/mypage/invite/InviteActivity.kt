@@ -1,15 +1,10 @@
 package com.example.eatoo.src.mypage.invite
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityInviteBinding
-import com.example.eatoo.src.home.adapter.Home_Group_Kind_RecyclerviewAdapter
-import com.example.eatoo.src.home.create_group.CreateGroupActivity
-import com.example.eatoo.src.home.group.groupmatesuggestion.TimeDialog
 import com.example.eatoo.src.mypage.invite.adapter.Invite_Group_Kind_RecyclerviewAdapter
 import com.example.eatoo.src.mypage.invite.model.InviteCodeResponse
 import com.example.eatoo.src.mypage.invite.model.InviteResponse
