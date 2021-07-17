@@ -13,4 +13,7 @@ interface GroupVoteView {
 
     fun onPostVotedSuccess(response: VotedResponse)
     fun onPostVotedFail(message: String?)
+
+    fun onPostNewItemSuccess()
+    fun onPostNewItemFail(message: String?)
 }

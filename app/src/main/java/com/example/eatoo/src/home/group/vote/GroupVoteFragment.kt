@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseFragment
 import com.example.eatoo.databinding.FragmentGroupVoteBinding
+import com.example.eatoo.src.home.create_group.model.Keyword
 import com.example.eatoo.src.home.group.vote.create_vote.CreateVoteActivity
 import com.example.eatoo.src.home.group.vote.get_vote.GroupVoteService
 import com.example.eatoo.src.home.group.vote.get_vote.GroupVoteView
@@ -115,6 +116,16 @@ View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener, Vot
         dismissLoadingDialog()
     }
 
+    override fun onPostNewItemSuccess() {
+        dismissLoadingDialog()
+        showCustomToast("항목 추가 성공!")
+    }
+
+    override fun onPostNewItemFail(message: String?) {
+        dismissLoadingDialog()
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
+    }
+
     override fun onVoteClicked(item: GroupVoteResult) {
         showCustomToast(item.name)
        //투표 조회 서버 통신
@@ -136,6 +147,21 @@ View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener, Vot
         context?.let {
             showLoadingDialog(it)
             GroupVoteService(this).tryPostVote(getUserIdx(), 28, voteDetail.voteIdx, VotedRequest(votedMenuList))
+        }
+    }
+
+    override fun onReVoteFinishClicked(
+        voteDetail: VoteDetailResult,
+        votedItemList: ArrayList<Int>
+    ) {
+        //재투표하기 api 연결.
+    }
+
+    override fun onVoteItemAdded(voteIdx : Int, newItem: String) {
+        //항목추가 api
+        context?.let {
+            showLoadingDialog(it)
+            GroupVoteService(this).tryPostNewVoteItem(getUserIdx(), voteIdx, NewItem(newItem))
         }
     }
 }

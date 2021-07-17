@@ -1,10 +1,8 @@
 package com.example.eatoo.src.home.group.vote.get_vote
 
 import com.example.eatoo.config.ApplicationClass
-import com.example.eatoo.src.home.group.vote.get_vote.model.GroupVoteResponse
-import com.example.eatoo.src.home.group.vote.get_vote.model.VoteDetailResponse
-import com.example.eatoo.src.home.group.vote.get_vote.model.VotedRequest
-import com.example.eatoo.src.home.group.vote.get_vote.model.VotedResponse
+import com.example.eatoo.src.home.create_group.model.Keyword
+import com.example.eatoo.src.home.group.vote.get_vote.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -78,6 +76,30 @@ class GroupVoteService (val view : GroupVoteView){
 
                 override fun onFailure(call: Call<VotedResponse>, t: Throwable) {
                     view.onPostVotedFail(t.message)
+                }
+
+            })
+    }
+
+    fun tryPostNewVoteItem(userIdx: Int, voteIdx : Int, newItem: NewItem) {
+        val groupVoteRetrofitInterface = ApplicationClass.sRetrofit.create(
+            GroupVoteRetrofitInterface::class.java
+        )
+        groupVoteRetrofitInterface.postAddedVoteItem(userIdx,  voteIdx, newItem)
+            .enqueue(object :
+                Callback<NewItemAddedResponse> {
+                override fun onResponse(
+                    call: Call<NewItemAddedResponse>,
+                    response: Response<NewItemAddedResponse>
+                ) {
+                    response.body()?.let {
+                        if (it.isSuccess) view.onPostNewItemSuccess()
+                        else view.onPostNewItemFail(it.message)
+                    }
+                }
+
+                override fun onFailure(call: Call<NewItemAddedResponse>, t: Throwable) {
+                    view.onPostNewItemFail(t.message)
                 }
 
             })

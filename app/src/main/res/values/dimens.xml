@@ -2,4 +2,5 @@
 <resources>
     <dimen name="vote_dialog_radio_top_margin">6dp</dimen>
     <dimen name="vote_dialog_radio_bottom_margin">10dp</dimen>
+    <dimen name="vote_dialog_add_item_margin">31dp</dimen>
 </resources>

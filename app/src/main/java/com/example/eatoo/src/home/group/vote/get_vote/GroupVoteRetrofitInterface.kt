@@ -1,5 +1,6 @@
 package com.example.eatoo.src.home.group.vote.get_vote
 
+import com.example.eatoo.src.home.create_group.model.Keyword
 import com.example.eatoo.src.home.group.vote.get_vote.model.*
 import retrofit2.Call
 import retrofit2.http.Body
@@ -28,4 +29,11 @@ interface GroupVoteRetrofitInterface {
         @Path("voteIdx") voteIdx : Int,
         @Body votedRequest : VotedRequest
     ) : Call<VotedResponse>
+
+    @POST ("/app/votes/{userIdx}/{voteIdx}/add-menu")
+    fun postAddedVoteItem(
+        @Path("userIdx") userIdx : Int,
+        @Path("voteIdx") voteIdx : Int,
+        @Body addedVoteItem : NewItem
+    ) : Call<NewItemAddedResponse>
 }

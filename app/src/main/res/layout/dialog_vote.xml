@@ -85,7 +85,9 @@
             android:layout_marginTop="33dp"
             android:layout_marginStart="27dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_vote_dialog_top_due_date">
+            app:layout_constraintTop_toBottomOf="@+id/tv_vote_dialog_top_due_date"
+            app:layout_constraintBottom_toTopOf="@id/btn_vote_dialog_done"
+            android:layout_marginBottom="20dp">
 
 
         </LinearLayout>
