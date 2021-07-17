@@ -168,8 +168,9 @@
     <string name="dialog_vote_confirm">투표완료</string>
     <string name="dialog_vote_num">%d명</string>
     <string name="dialog_vote_retry">재투표</string>
-    <string name="dialog_vote_add_item">+항목추가하기</string>
+    <string name="dialog_vote_add_item">+ 항목추가하기</string>
     <string name="vote_num">투표인원</string>
+    <string name="no_vote">진행중인 투표가 없습니다.</string>
 
     <!--group-->
     <string name="group_main">MAIN</string>

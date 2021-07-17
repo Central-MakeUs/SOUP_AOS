@@ -332,7 +332,7 @@
                     android:id="@+id/toggle_due_date"
                     android:layout_width="17dp"
                     android:layout_height="17dp"
-                    android:background="@drawable/selector_vote_toggle"
+                    android:background="@drawable/selector_create_vote_toggle"
                     android:textOn="@string/nothing"
                     android:textOff="@string/nothing"
                     android:button="@color/transparent"
