@@ -104,7 +104,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         dismissLoadingDialog()
         showCustomToast(response.message)
         if(response.code == 1000){
-
             Log.d("jwt", response.result.jwt)
             Log.d("userIdx", response.result.userIdx.toString())
 

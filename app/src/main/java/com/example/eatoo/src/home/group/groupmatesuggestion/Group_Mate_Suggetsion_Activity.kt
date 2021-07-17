@@ -1,6 +1,7 @@
 package com.example.eatoo.src.home.group.groupmatesuggestion
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import com.example.eatoo.src.home.group.groupmatesuggestion.model.CreateMateRequ
 import com.example.eatoo.src.home.group.groupmatesuggestion.model.CreateMateResponse
 import com.example.eatoo.src.home.model.GroupResponse
 import com.example.eatoo.src.home.model.MateResponse
+import com.example.eatoo.src.main.MainActivity
 import com.example.eatoo.util.getUserIdx
 import com.google.android.material.chip.Chip
 import kotlin.math.min
@@ -39,7 +41,6 @@ class Group_Mate_Suggetsion_Activity
 
         binding.registerMateBtn.setOnClickListener {
             val postRequest = CreateMateRequest(groupIdx = GroupIndex,name = binding.suggestionNameEdt.text.toString(), storeName = binding.storeEdt.text.toString(), startTime = binding.startTimeBtn.text.toString() ,endTime = binding.startTimeBtn.text.toString() ,headCount = Integer.parseInt(binding.limitPeopleEdt.text.toString()),timeLimit = binding.limitTimeTv.text.toString() ,imgUrl = "" )
-
             Log.d("요청사항", ""+ postRequest)
             MateCreateService(this).postCreateMate(postRequest,getUserIdx())
         }
@@ -107,12 +108,17 @@ class Group_Mate_Suggetsion_Activity
 
     override fun onGetGroupFail(message: String) {
     }
+
 //Mate 보이기
+
     override fun onGetMateSuccess(response: MateResponse) {
+        if(response.code == 1000)
+            startActivity(Intent(this, MainActivity::class.java))
     }
 
     override fun onGetMateFail(message: String) {
     }
+
 //그룹 생성하기
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {
     }

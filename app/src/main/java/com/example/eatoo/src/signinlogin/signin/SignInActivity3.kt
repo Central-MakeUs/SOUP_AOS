@@ -49,10 +49,23 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
     }
 
     override fun onPostSignUpSuccess(response: SignInResponse) {
-        putSharedPref(response.result.jwt, response.result.userIdx)
         dismissLoadingDialog()
-        showCustomToast(response.message)
-        startActivity(Intent(this, LoginActivity::class.java))
+        if(response.code == 1000) {
+            putSharedPref(response.result.jwt, response.result.userIdx)
+            showCustomToast(response.message)
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+        else if(response.code == 2025){
+            showCustomToast(response.message)
+            startActivity(Intent(this, SignInActivity::class.java))
+        }
+        else if(response.code == 2016 || response.code == 2027 ||response.code == 2028){
+            showCustomToast(response.message)
+            startActivity(Intent(this, SignInActivity2::class.java))
+        }
+        else if(response.code == 2033){
+            showCustomToast(response.message)
+        }
     }
 
 

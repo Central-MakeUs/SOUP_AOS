@@ -250,6 +250,7 @@
     <string name="profile_setting">프로필 설정</string>
     <string name="review">후기</string>
     <string name="invite">초대</string>
+    <string name="inviting">초대하기</string>
     <string name="my_member">My 멤버</string>
     <string name="find_invite">초대장 찾기</string>
     <string name="questions">문의사항</string>
@@ -263,5 +264,14 @@
     <!--dialog-->
     <string name="dialog_confirm">확인</string>
     <string name="dialog_cancel">취소</string>
+
+    <!--invite-->
+    <string name="invite_query">MATE GROUP에\n새로운 친구를 초대해주세요 :)
+</string>
+    <!--invite dialog-->
+    <string name="invite_dialog_qurey">의 초대 코드</string>
+    <string name="invite_dialog_confirm">공유하기</string>
+    <string name="invite_dialog_qurey2">A</string>
+
 
 </resources>

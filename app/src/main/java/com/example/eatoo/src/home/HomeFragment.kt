@@ -19,6 +19,7 @@ import com.example.eatoo.src.home.model.GroupResponse
 import com.example.eatoo.src.home.model.MateResponse
 import com.example.eatoo.util.getUserIdx
 import com.example.eatoo.src.home.create_group.CreateGroupActivity
+import com.example.eatoo.src.home.group.GroupActivity
 import com.example.eatoo.src.review.create_review.create_review1.CreateReview1Activity
 import com.example.eatoo.util.getUserNickName
 
@@ -61,19 +62,48 @@ class HomeFragment
     override fun onGetGroupSuccess(response: GroupResponse) {
         response.message?.let { showCustomToast(it) }
 
-        val GroupSize = response.result.getGroupsRes.size
+        if(response.code == 1000) {
+            binding.matePlusBtn.isClickable = true
+            binding.noneGroupLayoutMain.visibility = View.GONE
+            binding.groupRecyclerview.visibility = View.VISIBLE
+            val GroupSize = response.result.getGroupsRes.size
 
-        val GroupAdapter = Home_Group_Kind_RecyclerviewAdapter(response.result.getGroupsRes,GroupSize, "BASIC")
-        binding.groupRecyclerview.adapter = GroupAdapter
-        binding.groupRecyclerview.layoutManager = LinearLayoutManager(activity).also { it.orientation = LinearLayoutManager.HORIZONTAL }
-
-        GroupAdapter.setItemClickListener(object : Home_Group_Kind_RecyclerviewAdapter.ItemClickListener {
-            override fun onClick(view: View, position: Int) {
-                if(position == GroupSize){
-                    startActivity(Intent(activity,CreateGroupActivity::class.java))
-                }
+            val GroupAdapter = Home_Group_Kind_RecyclerviewAdapter(
+                response.result.getGroupsRes,
+                GroupSize,
+                "BASIC"
+            )
+            binding.groupRecyclerview.adapter = GroupAdapter
+            binding.groupRecyclerview.layoutManager = LinearLayoutManager(activity).also {
+                it.orientation = LinearLayoutManager.HORIZONTAL
             }
-        })
+
+            GroupAdapter.setItemClickListener(object :
+                Home_Group_Kind_RecyclerviewAdapter.ItemClickListener {
+                override fun onClick(view: View, position: Int, groupIdx : Int, state : String) {
+                    if (position == GroupSize && state == "plus") {
+                        startActivity(Intent(activity, CreateGroupActivity::class.java))
+                    }
+                    else if(position != GroupSize  && state == "Group_activity"){
+                        startActivity(Intent(activity, GroupActivity::class.java))
+                    }
+                }
+            })
+        }
+        else if(response.code == 2500){
+            binding.noneGroupLayoutMain.visibility = View.VISIBLE
+            binding.groupRecyclerview.visibility = View.GONE
+
+            binding.matePlusBtn.isClickable = false
+
+            binding.groupPlusBtn1.setOnClickListener{
+                startActivity(Intent(activity,CreateGroupActivity::class.java))
+            }
+            binding.groupPlusBtn2.setOnClickListener{
+                startActivity(Intent(activity,CreateGroupActivity::class.java))
+            }
+
+        }
     }
 
     override fun onGetGroupFail(message: String) {
@@ -84,11 +114,11 @@ class HomeFragment
         response.message?.let { showCustomToast(it) }
 
         if(response.code == 2501){
-            binding.matePlusLayout.visibility = View.VISIBLE
+            binding.mateNonePlusLayout.visibility = View.VISIBLE
             binding.homeMateRecylerview.visibility = View.GONE
         }
         else{
-            binding.matePlusLayout.visibility = View.GONE
+            binding.mateNonePlusLayout.visibility = View.GONE
             binding.homeMateRecylerview.visibility = View.VISIBLE
             val MateList = response.result
 

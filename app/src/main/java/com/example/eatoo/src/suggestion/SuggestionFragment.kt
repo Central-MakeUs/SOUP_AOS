@@ -27,7 +27,6 @@ class SuggestionFragment : BaseFragment<FragmentSuggestionBinding>(FragmentSugge
         binding.userNameSuggestionTxt.text = getUserNickName() + binding.userNameSuggestionTxt.text
 
 
-
        val SearchAdapter = MateSuggestionRecyclerviewAdapter(Celebnames)
         binding.mySuggestionRecyclerview.adapter = SearchAdapter
         binding.mySuggestionRecyclerview.layoutManager = LinearLayoutManager(activity).also { it.orientation = LinearLayoutManager.VERTICAL }

@@ -36,6 +36,7 @@ android {
     }
 
     dataBinding {
+        //noinspection DataBindingWithoutKapt
         enabled true
     }
 }
@@ -89,6 +90,13 @@ dependencies {
 
 //    //toggle_btn_library
 //    implementation 'com.nex3z:toggle-button-group:1.1.9'
+
+    //circleview library
+    implementation 'com.ramotion.circlemenu:circle-menu:0.3.2'
+
+    implementation 'com.github.martinstamenkovski:ARIndicatorView:2.0.0'
+
+
 
 }
 apply plugin: 'com.google.gms.google-services'

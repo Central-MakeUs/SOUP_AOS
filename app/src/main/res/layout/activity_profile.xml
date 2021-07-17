@@ -71,6 +71,7 @@
 
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_mypage_icon"
@@ -291,7 +292,7 @@
                     android:checked="true"
                     android:tag="1"
                     app:checkedIconEnabled="false"
-                    app:chipIcon="@drawable/ic_eatoo_character"
+                    app:chipIcon="@drawable/ic_user_character1"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
@@ -301,7 +302,7 @@
                     android:layout_height="42.6dp"
                     android:tag="2"
                     app:checkedIconEnabled="false"
-                    app:chipIcon="@drawable/ic_eatoo_character"
+                    app:chipIcon="@drawable/ic_user_character2"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
@@ -311,7 +312,7 @@
                     android:layout_height="42.6dp"
                     android:tag="3"
                     app:checkedIconEnabled="false"
-                    app:chipIcon="@drawable/ic_eatoo_character"
+                    app:chipIcon="@drawable/ic_user_character3"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
@@ -321,7 +322,7 @@
                     android:layout_height="42.6dp"
                     android:tag="4"
                     app:checkedIconEnabled="false"
-                    app:chipIcon="@drawable/ic_eatoo_character"
+                    app:chipIcon="@drawable/ic_user_character4"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
@@ -331,19 +332,88 @@
                     android:layout_height="42.6dp"
                     android:tag="5"
                     app:checkedIconEnabled="false"
-                    app:chipIcon="@drawable/ic_eatoo_character"
+                    app:chipIcon="@drawable/ic_user_character5"
                     app:closeIconEnabled="false" />
 
 
             </com.google.android.material.chip.ChipGroup>
 
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/character_group"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="25dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:layout_marginEnd="25dp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/character_tv">-->
+
+
+<!--                <androidx.appcompat.widget.AppCompatImageButton-->
+<!--                    android:id="@+id/character1"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@color/transparent"-->
+<!--                    android:src="@drawable/ic_user_character1"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/character2"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/character2" />-->
+
+<!--                <androidx.appcompat.widget.AppCompatImageButton-->
+<!--                    android:id="@+id/character2"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@color/transparent"-->
+<!--                    android:src="@drawable/ic_user_character2"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/character3"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/character3"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/character1"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/character3" />-->
+
+<!--                <androidx.appcompat.widget.AppCompatImageButton-->
+<!--                    android:id="@+id/character3"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@color/transparent"-->
+<!--                    android:src="@drawable/ic_user_character3"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+
+<!--                <androidx.appcompat.widget.AppCompatImageButton-->
+<!--                    android:id="@+id/character4"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@color/transparent"-->
+<!--                    android:src="@drawable/ic_user_character4"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/character3"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/character5"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/character3"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/character3" />-->
+
+<!--                <androidx.appcompat.widget.AppCompatImageButton-->
+<!--                    android:id="@+id/character5"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@color/transparent"-->
+<!--                    android:src="@drawable/ic_user_character5"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/character4"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/character4" />-->
+
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/login_btn"
+                android:id="@+id/register_btn"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="56dp"
                 android:layout_marginEnd="30dp"
                 android:background="@drawable/sign_in_btn_background_gray"
                 android:fontFamily="sans-serif-medium"

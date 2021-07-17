@@ -18,6 +18,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+        Log.d("토큰", X_ACCESS_TOKEN)
         //디버깅용
         //ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
         Handler(Looper.getMainLooper()).postDelayed({
@@ -30,7 +32,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
                 Log.d("jwt", "jwt : $jwt useridx : $useridx")
 
                 startActivity(Intent(this, MainActivity::class.java))
-            } else {
+            } else{
                 startActivity(Intent(this, ExplanationActivity::class.java))
             }
             finish()
