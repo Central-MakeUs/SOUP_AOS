@@ -49,12 +49,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 }
                 else {
                     binding.loginBtn.setBackgroundColor(binding.loginBtn.context.resources.getColor(R.color.gray_100))
-                }
 
-                Log.v( "email 텍스트 길이", " : "+binding.emailEdt.text.length )
-                Log.v( "password 텍스트 길이", " : "+binding.passwordEdt.text.length )
-                Log.d("버튼 클릭 여부",""+binding.loginBtn.isClickable)
-                Log.d("버튼 활성화 여부",""+binding.loginBtn.isEnabled)
+                }
+                if (binding.emailEdt.text.length > 6){
+                    binding.emailHint.setText(R.string.thank_input)
+                    binding.emailHint.setTextColor(binding.emailHint.context.resources.getColor(R.color.main_color))
+                }
+                else if(binding.emailEdt.text.length <= 6){
+                    binding.emailHint.setText(R.string.sign_in_email_bottom)
+                    binding.emailHint.setTextColor(binding.emailHint.context.resources.getColor(R.color.black))
+                }
 
             }
         })
@@ -82,14 +86,21 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                     binding.loginBtn.setBackgroundColor(binding.loginBtn.getContext().getResources().getColor(
                         R.color.main_color))
 
+
                 }
                 else {
                     binding.loginBtn.setBackgroundColor(binding.loginBtn.getContext().getResources().getColor(R.color.gray_100))
+
+
                 }
-                Log.v( "email 텍스트 길이", " : "+binding.emailEdt.text.length )
-                Log.v( "password 텍스트 길이", " : "+binding.passwordEdt.text.length )
-                Log.d("버튼 클릭 여부",""+binding.loginBtn.isClickable)
-                Log.d("버튼 활성화 여부",""+binding.loginBtn.isEnabled)
+                if(binding.passwordEdt.text.length > 7){
+                    binding.passwordHint.setText(R.string.thank_input_password)
+                    binding.passwordHint.setTextColor(binding.passwordHint.context.resources.getColor(R.color.main_color))
+                }
+                else if(binding.passwordEdt.text.length <= 7){
+                    binding.passwordHint.setText(R.string.sign_in_password_bottom)
+                    binding.passwordHint.setTextColor(binding.passwordHint.context.resources.getColor(R.color.black))
+                }
             }
         })
     }

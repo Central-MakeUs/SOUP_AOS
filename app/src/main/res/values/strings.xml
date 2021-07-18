@@ -177,6 +177,15 @@
     <string name="group_member_review">멤버 후기</string>
     <string name="group_recommend_restaurant">추천 맛집!</string>
     <string name="group_view_more">더보기</string>
+    <string name="group_main_mate_matching">매칭중</string>
+    <string name="group_main_mate_matching_limit">마감임박</string>
+    <string name="group_main_store_name">할머니 국밥</string>
+    <string name="group_main_store_location">회사 앞 4거리</string>
+    <string name="group_main_store_score">4.5</string>
+
+    <string name="group_main_review1">잇투님이 방문한 가게를 공유해요!</string>
+    <string name="group_main_review2">잇투님이 작성하신 후기를 통해 회사 주변\n가게를 등록하고 멤버들과 공유해요</string>
+    <string name="group_main_review3">잇투님의 그룹만의 맛집지도를 만들어보세요 :)</string>
 
 
     <!--group member-->

@@ -74,9 +74,7 @@ class HomeFragment
                 "BASIC"
             )
             binding.groupRecyclerview.adapter = GroupAdapter
-            binding.groupRecyclerview.layoutManager = LinearLayoutManager(activity).also {
-                it.orientation = LinearLayoutManager.HORIZONTAL
-            }
+            binding.groupRecyclerview.layoutManager = LinearLayoutManager(activity).also { it.orientation = LinearLayoutManager.HORIZONTAL }
 
             GroupAdapter.setItemClickListener(object :
                 Home_Group_Kind_RecyclerviewAdapter.ItemClickListener {
@@ -85,6 +83,8 @@ class HomeFragment
                         startActivity(Intent(activity, CreateGroupActivity::class.java))
                     }
                     else if(position != GroupSize  && state == "Group_activity"){
+                        ApplicationClass.sSharedPreferences.edit()
+                            .putInt(ApplicationClass.GROUP_IDX,  groupIdx).apply()
                         startActivity(Intent(activity, GroupActivity::class.java))
                     }
                 }

@@ -1,9 +1,13 @@
 package com.example.eatoo.src.signinlogin.signin
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import com.example.eatoo.R
 import com.example.eatoo.config.ApplicationClass
 import com.example.eatoo.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.example.eatoo.config.BaseActivity
@@ -37,6 +41,45 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
                 showCustomToast("전달받은 인텐트 없음")
             }
 
+
+            binding.nickNameEdt.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(p0: Editable?) {
+                    //텍스트를 입력 후
+                }
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    // 텍스트 입력 전
+                }
+                //
+                @SuppressLint("ResourceAsColor")
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    //텍스트 입력 중
+
+                    if(binding.nickNameEdt.text.length > 1){
+
+                        binding.nextBtn.isClickable = true // 버튼 클릭할수 있게
+                        binding.nextBtn.isEnabled = true // 버튼 활성화
+                        binding.nextBtn.setBackgroundColor(binding.nextBtn.context.resources.getColor(
+                            R.color.main_color))
+
+
+                    }
+                    else {
+                        binding.nextBtn.setBackgroundColor(binding.nextBtn.context.resources.getColor(
+                            R.color.gray_100))
+                    }
+                    if(binding.nickNameEdt.text.length > 1){
+                        binding.nickNameHint.setText(R.string.thank_input)
+                        binding.nickNameHint.setTextColor(binding.nickNameHint.context.resources.getColor(R.color.main_color))
+                    }
+                    else if(binding.nickNameEdt.text.length <= 1){
+                        binding.nickNameHint.setText(R.string.sign_in_name_bottom)
+                        binding.nickNameHint.setTextColor(binding.nickNameHint.context.resources.getColor(R.color.black))
+                    }
+
+
+                }
+            })
+
         }
     }
 
@@ -48,6 +91,7 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
 
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onPostSignUpSuccess(response: SignInResponse) {
         dismissLoadingDialog()
         if(response.code == 1000) {
@@ -65,6 +109,10 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
         }
         else if(response.code == 2033){
             showCustomToast(response.message)
+        }
+        if(response.code != 2033){
+            binding.nickNameHint.setText(R.string.thank_input)
+            binding.nickNameHint.setTextColor(binding.nickNameHint.context.resources.getColor(R.color.main_color))
         }
     }
 

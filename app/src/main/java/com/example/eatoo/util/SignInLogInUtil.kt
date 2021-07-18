@@ -12,3 +12,4 @@ fun putSharedPrefUser(nickname : String) {
     ApplicationClass.sSharedPreferences.edit()
         .putString(ApplicationClass.USER_NICKNAME, nickname).apply()
 }
+
