@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.example.eatoo.custom_view.CustomToolbar
+            android:id="@+id/toolbar_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="19dp"
@@ -39,7 +40,7 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/user_profile_img"
+                android:id="@+id/iv_profile_char_background"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -50,16 +51,16 @@
 
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_mypage_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/user_profile_img"
-                app:layout_constraintEnd_toEndOf="@+id/user_profile_img"
-                app:layout_constraintStart_toStartOf="@+id/user_profile_img"
-                app:layout_constraintTop_toTopOf="@+id/user_profile_img" />
+                android:id="@+id/iv_profile_char"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_profile_char_background"
+                app:layout_constraintEnd_toEndOf="@+id/iv_profile_char_background"
+                app:layout_constraintStart_toStartOf="@+id/iv_profile_char_background"
+                app:layout_constraintTop_toTopOf="@+id/iv_profile_char_background" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView4"
+                android:id="@+id/tv_profile_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -70,89 +71,85 @@
                 android:textSize="17sp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/user_profile_img" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_profile_char_background" />
 
             <EditText
-                android:id="@+id/nick_name_edt"
+                android:id="@+id/et_nickname"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginStart="20dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="22dp"
                 android:layout_marginTop="19dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/edittext_background_radius"
-                android:fontFamily="sans-serif"
+                android:layout_marginEnd="22dp"
+                android:background="@drawable/background_profile_et"
+                android:fontFamily="@font/roboto_regular"
                 android:hint="@string/nickname_hint"
+                android:textColorHint="@color/dialog_cancel_text"
                 android:inputType="text"
-                android:letterSpacing="0.01"
-                android:lineSpacingExtra="9sp"
-                android:paddingStart="12dp"
+                android:paddingStart="10dp"
                 android:singleLine="true"
-                android:textColor="#000000"
-                android:textSize="15sp"
-                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4"
-                tools:ignore="Autofill,RtlSymmetry" />
-
+                app:layout_constraintTop_toBottomOf="@+id/tv_profile_nickname"
+                />
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView7"
+                android:id="@+id/tv_available_nickname"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="11dp"
-                android:fontFamily="sans-serif"
-                android:letterSpacing="0.05"
-                android:lineSpacingExtra="10sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_regular"
                 android:padding="2dp"
-                android:text="@string/sign_in_nickname_bottom"
-                android:textColor="@color/gray_100"
+                android:text="@string/available_nickname"
+                android:textColor="@color/dialog_cancel_text"
                 android:textSize="10sp"
-                android:textStyle="normal"
-                app:layout_constraintStart_toStartOf="@+id/nick_name_edt"
-                app:layout_constraintTop_toBottomOf="@+id/nick_name_edt"
-                tools:ignore="HardcodedText,SmallSp" />
+                app:layout_constraintStart_toStartOf="@+id/et_nickname"
+                app:layout_constraintTop_toBottomOf="@+id/et_nickname"
+                android:visibility="gone"
+                tools:visibility="visible"
+                 />
 
             <View
                 android:id="@+id/view1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="22dp"
                 android:layout_marginTop="28dp"
-                android:layout_marginEnd="25dp"
+                android:layout_marginEnd="22dp"
                 android:background="@color/input_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_available_nickname" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_makegroup_color"
+                android:id="@+id/tv_profile_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="22dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/roboto_regular"
                 android:text="@string/create_group_color"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view1" />
 
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipgroup_makegroup"
+                android:id="@+id/chipgroup_profile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="25dp"
+                app:chipSpacingHorizontal="18dp"
+                app:singleLine="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_makegroup_color"
+                app:layout_constraintTop_toBottomOf="@id/tv_profile_color"
                 app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
@@ -163,9 +160,9 @@
                     android:checked="true"
                     android:tag="1"
                     app:checkedIconEnabled="false"
-                    app:chipEndPadding="-10dp"
-                    app:chipIcon="@drawable/color_chip1"
                     app:chipStartPadding="4dp"
+                    app:chipEndPadding="-10dp"
+                    app:chipIcon="@drawable/ic_ellipse_81"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
@@ -176,7 +173,7 @@
                     android:tag="2"
                     app:checkedIconEnabled="false"
                     app:chipEndPadding="-10dp"
-                    app:chipIcon="@drawable/color_chip2"
+                    app:chipIcon="@drawable/ic_ellipse_77"
                     app:chipStartPadding="4dp"
                     app:closeIconEnabled="false" />
 
@@ -188,7 +185,7 @@
                     android:tag="3"
                     app:checkedIconEnabled="false"
                     app:chipEndPadding="-10dp"
-                    app:chipIcon="@drawable/color_chip3"
+                    app:chipIcon="@drawable/ic_ellipse_78"
                     app:chipStartPadding="4dp"
                     app:closeIconEnabled="false" />
 
@@ -200,7 +197,7 @@
                     android:tag="4"
                     app:checkedIconEnabled="false"
                     app:chipEndPadding="-10dp"
-                    app:chipIcon="@drawable/color_chip4"
+                    app:chipIcon="@drawable/ic_ellipse_79"
                     app:chipStartPadding="4dp"
                     app:closeIconEnabled="false" />
 
@@ -212,7 +209,7 @@
                     android:tag="5"
                     app:checkedIconEnabled="false"
                     app:chipEndPadding="-10dp"
-                    app:chipIcon="@drawable/color_chip5"
+                    app:chipIcon="@drawable/ic_ellipse_80"
                     app:chipStartPadding="4dp"
                     app:closeIconEnabled="false" />
 
@@ -223,19 +220,19 @@
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="22dp"
                 android:layout_marginTop="35dp"
-                android:layout_marginEnd="25dp"
+                android:layout_marginEnd="22dp"
                 android:background="@color/input_hint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chipgroup_makegroup" />
+                app:layout_constraintTop_toBottomOf="@+id/chipgroup_profile" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/character_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="22dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/roboto_regular"
                 android:text="@string/character"
@@ -247,13 +244,14 @@
 
 
             <RadioGroup
-                android:id="@+id/character_group"
+                android:id="@+id/radiogroup_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="28dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="25dp"
+                android:layout_marginEnd="27dp"
                 android:orientation="horizontal"
+                android:weightSum="9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/character_tv"
@@ -261,42 +259,68 @@
 
                 <RadioButton
                     android:id="@+id/radiobtn_character1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:background="@drawable/selector_profile_char1"
+                    android:tag="1"
                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
 
                 <RadioButton
                     android:id="@+id/radiobtn_character2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:background="@drawable/selector_profile_char2"
+                    android:tag="2"
                     />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
 
                 <RadioButton
                     android:id="@+id/radiobtn_character3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:background="@drawable/selector_profile_char3"
+                    android:tag="3"
                     />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
 
                 <RadioButton
                     android:id="@+id/radiobtn_character4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:background="@drawable/selector_profile_char4"
+                    android:tag="4"
                     />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
 
                 <RadioButton
                     android:id="@+id/radiobtn_character5"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:background="@drawable/selector_profile_char5"
+                    android:tag="5"
                     />
 
 
@@ -307,14 +331,15 @@
 
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/login_btn"
+                android:id="@+id/btn_profile_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="22dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/sign_in_btn_background_gray"
-                android:fontFamily="sans-serif-medium"
+                android:layout_marginEnd="22dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/login_btn_background"
+                android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
                 android:text="@string/dialog_confirm"
                 android:textColor="@color/white"
@@ -323,7 +348,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/character_group" />
+                app:layout_constraintTop_toBottomOf="@+id/radiogroup_profile"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

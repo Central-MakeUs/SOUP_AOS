@@ -157,18 +157,6 @@
             app:layout_constraintStart_toStartOf="@+id/tv_write_review"
             app:layout_constraintTop_toBottomOf="@+id/tv_write_review" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_write_review_exp2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/try_write_review_exp2"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/tv_write_review"
-                app:layout_constraintTop_toBottomOf="@+id/tv_write_review_exp1" />
-
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_review_char"
             android:layout_width="wrap_content"

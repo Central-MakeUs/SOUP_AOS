@@ -13,6 +13,7 @@ import com.example.eatoo.src.review.my_review.adapter.MyReviewRVAdapter
 import com.example.eatoo.src.review.my_review.model.MyReviewResponse
 import com.example.eatoo.src.review.my_review.model.MyReviewResult
 import com.example.eatoo.util.getUserIdx
+import com.example.eatoo.util.getUserNickName
 
 class MyReviewActivity : BaseActivity<ActivityMyReviewBinding>(ActivityMyReviewBinding::inflate),
 View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
@@ -33,6 +34,7 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
 
     private fun bindView() {
         binding.fabMyreview.setOnClickListener(this)
+        binding.tvMyReviewUserName.text = getUserNickName()
     }
 
 
