@@ -38,7 +38,7 @@ View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener, Vot
     private fun getGroupVote() {
         context?.let {
             showLoadingDialog(it)
-            GroupVoteService(this).tryGetGroupVote(getUserIdx(),28) // getGroupIdx()
+            GroupVoteService(this).tryGetGroupVote(getUserIdx(),getGroupIdx())
         }
 
     }
@@ -131,7 +131,7 @@ View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener, Vot
        //투표 조회 서버 통신
         context?.let {
             showLoadingDialog(it)
-            GroupVoteService(this).tryGetVoteDetail(getUserIdx(), 28, item.voteIdx)
+            GroupVoteService(this).tryGetVoteDetail(getUserIdx(), getGroupIdx(), item.voteIdx)
         }
 
     }
@@ -146,7 +146,7 @@ View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener, Vot
 
         context?.let {
             showLoadingDialog(it)
-            GroupVoteService(this).tryPostVote(getUserIdx(), 28, voteDetail.voteIdx, VotedRequest(votedMenuList))
+            GroupVoteService(this).tryPostVote(getUserIdx(), getGroupIdx(), voteDetail.voteIdx, VotedRequest(votedMenuList))
         }
     }
 
