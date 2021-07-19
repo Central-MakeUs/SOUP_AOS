@@ -12,21 +12,15 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseFragment
 import com.example.eatoo.databinding.FragmentGroupCategoryBinding
-import com.example.eatoo.databinding.FragmentGroupMainBinding
 import com.example.eatoo.src.home.create_group.CreateGroupActivity
 import com.example.eatoo.src.home.group.category.category_list.GroupCategoryListFragment
 import com.example.eatoo.src.home.group.category.category_map.CategoryMapService
 import com.example.eatoo.src.home.group.category.category_map.CategoryMapView
 import com.example.eatoo.src.home.group.category.category_map.model.CategoryMapResponse
 import com.example.eatoo.src.main.MainActivity
-import com.example.eatoo.src.review.store_map.StoreMapActivity
-import com.example.eatoo.src.review.store_map.StoreMapService
-import com.example.eatoo.src.review.store_map.adapter.ExistingStoreRVAdapter
-import com.example.eatoo.src.review.store_map.dialog.RegisterNewStoreDialog
 import com.example.eatoo.util.getUserIdx
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -37,21 +31,19 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
+
 class GroupCategoryFragment
-    : BaseFragment<FragmentGroupCategoryBinding>(FragmentGroupCategoryBinding::bind, R.layout.fragment_group_category),
+    : BaseFragment<FragmentGroupCategoryBinding>(
+    FragmentGroupCategoryBinding::bind,
+    R.layout.fragment_group_category
+),
 CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
     private lateinit var map: GoogleMap
-//    private var currentSelectMarker: Marker? = null
     private lateinit var locationManager: LocationManager //내 위치 가져오기
     private lateinit var myLocationListener: GroupCategoryFragment.MyLocationListener
     private lateinit var locationLatLngEntity: LocationLatLngEntity
-
-//    private var storeLng : Double = 0.0
-//    private  var storeLat : Double = 0.0
-//    private lateinit var storeAdapter : ExistingStoreRVAdapter
-//    private var roadAddress : String? = ""
-
+    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -66,7 +58,7 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
 
     override fun onClick(p0: View?) {
         when(p0?.id){
-            R.id.ll_category_list->{
+            R.id.ll_category_list -> {
                 (context as MainActivity).supportFragmentManager.beginTransaction()
                     .add(R.id.nav_host, GroupCategoryListFragment())
                     .addToBackStack(null)
@@ -87,23 +79,22 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
 
     private fun requestPermission() {
         showCustomToast("request permission")
-        context?.let {
             if (::locationManager.isInitialized.not()) {
                 locationManager =
-                    it.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                    activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
             }
             val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
             if (isGpsEnabled) {
                 if (ContextCompat.checkSelfPermission(  //권한 없는 경우
-                        it,
+                        requireContext(),
                         android.Manifest.permission.ACCESS_FINE_LOCATION
                     ) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-                        it,
+                        requireContext(),
                         android.Manifest.permission.ACCESS_COARSE_LOCATION
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
                     ActivityCompat.requestPermissions(
-                        it as MainActivity,
+                        activity as MainActivity,
                         arrayOf(
                             android.Manifest.permission.ACCESS_FINE_LOCATION,
                             android.Manifest.permission.ACCESS_COARSE_LOCATION
@@ -112,7 +103,6 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
                     )
                 } else setupGoogleMap() //권한 있음.
             }
-        }
     }
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -120,33 +110,30 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        context?.let {
             if (requestCode == CreateGroupActivity.PERMISSION_REQUEST_CODE) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED
                 ) {
                     setupGoogleMap()
                 } else {
-                    Toast.makeText(it, "권한을 받지 못 했습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "권한을 받지 못 했습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
-        }
     }
 
     ///////google map
     private fun setupGoogleMap() {
         val mapFragment =
-            activity?.supportFragmentManager?.findFragmentById(R.id.frag_group_category) as? SupportMapFragment
+            childFragmentManager.findFragmentById(R.id.frag_group_category) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
     }
 
     override fun onMapReady(p0: GoogleMap) {
-        context?.let {
-            showLoadingDialog(it)
+
+            showLoadingDialog(requireContext())
             map = p0
             setMyLocationListener() //내 위치로 이동.
             map.setOnMarkerClickListener(this)
-        }
 
     }
 
@@ -213,6 +200,15 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
     }
 
     private fun onCurrentLocationChanged(locationLatLngEntity: LocationLatLngEntity) {
+        map.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                LatLng(
+                    locationLatLngEntity.latitude.toDouble(),
+                    locationLatLngEntity.longitude.toDouble()
+                ),
+                CreateGroupActivity.CAMERA_ZOOM_LEVEL
+            )
+        )
         setupCurrentMarker(locationLatLngEntity)
         removeLocationListener()
     }
@@ -229,7 +225,6 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
 
     override fun onGetCategoryMapStoreSuccess(response: CategoryMapResponse) {
         dismissLoadingDialog()
-        Log.d("groupCategoryFragment", response.toString())
         //add marker.
         response.result.getStoresRes.forEach {
             val markerOptions = MarkerOptions().apply {
@@ -244,7 +239,7 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
 
     override fun onGetCategoryMapStoreFail(message: String?) {
         dismissLoadingDialog()
-        showCustomToast(message?:resources.getString(R.string.failed_connection))
+        showCustomToast(message ?: resources.getString(R.string.failed_connection))
     }
 
 

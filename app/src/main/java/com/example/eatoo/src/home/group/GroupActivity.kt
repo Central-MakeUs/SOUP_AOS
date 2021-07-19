@@ -23,7 +23,10 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
     private fun setGroupViewPager() {
         viewPagerAdapter = GroupViewPagerAdapter(this)
 
-        binding.viewpagerGroup.adapter = viewPagerAdapter
+        binding.viewpagerGroup.apply {
+            adapter = viewPagerAdapter
+            isUserInputEnabled = false
+        }
 
 
         TabLayoutMediator( binding.tablayoutGroup, binding.viewpagerGroup) { tab, position ->
@@ -35,6 +38,8 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
                 else -> resources.getString(R.string.group_main)
             }
         }.attach()
+
+        binding.tablayoutGroup.isSmoothScrollingEnabled = false
 
     }
 }
