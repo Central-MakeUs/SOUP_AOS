@@ -73,7 +73,7 @@
             android:text="@string/dialog_confirm"
             android:textColor="@color/white"
             android:fontFamily="@font/roboto_regular"
-            android:background="@drawable/background_dialog_confirm"
+            android:background="@drawable/background_dialog_review_confirm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_dialog_cancel"/>

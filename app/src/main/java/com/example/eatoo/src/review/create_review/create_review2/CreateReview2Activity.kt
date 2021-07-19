@@ -13,6 +13,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
@@ -166,13 +167,11 @@ class CreateReview2Activity
     //keyword
 
     private fun initKeywordChips() {
-        binding.etKeyword.isFocusable = true
-        binding.etKeyword.isCursorVisible = true
-
+        setKeywordEt()
         binding.etKeyword.setOnKeyListener { v, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
                 val keywordList = binding.flexboxReview.getAllChips()
-                if (keywordList.size-1 == 6) showCustomToast(resources.getString(R.string.keyword_num_limit))
+                if (keywordList.size-1 == 4) showCustomToast(resources.getString(R.string.keyword_num_limit))
                 else {
                     val et = v as EditText
                     val keyword = et.text.toString()
@@ -185,6 +184,12 @@ class CreateReview2Activity
             }
             false
         }
+    }
+
+    private fun setKeywordEt() {
+        binding.etKeyword.requestFocus()
+        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(binding.etKeyword, InputMethodManager.SHOW_IMPLICIT)
     }
 
     @SuppressLint("InflateParams")

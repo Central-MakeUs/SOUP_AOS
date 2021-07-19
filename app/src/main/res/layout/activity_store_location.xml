@@ -47,6 +47,7 @@
                 android:background="@color/transparent"
                 android:fontFamily="@font/roboto_regular"
                 android:hint="@string/input_store_keyword"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:textColorHint="@color/input_hint"
                 android:textColor="@color/black"
                 android:textSize="15sp"

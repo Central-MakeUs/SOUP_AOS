@@ -81,6 +81,7 @@
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="19dp"
                 android:layout_marginEnd="22dp"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@drawable/background_profile_et"
                 android:fontFamily="@font/roboto_regular"
                 android:hint="@string/nickname_hint"
