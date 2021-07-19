@@ -29,13 +29,23 @@ class GroupMainFragment : BaseFragment<FragmentGroupMainBinding>(FragmentGroupMa
 
     override fun onGetGroupMainSuccess(response: GroupMainResponse) {
         showCustomToast("요청 완료")
-        val GroupAdapter = Group_Home_Main_Mate_Kind_RecyclerviewAdapter(response.result.getMateRes)
-        binding.findingMateRecyclerview.adapter = GroupAdapter
-        binding.findingMateRecyclerview.layoutManager = LinearLayoutManager(activity).also {
-            it.orientation = LinearLayoutManager.HORIZONTAL
-        }
 
+        if(response.result.getMateRes.size == 0){
+            binding.findingMateRecyclerview.visibility = View.GONE
+            binding.findingMateNoScroll.visibility = View.VISIBLE
+        }
+        else{binding.findingMateRecyclerview.visibility = View.VISIBLE
+            binding.findingMateNoScroll.visibility = View.GONE
+            val GroupAdapter = Group_Home_Main_Mate_Kind_RecyclerviewAdapter(response.result.getMateRes)
+            binding.findingMateRecyclerview.adapter = GroupAdapter
+            binding.findingMateRecyclerview.layoutManager = LinearLayoutManager(activity).also {
+                it.orientation = LinearLayoutManager.HORIZONTAL
+            }
+
+        }
         if(response.result.getStoreRes.size > 0){
+            binding.hasGroupStoreLayout.visibility = View.VISIBLE
+            binding.noneGroupStoreLayout.visibility = View.GONE
             var imgUrl : String = ""
 
             if(response.result.getStoreRes[0].imgUrl != null){
@@ -65,6 +75,8 @@ class GroupMainFragment : BaseFragment<FragmentGroupMainBinding>(FragmentGroupMa
 
         }
         else{
+            binding.hasGroupStoreLayout.visibility = View.GONE
+            binding.noneGroupStoreLayout.visibility = View.VISIBLE
             binding.storeList1.visibility = View.GONE
             binding.storeList2.visibility = View.GONE
         }

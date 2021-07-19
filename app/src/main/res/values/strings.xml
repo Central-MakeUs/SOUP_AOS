@@ -193,6 +193,13 @@
     <string name="group_recommend_restaurant">추천 맛집!</string>
     <string name="group_view_more">더보기</string>
     <string name="group_main_mate_matching">매칭중</string>
+    <string name="group_main_no_mate_matching">MATE</string>
+    <string name="group_main_no_mate_matching_txt">현재 진행중인\nMATE제안이 없어요</string>
+    <string name="group_main_no_mate_matching_txt2">멤버들에게 먼저\nMATE를 제안해보세요</string>
+    <string name="group_main_no_store_txt">의 추천 맛집이 없습니다.</string>
+    <string name="group_main_no_store_txt2">추천 맛집은 후기를 바탕으로 이루어집니다.</string>
+    <string name="group_main_no_store_txt3">마이페이지에서 후기를 먼저 작성해주세요 :)</string>
+    <string name="group_main_no_store_group_name_ex">회사아악</string>
     <string name="group_main_mate_matching_limit">마감임박</string>
     <string name="group_main_store_name">할머니 국밥</string>
     <string name="group_main_store_location">회사 앞 4거리</string>

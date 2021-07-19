@@ -39,6 +39,7 @@ class HomeFragment
 
         GroupService(this).tryGetGroupData(getUserIdx())
         GroupService(this).tryGetMateData(getUserIdx())
+        context?.let { showLoadingDialog(it) }
 
 
 //        binding.groupPlusBtn.setOnClickListener {
@@ -60,7 +61,9 @@ class HomeFragment
     }
 
     override fun onGetGroupSuccess(response: GroupResponse) {
+        dismissLoadingDialog()
         response.message?.let { showCustomToast(it) }
+
 
         if(response.code == 1000) {
             binding.matePlusBtn.isClickable = true
@@ -107,11 +110,14 @@ class HomeFragment
     }
 
     override fun onGetGroupFail(message: String) {
+        dismissLoadingDialog()
         showCustomToast(message)
+
     }
 //Mate 조회
     override fun onGetMateSuccess(response: MateResponse) {
-       response.message?.let { showCustomToast(it) }
+        dismissLoadingDialog()
+        response.message?.let { showCustomToast(it) }
 
         if(response.code == 2501){
             binding.mateNonePlusLayout.visibility = View.VISIBLE
@@ -145,6 +151,7 @@ class HomeFragment
     }
 
     override fun onGetMateFail(message: String) {
+        dismissLoadingDialog()
     }
 
 }
