@@ -150,7 +150,7 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
 
     }
 
-    private fun setupCurrentMarker(locationLatLngEntity: LocationLatLngEntity): Marker? { //검색한 위도경도
+    private fun setupCurrentMarker(locationLatLngEntity: LocationLatLngEntity) { //검색한 위도경도
 
         val positionLatLng = LatLng(
             locationLatLngEntity.latitude.toDouble(),
@@ -168,8 +168,8 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
             )
         )
         dismissLoadingDialog()
+        map.addMarker(markerOptions)
         getCategoryMapStore()
-        return map.addMarker(markerOptions)
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {

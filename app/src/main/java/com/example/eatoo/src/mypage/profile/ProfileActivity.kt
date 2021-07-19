@@ -48,7 +48,7 @@ class ProfileActivity
         val radioBtn = binding.radiogroupProfile.getChildAt(currentCharacter) as RadioButton?
         radioBtn?.isChecked = true
 
-        val currentCharImg = currentColor*5 + (result.characters-1)
+        val currentCharImg = if(result.characters != 0) currentColor*5 + (result.characters-1) else currentColor*5
         binding.ivProfileChar.setBackgroundResource(EatooCharList[currentCharImg])
     }
 
