@@ -16,6 +16,7 @@ import com.example.eatoo.R
 import com.example.eatoo.config.BaseFragment
 import com.example.eatoo.databinding.FragmentGroupCategoryBinding
 import com.example.eatoo.src.home.create_group.CreateGroupActivity
+import com.example.eatoo.src.home.group.GroupActivity
 import com.example.eatoo.src.home.group.category.category_list.GroupCategoryListFragment
 import com.example.eatoo.src.home.group.category.category_map.CategoryMapService
 import com.example.eatoo.src.home.group.category.category_map.CategoryMapView
@@ -59,10 +60,11 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.ll_category_list -> {
-                (context as MainActivity).supportFragmentManager.beginTransaction()
-                    .add(R.id.nav_host, GroupCategoryListFragment())
-                    .addToBackStack(null)
-                    .commitAllowingStateLoss()
+                //not working currently.
+//                (context as GroupActivity).supportFragmentManager.beginTransaction()
+//                    .add(R.id.nav_host, GroupCategoryListFragment())
+//                    .addToBackStack(null)
+//                    .commitAllowingStateLoss()
             }
         }
     }
@@ -163,7 +165,7 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
         p0.title?.let {
             showCustomToast(it)
         }
-        //adapter? 필요.
+        //adapter
         return false
     }
 

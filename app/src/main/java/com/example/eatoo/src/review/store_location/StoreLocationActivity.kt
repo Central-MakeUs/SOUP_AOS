@@ -45,6 +45,7 @@ StoreLocationView, StoreSearchRVAdapter.OnSearchResultClickListener, View.OnClic
         }
         binding.rvStoreSearch.addOnScrollListener(mRVScrollListener)
 
+
     }
 
     private fun setViewListener() {
@@ -58,6 +59,7 @@ StoreLocationView, StoreSearchRVAdapter.OnSearchResultClickListener, View.OnClic
             override fun afterTextChanged(p0: Editable?) {}
 
         })
+        binding.toolbarCustom.leftIcon.setOnClickListener { finish() }
     }
 
     override fun onClick(p0: View?) {

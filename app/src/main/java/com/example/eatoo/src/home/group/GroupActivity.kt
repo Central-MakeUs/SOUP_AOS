@@ -1,12 +1,15 @@
 package com.example.eatoo.src.home.group
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityGroupBinding
 import com.example.eatoo.src.home.group.adapter.GroupViewPagerAdapter
+import com.example.eatoo.src.main.MainActivity
+import com.example.eatoo.util.getGroupName
 import com.google.android.material.tabs.TabLayoutMediator
 
 class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::inflate) {
@@ -16,7 +19,11 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.customToolbar.title.text = getGroupName()
         setGroupViewPager()
+        binding.customToolbar.leftIcon.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
 
     }
 

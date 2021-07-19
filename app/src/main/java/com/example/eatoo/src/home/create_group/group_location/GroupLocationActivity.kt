@@ -29,23 +29,24 @@ class GroupLocationActivity : BaseActivity<ActivityGroupLocationBinding>(Activit
 
         initViews()
         initSearchListener()
+        binding.toolbarCustom.leftIcon.setOnClickListener { finish() }
 
 
     }
     private fun initViews() = with(binding) {
-        tvNoResult.isVisible = false
+        clNoSearchResult.isVisible = false
         locationAdapter = LocationSearchRvAdapter()
         mlayoutManager = LinearLayoutManager(this@GroupLocationActivity)
-        rvCreateGroupLocation.apply {
+        rvGroupLocationSearch.apply {
             adapter = locationAdapter
             layoutManager = mlayoutManager
         }
     }
 
     private fun initSearchListener() =with(binding) {
-        etSearchLocation.setOnKeyListener { v, i, keyEvent ->
+        etGroupLocation.setOnKeyListener { v, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
-                searchLocation(etSearchLocation.text.toString())
+                searchLocation(etGroupLocation.text.toString())
             }
             false
         }

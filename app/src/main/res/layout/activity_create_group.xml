@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.example.eatoo.custom_view.CustomToolbar
+            android:id="@+id/custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="19dp"
@@ -40,30 +41,38 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_makegroup_mate_name"
+                android:id="@+id/tv_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="21dp"
-                android:fontFamily="sans-serif"
-                android:lineSpacingExtra="6sp"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="잇퉁ㅇㅇㅇ"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_makegroup_mate_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
                 android:text="@string/create_group_suggest1"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_username"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_makegroup_suggest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
+                android:fontFamily="@font/roboto_bold"
                 android:text="@string/create_group_suggest2"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/tv_makegroup_mate_name"
-                app:layout_constraintTop_toBottomOf="@id/tv_makegroup_mate_name" />
+                app:layout_constraintStart_toStartOf="@+id/tv_username"
+                app:layout_constraintTop_toBottomOf="@id/tv_username" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_makegroup_group_name"
@@ -75,7 +84,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/tv_makegroup_mate_name"
+                app:layout_constraintStart_toStartOf="@+id/tv_username"
                 app:layout_constraintTop_toBottomOf="@id/tv_makegroup_suggest" />
 
             <EditText

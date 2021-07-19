@@ -39,12 +39,11 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapBinding::inflate),
     OnMapReadyCallback, GoogleMap.OnMapClickListener,
-    GoogleMap.OnMarkerClickListener, View.OnClickListener, RegisterNewStoreDialogInterface ,
-    StoreMapView, ExistingStoreRVAdapter.OnReviewClickListener{
+    GoogleMap.OnMarkerClickListener, View.OnClickListener, RegisterNewStoreDialogInterface,
+    StoreMapView, ExistingStoreRVAdapter.OnReviewClickListener {
 
 
-
-    private lateinit var storeRegisterDialog : RegisterNewStoreDialog
+    private lateinit var storeRegisterDialog: RegisterNewStoreDialog
 
     private lateinit var map: GoogleMap
     private var currentSelectMarker: Marker? = null
@@ -52,15 +51,14 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     private lateinit var myLocationListener: StoreMapActivity.MyLocationListener
     private lateinit var locationLatLngEntity: LocationLatLngEntity
 
-    private var storeLng : Double = 0.0
-    private  var storeLat : Double = 0.0
-    private lateinit var storeAdapter : ExistingStoreRVAdapter
-    private var roadAddress : String? = ""
+    private var storeLng: Double = 0.0
+    private var storeLat: Double = 0.0
+    private lateinit var storeAdapter: ExistingStoreRVAdapter
+    private var roadAddress: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //현재 위치 맵 띄우기!!!!!!!!!!!!!!
         requestPermission()
         bindView()
         getAllReviewLocation()
@@ -72,6 +70,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
 
     private fun bindView() {
         binding.btnRegisterNewStore.setOnClickListener(this)
+        binding.customToolbar.leftIcon.setOnClickListener { finish() }
     }
 
     private fun setupGoogleMap() {
@@ -95,12 +94,12 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     private fun setupMarker(locationLatLngEntity: LocationLatLngEntity): Marker? { //검색한 위도경도
 
         val positionLatLng = LatLng(
-             locationLatLngEntity.latitude.toDouble(),
-             locationLatLngEntity.longitude.toDouble()
+            locationLatLngEntity.latitude.toDouble(),
+            locationLatLngEntity.longitude.toDouble()
         )
         val markerOptions = MarkerOptions().apply {
             position(positionLatLng)
-            title( locationLatLngEntity.latitude.toString())
+            title(locationLatLngEntity.latitude.toString())
             snippet(locationLatLngEntity.longitude.toString())
         }
         map.moveCamera(
@@ -139,9 +138,10 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
                     ),
                     PERMISSION_REQUEST_CODE
                 )
-            } else  setupGoogleMap() //권한 있음.
+            } else setupGoogleMap() //권한 있음.
         }
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -225,7 +225,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         storeLat = latlng.latitude
 
         Log.d("storeMapactivity", "lng : ${latlng.longitude}, lat : ${latlng.latitude}")
-        StoreMapService(this).tryGetStore(getUserIdx(), latlng.longitude, latlng.latitude )
+        StoreMapService(this).tryGetStore(getUserIdx(), latlng.longitude, latlng.latitude)
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
@@ -238,13 +238,13 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
 
         Log.d("storeMapactivity", "lng : $storeLng, lat : $storeLat")
 
-        StoreMapService(this).tryGetStore(getUserIdx(), storeLng, storeLat )
+        StoreMapService(this).tryGetStore(getUserIdx(), storeLng, storeLat)
 
         return false
     }
 
     override fun onClick(p0: View?) {
-        when(p0?.id){
+        when (p0?.id) {
             R.id.btn_register_new_store -> {
                 storeRegisterDialog = RegisterNewStoreDialog(this)
                 storeRegisterDialog.show()
@@ -261,6 +261,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
             putExtra("lng", storeLng)
         }
         startActivity(intent)
+        finish()
 
     }
 
@@ -271,13 +272,14 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         storeAdapter = ExistingStoreRVAdapter(this, response.result, this)
         binding.rvExistingStore.apply {
             adapter = storeAdapter
-            layoutManager = LinearLayoutManager(this@StoreMapActivity, LinearLayoutManager.HORIZONTAL, false)
+            layoutManager =
+                LinearLayoutManager(this@StoreMapActivity, LinearLayoutManager.HORIZONTAL, false)
         }
     }
 
     override fun onGetStoreFail(message: String?, code: Int) {
         binding.btnRegisterNewStore.isVisible = true
-        if(code == 2010){
+        if (code == 2010) {
             StoreMapService(this).tryGetAddress(storeLat, storeLng)
         }
     }
@@ -285,9 +287,9 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     override fun onGetAddressSuccess(response: KakaoAddressResponse?) {
         //도로명 주소 변환! 도로명 주소가 없다면 지번 주소로 설정.
         Log.d("storeMapactivity", "kakaomap address : $response")
-        roadAddress = if(response?.documents?.get(0)?.road_address == null){
+        roadAddress = if (response?.documents?.get(0)?.road_address == null) {
             response?.documents?.get(0)?.address?.address_name
-        }else {
+        } else {
             response.documents[0].road_address.address_name
         }
 
@@ -309,11 +311,11 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     }
 
     override fun onGetAllStoreFail(message: String?) {
-        showCustomToast(message?:"통신오류가 발생했습니다.")
+        showCustomToast(message ?: "통신오류가 발생했습니다.")
     }
 
     //adapter click listener
-    override fun onReviewClicked(item : Store) {
+    override fun onReviewClicked(item: Store) {
         val intent = Intent(this, CreateReview1Activity::class.java)
         intent.apply {
             putExtra("storeIdx", item.storeIdx)
