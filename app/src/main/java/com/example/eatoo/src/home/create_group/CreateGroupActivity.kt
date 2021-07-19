@@ -10,10 +10,8 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -105,12 +103,12 @@ class CreateGroupActivity :
     }
 
     private fun initKeywordChips() {
-        binding.etKeyword.isFocusable = true
-        binding.etKeyword.isCursorVisible = true
+        setKeywordEt()
+
         binding.etKeyword.setOnKeyListener { v, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
                 val keywordList = binding.flexboxMakeGroup.getAllChips()
-                if (keywordList.size-1 == 6) showCustomToast("키워드는 최대 다섯 개 입력 가능합니다.")
+                if (keywordList.size-1 == 4) showCustomToast("키워드는 최대 다섯 개 입력 가능합니다.")
                 else {
                     val et = v as EditText
                     val keyword = et.text.toString()
@@ -123,6 +121,12 @@ class CreateGroupActivity :
             }
             false
         }
+    }
+
+    private fun setKeywordEt() {
+        binding.etKeyword.requestFocus()
+        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(binding.etKeyword, InputMethodManager.SHOW_IMPLICIT)
     }
 
     @SuppressLint("InflateParams")
@@ -148,7 +152,7 @@ class CreateGroupActivity :
 
     private fun FlexboxLayout.getAllChips(): List<Keyword> {
         var keywordList: MutableList<Keyword> = mutableListOf()
-        (0 until childCount - 1).mapNotNull { index ->
+        (0 until childCount-1).mapNotNull { index ->
             val childChip = getChildAt(index) as? Chip
             keywordList.add(Keyword(name = childChip?.text.toString()))
         }
@@ -178,6 +182,8 @@ class CreateGroupActivity :
         binding.registerGroupBtn.setOnClickListener {
 
             val keywordList = binding.flexboxMakeGroup.getAllChips()
+            Log.d("createGroupActivity", "register "+ keywordList.toString())
+
             val groupColor = getGroupColor()
 
             val group = CreateGroupRequest(

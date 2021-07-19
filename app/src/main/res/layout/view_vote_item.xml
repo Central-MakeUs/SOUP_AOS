@@ -15,6 +15,7 @@
         android:background="@drawable/edittext_background_radius_litle"
         android:fontFamily="@font/roboto_regular"
         android:hint="@string/input_vote_item"
+        android:textCursorDrawable="@drawable/color_cursor"
         android:imeOptions="actionNext"
         android:inputType="text"
         android:maxLength="23"

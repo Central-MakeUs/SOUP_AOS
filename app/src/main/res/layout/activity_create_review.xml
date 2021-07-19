@@ -188,6 +188,7 @@
                     android:maxLength="20"
                     android:maxLines="1"
                     android:inputType="text"
+                    android:textCursorDrawable="@drawable/color_cursor"
                     android:textColorHint="@color/input_hint"
                     android:textColor="@color/black"
                     android:textSize="14sp" />

@@ -43,7 +43,7 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
     private lateinit var locationManager: LocationManager //내 위치 가져오기
     private lateinit var myLocationListener: GroupCategoryFragment.MyLocationListener
     private lateinit var locationLatLngEntity: LocationLatLngEntity
-    
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
