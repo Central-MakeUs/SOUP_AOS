@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".src.mypage.profile.ProfileActivity"></activity>
+        <activity android:name=".src.mypage.invite.InviteActivity"></activity>
+        <activity android:name=".src.mypage.profile.ProfileActivity" />
         <activity android:name=".src.home.group.vote.create_vote.CreateVoteActivity" />
         <activity android:name=".src.review.store_location.StoreLocationActivity" />
         <activity android:name=".src.review.create_review.create_review2.CreateReview2Activity" />
@@ -22,9 +23,7 @@
         <activity android:name=".src.review.my_review.MyReviewActivity" />
         <activity android:name=".src.review.create_review.create_review1.CreateReview1Activity" />
         <activity android:name=".src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity" />
-        <activity android:name=".src.home.group.GroupActivity" >
-
-        </activity>
+        <activity android:name=".src.home.group.GroupActivity" />
         <activity android:name=".src.home.create_group.group_location.GroupLocationActivity" />
         <activity android:name=".src.signinlogin.signin.SignInActivity3" />
         <activity android:name=".src.signinlogin.signin.SignInActivity2" />

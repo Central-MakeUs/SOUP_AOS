@@ -25,7 +25,7 @@ class ProfileActivity
     private var currentCharacter  = 0
 
 
-        override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         getProfile()
@@ -127,7 +127,7 @@ class ProfileActivity
         else currentColor
 
         val checkedRadioButton
-        = binding.radiogroupProfile.findViewById<RadioButton>(binding.radiogroupProfile.checkedRadioButtonId).tag.toString().toInt()
+                = binding.radiogroupProfile.findViewById<RadioButton>(binding.radiogroupProfile.checkedRadioButtonId).tag.toString().toInt()
 
         val character = if(checkedRadioButton != currentCharacter) checkedRadioButton
         else currentCharacter

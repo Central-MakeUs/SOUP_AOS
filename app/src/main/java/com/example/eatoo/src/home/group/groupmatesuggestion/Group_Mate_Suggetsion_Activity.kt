@@ -1,9 +1,11 @@
 package com.example.eatoo.src.home.group.groupmatesuggestion
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityGroupMateSuggetsionBinding
@@ -13,6 +15,7 @@ import com.example.eatoo.src.home.group.groupmatesuggestion.model.CreateMateRequ
 import com.example.eatoo.src.home.group.groupmatesuggestion.model.CreateMateResponse
 import com.example.eatoo.src.home.model.GroupResponse
 import com.example.eatoo.src.home.model.MateResponse
+import com.example.eatoo.src.main.MainActivity
 import com.example.eatoo.util.getUserIdx
 import com.google.android.material.chip.Chip
 import kotlin.math.min
@@ -39,7 +42,6 @@ class Group_Mate_Suggetsion_Activity
 
         binding.registerMateBtn.setOnClickListener {
             val postRequest = CreateMateRequest(groupIdx = GroupIndex,name = binding.suggestionNameEdt.text.toString(), storeName = binding.storeEdt.text.toString(), startTime = binding.startTimeBtn.text.toString() ,endTime = binding.startTimeBtn.text.toString() ,headCount = Integer.parseInt(binding.limitPeopleEdt.text.toString()),timeLimit = binding.limitTimeTv.text.toString() ,imgUrl = "" )
-
             Log.d("요청사항", ""+ postRequest)
             MateCreateService(this).postCreateMate(postRequest,getUserIdx())
         }
@@ -74,7 +76,7 @@ class Group_Mate_Suggetsion_Activity
         val GroupList = response.result.getGroupsRes
         val GroupListtSize = GroupList.size - 1
         for(i in 0..GroupListtSize){
-            var chip = Chip(this) // Must contain context in parameter
+            val chip  = LayoutInflater.from(this).inflate(R.layout.view_chip_2, null) as Chip
             chip.text =  GroupList[i].name
             Log.d("그룹 이름들", GroupList[i].name)
             chip.isCheckable = true
@@ -87,6 +89,7 @@ class Group_Mate_Suggetsion_Activity
                     chip.setTextAppearanceResource(R.style.Chip_select_Style)
                     var GroupName = chip.text.toString()
                     var count : Int = 0
+                    //groupidx 부분 수정해야해요
                     for(j in 0..GroupListtSize){
                         if(GroupList[j].name == GroupName){
                             GroupIndex = GroupList[j].groupIdx
@@ -107,12 +110,17 @@ class Group_Mate_Suggetsion_Activity
 
     override fun onGetGroupFail(message: String) {
     }
+
 //Mate 보이기
+
     override fun onGetMateSuccess(response: MateResponse) {
+        if(response.code == 1000)
+            startActivity(Intent(this, MainActivity::class.java))
     }
 
     override fun onGetMateFail(message: String) {
     }
+
 //그룹 생성하기
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {
     }

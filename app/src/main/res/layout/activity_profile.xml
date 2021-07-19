@@ -59,6 +59,7 @@
                 app:layout_constraintStart_toStartOf="@+id/iv_profile_char_background"
                 app:layout_constraintTop_toTopOf="@+id/iv_profile_char_background" />
 
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_profile_nickname"
                 android:layout_width="wrap_content"
@@ -323,12 +324,7 @@
                     android:tag="5"
                     />
 
-
-
-
-
             </RadioGroup>
-
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_profile_confirm"

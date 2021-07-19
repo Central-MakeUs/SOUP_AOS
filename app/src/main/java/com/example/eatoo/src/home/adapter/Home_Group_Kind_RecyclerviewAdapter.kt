@@ -45,12 +45,12 @@ class Home_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<GetGroupsRes
         Log.d("GroupList.size","" + GroupList.size)
         Log.d("groupsize","" +groupsize)
 
-        holder.GourpPlus.setOnClickListener {
-            itemClickListener.onClick(it,position)
+        holder.GroupLayout.setOnClickListener {
+            itemClickListener.onClick(it,position,GroupList[position].groupIdx , "Group_activity")
         }
 
-        holder.GourpPlus.setOnClickListener {
-            itemClickListener.onClick(it,position)
+        holder.GroupPlus.setOnClickListener {
+            itemClickListener.onClick(it,position,0 , "plus")
         }
 
     }
@@ -59,11 +59,11 @@ class Home_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<GetGroupsRes
     class CustomViewholder(val view : View) : RecyclerView.ViewHolder(view){
         val GroupLayout : ConstraintLayout = view.findViewById(R.id.group_layout)
         val GroupName : AppCompatTextView = view.findViewById(R.id.group_name_tv)
-        val GourpPlus : AppCompatImageButton = view.findViewById(R.id.group_plus_btn)
+        val GroupPlus : AppCompatImageButton = view.findViewById(R.id.group_plus_btn)
     }
 
     interface ItemClickListener {
-        fun onClick(view: View, position: Int)
+        fun onClick(view: View, position: Int,groupIdx : Int , state : String)
     }
 
     private lateinit var itemClickListener: ItemClickListener
@@ -71,5 +71,7 @@ class Home_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<GetGroupsRes
     fun setItemClickListener(itemClickListener: ItemClickListener){
         this.itemClickListener = itemClickListener
     }
+
+
 
 }
