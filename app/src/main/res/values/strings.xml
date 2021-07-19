@@ -224,6 +224,10 @@
     <string name="make_group_suggest4">해보세요&#160;</string>
     <string name="many_groups_possible">여러개의 그룹을 만들 수 있어요!</string>
 
+
+    <!--group category-->
+    <string name="cateogy_map">지도</string>
+
     <!-- login_sign_in-->
     <string name="login">로그인</string>
     <string name="sign_in">회원가입</string>

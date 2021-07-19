@@ -84,17 +84,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         showLoadingDialog(this)
         this.map = map
 
-        //테스트
-        val markeroptions = MarkerOptions().apply {
-            position(LatLng(37.27427291870117, 127.15801239013672))
-        }
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-            LatLng(37.27427291870117, 127.15801239013672),
-            CreateGroupActivity.CAMERA_ZOOM_LEVEL
-        ))
-        dismissLoadingDialog()
-        map.addMarker(markeroptions)
-//        setMyLocationListener() //나중에는 서버로 대체?
+        setMyLocationListener()
         this.map.setOnMapClickListener(this)
         this.map.setOnMarkerClickListener(this)
 
@@ -103,8 +93,6 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     }
 
     private fun setupMarker(locationLatLngEntity: LocationLatLngEntity): Marker? { //검색한 위도경도
-//        latitude = searchResult.locationLatLng.latitude.toDouble()
-//        longitude = searchResult.locationLatLng.longitude.toDouble()
 
         val positionLatLng = LatLng(
              locationLatLngEntity.latitude.toDouble(),
@@ -212,7 +200,6 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
                 CreateGroupActivity.CAMERA_ZOOM_LEVEL
             )
         )
-//        loadReverseGeoInfo(locationLatLngEntity)
         setupMarker(locationLatLngEntity)
         removeLocationListener()
     }
@@ -289,7 +276,6 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     }
 
     override fun onGetStoreFail(message: String?, code: Int) {
-        //Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         binding.btnRegisterNewStore.isVisible = true
         if(code == 2010){
             StoreMapService(this).tryGetAddress(storeLat, storeLng)

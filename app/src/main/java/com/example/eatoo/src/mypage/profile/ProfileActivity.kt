@@ -39,8 +39,8 @@ class ProfileActivity
 
     private fun setProfile(result: ProfileResult) {
         currentNickname = result.nickName
-        currentColor = result.color -1
-        currentCharacter = (result.characters)*2-2
+        currentColor = if(result.color != 0) result.color -1 else 0
+        currentCharacter = if(result.characters != 0) (result.characters)*2-2 else 0
 
         binding.etNickname.setText(currentNickname)
         val chip = binding.chipgroupProfile.getChildAt(currentColor) as Chip?

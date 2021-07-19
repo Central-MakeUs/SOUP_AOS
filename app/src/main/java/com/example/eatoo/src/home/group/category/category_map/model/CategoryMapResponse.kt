@@ -13,7 +13,7 @@ data class CategoryMapResult(
 )
 
 data class CategoryMapStoreInfo(
-    @SerializedName("address") val address: Any,
+    @SerializedName("address") val address: String,
     @SerializedName("imgUrl") val imgUrl: String,
     @SerializedName("latitude") val latitude: Double,
     @SerializedName("longitude") val longitude: Double,

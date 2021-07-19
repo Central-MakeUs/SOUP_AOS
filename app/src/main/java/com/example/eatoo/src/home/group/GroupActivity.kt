@@ -25,6 +25,7 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
 
         binding.viewpagerGroup.adapter = viewPagerAdapter
 
+
         TabLayoutMediator( binding.tablayoutGroup, binding.viewpagerGroup) { tab, position ->
             tab.text = when(position) {
                 0 -> resources.getString(R.string.group_main)

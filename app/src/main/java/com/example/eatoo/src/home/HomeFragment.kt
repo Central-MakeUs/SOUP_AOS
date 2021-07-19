@@ -111,7 +111,7 @@ class HomeFragment
     }
 //Mate 조회
     override fun onGetMateSuccess(response: MateResponse) {
-        response.message?.let { showCustomToast(it) }
+       response.message?.let { showCustomToast(it) }
 
         if(response.code == 2501){
             binding.mateNonePlusLayout.visibility = View.VISIBLE
@@ -122,7 +122,7 @@ class HomeFragment
             binding.homeMateRecylerview.visibility = View.VISIBLE
             val MateList = response.result
 
-            val MateAdapter = Home_Mate_Kind_RecyclerviewAdapter(MateList)
+            val MateAdapter = Home_Mate_Kind_RecyclerviewAdapter(MateList!!)
             binding.homeMateRecylerview.adapter = MateAdapter
             binding.homeMateRecylerview.layoutManager = LinearLayoutManager(activity).also {
                 it.orientation = LinearLayoutManager.VERTICAL
