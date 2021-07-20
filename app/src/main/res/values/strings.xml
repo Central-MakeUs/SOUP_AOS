@@ -288,6 +288,9 @@
     <string name="inviting">초대하기</string>
     <string name="my_member">My 멤버</string>
     <string name="find_invite">초대장 찾기</string>
+    <string name="find_invite_exp">초대장 확인</string>
+    <string name="find_invite_exp2">전달받은 초대코드를 입력해주세요</string>
+    <string name="find_invite_input">초대코드 4자를 입력해주세요</string>
     <string name="questions">문의사항</string>
     <string name="account_secession">계정탈퇴</string>
     <string name="logout">로그아웃</string>

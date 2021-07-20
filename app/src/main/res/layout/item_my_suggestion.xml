@@ -23,6 +23,7 @@
 
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/group_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/login_btn_background"
@@ -67,7 +68,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title_txt" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/time_txt"
+        android:id="@+id/start_time_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
@@ -75,9 +76,24 @@
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="normal"
-        android:text="@string/mate_suggestion_time"
+        android:text="@string/mate_suggestion_start_time"
         app:layout_constraintStart_toStartOf="@+id/restaurant_txt"
         app:layout_constraintTop_toBottomOf="@+id/restaurant_txt" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/end_time_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:lineSpacingExtra="5sp"
+        android:text="@string/mate_suggestion_end_time"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/start_time_txt"
+        app:layout_constraintStart_toEndOf="@+id/start_time_txt"
+        app:layout_constraintTop_toTopOf="@+id/start_time_txt" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/date_txt"
@@ -87,13 +103,12 @@
         android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif-light"
         android:lineSpacingExtra="7sp"
-        android:text="@string/mate_suggestion_date"
         android:textColor="@color/black"
         android:textSize="10sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/time_txt"
-        app:layout_constraintTop_toBottomOf="@+id/time_txt"
+        app:layout_constraintStart_toStartOf="@+id/start_time_txt"
+        app:layout_constraintTop_toBottomOf="@+id/start_time_txt"
         tools:ignore="SmallSp" />
 
     <androidx.appcompat.widget.AppCompatTextView
