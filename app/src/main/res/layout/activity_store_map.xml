@@ -38,6 +38,7 @@
         android:id="@+id/rv_existing_store"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:overScrollMode="never"
         android:layout_marginBottom="20dp"
         android:layout_marginHorizontal="20dp"
         app:layout_constraintBottom_toTopOf="@id/btn_register_new_store"
