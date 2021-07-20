@@ -178,7 +178,7 @@ class Home_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<GetGroupsRes
         val GroupNameLayouttext1 : AppCompatTextView = view.findViewById(R.id.keword_recomand1)
         val GroupNameLayouttext2 : AppCompatTextView = view.findViewById(R.id.keword_recomand2)
         val GroupKeywordChip1 : LinearLayout = view.findViewById(R.id.chip_first)
-//        val GroupKeywordChip2 : LinearLayout = view.findViewById(R.id.chip_second)
+        //        val GroupKeywordChip2 : LinearLayout = view.findViewById(R.id.chip_second)
         val GroupKeyword1 : Chip = view.findViewById(R.id.chip1)
         val GroupKeyword2 : Chip = view.findViewById(R.id.chip2)
 //        val GroupKeyword3 : Chip = view.findViewById(R.id.chip2_1)

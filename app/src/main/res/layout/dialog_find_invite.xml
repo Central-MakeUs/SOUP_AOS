@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/transparent">
+    android:background="@drawable/background_dialog_confirm_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="280dp"
@@ -26,9 +26,11 @@
             android:textSize="14sp"
             android:textColor="@color/main_color"
             android:lineSpacingExtra="6sp"
+            android:lineHeight="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UnusedAttribute" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -42,10 +44,11 @@
             android:textColor="@color/black"
             android:textSize="11sp"
             android:textStyle="bold"
+            android:lineHeight="24sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_query1"
             app:layout_constraintStart_toStartOf="@+id/tv_query1"
             app:layout_constraintTop_toBottomOf="@+id/tv_query1"
-            tools:ignore="SmallSp" />
+            tools:ignore="SmallSp,UnusedAttribute" />
 
 
         <EditText
@@ -56,6 +59,7 @@
             android:layout_marginBottom="23dp"
             android:maxLines="1"
             android:maxLength="4"
+            android:padding="5dp"
             android:background="@drawable/edittext_background_radius4"
             android:fontFamily="sans-serif-medium"
             android:hint="@string/find_invite_input"
