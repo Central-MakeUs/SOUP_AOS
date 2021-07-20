@@ -4,7 +4,6 @@ import com.example.eatoo.config.BaseResponse
 
 interface SingleView {
 
-    fun onPatchSingleStatusSuccess(response : SingleResultResponse)
-
+    fun onPatchSingleStatusSuccess()
     fun onPatchSingleStatusFail(message : String?)
 }

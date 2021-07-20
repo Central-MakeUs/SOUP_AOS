@@ -59,7 +59,7 @@ class CustomToolbar : androidx.appcompat.widget.Toolbar {
         val leftIconDrawable = typedArray.getResourceId(R.styleable.CustomToolbar_leftIcon, 0)
         leftIcon.setImageResource(leftIconDrawable)
 
-        val rightIconDrawable = typedArray.getResourceId(R.styleable.CustomToolbar_rightIcon, 0)
+        var rightIconDrawable = typedArray.getResourceId(R.styleable.CustomToolbar_rightIcon, 0)
         rightIcon.setBackgroundResource(rightIconDrawable)
 
         val text = typedArray.getText(R.styleable.CustomToolbar_titleText)
