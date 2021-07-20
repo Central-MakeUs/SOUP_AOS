@@ -54,6 +54,7 @@
                 android:id="@+id/iv_profile_char"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:layout_marginBottom="7dp"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_profile_char_background"
                 app:layout_constraintEnd_toEndOf="@+id/iv_profile_char_background"
                 app:layout_constraintStart_toStartOf="@+id/iv_profile_char_background"
@@ -119,7 +120,7 @@
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="22dp"
-                android:background="@color/input_hint"
+                android:background="@color/gray_101"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_available_nickname" />
@@ -225,7 +226,7 @@
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="35dp"
                 android:layout_marginEnd="22dp"
-                android:background="@color/input_hint"
+                android:background="@color/gray_101"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/chipgroup_profile" />

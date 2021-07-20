@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="2px"
         android:layout_marginTop="20dp"
-        android:background="@color/gray_300"
+        android:background="@color/gray_101"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,33 +90,32 @@
                 app:layout_constraintTop_toBottomOf="@+id/user_name_suggestion_txt" />
 
 
-<!--            <com.google.android.material.progressindicator.CircularProgressIndicator-->
-<!--                android:id="@+id/indicator"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:foregroundGravity="center"-->
-<!--                app:indicator_color="@color/gray_100"-->
-<!--                app:selected_color="@color/main_color"-->
-<!--                app:indicator_shape="@drawable/fill_circle"-->
-<!--                android:layout_marginTop="38dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/my_group_recyclerview" />-->
+            <!--            <com.google.android.material.progressindicator.CircularProgressIndicator-->
+            <!--                android:id="@+id/indicator"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:foregroundGravity="center"-->
+            <!--                app:indicator_color="@color/gray_100"-->
+            <!--                app:selected_color="@color/main_color"-->
+            <!--                app:indicator_shape="@drawable/fill_circle"-->
+            <!--                android:layout_marginTop="38dp"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/my_group_recyclerview" />-->
 
             <com.arindicatorview.ARIndicatorView
                 android:id="@+id/indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:layout_marginTop="38dp"
                 app:indicator_color="@color/gray_100"
-                app:selected_color="@color/main_color"
                 app:indicator_shape="@drawable/fill_circle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/my_group_recyclerview"
-                />
+                app:selected_color="@color/main_color" />
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -124,7 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="90dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="40dp"
                 android:background="@drawable/sign_in_btn_background_gray"
@@ -138,7 +137,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/indicator" />
+                app:layout_constraintTop_toBottomOf="@+id/my_group_recyclerview" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

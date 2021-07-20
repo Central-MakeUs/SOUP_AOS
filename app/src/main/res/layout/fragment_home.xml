@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="2px"
         android:layout_marginTop="10dp"
-        android:background="@color/gray_300"
+        android:background="@color/gray_101"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,6 +83,7 @@
                 app:layout_constraintStart_toStartOf="@+id/appCompatImageView6"
                 app:layout_constraintTop_toTopOf="@+id/appCompatImageView6" />
 
+
             <LinearLayout
                 android:id="@+id/group_layout"
                 android:layout_width="match_parent"
@@ -91,6 +92,7 @@
                 android:layout_marginTop="24dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/uset_name_home_tv">
 
@@ -221,7 +223,7 @@
                             android:id="@+id/constraintLayout"
                             android:layout_width="wrap_content"
                             android:layout_height="255dp"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginStart="25dp"
                             android:layout_marginEnd="20dp"
                             android:background="@drawable/main_home_group_backgroud"
                             app:layout_constraintBottom_toBottomOf="@+id/none_group_layout"
@@ -303,7 +305,6 @@
                                 app:layout_constraintTop_toBottomOf="@+id/group_name_tv2" />
 
 
-
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/appCompatImageView7"
                                 android:layout_width="wrap_content"
@@ -338,7 +339,6 @@
 
 
             </LinearLayout>
-
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView10"
@@ -445,7 +445,8 @@
                     android:id="@+id/cardview_review_suggest"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="27dp">
+                    android:layout_marginTop="27dp"
+                    android:layout_marginBottom="4dp">
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -468,11 +469,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:fontFamily="sans-serif-black"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
                         android:lineSpacingExtra="8sp"
                         android:text="@string/main_review_food2"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="@+id/tv_write_review"
                         app:layout_constraintTop_toBottomOf="@+id/tv_write_review" />
 
