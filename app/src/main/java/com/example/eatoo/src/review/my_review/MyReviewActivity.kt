@@ -1,6 +1,8 @@
 package com.example.eatoo.src.review.my_review
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -25,7 +27,6 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
 
         bindView()
         getMyReview()
-        binding.customToolbar.leftIcon.setOnClickListener { finish() }
     }
 
     private fun getMyReview() {
@@ -36,6 +37,8 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
     private fun bindView() {
         binding.fabMyreview.setOnClickListener(this)
         binding.tvMyReviewUserName.text = getUserNickName()
+        binding.customToolbar.leftIcon.setOnClickListener { finish() }
+        binding.fabMyreview.imageTintList =   ColorStateList.valueOf(Color.rgb(255, 255, 255))
     }
 
 
