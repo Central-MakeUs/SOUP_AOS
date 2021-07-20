@@ -91,9 +91,9 @@ View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener, Vot
 
     override fun onGetGroupVoteFail(message: String?) {
         dismissLoadingDialog()
-        showCustomToast(message?:resources.getString(R.string.failed_connection))
-        binding.ivNoVote.visibility = View.GONE
-        binding.tvNoVote.visibility = View.GONE
+//        showCustomToast(message?:resources.getString(R.string.failed_connection))
+        binding.ivNoVote.isVisible = true
+        binding.tvNoVote.isVisible = true
     }
 
     override fun onGetVoteDetailSuccess(response: VoteDetailResponse) {

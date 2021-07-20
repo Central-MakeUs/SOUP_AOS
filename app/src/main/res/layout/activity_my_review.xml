@@ -119,6 +119,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:contentDescription="fab_review" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="@drawable/background_shadow"
+        app:layout_constraintBottom_toTopOf="@id/cardview_review_suggest"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_review_suggest"

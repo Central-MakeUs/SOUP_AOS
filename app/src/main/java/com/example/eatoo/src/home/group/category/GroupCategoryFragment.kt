@@ -78,9 +78,8 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
     }
 
     ///////permission
-
     private fun requestPermission() {
-        showCustomToast("request permission")
+//        showCustomToast("request permission")
             if (::locationManager.isInitialized.not()) {
                 locationManager =
                     activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager

@@ -69,7 +69,9 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
 
     override fun onGetMyReviewFail(message: String?) {
         dismissLoadingDialog()
-        showCustomToast(message?:"통신오류가 발생했습니다.")
+//        showCustomToast(message?:"통신오류가 발생했습니다.")
+        binding.tvNoReview.isVisible = true
+        binding.ivNoReview.isVisible = true
     }
 
     override fun onMyReviewClicked(item: MyReviewResult) {
