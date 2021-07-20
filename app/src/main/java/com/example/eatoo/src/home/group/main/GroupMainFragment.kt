@@ -1,6 +1,7 @@
 package com.example.eatoo.src.home.group.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -30,6 +31,8 @@ class GroupMainFragment : BaseFragment<FragmentGroupMainBinding>(FragmentGroupMa
     override fun onGetGroupMainSuccess(response: GroupMainResponse) {
         showCustomToast("요청 완료")
 
+
+        Log.d("메이트 리스 크기", ""+response.result.getStoreRes.size)
         if(response.result.getMateRes.size == 0){
             binding.findingMateRecyclerview.visibility = View.GONE
             binding.findingMateNoScroll.visibility = View.VISIBLE
