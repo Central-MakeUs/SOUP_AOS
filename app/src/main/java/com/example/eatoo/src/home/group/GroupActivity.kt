@@ -76,6 +76,7 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
 
         binding.tablayoutGroup.isSmoothScrollingEnabled = false
 
+
     }
 
     override fun onPatchSingleStatusSuccess() {

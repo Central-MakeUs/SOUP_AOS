@@ -36,8 +36,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tablayout_group"
                 app:tabMode="fixed"
+                app:tabTextAppearance="@style/CustomTabText"
                 app:tabIndicatorColor="@color/main_orange"
-                app:tabTextColor="@color/main_orange"
+                app:tabIndicatorHeight="2dp"
+                app:tabTextColor="@color/black"
+                app:tabSelectedTextColor="@color/main_orange"
                 app:tabRippleColor="@color/transparent"
                 />
 
