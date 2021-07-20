@@ -117,6 +117,8 @@
     <string name="create_group_name_suggest">그룹 이름을 입력해주세요</string>
     <string name="create_group_color">색상</string>
     <string name="create_group_keyword">키워드</string>
+    <string name="create_group_keyword_exp">을 나타낼 수 있는</string>
+    <string name="create_group_keyword_exp2">키워드를 입력해주세요!</string>
     <string name="create_group_location">위치</string>
     <string name="create_group_register">등록하기</string>
     <string name="create_group_change_location">변경하기</string>

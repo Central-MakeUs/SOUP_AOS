@@ -30,6 +30,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +39,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_profile_char_background"
@@ -52,9 +54,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_profile_char"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginBottom="7dp"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_profile_char_background"
                 app:layout_constraintEnd_toEndOf="@+id/iv_profile_char_background"
                 app:layout_constraintStart_toStartOf="@+id/iv_profile_char_background"
@@ -111,7 +112,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/et_nickname"
                 android:visibility="gone"
                 tools:visibility="visible"
-                 />
+                />
 
             <View
                 android:id="@+id/view1"
@@ -139,6 +140,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view1" />
+
 
 
             <com.google.android.material.chip.ChipGroup
@@ -254,73 +256,56 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="27dp"
                 android:orientation="horizontal"
-                android:weightSum="9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/character_tv"
-                android:gravity="fill_vertical">
+                android:gravity="center"
+                >
 
                 <RadioButton
                     android:id="@+id/radiobtn_character1"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:background="@drawable/selector_profile_char1"
                     android:tag="1"
-                   />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_marginEnd="16dp"
+                    />
 
                 <RadioButton
                     android:id="@+id/radiobtn_character2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:background="@drawable/selector_profile_char2"
                     android:tag="2"
+                    android:layout_marginEnd="16dp"
                     />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
 
                 <RadioButton
                     android:id="@+id/radiobtn_character3"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:background="@drawable/selector_profile_char3"
                     android:tag="3"
+                    android:layout_marginEnd="16dp"
                     />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
 
                 <RadioButton
                     android:id="@+id/radiobtn_character4"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:background="@drawable/selector_profile_char4"
                     android:tag="4"
+                    android:layout_marginEnd="16dp"
                     />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
 
                 <RadioButton
                     android:id="@+id/radiobtn_character5"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:background="@drawable/selector_profile_char5"
                     android:tag="5"
@@ -336,6 +321,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="22dp"
                 android:layout_marginBottom="20dp"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/login_btn_background"
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="center"

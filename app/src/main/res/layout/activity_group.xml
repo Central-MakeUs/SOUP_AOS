@@ -32,13 +32,17 @@
                 app:titleText="그룹이름" />
 
             <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tablayout_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabIndicatorColor="@color/main_orange"
+                android:id="@+id/tablayout_group"
                 app:tabMode="fixed"
+                app:tabTextAppearance="@style/CustomTabText"
+                app:tabIndicatorColor="@color/main_orange"
+                app:tabIndicatorHeight="2dp"
+                app:tabTextColor="@color/black"
+                app:tabSelectedTextColor="@color/main_orange"
                 app:tabRippleColor="@color/transparent"
-                app:tabTextColor="@color/main_orange" />
+                />
 
         </LinearLayout>
 

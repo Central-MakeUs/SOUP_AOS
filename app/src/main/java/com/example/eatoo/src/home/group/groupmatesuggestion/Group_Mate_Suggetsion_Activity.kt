@@ -44,6 +44,7 @@ class Group_Mate_Suggetsion_Activity
             val postRequest = CreateMateRequest(groupIdx = GroupIndex,name = binding.suggestionNameEdt.text.toString(), storeName = binding.storeEdt.text.toString(), startTime = binding.startTimeBtn.text.toString() ,endTime = binding.startTimeBtn.text.toString() ,headCount = Integer.parseInt(binding.limitPeopleEdt.text.toString()),timeLimit = binding.limitTimeTv.text.toString() ,imgUrl = "" )
             Log.d("요청사항", ""+ postRequest)
             MateCreateService(this).postCreateMate(postRequest,getUserIdx())
+            showLoadingDialog(this)
         }
 
         binding.startTimeLayout.setOnClickListener{
@@ -123,6 +124,9 @@ class Group_Mate_Suggetsion_Activity
 
 //그룹 생성하기
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {
+        dismissLoadingDialog()
+        finish()
+
     }
 
     override fun onPostMateCreateFailure(message: String) {

@@ -25,5 +25,10 @@
         <item name="android:windowExitAnimation">@anim/close</item>
     </style>
 
+    <style name="CustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
 
 </resources>

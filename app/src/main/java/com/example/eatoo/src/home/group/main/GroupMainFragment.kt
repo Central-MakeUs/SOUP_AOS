@@ -1,5 +1,6 @@
 package com.example.eatoo.src.home.group.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,7 @@ import com.example.eatoo.config.ApplicationClass.Companion.GROUP_IDX
 import com.example.eatoo.config.BaseFragment
 import com.example.eatoo.databinding.FragmentGroupMainBinding
 import com.example.eatoo.src.home.adapter.Home_Group_Kind_RecyclerviewAdapter
+import com.example.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
 import com.example.eatoo.src.home.group.main.adapter.Group_Home_Main_Mate_Kind_RecyclerviewAdapter
 import com.example.eatoo.src.home.group.main.adapter.Group_Home_Main_Store_Kind_RecyclerviewAdapter
 import com.example.eatoo.src.home.group.main.model.GroupMainResponse
@@ -35,8 +37,12 @@ class GroupMainFragment : BaseFragment<FragmentGroupMainBinding>(FragmentGroupMa
         if(response.result.getMateRes.size == 0){
             binding.findingMateRecyclerview.visibility = View.GONE
             binding.findingMateNoScroll.visibility = View.VISIBLE
+            binding.matePlusBtn.setOnClickListener {
+                startActivity(Intent(activity,Group_Mate_Suggetsion_Activity::class.java))
+            }
         }
-        else{binding.findingMateRecyclerview.visibility = View.VISIBLE
+        else{
+            binding.findingMateRecyclerview.visibility = View.VISIBLE
             binding.findingMateNoScroll.visibility = View.GONE
             val GroupAdapter = Group_Home_Main_Mate_Kind_RecyclerviewAdapter(response.result.getMateRes)
             binding.findingMateRecyclerview.adapter = GroupAdapter

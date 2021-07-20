@@ -12,6 +12,7 @@ import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityGroupBinding
 import com.example.eatoo.single_status.SingleResultResponse
 import com.example.eatoo.single_status.SingleService
+import com.example.eatoo.single_status.SingleStatusInterface
 import com.example.eatoo.single_status.SingleView
 import com.example.eatoo.src.home.group.adapter.GroupViewPagerAdapter
 import com.example.eatoo.src.home.group.member.GroupMemberService
@@ -26,6 +27,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::inflate),
     SingleView, GroupMemberView {
 
+//    val  singleStatusInterface: SingleStatusInterface = SingleStatusInterface
     private lateinit var viewPagerAdapter : GroupViewPagerAdapter
     private var changeToSingle = false
 
@@ -76,10 +78,14 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
 
         binding.tablayoutGroup.isSmoothScrollingEnabled = false
 
+
     }
 
     override fun onPatchSingleStatusSuccess() {
         showCustomToast("on off 전환 성공")
+
+//        singleStatusInterface.onSingleStatusChange()
+
         if(changeToSingle) binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icons)
         else binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icon)
 

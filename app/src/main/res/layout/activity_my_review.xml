@@ -113,19 +113,24 @@
         android:layout_marginEnd="17dp"
         android:layout_marginBottom="23dp"
         android:src="@drawable/ic_baseline_add_24"
-        android:background="@color/white"
+        app:tint="@color/white"
         app:backgroundTint="@color/main_orange"
         app:layout_constraintBottom_toTopOf="@+id/cardview_review_suggest"
         app:layout_constraintEnd_toEndOf="parent"
         android:contentDescription="fab_review" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="@drawable/background_shadow"
+        app:layout_constraintBottom_toTopOf="@id/cardview_review_suggest"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_review_suggest"
         android:layout_width="match_parent"
         android:layout_height="107dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:elevation="8dp"
+        android:elevation="10dp"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

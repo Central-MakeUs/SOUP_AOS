@@ -40,7 +40,7 @@ class ProfileActivity
     private fun setProfile(result: ProfileResult) {
         currentNickname = result.nickName
         currentColor = if(result.color != 0) result.color -1 else 0
-        currentCharacter = if(result.characters != 0) (result.characters)*2-2 else 0
+        currentCharacter = if(result.characters != 0) (result.characters)-1 else 0
 
         binding.etNickname.setText(currentNickname)
         val chip = binding.chipgroupProfile.getChildAt(currentColor) as Chip?
@@ -48,7 +48,7 @@ class ProfileActivity
         val radioBtn = binding.radiogroupProfile.getChildAt(currentCharacter) as RadioButton?
         radioBtn?.isChecked = true
 
-        val currentCharImg = if(result.characters != 0) currentColor*5 + (result.characters-1) else currentColor*5
+        val currentCharImg = if(result.characters != 0) currentColor*5 + currentCharacter else currentColor*5
         binding.ivProfileChar.setBackgroundResource(EatooCharList[currentCharImg])
     }
 
@@ -154,7 +154,6 @@ class ProfileActivity
 
     override fun onPatchProfileSuccess(response: PatchProfileResponse) {
         dismissLoadingDialog()
-        showCustomToast("프로필 수정 완료")
         finish()
     }
 
