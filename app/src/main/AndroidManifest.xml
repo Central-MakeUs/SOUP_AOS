@@ -25,17 +25,19 @@
         <activity android:name=".src.review.create_review.create_review1.CreateReview1Activity" />
         <activity android:name=".src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity" />
         <activity android:name=".src.home.group.GroupActivity">
+
+        </activity>
+        <activity android:name=".src.home.create_group.group_location.GroupLocationActivity" />
+        <activity android:name=".src.signinlogin.signin.SignInActivity3" />
+        <activity android:name=".src.signinlogin.signin.SignInActivity2" />
+        <activity android:name=".src.explanation.ExplanationActivity" />
+        <activity android:name=".src.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".src.home.create_group.group_location.GroupLocationActivity" />
-        <activity android:name=".src.signinlogin.signin.SignInActivity3" />
-        <activity android:name=".src.signinlogin.signin.SignInActivity2" />
-        <activity android:name=".src.explanation.ExplanationActivity" />
-        <activity android:name=".src.splash.SplashActivity"></activity>
         <activity android:name=".src.home.create_group.CreateGroupActivity">
 
         </activity>
