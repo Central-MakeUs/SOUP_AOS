@@ -34,10 +34,10 @@ class InviteDialog(context: Context , val code : String , val GroupName : String
         val window = window
         if (window != null) {
             // 백그라운드 투명
-            window.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+            window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             window.statusBarColor = Color.WHITE
             val params = window.attributes
-            params.width = WindowManager.LayoutParams.MATCH_PARENT
+            params.width = WindowManager.LayoutParams.WRAP_CONTENT
             params.height = WindowManager.LayoutParams.WRAP_CONTENT
             // 열기&닫기 시 애니메이션 설정
             params.windowAnimations = R.style.AnimationPopupStyle
