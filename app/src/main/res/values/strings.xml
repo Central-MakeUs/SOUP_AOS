@@ -56,7 +56,6 @@
     <!--profile-->
 
 
-
     <!--review-->
     <string name="my_review_user_title">님이 작성하신</string>
     <string name="is_review">후기입니다 :)</string>
@@ -124,6 +123,7 @@
     <string name="input_store_keyword">가게를 직접 입력해주세요</string>
     <string name="input_location">위치를 직접 입력해주세요</string>
     <string name="set_current_location">현 위치로 주소 설정하기</string>
+    <string name="current_location">현재위치</string>
     <string name="search_address_fail">현 위치 주소를 가져오지 못 했습니다.</string>
     <string name="input_jwt_request">JWT를 입력해주세요.</string>
     <string name="invalid_jwt">유효하지 않은 JWT입니다.</string>
@@ -208,6 +208,10 @@
     <string name="group_main_review1">잇투님이 방문한 가게를 공유해요!</string>
     <string name="group_main_review2">잇투님이 작성하신 후기를 통해 회사 주변\n가게를 등록하고 멤버들과 공유해요</string>
     <string name="group_main_review3">잇투님의 그룹만의 맛집지도를 만들어보세요 :)</string>
+
+
+    <string name="main_suggestion_review1">MATE를 제안해보세요!</string>
+    <string name="main_suggestion_review2">그룹을 만들고 멤버들에게 식사\nMATE를 제안해보세요 :)</string>
 
 
     <!--group member-->
@@ -300,8 +304,6 @@
     <string name="edit">편집</string>
     <string name="taste_keyword">식성 키워드</string>
     <string name="character">캐릭터</string>
-
-
 
 
     <!--dialog-->

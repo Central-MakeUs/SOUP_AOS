@@ -17,12 +17,12 @@ class Home_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<GetGroupsRes
         if(group_status == "BASIC")
         {
             inflaterview = LayoutInflater.from(parent.context).inflate(R.layout.item_home_has_group,parent,false)
-            return CustomViewholder(inflaterview);
+            return CustomViewholder(inflaterview)
         }
         else if(group_status == "LAST")
         {
             inflaterview = LayoutInflater.from(parent.context).inflate(R.layout.item_main_group_plus,parent,false)
-            return CustomViewholder(inflaterview);
+            return CustomViewholder(inflaterview)
         }
         return CustomViewholder(inflaterview)
     }

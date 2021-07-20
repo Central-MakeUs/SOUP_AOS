@@ -125,7 +125,7 @@ StoreLocationView, StoreSearchRVAdapter.OnSearchResultClickListener, View.OnClic
     }
 
     override fun onSearchResultClick(item: KakaoSearchDoc) {
-        val address = if(item.road_address_name.isEmpty()) item.road_address_name else item.address_name
+        val address = if(item.road_address_name.isEmpty()) item.address_name else item.road_address_name
 
         val intent = Intent(this, CreateReview1Activity::class.java)
         intent.apply {

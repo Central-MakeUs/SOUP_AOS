@@ -28,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="2px"
         android:layout_marginTop="20dp"
+        android:elevation="5dp"
         android:background="@color/gray_101"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -127,44 +128,69 @@
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView13"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif-black"
-                android:lineSpacingExtra="8sp"
-                android:text="@string/main_review_food1"
-                android:textColor="@color/black"
-                android:textSize="17sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toTopOf="@+id/appCompatTextView14"
-                app:layout_constraintStart_toStartOf="@+id/appCompatTextView14"
-                app:layout_constraintTop_toBottomOf="@+id/my_suggestion_layout" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:fontFamily="sans-serif-black"
-                android:lineSpacingExtra="8sp"
-                android:text="@string/main_review_food2"
-                android:textColor="@color/black"
-                android:textSize="14sp"
+                android:layout_marginTop="29dp"
+                android:layout_marginBottom="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/ic_review_create"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView14"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/appCompatTextView13" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/my_suggestion_layout">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="sans-serif-black"
+                    android:lineSpacingExtra="8sp"
+                    android:text="@string/main_suggestion_review1"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:lineHeight="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="UnusedAttribute" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:lineSpacingExtra="8sp"
+                    android:text="@string/main_suggestion_review2"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:lineHeight="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView13"
+                    tools:ignore="UnusedAttribute" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="37dp"
+                    android:layout_marginEnd="33dp"
+                    android:src="@drawable/ic_group_271"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/appCompatTextView14" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
     </androidx.core.widget.NestedScrollView>

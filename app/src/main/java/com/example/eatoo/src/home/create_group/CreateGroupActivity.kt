@@ -22,14 +22,14 @@ import com.example.eatoo.config.ApplicationClass
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityCreateGroupBinding
 import com.example.eatoo.src.home.create_group.group_location.GroupLocationActivity
+import com.example.eatoo.src.home.create_group.group_location.current_location.CurrentLocationActivity
 import com.example.eatoo.src.home.create_group.model.CreateGroupRequest
 import com.example.eatoo.src.home.create_group.model.CreateGroupResponse
 import com.example.eatoo.src.home.create_group.model.Keyword
 import com.example.eatoo.src.home.group.GroupActivity
 import com.example.eatoo.util.getUserIdx
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
-import com.example.googlemapsapiprac.model.SearchResultEntity
-import com.example.eatoo.src.home.create_group.model.address.AddressInfoResponse
+import com.example.eatoo.src.home.create_group.model.SearchResultEntity
 import com.example.eatoo.util.getUserNickName
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -40,6 +40,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.chip.Chip
+import com.google.gson.Gson
 import kotlin.math.roundToInt
 
 class CreateGroupActivity :
@@ -50,7 +51,6 @@ class CreateGroupActivity :
     private lateinit var searchResult: SearchResultEntity
     private var currentSelectMarker: Marker? = null
     private lateinit var locationManager: LocationManager
-    private lateinit var myLocationListener: MyLocationListener
     private lateinit var locationLatLngEntity: LocationLatLngEntity
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
@@ -62,6 +62,11 @@ class CreateGroupActivity :
         const val PERMISSION_REQUEST_CODE = 101
     }
 
+    override fun onResume() {
+        super.onResume()
+        getSearchJson()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -69,8 +74,6 @@ class CreateGroupActivity :
         enableMap()
         closeMap()
         setKeyword()
-
-        getSearchIntent()
 
         searchLocation()
         getCurrentLocation()
@@ -80,14 +83,26 @@ class CreateGroupActivity :
 
 
     }
-    private fun getSearchIntent() {
-        val intentResult = intent.getParcelableExtra<SearchResultEntity>(SEARCH_RESULT_EXTRA_KEY)
-        if (intentResult != null) { //위치를 검색해서 다시 돌아온 경우
+    private fun getSearchJson() {
+
+        val gson = Gson()
+        val jsonFromCurrentLocation =  ApplicationClass.sSharedPreferences.getString("CURRENT_LOCATION", "")
+        val jsonFromLocationSearch = ApplicationClass.sSharedPreferences.getString("LOCATION_SEARCH", "")
+
+        if(jsonFromCurrentLocation != "" || jsonFromLocationSearch != "") {
+            if(jsonFromCurrentLocation != ""){
+                searchResult = gson.fromJson(jsonFromCurrentLocation, SearchResultEntity::class.java)
+            } else if(jsonFromLocationSearch != "") {
+                searchResult = gson.fromJson(jsonFromLocationSearch, SearchResultEntity::class.java)
+            }
+
             mapShowing = true
-            searchResult = intentResult
-            setAddressTv(intentResult.fullAddress)
+            setAddressTv(searchResult.fullAddress)
             setupGoogleMap()
+            ApplicationClass.sSharedPreferences.edit().putString("CURRENT_LOCATION", null).apply()
+            ApplicationClass.sSharedPreferences.edit().putString("LOCATION_SEARCH", null).apply()
         }
+
 
     }
 
@@ -111,11 +126,11 @@ class CreateGroupActivity :
         binding.etKeyword.setOnKeyListener { v, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
                 val keywordList = binding.flexboxMakeGroup.getAllChips()
-                if (keywordList.size-1 == 4) showCustomToast("키워드는 최대 다섯 개 입력 가능합니다.")
+                if (keywordList.size-1 == 4) showCustomToast(resources.getString(R.string.keyword_num_limit))
                 else {
                     val et = v as EditText
                     val keyword = et.text.toString()
-                    if (keyword.length >= 11) showCustomToast("키워드는 최대 10 글자 입력 가능합니다.")
+                    if (keyword.length >= 11) showCustomToast(resources.getString(R.string.keyword_length_limit))
                     else{
                         binding.flexboxMakeGroup.addChip(keyword)
                         et.text.clear()
@@ -185,8 +200,6 @@ class CreateGroupActivity :
         binding.registerGroupBtn.setOnClickListener {
 
             val keywordList = binding.flexboxMakeGroup.getAllChips()
-            Log.d("createGroupActivity", "register "+ keywordList.toString())
-
             val groupColor = getGroupColor()
 
             val group = CreateGroupRequest(
@@ -302,7 +315,7 @@ class CreateGroupActivity :
                     ),
                     PERMISSION_REQUEST_CODE
                 )
-            } else setMyLocationListener()
+            } else startActivity(Intent(this, CurrentLocationActivity::class.java))
         }
     }
 
@@ -316,89 +329,14 @@ class CreateGroupActivity :
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED
                 && grantResults[1] == PackageManager.PERMISSION_GRANTED
             ) {
-                setMyLocationListener()
+                startActivity(Intent(this, CurrentLocationActivity::class.java))
             } else {
                 Toast.makeText(this, "권한을 받지 못 했습니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    @SuppressLint("MissingPermission")
-    private fun setMyLocationListener() {
-        val minTime = 1500L //현재 위치를 가져오는데 걸리는 시간 1.5초
-        val minDistance = 100f //최소 거리 허용 단위.
-
-        if (::myLocationListener.isInitialized.not()) {
-            myLocationListener = MyLocationListener()
-        }
-        with(locationManager) { //현재 내 위치 가져오기
-            requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
-                minTime, minDistance, myLocationListener
-            )
-            requestLocationUpdates(
-                LocationManager.NETWORK_PROVIDER,
-                minTime, minDistance, myLocationListener //여기서 콜백을 받아서 처리한다.
-            )
-        }
-    }
-
-    inner class MyLocationListener : LocationListener { //현재 위치에 대한 콜백을 받는다.
-        override fun onLocationChanged(location: Location) {
-            locationLatLngEntity = LocationLatLngEntity(
-                location.latitude.toFloat(),
-                location.longitude.toFloat()
-            )
-            onCurrentLocationChanged(locationLatLngEntity)
-        }
-
-    }
-
-    private fun onCurrentLocationChanged(locationLatLngEntity: LocationLatLngEntity) {
-        latitude = locationLatLngEntity.latitude.toDouble()
-        longitude = locationLatLngEntity.longitude.toDouble()
-
-        map.moveCamera(
-            CameraUpdateFactory.newLatLngZoom(LatLng(latitude, longitude), CAMERA_ZOOM_LEVEL)
-        )
-        loadReverseGeoInfo(locationLatLngEntity)
-        removeLocationListener()
-    }
-
-    private fun loadReverseGeoInfo(locationLatLngEntity: LocationLatLngEntity) {
-        CreateGroupService(this).tryGetCurrentAddress(
-            locationLatLngEntity.latitude.toDouble(),
-            locationLatLngEntity.longitude.toDouble()
-        )
-    }
-
-    private fun removeLocationListener() {
-        if (::locationManager.isInitialized && ::myLocationListener.isInitialized) {
-            locationManager.removeUpdates(myLocationListener)
-        }
-    }
-
-    override fun onGetCurrentAddressSuccess(response: AddressInfoResponse) {
-        currentSelectMarker = setupMarker(
-            SearchResultEntity(
-                fullAddress = response.addressInfo.fullAddress ?: "주소정보 없음",
-                buildingName = "내 위치",
-                locationLatLng = locationLatLngEntity
-            )
-        )
-        setAddressTv(response.addressInfo.fullAddress ?: "주소정보 없음")
-        showMap()
-        mapShowing = true
-        currentSelectMarker?.showInfoWindow()
-    }
-
-    override fun onGetCurrentAddressFail(message: String?) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
     override fun onPostGroupSuccess(response: CreateGroupResponse) {
-        Log.d("createGroup", response.toString())
-        Toast.makeText(this, "요청에 성공하였습니다.", Toast.LENGTH_SHORT).show()
         ApplicationClass.sSharedPreferences.edit()
             .putInt(ApplicationClass.GROUP_IDX, response.result.groupIdx).apply()
         startActivity(Intent(this, GroupActivity::class.java))

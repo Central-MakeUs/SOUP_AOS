@@ -21,6 +21,7 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="2px"
+        android:elevation="5dp"
         android:layout_marginTop="10dp"
         android:background="@color/gray_101"
         app:layout_constraintEnd_toEndOf="parent"
@@ -434,10 +435,8 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/home_mate_recylerview"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:overScrollMode="never"
                     android:scrollbars="none" />
 
@@ -445,8 +444,9 @@
                     android:id="@+id/cardview_review_suggest"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:elevation="5dp"
                     android:layout_marginTop="27dp"
-                    android:layout_marginBottom="4dp">
+                    android:layout_marginBottom="10dp">
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -459,9 +459,11 @@
                         android:text="@string/main_review_food1"
                         android:textColor="@color/black"
                         android:textSize="17sp"
+                        android:lineHeight="25sp"
                         android:textStyle="normal"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="UnusedAttribute" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -474,9 +476,11 @@
                         android:textSize="14sp"
                         android:textColor="@color/black"
                         android:lineSpacingExtra="8sp"
+                        android:lineHeight="24sp"
                         android:text="@string/main_review_food2"
                         app:layout_constraintStart_toStartOf="@+id/tv_write_review"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_write_review" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_write_review"
+                        tools:ignore="UnusedAttribute" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_review_char"

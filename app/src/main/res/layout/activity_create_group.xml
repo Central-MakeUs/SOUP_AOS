@@ -382,7 +382,7 @@
                 android:background="@drawable/login_btn_background"
                 android:fontFamily="@font/roboto_regular"
                 android:text="@string/create_group_register"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

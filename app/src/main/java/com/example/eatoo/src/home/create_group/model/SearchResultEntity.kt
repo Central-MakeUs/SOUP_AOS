@@ -1,7 +1,8 @@
-package com.example.googlemapsapiprac.model
+package com.example.eatoo.src.home.create_group.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.example.googlemapsapiprac.model.LocationLatLngEntity
 
 data class SearchResultEntity(
     val fullAddress: String,

@@ -4,49 +4,52 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eatoo.databinding.ItemLocationSearchResultBinding
-import com.example.googlemapsapiprac.model.SearchResultEntity
+import com.example.eatoo.databinding.ItemReviewStoreSearchBinding
+import com.example.eatoo.src.home.create_group.model.SearchResultEntity
+import com.example.eatoo.src.review.store_location.adaper.StoreSearchRVAdapter
+import com.example.eatoo.src.review.store_location.model.KakaoSearchDoc
 
-class LocationSearchRvAdapter : RecyclerView.Adapter<LocationSearchRvAdapter.MainViewHolder>() {
+class LocationSearchRvAdapter(
+    val listener : OnSearchResultClickListener
+) : RecyclerView.Adapter<LocationSearchRvAdapter.ViewHolder>() {
 
-    private var searchResultList: List<SearchResultEntity> = listOf()
-    private lateinit var searchResultClickListener: (SearchResultEntity) -> Unit
+    var storeList = ArrayList<KakaoSearchDoc>()
 
-    class MainViewHolder(
-        val binding : ItemLocationSearchResultBinding,
-        val searchResultClickListener: (SearchResultEntity) -> Unit)
-        : RecyclerView.ViewHolder(binding.root) {
+    interface OnSearchResultClickListener {
+        fun onSearchResultClick(item : KakaoSearchDoc)
+    }
 
-        fun bindData(data: SearchResultEntity) = with(binding) {
-            tvTitle.text = data.buildingName
-            tvSubtitle.text = data.fullAddress
-        }
-
-        fun bindView(data: SearchResultEntity) {
-            binding.root.setOnClickListener {
-                searchResultClickListener(data)
+    inner class ViewHolder(val binding : ItemReviewStoreSearchBinding) : RecyclerView.ViewHolder(binding.root)  {
+        fun bindItem(item : KakaoSearchDoc) {
+            binding.tvReviewSearchStoreName.text = item.place_name
+            binding.tvReviewSearchStoreLocation.text = item.address_name
+            binding.tvMyreviewStoreRoadAddress.text = item.road_address_name
+            binding.clReviewSearchStoreResult.setOnClickListener {
+                listener.onSearchResultClick(item)
             }
         }
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        val view =
-            ItemLocationSearchResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MainViewHolder(view, searchResultClickListener)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
+        val view = ItemReviewStoreSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        holder.bindData(searchResultList[position])
-        holder.bindView(searchResultList[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bindItem(storeList[position])
     }
 
-    override fun getItemCount(): Int= searchResultList.size
+    override fun getItemCount(): Int = storeList.size
 
-    fun setSearchResultList(
-        searchResultList: List<SearchResultEntity>,
-        searchResultClickListener: (SearchResultEntity) -> Unit
-    ) {
-        this.searchResultList = searchResultList
-        this.searchResultClickListener = searchResultClickListener
+    fun addAllData(item: ArrayList<KakaoSearchDoc>) {
+        storeList.addAll(item)
+        notifyItemRangeChanged(storeList.size, item.size)
+    }
+
+    fun removeAllData() {
+        storeList.clear()
         notifyDataSetChanged()
     }
 }
