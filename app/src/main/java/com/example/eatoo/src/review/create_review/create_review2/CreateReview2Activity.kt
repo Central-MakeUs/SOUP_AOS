@@ -60,6 +60,7 @@ class CreateReview2Activity
             }
             override fun afterTextChanged(p0: Editable?) {}
         })
+        binding.customToolbar.leftIcon.setOnClickListener { finish() }
     }
 
     override fun onClick(p0: View?) {

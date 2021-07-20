@@ -25,6 +25,7 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
 
         bindView()
         getMyReview()
+        binding.customToolbar.leftIcon.setOnClickListener { finish() }
     }
 
     private fun getMyReview() {

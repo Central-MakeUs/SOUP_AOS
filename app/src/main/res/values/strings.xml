@@ -235,6 +235,9 @@
     <!--group category-->
     <string name="cateogy_map">지도</string>
 
+    <!--member-->
+    <string name="is_group_member">의 멤버</string>
+
     <!-- login_sign_in-->
     <string name="login">로그인</string>
     <string name="sign_in">회원가입</string>

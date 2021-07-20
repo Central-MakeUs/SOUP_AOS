@@ -65,6 +65,7 @@ class CreateVoteActivity
         listenDueDateToggle()
         binding.tvDueDateDate.setOnClickListener(this)
         binding.tvDueDateTime.setOnClickListener(this)
+        binding.customToolbar.leftIcon.setOnClickListener { finish() }
     }
 
     override fun onClick(p0: View?) {

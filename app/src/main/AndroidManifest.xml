@@ -36,9 +36,7 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".src.home.create_group.CreateGroupActivity" >
-
-        </activity>
+        <activity android:name=".src.home.create_group.CreateGroupActivity" />
         <activity android:name=".src.signinlogin.signin.SignInActivity" />
         <activity android:name=".src.signinlogin.login.LoginActivity" />
         <activity android:name=".src.main.MainActivity" />

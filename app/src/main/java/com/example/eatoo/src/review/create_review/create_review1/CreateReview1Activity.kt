@@ -84,6 +84,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
         binding.rdGroup.setOnCheckedChangeListener(this)
         binding.ivStoreNameDelete.setOnClickListener(this)
         setCancelIcon()
+        binding.customToolbar.leftIcon.setOnClickListener { finish() }
     }
 
     private fun setCancelIcon() {
@@ -102,6 +103,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
         when(v?.id) {
             R.id.ll_container_review_map -> {
                 startActivity(Intent(this, StoreMapActivity::class.java))
+                finish()
             }
             R.id.btn_create_review_next ->  validityTest()
             R.id.rl_store_location_review1 -> {

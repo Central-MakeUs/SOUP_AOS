@@ -21,11 +21,14 @@
             android:orientation="vertical">
 
             <com.example.eatoo.custom_view.CustomToolbar
+                android:id="@+id/custom_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:contentInsetStart="0dp"
+                app:contentInsetEnd="0dp"
                 app:leftIcon="@drawable/ic_vector"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
                 app:titleText="그룹이름" />
 
             <com.google.android.material.tabs.TabLayout

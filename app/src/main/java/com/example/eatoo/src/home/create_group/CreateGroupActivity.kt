@@ -30,6 +30,7 @@ import com.example.eatoo.util.getUserIdx
 import com.example.googlemapsapiprac.model.LocationLatLngEntity
 import com.example.googlemapsapiprac.model.SearchResultEntity
 import com.example.eatoo.src.home.create_group.model.address.AddressInfoResponse
+import com.example.eatoo.util.getUserNickName
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -64,6 +65,7 @@ class CreateGroupActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.tvUsername.text = getUserNickName()
         enableMap()
         closeMap()
         setKeyword()
@@ -74,6 +76,7 @@ class CreateGroupActivity :
         getCurrentLocation()
 
         registerGroup()
+        binding.customToolbar.leftIcon.setOnClickListener { finish() }
 
 
     }

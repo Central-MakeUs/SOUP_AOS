@@ -9,7 +9,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class GroupMemberService (val view : GroupMemberFragment) {
+class GroupMemberService (val view : GroupMemberView) {
 
     fun tryGetGroupMember(userIdx : Int, groupIdx : Int) {
         val groupMemberRetrofitInterface = ApplicationClass.sRetrofit.create(
