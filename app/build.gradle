@@ -96,6 +96,9 @@ dependencies {
 
     implementation 'com.github.martinstamenkovski:ARIndicatorView:2.0.0'
 
+    //google gson
+    implementation 'com.google.code.gson:gson:2.8.7'
+
 
 
 }

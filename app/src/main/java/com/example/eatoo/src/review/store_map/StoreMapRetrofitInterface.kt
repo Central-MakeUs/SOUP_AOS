@@ -23,11 +23,5 @@ interface StoreMapRetrofitInterface {
         @Query ("latitude") latitude: Double
     ) : Call<StoreResponse>
 
-    @GET ("/v2/local/geo/coord2address.{format}")
-    fun getAddress(
-        @Header("Authorization") auth : String = "KakaoAK ${KakaoKey.KAKAO_API_KEY}",
-        @Path("format") format : String = "json",
-        @Query("x") longitude: Double,
-        @Query("y") latitude: Double
-    ) : Call<KakaoAddressResponse>
+
 }

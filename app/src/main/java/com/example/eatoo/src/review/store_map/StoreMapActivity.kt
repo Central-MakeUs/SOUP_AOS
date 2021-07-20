@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityStoreMapBinding
+import com.example.eatoo.reverse_geo.ReverseGeoService
+import com.example.eatoo.reverse_geo.ReverseGeoView
 import com.example.eatoo.src.home.create_group.CreateGroupActivity
 import com.example.eatoo.src.home.create_group.CreateGroupActivity.Companion.PERMISSION_REQUEST_CODE
 import com.example.eatoo.src.review.create_review.create_review1.CreateReview1Activity
@@ -40,7 +42,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapBinding::inflate),
     OnMapReadyCallback, GoogleMap.OnMapClickListener,
     GoogleMap.OnMarkerClickListener, View.OnClickListener, RegisterNewStoreDialogInterface,
-    StoreMapView, ExistingStoreRVAdapter.OnReviewClickListener {
+    StoreMapView, ExistingStoreRVAdapter.OnReviewClickListener, ReverseGeoView {
 
 
     private lateinit var storeRegisterDialog: RegisterNewStoreDialog
@@ -87,8 +89,6 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         this.map.setOnMapClickListener(this)
         this.map.setOnMarkerClickListener(this)
 
-//        currentSelectMarker = setupMarker(searchResult)
-//        currentSelectMarker?.showInfoWindow()
     }
 
     private fun setupMarker(locationLatLngEntity: LocationLatLngEntity): Marker? { //검색한 위도경도
@@ -214,29 +214,19 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
      */
 
     override fun onMapClick(latlng: LatLng) {
-        val markerOptions = MarkerOptions().apply {
-            position(latlng)
-            title("hello world!")
-        }
-//        map.clear()
+        val markerOptions = MarkerOptions().position(latlng)
+
         map.addMarker(markerOptions)
 
         storeLng = latlng.longitude
         storeLat = latlng.latitude
 
-        Log.d("storeMapactivity", "lng : ${latlng.longitude}, lat : ${latlng.latitude}")
         StoreMapService(this).tryGetStore(getUserIdx(), latlng.longitude, latlng.latitude)
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        //클릭확인
-        marker.title?.let {
-            showCustomToast(it)
-        }
         storeLng = marker.position.longitude
         storeLat = marker.position.latitude
-
-        Log.d("storeMapactivity", "lng : $storeLng, lat : $storeLat")
 
         StoreMapService(this).tryGetStore(getUserIdx(), storeLng, storeLat)
 
@@ -268,7 +258,6 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     override fun onGetStoreSuccess(response: StoreResponse) {
         //recyclerview 로 등록 스토어 보여주기.
         binding.btnRegisterNewStore.isVisible = false
-        Log.d("storeMapactivity", response.toString())
         storeAdapter = ExistingStoreRVAdapter(this, response.result, this)
         binding.rvExistingStore.apply {
             adapter = storeAdapter
@@ -280,13 +269,12 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     override fun onGetStoreFail(message: String?, code: Int) {
         binding.btnRegisterNewStore.isVisible = true
         if (code == 2010) {
-            StoreMapService(this).tryGetAddress(storeLat, storeLng)
+            ReverseGeoService(this).tryGetAddress(storeLat, storeLng)
         }
     }
 
     override fun onGetAddressSuccess(response: KakaoAddressResponse?) {
         //도로명 주소 변환! 도로명 주소가 없다면 지번 주소로 설정.
-        Log.d("storeMapactivity", "kakaomap address : $response")
         roadAddress = if (response?.documents?.get(0)?.road_address == null) {
             response?.documents?.get(0)?.address?.address_name
         } else {
@@ -300,7 +288,6 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     }
 
     override fun onGetAllStoreSuccess(response: AllStoreResponse) {
-        Log.d("storeMapactivity", response.toString())
         response.result.forEach {
             val markerOptions = MarkerOptions().apply {
                 position(LatLng(it.latitude, it.longitude))

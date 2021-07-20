@@ -56,7 +56,6 @@
     <!--profile-->
 
 
-
     <!--review-->
     <string name="my_review_user_title">님이 작성하신</string>
     <string name="is_review">후기입니다 :)</string>
@@ -124,6 +123,7 @@
     <string name="input_store_keyword">가게를 직접 입력해주세요</string>
     <string name="input_location">위치를 직접 입력해주세요</string>
     <string name="set_current_location">현 위치로 주소 설정하기</string>
+    <string name="current_location">현재위치</string>
     <string name="search_address_fail">현 위치 주소를 가져오지 못 했습니다.</string>
     <string name="input_jwt_request">JWT를 입력해주세요.</string>
     <string name="invalid_jwt">유효하지 않은 JWT입니다.</string>
@@ -290,8 +290,6 @@
     <string name="edit">편집</string>
     <string name="taste_keyword">식성 키워드</string>
     <string name="character">캐릭터</string>
-
-
 
 
     <!--dialog-->

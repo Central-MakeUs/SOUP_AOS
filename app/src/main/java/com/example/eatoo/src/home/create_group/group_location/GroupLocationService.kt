@@ -8,7 +8,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class GroupLocationService(val view: GroupLocationActivity) {
+class GroupLocationService(val view: GroupLocationView) {
 
     fun tryGetLocation(keyword: String) {
 
