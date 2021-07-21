@@ -94,13 +94,15 @@ class HomeFragment
 
             GroupAdapter.setItemClickListener(object :
                 Home_Group_Kind_RecyclerviewAdapter.ItemClickListener {
-                override fun onClick(view: View, position: Int, groupIdx : Int, state : String) {
+                override fun onClick(view: View, position: Int, groupIdx : Int, groupname : String, state : String) {
                     if (position == GroupSize && state == "plus") {
                         startActivity(Intent(activity, CreateGroupActivity::class.java))
                     }
                     else if(position != GroupSize  && state == "Group_activity"){
                         ApplicationClass.sSharedPreferences.edit()
                             .putInt(ApplicationClass.GROUP_IDX,  groupIdx).apply()
+                        ApplicationClass.sSharedPreferences.edit()
+                            .putString(ApplicationClass.GROUP_NAME,  groupname).apply()
                         startActivity(Intent(activity, GroupActivity::class.java))
                     }
                 }
