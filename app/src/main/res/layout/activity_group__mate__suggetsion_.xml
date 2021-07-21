@@ -80,13 +80,12 @@
                 android:id="@+id/gourp_chipGroup_scrollview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="23dp"
                 android:layout_marginEnd="30dp"
                 android:overScrollMode="never"
                 android:scrollbars="none"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/appCompatTextView15"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView15">
 
                 <com.google.android.material.chip.ChipGroup
@@ -104,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="29dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/main_mate_suggestion_name"
                 android:textColor="@color/black"

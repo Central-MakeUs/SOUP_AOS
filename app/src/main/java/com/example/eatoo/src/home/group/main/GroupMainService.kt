@@ -5,6 +5,7 @@ import com.example.eatoo.config.ApplicationClass
 import com.example.eatoo.single_status.SingleResultResponse
 import com.example.eatoo.single_status.SingleRetrofitInterface
 import com.example.eatoo.src.home.group.main.model.GroupMainResponse
+import com.example.eatoo.src.home.group.main.model.MateAttendResponse
 import com.example.eatoo.src.home.group.member.model.GroupMemberResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -53,5 +54,9 @@ class GroupMainService (val view : GroupMainView) {
 
         })
     }
+
+
+
+
 
 }

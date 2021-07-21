@@ -17,6 +17,7 @@ data class GroupMainResult(
 data class GroupMateResponse(
     @SerializedName("status") val status: Int,
     @SerializedName("mateIdx") val mateIdx: Int,
+    @SerializedName("isAttended") val isAttended: String,
     @SerializedName("imgUrl") val imgUrl: String,
     @SerializedName("mateName") val mateName: String,
     @SerializedName("storeName") val storeName: String,

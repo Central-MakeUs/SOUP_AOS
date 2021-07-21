@@ -32,9 +32,18 @@ class InviteActivity :  BaseActivity<ActivityInviteBinding>(ActivityInviteBindin
     override fun onGetInviteGroupDateSuccess(response: InviteResponse) {
         if(response.code == 1000){
 
-            val GroupAdapter = Invite_Group_Kind_RecyclerviewAdapter(response.result)
-            binding.myGroupRecyclerview.adapter = GroupAdapter
-            binding.myGroupRecyclerview.layoutManager = LinearLayoutManager(this).also { it.orientation = LinearLayoutManager.HORIZONTAL }
+            if(response.result.size == 0){
+                binding.myGroupRecyclerview.visibility = View.GONE
+                binding.mySuggestionNoneLayout.visibility = View.VISIBLE
+                binding.inviteBtn.visibility = View.GONE
+            }
+            else{
+                binding.myGroupRecyclerview.visibility = View.VISIBLE
+                binding.inviteBtn.visibility = View.VISIBLE
+                binding.mySuggestionNoneLayout.visibility = View.GONE
+                val GroupAdapter = Invite_Group_Kind_RecyclerviewAdapter(response.result)
+                binding.myGroupRecyclerview.adapter = GroupAdapter
+                binding.myGroupRecyclerview.layoutManager = LinearLayoutManager(this).also { it.orientation = LinearLayoutManager.HORIZONTAL }
 //            binding.indicator.attachTo(binding.myGroupRecyclerview, true)
 //            GroupAdapter.setItemClickListener(object :
 //                Invite_Group_Kind_RecyclerviewAdapter.ItemClickListener {
@@ -43,14 +52,16 @@ class InviteActivity :  BaseActivity<ActivityInviteBinding>(ActivityInviteBindin
 //                    GroupName = groupname
 //                }
 //            })
-            GroupAdapter.setItemClickListener(object :
-                Invite_Group_Kind_RecyclerviewAdapter.ItemClickListener {
-                override fun onClick(view: View, position: Int, groupIdx : Int ,groupname : String) {
-                    GroupIdx = groupIdx
-                    GroupName = groupname
-                    Click_status = 1
-                }
-            })
+                GroupAdapter.setItemClickListener(object :
+                    Invite_Group_Kind_RecyclerviewAdapter.ItemClickListener {
+                    override fun onClick(view: View, position: Int, groupIdx : Int ,groupname : String) {
+                        GroupIdx = groupIdx
+                        GroupName = groupname
+                        Click_status = 1
+                    }
+                })
+            }
+
 
             binding.inviteBtn.setOnClickListener {
                 if(Click_status == 1){

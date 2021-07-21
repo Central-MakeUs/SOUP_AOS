@@ -26,23 +26,23 @@ class Group_Home_Main_Store_Kind_RecyclerviewAdapter(val StoreList : ArrayList<G
 
 
 
-        val imageUrl: String = StoreList[position].imgUrl
-        if(imageUrl != null) {
-            Glide.with(holder.view.context).load(imageUrl).into(holder.Storeimg)
-            holder.Storeimg.background = holder.view.context.resources.getDrawable(R.drawable.group_main_home_store_img_background, null)
-            holder.Storeimg.clipToOutline = true
-        }
-
-        if(StoreList[position].isLiked == "Y"){
-            holder.Storeimg.background = holder.view.context.resources.getDrawable(R.drawable.eva_heart_outline, null)
-        }
-        else{
-            holder.Storeimg.background = holder.view.context.resources.getDrawable(R.drawable.vector, null)
-        }
-
-        holder.StoreName.text = StoreList[position].storeName
-        holder.ResraurantLocation.text = StoreList[position].address
-        holder.StoreScore.text = StoreList[position].rating.toString()
+//        val imageUrl: String = StoreList[position].imgUrl
+//        if(imageUrl != null) {
+//            Glide.with(holder.view.context).load(imageUrl).into(holder.Storeimg)
+//            holder.Storeimg.background = holder.view.context.resources.getDrawable(R.drawable.group_main_home_store_img_background, null)
+//            holder.Storeimg.clipToOutline = true
+//        }
+//
+//        if(StoreList[position].isLiked == "Y"){
+//            holder.Storeimg.background = holder.view.context.resources.getDrawable(R.drawable.eva_heart_outline, null)
+//        }
+//        else{
+//            holder.Storeimg.background = holder.view.context.resources.getDrawable(R.drawable.vector, null)
+//        }
+//
+//        holder.StoreName.text = StoreList[position].storeName
+//        holder.ResraurantLocation.text = StoreList[position].address
+//        holder.StoreScore.text = StoreList[position].rating.toString()
 
     }
 

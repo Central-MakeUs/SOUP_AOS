@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         android:overScrollMode="never"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cardview_review_suggest"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -48,14 +48,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/appCompatTextView12" />
 
+
             <LinearLayout
                 android:id="@+id/finding_mate_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="11dp"
+                android:layout_marginTop="12dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView12">
 
@@ -63,13 +65,19 @@
                     android:id="@+id/finding_mate_recyclerview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginEnd="20dp"
                     android:descendantFocusability="blocksDescendants"
-                    android:overScrollMode="never" />
+                    android:overScrollMode="never"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    tools:ignore="RtlHardcoded" />
 
                 <HorizontalScrollView
                     android:id="@+id/finding_mate_no_scroll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
                     android:overScrollMode="never"
                     android:scrollbars="none"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -94,10 +102,10 @@
                                 android:id="@+id/constraintLayout2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
-                                android:elevation="5dp"
                                 android:layout_margin="5dp"
                                 android:background="@drawable/background_dialog"
+                                android:clickable="false"
+                                android:elevation="5dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -155,8 +163,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="11dp"
-                                android:elevation="5dp"
                                 android:background="@drawable/mathing_status_background"
+                                android:elevation="5dp"
                                 android:fontFamily="sans-serif"
                                 android:padding="1.5dp"
                                 android:paddingStart="11dp"
@@ -176,8 +184,8 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="15dp"
-                            android:layout_marginStart="15dp">
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="15dp">
 
 
                             <androidx.constraintlayout.widget.ConstraintLayout
@@ -247,8 +255,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="11dp"
-                                android:elevation="5dp"
                                 android:background="@drawable/mathing_status_background"
+                                android:elevation="5dp"
                                 android:fontFamily="sans-serif"
                                 android:padding="1.5dp"
                                 android:paddingStart="11dp"
@@ -271,8 +279,6 @@
 
             </LinearLayout>
 
-
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView14"
                 android:layout_width="wrap_content"
@@ -293,6 +299,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-black"
                 android:lineSpacingExtra="13sp"
                 android:text="@string/group_recommend_restaurant"
@@ -308,10 +315,10 @@
                 android:layout_marginEnd="23dp"
                 android:fontFamily="sans-serif-black"
                 android:lineSpacingExtra="12sp"
+                android:text="@string/group_view_more"
                 android:textColor="@color/black"
                 android:textSize="10sp"
                 android:textStyle="normal"
-                android:text="@string/group_view_more"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView13"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/appCompatTextView13" />
@@ -320,32 +327,31 @@
                 android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="20dp"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView13">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/group_store_recyclerview"
-                    android:paddingEnd="5dp"
-                    android:overScrollMode="never"
-                    android:scrollbars="none"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:paddingEnd="5dp"
+                    android:scrollbars="none"
                     tools:ignore="RtlSymmetry" />
-
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/none_group_store_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="5dp"
                     android:layout_margin="5dp"
-                    android:background="@drawable/background_dialog">
+                    android:background="@drawable/background_dialog"
+                    android:elevation="5dp">
 
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -370,6 +376,7 @@
 
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/group_name_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -432,81 +439,84 @@
             </LinearLayout>
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="18dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_write_review"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/roboto_bold"
-                    android:lineHeight="15sp"
-                    android:lineSpacingExtra="8sp"
-                    android:text="@string/group_main_review1"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:lineHeight="25sp"
-                    tools:ignore="UnusedAttribute" />
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_write_review_exp1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:lineHeight="18sp"
-                    android:text="@string/group_main_review2"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="@+id/tv_write_review"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_write_review"
-                    tools:ignore="UnusedAttribute" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_write_review_exp2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:lineHeight="18sp"
-                    android:text="@string/group_main_review3"
-                    android:textColor="@color/main_color"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="@+id/tv_write_review"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_write_review_exp1"
-                    tools:ignore="UnusedAttribute" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_review_char"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginEnd="20dp"
-                    android:src="@drawable/ic_group_271"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_write_review_exp2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tv_write_review_exp2" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.core.widget.NestedScrollView>
 
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_review_suggest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:elevation="10dp"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_write_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_bold"
+                android:lineSpacingExtra="8sp"
+                android:text="@string/group_main_review1"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:lineHeight="25sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UnusedAttribute" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_write_review_exp1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/group_main_review2"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="11sp"
+                android:lineHeight="18sp"
+                tools:ignore="UnusedAttribute"
+                app:layout_constraintStart_toStartOf="@+id/tv_write_review"
+                app:layout_constraintTop_toBottomOf="@+id/tv_write_review" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_write_review_exp2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:layout_marginBottom="18dp"
+                android:fontFamily="@font/roboto_regular"
+                android:lineHeight="10sp"
+                android:lineSpacingExtra="8sp"
+                android:text="@string/group_main_review3"
+                android:textColor="@color/main_color"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_write_review_exp1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_write_review_exp1"
+                tools:ignore="SmallSp,UnusedAttribute" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_review_char"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_group_271"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

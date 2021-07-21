@@ -1,24 +1,22 @@
 package com.example.eatoo.src.home.group.main
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.eatoo.R
-import com.example.eatoo.config.ApplicationClass.Companion.GROUP_IDX
 import com.example.eatoo.config.BaseFragment
 import com.example.eatoo.databinding.FragmentGroupMainBinding
-import com.example.eatoo.src.home.adapter.Home_Group_Kind_RecyclerviewAdapter
 import com.example.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
 import com.example.eatoo.src.home.group.main.adapter.Group_Home_Main_Mate_Kind_RecyclerviewAdapter
 import com.example.eatoo.src.home.group.main.adapter.Group_Home_Main_Store_Kind_RecyclerviewAdapter
 import com.example.eatoo.src.home.group.main.model.GroupMainResponse
 import com.example.eatoo.util.getGroupIdx
+import com.example.eatoo.util.getGroupName
 import com.example.eatoo.util.getUserIdx
 
-class GroupMainFragment : BaseFragment<FragmentGroupMainBinding>(FragmentGroupMainBinding::bind, R.layout.fragment_group_main) ,GroupMainView {
+class GroupMainFragment() : BaseFragment<FragmentGroupMainBinding>(FragmentGroupMainBinding::bind, R.layout.fragment_group_main) ,GroupMainView {
 
 
     val GroupIdx = getGroupIdx()
@@ -31,6 +29,7 @@ class GroupMainFragment : BaseFragment<FragmentGroupMainBinding>(FragmentGroupMa
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onGetGroupMainSuccess(response: GroupMainResponse) {
         showCustomToast("요청 완료")
 
@@ -49,6 +48,13 @@ class GroupMainFragment : BaseFragment<FragmentGroupMainBinding>(FragmentGroupMa
             binding.findingMateRecyclerview.layoutManager = LinearLayoutManager(activity).also {
                 it.orientation = LinearLayoutManager.HORIZONTAL
             }
+            GroupAdapter.setItemClickListener(object :
+                Group_Home_Main_Mate_Kind_RecyclerviewAdapter.ItemClickListener {
+                override fun onClick(view: View, position: Int, mateIdx : Int) {
+                    val dialog = context?.let { MateAttendDialog(it, mateIdx) }
+                    dialog?.show()
+                }
+            })
 
         }
 
@@ -65,6 +71,7 @@ class GroupMainFragment : BaseFragment<FragmentGroupMainBinding>(FragmentGroupMa
         else{
             binding.groupStoreRecyclerview.visibility = View.GONE
             binding.noneGroupStoreLayout.visibility = View.VISIBLE
+            binding.groupNameTv.text = "'" + getGroupName().toString() + "'"
         }
 
     }

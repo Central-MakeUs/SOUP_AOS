@@ -41,7 +41,7 @@ class Group_Mate_Suggetsion_Activity
 
 
         binding.registerMateBtn.setOnClickListener {
-            val postRequest = CreateMateRequest(groupIdx = GroupIndex,name = binding.suggestionNameEdt.text.toString(), storeName = binding.storeEdt.text.toString(), startTime = binding.startTimeBtn.text.toString() ,endTime = binding.startTimeBtn.text.toString() ,headCount = Integer.parseInt(binding.limitPeopleEdt.text.toString()),timeLimit = binding.limitTimeTv.text.toString() ,imgUrl = "" )
+            val postRequest = CreateMateRequest(groupIdx = GroupIndex,name = binding.suggestionNameEdt.text.toString(), storeName = binding.storeEdt.text.toString(), startTime =  binding.startTimeBtn.text.toString() ,endTime =  binding.startTimeBtn.text.toString() ,headCount = Integer.parseInt(binding.limitPeopleEdt.text.toString()),timeLimit = binding.limitTimeTv.text.toString() ,imgUrl = "" )
             Log.d("요청사항", ""+ postRequest)
             MateCreateService(this).postCreateMate(postRequest,getUserIdx())
             showLoadingDialog(this)
@@ -115,16 +115,19 @@ class Group_Mate_Suggetsion_Activity
 //Mate 보이기
 
     override fun onGetMateSuccess(response: MateResponse) {
-        if(response.code == 1000)
-            startActivity(Intent(this, MainActivity::class.java))
+        if(response.code == 1000) {
+            val dialog = Mate_completeDialog(this)
+            dialog.show()
+        }
     }
 
     override fun onGetMateFail(message: String) {
     }
 
-//그룹 생성하기
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {
         dismissLoadingDialog()
+        val dialog = Mate_completeDialog(this)
+        dialog.show()
         finish()
 
     }

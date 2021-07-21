@@ -109,10 +109,10 @@
                 android:textColor="@color/black"
                 android:textSize="11sp"
                 android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView15"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintTop_toTopOf="@+id/appCompatImageView15"
+
                 tools:ignore="SmallSp" />
 
             <androidx.appcompat.widget.AppCompatImageView

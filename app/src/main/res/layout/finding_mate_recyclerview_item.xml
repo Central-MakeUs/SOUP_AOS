@@ -3,120 +3,152 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:elevation="5dp"
-    android:background="@drawable/background_dialog"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="5dp"
+        android:background="@drawable/background_dialog"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/mate_suggestion_img"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mate_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="52dp"
-            android:src="@drawable/ic_main_home_mate"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/mate_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:fontFamily="sans-serif-black"
-            android:lineSpacingExtra="13sp"
-            android:text="@string/group_mate_title"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="@+id/mate_suggestion_img"
-            app:layout_constraintStart_toStartOf="@+id/mate_suggestion_img"
-            app:layout_constraintTop_toBottomOf="@+id/mate_suggestion_img" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/mate_resraurant_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/background_keyword"
-            android:fontFamily="sans-serif-black"
-            android:lineSpacingExtra="9sp"
-            android:padding="3dp"
-            android:text="@string/group_mate_restaurant"
-            android:textColor="@color/main_color"
-            android:textSize="8sp"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toStartOf="@+id/mate_title"
-            app:layout_constraintStart_toStartOf="@+id/mate_title"
-            app:layout_constraintTop_toBottomOf="@+id/mate_title"
-            tools:ignore="SmallSp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/mate_time_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/background_keyword"
-            android:fontFamily="sans-serif-black"
-            android:lineSpacingExtra="9sp"
-            android:padding="3dp"
-            android:text="@string/group_time"
-            android:textColor="@color/main_color"
-            android:textSize="8sp"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="@+id/mate_title"
-            app:layout_constraintStart_toEndOf="@+id/mate_title"
-            app:layout_constraintTop_toBottomOf="@+id/mate_title"
-            tools:ignore="SmallSp" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
-            android:layout_marginBottom="12dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/mate_title"
-            app:layout_constraintStart_toStartOf="@+id/mate_title"
-            app:layout_constraintTop_toBottomOf="@+id/mate_title">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/mate_limit_people_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="sans-serif-black"
-                android:lineSpacingExtra="12sp"
-                android:text="@string/group_mate_limit_people"
-                android:textColor="@color/black"
-                android:textSize="11sp"
-                android:textStyle="normal"
-                tools:ignore="SmallSp" />
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/mate_suggestion_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="6dp"
-                android:src="@drawable/ic_hello" />
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="52dp"
+                android:src="@drawable/ic_main_home_mate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mate_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:fontFamily="sans-serif-black"
+                android:lineSpacingExtra="13sp"
+                android:text="@string/group_mate_title"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="@+id/mate_suggestion_img"
+                app:layout_constraintStart_toStartOf="@+id/mate_suggestion_img"
+                app:layout_constraintTop_toBottomOf="@+id/mate_suggestion_img" />
 
 
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mate_title">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/mate_resraurant_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginEnd="2.5dp"
+                    android:background="@drawable/background_keyword"
+                    android:fontFamily="sans-serif-black"
+                    android:lineSpacingExtra="9sp"
+                    android:padding="3dp"
+                    android:text="@string/group_mate_restaurant"
+                    android:textColor="@color/main_color"
+                    android:textSize="8sp"
+                    android:textStyle="normal"
+                    tools:ignore="RtlHardcoded,SmallSp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/mate_time_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2.5dp"
+                    android:layout_gravity="center|right"
+                    android:background="@drawable/background_keyword"
+                    android:fontFamily="sans-serif-black"
+                    android:lineSpacingExtra="9sp"
+                    android:padding="3dp"
+                    android:text="@string/group_time"
+                    android:textColor="@color/main_color"
+                    android:textSize="8sp"
+                    android:textStyle="normal"
+                    tools:ignore="RtlHardcoded,SmallSp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/mate_title"
+                app:layout_constraintStart_toStartOf="@+id/mate_title"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/mate_limit_people_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-black"
+                    android:lineSpacingExtra="12sp"
+                    android:text="@string/group_mate_limit_people"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    android:textStyle="normal"
+                    tools:ignore="SmallSp" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/no_attend_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="6dp"
+                    android:src="@drawable/group" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/attend_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="6dp"
+                    android:src="@drawable/ic_hello" />
+
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -127,18 +159,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="11dp"
+        android:background="@drawable/mathing_status_background"
+        android:fontFamily="sans-serif"
+        android:padding="1.5dp"
+        android:elevation="5dp"
         android:paddingStart="11dp"
         android:paddingEnd="11dp"
-        android:background="@drawable/mathing_status_background"
-        android:padding="1.5dp"
         android:text="@string/group_main_mate_matching"
-        android:fontFamily="sans-serif"
-        android:textStyle="bold"
-        android:textSize="10sp"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout2"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/background"
+        app:layout_constraintStart_toStartOf="@+id/background"
+        app:layout_constraintTop_toTopOf="@+id/background"
         tools:ignore="SmallSp" />
 
 
