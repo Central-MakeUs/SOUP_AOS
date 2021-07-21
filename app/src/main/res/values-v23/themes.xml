@@ -50,6 +50,11 @@
         <item name="chipStrokeWidth">1.5dp</item>
     </style>
 
+    <style name="CustomGroupKeywordChipStyle1" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipStrokeColor">@color/white</item>
+        <item name="chipStrokeWidth">1.5dp</item>
+    </style>
+
     <style name="CustomKeywordChipStyle2" parent="Widget.MaterialComponents.Chip.Action">
         <item name="chipBackgroundColor">@color/white</item>
         <item name="chipStrokeColor">@color/chip_stroke_color</item>

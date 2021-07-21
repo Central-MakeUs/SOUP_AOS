@@ -79,9 +79,10 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip1"
-                        style="@style/CustomGroupKeywordChipStyle"
+                        style="@style/CustomGroupKeywordChipStyle1"
                         android:clickable="false"
                         android:checkable="false"
+                        android:backgroundTint="@color/transparent"
                         android:fontFamily="sans-serif-medium"
                         android:textStyle="normal"
                         android:textSize="15sp"
@@ -92,9 +93,10 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip2"
-                        style="@style/CustomGroupKeywordChipStyle"
+                        style="@style/CustomGroupKeywordChipStyle1"
                         android:clickable="false"
                         android:checkable="false"
+                        android:backgroundTint="@color/transparent"
                         android:layout_marginStart="9dp"
                         android:fontFamily="sans-serif-medium"
                         android:textStyle="normal"
@@ -115,9 +117,10 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip2_1"
-                        style="@style/CustomGroupKeywordChipStyle"
+                        style="@style/CustomGroupKeywordChipStyle1"
                         android:clickable="false"
                         android:checkable="false"
+                        android:backgroundTint="@color/transparent"
                         android:fontFamily="sans-serif-medium"
                         android:textStyle="normal"
                         android:textSize="15sp"
@@ -128,9 +131,10 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip2_2"
-                        style="@style/CustomGroupKeywordChipStyle"
+                        style="@style/CustomGroupKeywordChipStyle1"
                         android:clickable="false"
                         android:checkable="false"
+                        android:backgroundTint="@color/transparent"
                         android:layout_marginStart="9dp"
                         android:fontFamily="sans-serif-medium"
                         android:textStyle="normal"

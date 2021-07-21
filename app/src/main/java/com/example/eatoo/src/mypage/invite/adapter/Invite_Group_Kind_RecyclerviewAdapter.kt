@@ -1,6 +1,7 @@
 package com.example.eatoo.src.mypage.invite.adapter
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +12,14 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eatoo.R
+import com.example.eatoo.config.ApplicationClass
 import com.example.eatoo.src.mypage.invite.model.InviteGroupResult
 import com.google.android.material.chip.Chip
 
 class Invite_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<InviteGroupResult>) : RecyclerView.Adapter<Invite_Group_Kind_RecyclerviewAdapter.CustomViewholder>(){
+
+    val colorArray = ApplicationClass.applicationResources.getIntArray(R.array.groupRVColor)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
         val inflaterview = LayoutInflater.from(parent.context).inflate(R.layout.item_invit_group_recyclerview,parent,false)
 
@@ -24,7 +29,7 @@ class Invite_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<InviteGrou
 
     override fun getItemCount() = GroupList.size
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onBindViewHolder(holder: CustomViewholder, position : Int) {
 
         holder.GroupName.text = GroupList[position].name
@@ -98,22 +103,31 @@ class Invite_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<InviteGrou
         }
 
 
-//        if (GroupList[position].getGroupMembersRes[0].color == 1){
-//            holder.GroupLayout.setBackgroundColor(R.color.group_red)
-//        }
-//        else if(GroupList[position].getGroupMembersRes[0].color == 2){
-//            holder.GroupLayout.setBackgroundColor(R.color.group_orange)
-//        }
-//        else if(GroupList[position].getGroupMembersRes[0].color == 3){
-//            holder.GroupLayout.setBackgroundColor(R.color.group_orange_litle)
-//        }
-//        else if(GroupList[position].getGroupMembersRes[0].color == 4){
-//            holder.GroupLayout.setBackgroundColor(R.color.group_yellow)
-//        }
-//        else if(GroupList[position].getGroupMembersRes[0].color == 5){
-//            holder.GroupLayout.setBackgroundColor(R.color.group_yellow_litle)
-//
-//        }
+        if (GroupList[position].color == 1){
+            holder.GroupLayout.setBackgroundTintList(
+                ColorStateList.valueOf(colorArray[0]))
+            holder.GroupKeywordChip1.setBackgroundTintList(
+                ColorStateList.valueOf(colorArray[0]))
+        }
+        else if(GroupList[position].color == 2){
+            holder.GroupLayout.setBackgroundTintList(
+                ColorStateList.valueOf(colorArray[1]))
+            holder.GroupKeywordChip1.setBackgroundTintList(
+                ColorStateList.valueOf(colorArray[1]))
+        }
+        else if(GroupList[position].color == 3){
+            holder.GroupLayout.backgroundTintList = ColorStateList.valueOf(colorArray[2])
+            holder.GroupKeywordChip1.backgroundTintList = ColorStateList.valueOf(colorArray[2])
+        }
+        else if(GroupList[position].color == 4){
+            holder.GroupLayout.backgroundTintList = ColorStateList.valueOf(colorArray[3])
+            holder.GroupKeywordChip1.backgroundTintList = ColorStateList.valueOf(colorArray[3])
+        }
+        else if(GroupList[position].color == 5){
+            holder.GroupLayout.backgroundTintList = ColorStateList.valueOf(colorArray[4])
+            holder.GroupKeywordChip1.backgroundTintList = ColorStateList.valueOf(colorArray[4])
+
+        }
 
     }
 

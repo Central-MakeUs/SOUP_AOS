@@ -52,4 +52,12 @@
         <item>@color/group_orange_litle</item>
         <item>@color/group_vote_rv</item>
     </array>
+
+    <array name="groupRVColor">
+        <item>@color/group_red</item>
+        <item>@color/group_orange</item>
+        <item>@color/group_orange_litle</item>
+        <item>@color/group_yellow</item>
+        <item>@color/group_yellow_litle</item>
+    </array>
 </resources>
