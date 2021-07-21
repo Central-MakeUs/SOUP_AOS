@@ -27,9 +27,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:paddingStart="19dp"
             app:contentInsetStart="0dp"
-            app:titleText="@string/nothing"
+            app:leftIcon="@drawable/ic_icon__1_"
             />
 
             <androidx.appcompat.widget.AppCompatImageView
