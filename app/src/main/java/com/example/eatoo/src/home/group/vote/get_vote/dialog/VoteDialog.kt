@@ -24,14 +24,13 @@ import com.example.eatoo.src.home.group.vote.get_vote.model.VoteDetailResult
 import org.w3c.dom.Text
 
 class VoteDialog(
-    val view: GroupVoteFragment,
-    private val voteDetail: VoteDetailResult
+    val view: GroupVoteFragment
 ) : Dialog(view.requireContext()), View.OnClickListener {
 
+    lateinit var voteDetail : VoteDetailResult
     private lateinit var binding: DialogVoteBinding
     var votedItemList = ArrayList<Int>()
     private var toggleChecked = 0
-    private var reVote = false
     private val mInflater: LayoutInflater =
         context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -74,8 +73,37 @@ class VoteDialog(
         }
     }
 
+    /////공통 메서드
+    private fun setVoteConfirmToRetry() {
+        if (voteDetail.isVoted == "Y") {
+            binding.btnVoteDialogDone.text =
+                ApplicationClass.applicationResources.getString(R.string.dialog_vote_retry)
+            binding.btnVoteDialogDone.isSelected = true
+        }
+    }
 
-    /////////복수투표
+    private fun setUnItemChecked(voteItem: TextView?, votedNum: TextView?) {
+        voteItem?.background =
+            ContextCompat.getDrawable(context, R.drawable.background_vote_dialog_item)
+        votedNum?.setTextColor(ContextCompat.getColor(context, R.color.dialog_cancel_text))
+        voteItem?.setTextColor(ContextCompat.getColor(context, R.color.black))
+
+    }
+
+    private fun setItemChecked(voteItem: TextView?, votedNum: TextView?) {
+        voteItem?.background =
+            ContextCompat.getDrawable(context, R.drawable.background_vote_dialog_item_orange)
+        votedNum?.setTextColor(ContextCompat.getColor(context, R.color.main_orange))
+        voteItem?.setTextColor(ContextCompat.getColor(context, R.color.black))
+    }
+
+
+    /***
+     *
+     * 복수투표
+     *
+     ***/
+
 
     @SuppressLint("InflateParams")
     private fun inflateMultiVoteView() {
@@ -124,32 +152,28 @@ class VoteDialog(
             insertPoint.addView(dynamicVoteView, insertPoint.childCount)
         }
 
+        //////복수투표 항목추가 버튼
         if (voteDetail.isAddible == "Y") {
             val dynamicAddItemView: View =
                 mInflater.inflate(R.layout.view_vote_dialog_add_item, null)
-            val params = ViewGroup.MarginLayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-            params.marginStart =
-                ApplicationClass.applicationResources.getDimension(R.dimen.vote_dialog_add_item_margin)
-                    .toInt()
-            dynamicAddItemView.layoutParams = params
 
             dynamicAddItemView.setOnClickListener {
                 addVoteItemView(insertPoint)
             }
             insertPoint.addView(dynamicAddItemView, insertPoint.childCount)
         }
+
+        ////재투표인 경우 버튼 변경
         setVoteConfirmToRetry()
 
 
     }
 
+    //////복수투표 항목입력 뷰 추가
     @SuppressLint("InflateParams")
     private fun addVoteItemView(insertPoint : LinearLayout ) {
         val dynamicVoteView: View = mInflater.inflate(R.layout.view_multi_vote_add_item, null)
-        dynamicVoteView.id = binding.llMultiVoteContainer.childCount
+        dynamicVoteView.id = binding.llMultiVoteContainer.childCount-1
         val addVoteItem = dynamicVoteView.findViewById<EditText>(R.id.et_vote_dialog_item)
         addVoteItem.setOnKeyListener { v, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
@@ -158,36 +182,27 @@ class VoteDialog(
             }
             false
         }
+
+
         val votedNum = dynamicVoteView.findViewById<TextView>(R.id.tv_vote_dialog_num)
         votedNum.text = String.format(
             ApplicationClass.applicationResources.getString(R.string.dialog_vote_num), 0)
+
+        val voteToggle =
+            dynamicVoteView.findViewById<AppCompatToggleButton>(R.id.toggle_vote_dialog)
+        voteToggle.setOnClickListener {
+            if (voteToggle.isChecked) {
+                setItemChecked(addVoteItem, votedNum)
+            } else {
+                setUnItemChecked(addVoteItem, votedNum)
+            }
+        }
+
         insertPoint.addView(dynamicVoteView, insertPoint.childCount-1)
 
     }
 
-    private fun setVoteConfirmToRetry() {
-        if (voteDetail.isVoted == "Y") {
-            binding.btnVoteDialogDone.text =
-                ApplicationClass.applicationResources.getString(R.string.dialog_vote_retry)
-            binding.btnVoteDialogDone.isSelected = true
-        }
-    }
-
-    private fun setUnItemChecked(voteItem: TextView?, votedNum: TextView?) {
-        voteItem?.background =
-            ContextCompat.getDrawable(context, R.drawable.background_vote_dialog_item)
-        votedNum?.setTextColor(ContextCompat.getColor(context, R.color.dialog_cancel_text))
-        voteItem?.setTextColor(ContextCompat.getColor(context, R.color.black))
-
-    }
-
-    private fun setItemChecked(voteItem: TextView?, votedNum: TextView?) {
-        voteItem?.background =
-            ContextCompat.getDrawable(context, R.drawable.background_vote_dialog_item_orange)
-        votedNum?.setTextColor(ContextCompat.getColor(context, R.color.main_orange))
-        voteItem?.setTextColor(ContextCompat.getColor(context, R.color.black))
-    }
-
+    ////복수투표 하기.
     private fun getMultiVotedItem() {
         if (binding.btnVoteDialogDone.isSelected) {
             binding.llMultiVoteContainer.children.forEach {
@@ -195,14 +210,18 @@ class VoteDialog(
                 val clChild = llChild.getChildAt(0) as AppCompatToggleButton
                 if (clChild.isChecked) votedItemList.add(it.id)
             }
-            if (reVote) view.onReVoteFinishClicked(voteDetail, votedItemList)
-            else view.onVoteFinishClick(voteDetail, votedItemList)
+            view.onVoteFinishClick(voteDetail, votedItemList)
             dismiss()
+            votedItemList.clear()
         }
     }
 
 
-    /////////복수 투표 X
+    /****
+     *
+     *복수 투표 X
+     *
+     ****/
     private fun inflateNonMultiVoteView() {
 
         val insertPointItem: LinearLayout = findViewById(R.id.ll_nonmuti_vote_item_container)
@@ -245,18 +264,22 @@ class VoteDialog(
         }
 
         binding.radiogroupVoteDialog.setOnCheckedChangeListener { radioGroup, i ->
-            binding.llNonmutiVoteItemContainer.children.forEach {
-                val llChild = it as ConstraintLayout
-                val voteItem = llChild.getChildAt(0) as TextView
-                val votedNum = llChild.getChildAt(1) as TextView
-                if (it.id == i) setItemChecked(voteItem, votedNum)
-                else setUnItemChecked(voteItem, votedNum)
+            binding.llNonmutiVoteItemContainer.children.forEachIndexed { index, it ->
+                   val llChild = it as ConstraintLayout
+                   val voteItem = llChild.getChildAt(0) as? TextView
+                   val votedNum = llChild.getChildAt(1) as? TextView
+                   if(voteItem != null && votedNum != null){
+                       if (it.id == i) setItemChecked(voteItem, votedNum)
+                       else setUnItemChecked(voteItem, votedNum)
+                   }
+
             }
         }
 
+        /////복수 투표 x 항목추가 버튼
         if (voteDetail.isAddible == "Y") {
             val dynamicAddItemView: View =
-                mInflater.inflate(R.layout.view_vote_dialog_add_item, null)
+                mInflater.inflate(R.layout.view_vote_dialog_nonmulti_add_item, null)
 
             dynamicAddItemView.setOnClickListener {
                 addNonMultiVoteItemView(insertPointItem, insertPointRadio)
@@ -264,13 +287,15 @@ class VoteDialog(
             insertPointItem.addView(dynamicAddItemView, insertPointItem.childCount)
         }
 
+        /////복수 투표 x 재투표 버튼
         setVoteConfirmToRetry()
 
     }
+    /////복수 투표 x 항목입력 추가
     @SuppressLint("InflateParams")
     private fun addNonMultiVoteItemView(insertPointItem : LinearLayout , insertPointRadio : RadioGroup) {
         val dynamicVoteView: View = mInflater.inflate(R.layout.view_nonmulti_vote_add_item, null)
-        dynamicVoteView.id = binding.llNonmutiVoteItemContainer.childCount
+        dynamicVoteView.id = binding.llNonmutiVoteItemContainer.childCount-1
         val addVoteItem = dynamicVoteView.findViewById<EditText>(R.id.et_vote_dialog_item)
         addVoteItem.setOnKeyListener { v, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
@@ -282,9 +307,28 @@ class VoteDialog(
         val votedNum = dynamicVoteView.findViewById<TextView>(R.id.tv_vote_dialog_num)
         votedNum.text = String.format(
             ApplicationClass.applicationResources.getString(R.string.dialog_vote_num), 0)
+
         insertPointItem.addView(dynamicVoteView, insertPointItem.childCount-1)
 
         insertPointRadio.addView(setRadioButton(binding.radiogroupVoteDialog.childCount, null))
+
+        binding.radiogroupVoteDialog.setOnCheckedChangeListener { radioGroup, i ->
+            binding.llNonmutiVoteItemContainer.children.forEachIndexed { index, it ->
+                if(index != binding.llNonmutiVoteItemContainer.childCount -1) {
+                    val llChild = it as ConstraintLayout
+                    val voteItemEt = llChild.getChildAt(0) as? EditText
+                    val voteItemTv = llChild.getChildAt(0) as? TextView
+                    val dynamicVotedNum = llChild.getChildAt(1) as TextView
+                    if(voteItemEt != null) {
+                        if (it.id == i) setItemChecked(voteItemEt, dynamicVotedNum)
+                        else setUnItemChecked(voteItemEt, dynamicVotedNum)
+                    }else if(voteItemTv != null) {
+                        if (it.id == i) setItemChecked(voteItemTv, dynamicVotedNum)
+                        else setUnItemChecked(voteItemTv, dynamicVotedNum)
+                    }
+                }
+            }
+        }
 
     }
 
@@ -321,9 +365,9 @@ class VoteDialog(
         if (binding.btnVoteDialogDone.isSelected) {
             votedItemList.add(binding.radiogroupVoteDialog.checkedRadioButtonId)
 
-            if (reVote) view.onReVoteFinishClicked(voteDetail, votedItemList)
-            else view.onVoteFinishClick(voteDetail, votedItemList)
+            view.onVoteFinishClick(voteDetail, votedItemList)
             dismiss()
+            votedItemList.clear()
         }
 
     }

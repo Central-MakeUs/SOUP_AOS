@@ -26,6 +26,8 @@ class GroupVoteFragment
 View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener, VoteDialogInterface{
 
     private lateinit var groupVoteAdapter : GroupVoteRVAdapter
+    private lateinit var voteDialog : VoteDialog
+    private var isNewItemAdded = false
 
     override fun onResume() {
         super.onResume()
@@ -43,6 +45,7 @@ View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener, Vot
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         setOnClickListeners()
         setGroupName()
@@ -67,7 +70,6 @@ View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener, Vot
 
     override fun onGetGroupVoteSuccess(response: GroupVoteResponse) {
         dismissLoadingDialog()
-        Log.d("groupVoteFrag", response.toString())
         if(response.result.isNotEmpty()){
 
             binding.ivNoVote.visibility = View.GONE
@@ -89,16 +91,23 @@ View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener, Vot
 
     override fun onGetGroupVoteFail(message: String?) {
         dismissLoadingDialog()
-//        showCustomToast(message?:resources.getString(R.string.failed_connection))
         binding.ivNoVote.isVisible = true
         binding.tvNoVote.isVisible = true
     }
 
     override fun onGetVoteDetailSuccess(response: VoteDetailResponse) {
         dismissLoadingDialog()
-        Log.d("groupVoteFrag", response.toString())
-        val voteDialog = VoteDialog(this, response.result)
-        voteDialog.show()
+
+        if(isNewItemAdded) {
+            voteDialog.voteDetail = response.result
+            isNewItemAdded = false
+        }else {
+            voteDialog = VoteDialog(this)
+            voteDialog.voteDetail = response.result
+            voteDialog.show()
+        }
+
+
 
     }
 
@@ -108,25 +117,31 @@ View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener, Vot
 
     override fun onPostVotedSuccess(response: VotedResponse) {
         dismissLoadingDialog()
+        showCustomToast("투표하기 성공!")
+        isNewItemAdded = false
     }
 
     override fun onPostVotedFail(message: String?) {
         dismissLoadingDialog()
     }
 
-    override fun onPostNewItemSuccess() {
+    override fun onPostNewItemSuccess(response : NewItemAddedResponse) {
         dismissLoadingDialog()
         showCustomToast("항목 추가 성공!")
+        isNewItemAdded = true
+        GroupVoteService(this).tryGetVoteDetail(getUserIdx(), getGroupIdx(), response.result.voteIdx)
+
+
     }
 
     override fun onPostNewItemFail(message: String?) {
         dismissLoadingDialog()
         showCustomToast(message?:resources.getString(R.string.failed_connection))
+        isNewItemAdded = false
     }
 
     override fun onVoteClicked(item: GroupVoteResult) {
-        showCustomToast(item.name)
-       //투표 조회 서버 통신
+        //투표 조회 api
         context?.let {
             showLoadingDialog(it)
             GroupVoteService(this).tryGetVoteDetail(getUserIdx(), getGroupIdx(), item.voteIdx)
@@ -135,24 +150,14 @@ View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener, Vot
     }
 
     override fun onVoteFinishClick(voteDetail : VoteDetailResult, votedItemList : ArrayList<Int>) {
-        //투표하기 api  연결
         val votedMenuList = ArrayList<VotedMenu>()
         votedItemList.forEach {
             votedMenuList.add(VotedMenu(voteDetail.getMenuRes[it].voteMenuIdx))
         }
-        Log.d("groupVoteFrag", votedMenuList.toString())
-
         context?.let {
             showLoadingDialog(it)
-            GroupVoteService(this).tryPostVote(getUserIdx(), getGroupIdx(), voteDetail.voteIdx, VotedRequest(votedMenuList))
+            GroupVoteService(this).tryPostVote(getUserIdx(), getGroupIdx(), voteDetail.voteIdx, VotedRequest(votedMenuList.toList()))
         }
-    }
-
-    override fun onReVoteFinishClicked(
-        voteDetail: VoteDetailResult,
-        votedItemList: ArrayList<Int>
-    ) {
-        //재투표하기 api 연결.
     }
 
     override fun onVoteItemAdded(voteIdx : Int, newItem: String) {

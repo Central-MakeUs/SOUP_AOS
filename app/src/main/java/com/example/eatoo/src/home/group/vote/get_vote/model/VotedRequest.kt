@@ -1,7 +1,7 @@
 package com.example.eatoo.src.home.group.vote.get_vote.model
 
 data class VotedRequest(
-    val postVoteMenuReq : ArrayList<VotedMenu>
+    val postVoteMenuReq : List<VotedMenu>
 )
 
 data class VotedMenu(

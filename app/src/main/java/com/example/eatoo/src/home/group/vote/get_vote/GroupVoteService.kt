@@ -93,7 +93,7 @@ class GroupVoteService (val view : GroupVoteView){
                     response: Response<NewItemAddedResponse>
                 ) {
                     response.body()?.let {
-                        if (it.isSuccess) view.onPostNewItemSuccess()
+                        if (it.isSuccess) view.onPostNewItemSuccess(response.body() as NewItemAddedResponse)
                         else view.onPostNewItemFail(it.message)
                     }
                 }
