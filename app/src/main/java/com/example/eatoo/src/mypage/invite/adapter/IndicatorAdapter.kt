@@ -49,14 +49,14 @@ class IndicatorAdapter(val context: Context, var cardList: ArrayList<InviteGroup
             else R.drawable.stoke_circle
         )
 
-        holder.bind(asset)
+        //holder.bind(asset)
     }
 
     inner class IndexListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val dotsView: View = view.findViewById(R.id.indicator)
-
-        fun bind(asset: Drawable) {
-            dotsView.background = asset
-        }
+//        val dotsView: View = view.findViewById(R.id.indicator)
+//
+//        fun bind(asset: Drawable) {
+//            dotsView.background = asset
+//        }
     }
 }

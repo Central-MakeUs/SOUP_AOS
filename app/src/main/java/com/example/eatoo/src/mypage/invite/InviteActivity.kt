@@ -1,10 +1,15 @@
 package com.example.eatoo.src.mypage.invite
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.eatoo.config.ApplicationClass
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityInviteBinding
+import com.example.eatoo.src.home.adapter.Home_Group_Kind_RecyclerviewAdapter
+import com.example.eatoo.src.home.create_group.CreateGroupActivity
+import com.example.eatoo.src.home.group.GroupActivity
 import com.example.eatoo.src.mypage.invite.adapter.Invite_Group_Kind_RecyclerviewAdapter
 import com.example.eatoo.src.mypage.invite.model.InviteCodeResponse
 import com.example.eatoo.src.mypage.invite.model.InviteResponse
@@ -15,6 +20,7 @@ class InviteActivity :  BaseActivity<ActivityInviteBinding>(ActivityInviteBindin
 
     lateinit var GroupName : String
     var GroupIdx : Int = 0
+    var Click_status = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,18 +35,30 @@ class InviteActivity :  BaseActivity<ActivityInviteBinding>(ActivityInviteBindin
             val GroupAdapter = Invite_Group_Kind_RecyclerviewAdapter(response.result)
             binding.myGroupRecyclerview.adapter = GroupAdapter
             binding.myGroupRecyclerview.layoutManager = LinearLayoutManager(this).also { it.orientation = LinearLayoutManager.HORIZONTAL }
-            binding.indicator.attachTo(binding.myGroupRecyclerview, true)
+//            binding.indicator.attachTo(binding.myGroupRecyclerview, true)
+//            GroupAdapter.setItemClickListener(object :
+//                Invite_Group_Kind_RecyclerviewAdapter.ItemClickListener {
+//                override fun onClick(view: View, position: Int, groupIdx : Int , groupname : String) {
+//                    GroupIdx = groupIdx
+//                    GroupName = groupname
+//                }
+//            })
             GroupAdapter.setItemClickListener(object :
                 Invite_Group_Kind_RecyclerviewAdapter.ItemClickListener {
-                override fun onClick(view: View, position: Int, groupIdx : Int , groupname : String) {
+                override fun onClick(view: View, position: Int, groupIdx : Int ,groupname : String) {
                     GroupIdx = groupIdx
                     GroupName = groupname
+                    Click_status = 1
                 }
             })
 
             binding.inviteBtn.setOnClickListener {
-                InviteService(this).tryGetInviteCodeData(getUserIdx(),GroupIdx)
-
+                if(Click_status == 1){
+                    InviteService(this).tryGetInviteCodeData(getUserIdx(),GroupIdx)
+                }
+            }
+            binding.backBtn.setOnClickListener {
+                finish()
             }
 
         }

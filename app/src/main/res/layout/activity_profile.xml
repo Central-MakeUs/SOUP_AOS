@@ -112,7 +112,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/et_nickname"
                 android:visibility="gone"
                 tools:visibility="visible"
-                 />
+                />
 
             <View
                 android:id="@+id/view1"
@@ -121,7 +121,7 @@
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="22dp"
-                android:background="@color/input_hint"
+                android:background="@color/gray_101"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_available_nickname" />
@@ -228,7 +228,7 @@
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="35dp"
                 android:layout_marginEnd="22dp"
-                android:background="@color/input_hint"
+                android:background="@color/gray_101"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/chipgroup_profile" />
@@ -270,7 +270,7 @@
                     android:background="@drawable/selector_profile_char1"
                     android:tag="1"
                     android:layout_marginEnd="16dp"
-                   />
+                    />
 
                 <RadioButton
                     android:id="@+id/radiobtn_character2"
@@ -321,6 +321,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="22dp"
                 android:layout_marginBottom="20dp"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/login_btn_background"
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="center"

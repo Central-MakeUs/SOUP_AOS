@@ -231,6 +231,7 @@
         android:background="@drawable/sign_in_btn_background_gray"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
+        style="?android:attr/borderlessButtonStyle"
         android:text="@string/sign_in_check"
         android:textColor="@color/white"
         android:textSize="14sp"

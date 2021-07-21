@@ -22,6 +22,7 @@
     <color name="gray_150">#d8d8d8</color>
     <color name="gray_100">#a8a8a8</color>
     <color name="gray_000">#f1f1f1</color>
+    <color name="gray_101">#dcdcdc</color>
 
 
     <!--make group-->
@@ -50,5 +51,13 @@
         <item>@color/main_orange</item>
         <item>@color/group_orange_litle</item>
         <item>@color/group_vote_rv</item>
+    </array>
+
+    <array name="groupRVColor">
+        <item>@color/group_red</item>
+        <item>@color/group_orange</item>
+        <item>@color/group_orange_litle</item>
+        <item>@color/group_yellow</item>
+        <item>@color/group_yellow_litle</item>
     </array>
 </resources>

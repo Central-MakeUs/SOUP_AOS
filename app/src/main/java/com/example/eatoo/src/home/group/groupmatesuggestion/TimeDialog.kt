@@ -32,10 +32,10 @@ class TimeDialog(context: Context, val dialogInteface : TimeDialogInterface, val
         val window = window
         if (window != null) {
             // 백그라운드 투명
-            window.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+            window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             window.statusBarColor = Color.WHITE
             val params = window.attributes
-            params.width = WindowManager.LayoutParams.MATCH_PARENT
+            params.width = WindowManager.LayoutParams.WRAP_CONTENT
             params.height = WindowManager.LayoutParams.WRAP_CONTENT
             // 열기&닫기 시 애니메이션 설정
             params.windowAnimations = R.style.AnimationPopupStyle
@@ -51,9 +51,7 @@ class TimeDialog(context: Context, val dialogInteface : TimeDialogInterface, val
             Hour = mTimePicker.currentHour.toString()
             minute = mTimePicker.currentMinute.toString()
         }
-        binding.cancleBtn.setOnClickListener {
-            dismiss()
-        }
+
         binding.checkBtn.setOnClickListener {
             //startActivityForResult()
             Log.d("선택된 시간",Hour + minute)

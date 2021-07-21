@@ -117,6 +117,8 @@
     <string name="create_group_name_suggest">그룹 이름을 입력해주세요</string>
     <string name="create_group_color">색상</string>
     <string name="create_group_keyword">키워드</string>
+    <string name="create_group_keyword_exp">을 나타낼 수 있는</string>
+    <string name="create_group_keyword_exp2">키워드를 입력해주세요!</string>
     <string name="create_group_location">위치</string>
     <string name="create_group_register">등록하기</string>
     <string name="create_group_change_location">변경하기</string>
@@ -193,6 +195,13 @@
     <string name="group_recommend_restaurant">추천 맛집!</string>
     <string name="group_view_more">더보기</string>
     <string name="group_main_mate_matching">매칭중</string>
+    <string name="group_main_no_mate_matching">MATE</string>
+    <string name="group_main_no_mate_matching_txt">현재 진행중인\nMATE제안이 없어요</string>
+    <string name="group_main_no_mate_matching_txt2">멤버들에게 먼저\nMATE를 제안해보세요</string>
+    <string name="group_main_no_store_txt">의 추천 맛집이 없습니다.</string>
+    <string name="group_main_no_store_txt2">추천 맛집은 후기를 바탕으로 이루어집니다.</string>
+    <string name="group_main_no_store_txt3">마이페이지에서 후기를 먼저 작성해주세요 :)</string>
+    <string name="group_main_no_store_group_name_ex">회사아악</string>
     <string name="group_main_mate_matching_limit">마감임박</string>
     <string name="group_main_store_name">할머니 국밥</string>
     <string name="group_main_store_location">회사 앞 4거리</string>
@@ -201,6 +210,10 @@
     <string name="group_main_review1">잇투님이 방문한 가게를 공유해요!</string>
     <string name="group_main_review2">잇투님이 작성하신 후기를 통해 회사 주변\n가게를 등록하고 멤버들과 공유해요</string>
     <string name="group_main_review3">잇투님의 그룹만의 맛집지도를 만들어보세요 :)</string>
+
+
+    <string name="main_suggestion_review1">MATE를 제안해보세요!</string>
+    <string name="main_suggestion_review2">그룹을 만들고 멤버들에게 식사\nMATE를 제안해보세요 :)</string>
 
 
     <!--group member-->
@@ -284,6 +297,9 @@
     <string name="inviting">초대하기</string>
     <string name="my_member">My 멤버</string>
     <string name="find_invite">초대장 찾기</string>
+    <string name="find_invite_exp">초대장 확인</string>
+    <string name="find_invite_exp2">전달받은 초대코드를 입력해주세요</string>
+    <string name="find_invite_input">초대코드 4자를 입력해주세요</string>
     <string name="questions">문의사항</string>
     <string name="account_secession">계정탈퇴</string>
     <string name="logout">로그아웃</string>

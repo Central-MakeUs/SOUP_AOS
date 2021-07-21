@@ -6,12 +6,10 @@ import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseFragment
 import com.example.eatoo.databinding.FragmentGroupVoteBinding
-import com.example.eatoo.src.home.create_group.model.Keyword
 import com.example.eatoo.src.home.group.vote.create_vote.CreateVoteActivity
 import com.example.eatoo.src.home.group.vote.get_vote.GroupVoteService
 import com.example.eatoo.src.home.group.vote.get_vote.GroupVoteView

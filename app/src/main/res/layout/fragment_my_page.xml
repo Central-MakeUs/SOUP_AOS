@@ -30,7 +30,8 @@
         android:layout_width="match_parent"
         android:layout_height="2px"
         android:layout_marginTop="20dp"
-        android:background="@color/gray_300"
+        android:elevation="5dp"
+        android:background="@color/gray_101"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,6 +53,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
         android:src="@drawable/ic_mypage_icon"
         app:layout_constraintBottom_toBottomOf="@+id/user_profile_img"
         app:layout_constraintEnd_toEndOf="@+id/user_profile_img"
@@ -77,6 +79,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="5dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
@@ -213,19 +216,65 @@
 <!--        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4" />-->
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:text="@string/edit"
         android:fontFamily="sans-serif-medium"
-        android:textStyle="normal"
-        android:textSize="12sp"
-        android:textColor="#000000"
         android:gravity="center_horizontal"
+        android:text="@string/edit"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/appCompatTextView4" />
 
+    <FrameLayout
+        android:id="@+id/fl_creategroup_keyword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/appCompatTextView4"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4">
+
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flexbox_make_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:alignContent="stretch"
+            app:alignItems="stretch"
+            app:flexWrap="wrap">
+
+            <EditText
+                android:id="@+id/et_keyword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:gravity="top"
+                android:inputType="text"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_flexGrow="1"
+                tools:visibility="visible" />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/keyword_plus_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_group_gray_plus"
+            app:layout_constraintStart_toStartOf="@id/fl_creategroup_keyword"
+            app:layout_constraintTop_toTopOf="@id/fl_creategroup_keyword" />
+
+
+    </FrameLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -241,7 +290,7 @@
             android:id="@+id/view4"
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:background="@color/gray_300"
+            android:background="@color/gray_101"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -255,10 +304,10 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="sans-serif-medium"
-            android:textStyle="normal"
-            android:textSize="15sp"
-            android:textColor="@color/black"
             android:text="@string/find_invite"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -267,14 +316,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_right_btn"
             android:background="@color/white"
+            android:src="@drawable/ic_right_btn"
             app:layout_constraintBottom_toBottomOf="@+id/find_invite_txt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/find_invite_txt" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/questions_layout"
@@ -289,7 +337,7 @@
             android:id="@+id/view3"
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:background="@color/gray_300"
+            android:background="@color/gray_101"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -335,7 +383,7 @@
             android:id="@+id/view2"
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:background="@color/gray_300"
+            android:background="@color/gray_101"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -382,7 +430,7 @@
             android:id="@+id/view1"
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:background="@color/gray_300"
+            android:background="@color/gray_101"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

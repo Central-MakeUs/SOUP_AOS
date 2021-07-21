@@ -4,11 +4,12 @@ import com.example.eatoo.config.ApplicationClass
 import com.example.eatoo.src.home.model.GroupResponse
 import com.example.eatoo.src.home.model.MateResponse
 import com.example.eatoo.src.home.model.MateResultResponse
+import com.example.eatoo.src.main.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class GroupService (val view : GroupView) {
+class GroupService(val view: GroupView) {
 
     fun tryGetGroupData(userIdx : Int ) {
         val groupinerface = ApplicationClass.sRetrofit.create(GroupRetrofitInterface::class.java)

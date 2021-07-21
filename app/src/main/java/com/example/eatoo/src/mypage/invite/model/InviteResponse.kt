@@ -10,6 +10,8 @@ data class InviteResponse(
 data class InviteGroupResult(
     @SerializedName("groupIdx") val groupIdx: Int,
     @SerializedName("name") val name: String,
+    @SerializedName("color") val color: Int,
+    @SerializedName("membersNumber") val membersNumber: Int,
     @SerializedName("getGroupKeywordRes") val getGroupKeywordRes: ArrayList<InviteGroupKeyword>,
     @SerializedName("getGroupMembersRes") val getGroupMembersRes: ArrayList<InviteMembers>
 )

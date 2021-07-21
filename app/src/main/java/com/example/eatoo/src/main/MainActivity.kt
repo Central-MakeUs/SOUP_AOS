@@ -2,13 +2,10 @@ package com.example.eatoo.src.main
 
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
-import android.view.View
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityMainBinding
+import com.example.eatoo.src.home.GroupService
 import com.example.eatoo.src.home.HomeFragment
 import com.example.eatoo.src.main.model.UserResponse
 import com.example.eatoo.src.mypage.MyPageFragment
@@ -32,13 +29,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 //
 //        // 바인딩
 //        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
+        MainService(this).tryGetUserData(getUserIdx())
+        showLoadingDialog(this)
 
         supportFragmentManager.beginTransaction().replace(R.id.nav_host, HomeFragment()).commitAllowingStateLoss()
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(
             BottomNavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
+
                     R.id.homeFragment -> {
+                        MainService(this).tryGetUserData(getUserIdx())
+                        showLoadingDialog(this)
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.nav_host, HomeFragment())
                             .commitAllowingStateLoss()
@@ -46,18 +48,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                     }
 
                     R.id.suggestionFragment -> {
+                        MainService(this).tryGetUserData(getUserIdx())
+                        showLoadingDialog(this)
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.nav_host, SuggestionFragment())
                             .commitAllowingStateLoss()
                         return@OnNavigationItemSelectedListener true
                     }
                     R.id.wishlistFragment -> {
+                        MainService(this).tryGetUserData(getUserIdx())
+                        showLoadingDialog(this)
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.nav_host, WishListFragment())
                             .commitAllowingStateLoss()
                         return@OnNavigationItemSelectedListener true
                     }
                     R.id.myPageFragment -> {
+                        MainService(this).tryGetUserData(getUserIdx())
+                        showLoadingDialog(this)
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.nav_host, MyPageFragment())
                             .commitAllowingStateLoss()
@@ -68,10 +76,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 false
             })
 
-        MainService(this).tryGetUserData(getUserIdx())
     }
 
     override fun onGetUserDateSuccess(response: UserResponse) {
+        dismissLoadingDialog()
         Log.d("닉네임",response.result.nickName)
         putSharedPrefUser(response.result.nickName)
     }
