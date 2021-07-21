@@ -12,6 +12,7 @@ import com.example.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsio
 import com.example.eatoo.src.home.group.main.adapter.Group_Home_Main_Mate_Kind_RecyclerviewAdapter
 import com.example.eatoo.src.home.group.main.adapter.Group_Home_Main_Store_Kind_RecyclerviewAdapter
 import com.example.eatoo.src.home.group.main.model.GroupMainResponse
+import com.example.eatoo.src.review.create_review.create_review1.CreateReview1Activity
 import com.example.eatoo.util.getGroupIdx
 import com.example.eatoo.util.getGroupName
 import com.example.eatoo.util.getUserIdx
@@ -25,13 +26,17 @@ class GroupMainFragment() : BaseFragment<FragmentGroupMainBinding>(FragmentGroup
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.cardviewReviewSuggest.setOnClickListener {
+            startActivity(Intent(activity, CreateReview1Activity::class.java))
+        }
+
         GroupMainService(this).tryGetGroupMain(getUserIdx(),GroupIdx)
 
     }
 
     @SuppressLint("SetTextI18n")
     override fun onGetGroupMainSuccess(response: GroupMainResponse) {
-        showCustomToast("요청 완료")
+        //showCustomToast("요청 완료")
 
         if(response.result.getMateRes.size == 0){
             binding.findingMateRecyclerview.visibility = View.GONE

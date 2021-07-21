@@ -124,10 +124,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="25dp"
+                        android:background="@color/white"
                         android:layout_marginBottom="136dp"
                         android:fontFamily="sans-serif-medium"
                         android:gravity="center_horizontal"
                         android:lineSpacingExtra="6sp"
+                        android:lineHeight="16sp"
                         android:textColor="@color/gray_100"
                         android:textSize="10sp"
                         android:textStyle="normal"
@@ -135,7 +137,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView14"
-                        tools:ignore="SmallSp"
+                        tools:ignore="SmallSp,UnusedAttribute"
                         tools:text="@string/user_suggestion_no" />
 
 

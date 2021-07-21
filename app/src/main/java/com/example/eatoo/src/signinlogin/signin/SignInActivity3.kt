@@ -38,7 +38,7 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
 
             }
             else{
-                showCustomToast("전달받은 인텐트 없음")
+                //showCustomToast("전달받은 인텐트 없음")
             }
 
 
@@ -96,7 +96,7 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
         dismissLoadingDialog()
         if(response.code == 1000) {
             putSharedPref(response.result.jwt, response.result.userIdx)
-            showCustomToast(response.message)
+            //showCustomToast(response.message)
             startActivity(Intent(this, LoginActivity::class.java))
         }
         else if(response.code == 2025){
@@ -119,7 +119,7 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
 
     override fun onPostSignUpFailure(message: String) {
         dismissLoadingDialog()
-        showCustomToast(message)
+        //showCustomToast(message)
 
     }
 }

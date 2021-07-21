@@ -113,7 +113,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
     override fun onPostLoginSuccess(response: LoginResponse) {
         dismissLoadingDialog()
-        showCustomToast(response.message)
+//        showCustomToast(response.message)
         if(response.code == 1000){
             Log.d("jwt", response.result.jwt)
             Log.d("userIdx", response.result.userIdx.toString())
@@ -125,6 +125,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
     override fun onPostLoginFailure(message: String) {
         dismissLoadingDialog()
-        showCustomToast(message)
+//        showCustomToast(message)
     }
 }
