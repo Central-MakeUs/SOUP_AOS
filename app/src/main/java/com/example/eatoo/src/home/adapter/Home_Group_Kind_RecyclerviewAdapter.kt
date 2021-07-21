@@ -24,6 +24,7 @@ import com.google.android.material.chip.ChipGroup
 class Home_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<GetGroupsRes> , var groupsize : Int , var group_status : String) : RecyclerView.Adapter<Home_Group_Kind_RecyclerviewAdapter.CustomViewholder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
         var inflaterview = LayoutInflater.from(parent.context).inflate(R.layout.item_home_has_group,parent,false)
+        Log.d("group_status",group_status)
         if(group_status == "BASIC")
         {
             inflaterview = LayoutInflater.from(parent.context).inflate(R.layout.item_home_has_group,parent,false)
@@ -42,51 +43,55 @@ class Home_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<GetGroupsRes
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CustomViewholder, position : Int) {
+        Log.d("position",""+position)
         if (position == GroupList.size - 1) {
+            holder.LastLayout.visibility = GONE
             group_status = "LAST"
             holder.GroupName.text = GroupList[position].name
-            if (GroupList[position].getGroupMembersRes.size > 3) {
+            if (GroupList[position].membersNumber > 3) {
                 holder.GroupMemberCount.text =
-                    "+" + (GroupList[position].getGroupMembersRes.size - 3).toString()
+                    "+" + (GroupList[position].membersNumber - 3).toString()
             }
-            else if(GroupList[position].getGroupMembersRes.size == 1){
+            else if(GroupList[position].membersNumber == 1){
                 holder.GroupMember2.visibility = View.GONE
                 holder.GroupMember3.visibility = View.GONE
                 holder.GroupMemberCount.visibility = View.GONE
                 holder.GroupMemberCountBackground.visibility = View.GONE
             }
-            else if(GroupList[position].getGroupMembersRes.size == 2){
+            else if(GroupList[position].membersNumber == 2){
                 holder.GroupMember3.visibility = View.GONE
                 holder.GroupMemberCount.visibility = View.GONE
                 holder.GroupMemberCountBackground.visibility = View.GONE
             }
-            else if(GroupList[position].getGroupMembersRes.size == 3){
+            else if(GroupList[position].membersNumber == 3){
                 holder.GroupMemberCount.visibility = View.GONE
                 holder.GroupMemberCountBackground.visibility = View.GONE
             }
 
         }
         else if (position == GroupList.size){
-            group_status = "LAST"
+            holder.GroupLayout.visibility = GONE
+            holder.LastLayout.visibility = VISIBLE
         }
         else{
+            holder.LastLayout.visibility = GONE
             holder.GroupName.text = GroupList[position].name
-            if (GroupList[position].getGroupMembersRes.size > 3) {
+            if (GroupList[position].membersNumber > 3) {
                 holder.GroupMemberCount.text =
-                    "+" + (GroupList[position].getGroupMembersRes.size - 3).toString()
+                    "+" + (GroupList[position].membersNumber - 3).toString()
             }
-            else if(GroupList[position].getGroupMembersRes.size == 1){
+            else if(GroupList[position].membersNumber == 1){
                 holder.GroupMember2.visibility = View.GONE
                 holder.GroupMember3.visibility = View.GONE
                 holder.GroupMemberCount.visibility = View.GONE
                 holder.GroupMemberCountBackground.visibility = View.GONE
             }
-            else if(GroupList[position].getGroupMembersRes.size == 2){
+            else if(GroupList[position].membersNumber == 2){
                 holder.GroupMember3.visibility = View.GONE
                 holder.GroupMemberCount.visibility = View.GONE
                 holder.GroupMemberCountBackground.visibility = View.GONE
             }
-            else if(GroupList[position].getGroupMembersRes.size == 3){
+            else if(GroupList[position].membersNumber == 3){
                 holder.GroupMemberCount.visibility = View.GONE
                 holder.GroupMemberCountBackground.visibility = View.GONE
             }
@@ -168,6 +173,7 @@ class Home_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<GetGroupsRes
 
     class CustomViewholder(val view : View) : RecyclerView.ViewHolder(view){
         val GroupLayout : ConstraintLayout = view.findViewById(R.id.group_layout)
+        val LastLayout : ConstraintLayout = view.findViewById(R.id.last_layout)
         val GroupName : AppCompatTextView = view.findViewById(R.id.group_name_tv)
         val GroupPlus : AppCompatImageButton = view.findViewById(R.id.group_plus_btn)
         val GroupMemberCount : AppCompatTextView = view.findViewById(R.id.group_member_count_tv)
