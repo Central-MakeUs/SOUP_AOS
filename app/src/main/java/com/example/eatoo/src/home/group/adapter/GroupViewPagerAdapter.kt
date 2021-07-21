@@ -3,6 +3,8 @@ package com.example.eatoo.src.home.group.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.adapter.FragmentViewHolder
+import com.example.eatoo.src.home.group.GroupActivity
 import com.example.eatoo.src.home.group.category.GroupCategoryFragment
 import com.example.eatoo.src.home.group.main.GroupMainFragment
 import com.example.eatoo.src.home.group.member.GroupMemberFragment
@@ -11,6 +13,8 @@ import com.example.eatoo.src.home.group.vote.GroupVoteFragment
 private const val GROUP_TAB_NUM = 4
 
 class GroupViewPagerAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm) {
+
+//    val fragmentList = arrayListOf<Fragment>(GroupMainFragment(), GroupCategoryFragment())
 
     override fun getItemCount(): Int = GROUP_TAB_NUM
 
@@ -23,5 +27,10 @@ class GroupViewPagerAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm) {
             else -> GroupMainFragment()
         }
     }
+
+
+
+
+
 
 }

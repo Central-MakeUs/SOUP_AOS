@@ -302,7 +302,7 @@ class CreateVoteActivity
 
     private fun postCreateVote(req: CreateVoteRequest) {
         showLoadingDialog(this)
-        Log.d("createVoteActivity", "$req")
+        Log.d("createVoteActivity", "$req ${getGroupIdx()}")
         CreateVoteService(this).tryPostVote(getUserIdx(), getGroupIdx(), req)
     }
 
