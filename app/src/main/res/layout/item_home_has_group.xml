@@ -142,20 +142,13 @@
 
                 </LinearLayout>
 
-
-
             </LinearLayout>
-
-
-
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="136dp"
                 android:layout_marginBottom="30dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -188,32 +181,44 @@
                     app:layout_constraintStart_toStartOf="@+id/group_member2"
                     app:layout_constraintTop_toTopOf="@+id/group_member2" />
 
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/group_member_count_tv_background"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="26dp"
-                    android:src="@drawable/ic_group_user_white"
                     app:layout_constraintBottom_toBottomOf="@+id/group_member3"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/group_member3"
-                    app:layout_constraintTop_toTopOf="@+id/group_member3"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toTopOf="@+id/group_member3">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/group_member_count_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-black"
-                    android:lineSpacingExtra="15sp"
-                    android:text="@string/main_group_member_count"
-                    android:textColor="@color/main_color"
-                    android:textSize="15sp"
-                    android:textStyle="normal"
-                    app:layout_constraintBottom_toBottomOf="@+id/group_member_count_tv_background"
-                    app:layout_constraintEnd_toEndOf="@+id/group_member_count_tv_background"
-                    app:layout_constraintStart_toStartOf="@+id/group_member_count_tv_background"
-                    app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/group_member_count_tv_background"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_group_user_white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/group_member_count_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:lineSpacingExtra="15sp"
+                        android:text="@string/main_group_member_count"
+                        android:textColor="@color/main_color"
+                        android:textSize="15sp"
+                        android:textStyle="normal"
+                        app:layout_constraintBottom_toBottomOf="@+id/group_member_count_tv_background"
+                        app:layout_constraintEnd_toEndOf="@+id/group_member_count_tv_background"
+                        app:layout_constraintStart_toStartOf="@+id/group_member_count_tv_background"
+                        app:layout_constraintTop_toTopOf="@+id/group_member_count_tv_background" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

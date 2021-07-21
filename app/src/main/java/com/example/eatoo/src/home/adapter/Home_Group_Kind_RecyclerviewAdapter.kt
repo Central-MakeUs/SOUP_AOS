@@ -104,11 +104,11 @@ class Home_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<GetGroupsRes
 //            holder.GroupLayout.setBackgroundResource(R.color.group_yellow_litle)
 //        }
         holder.GroupLayout.setOnClickListener {
-            itemClickListener.onClick(it,position,GroupList[position].groupIdx , "Group_activity")
+            itemClickListener.onClick(it,position,GroupList[position].groupIdx , GroupList[position].name,"Group_activity")
         }
 
         holder.GroupPlus.setOnClickListener {
-            itemClickListener.onClick(it,position,0 , "plus")
+            itemClickListener.onClick(it,position,0, "no","plus")
         }
 
 
@@ -182,7 +182,7 @@ class Home_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<GetGroupsRes
     }
 
     interface ItemClickListener {
-        fun onClick(view: View, position: Int,groupIdx : Int , state : String)
+        fun onClick(view: View, position: Int,groupIdx : Int , groupname : String , state : String)
     }
 
     private lateinit var itemClickListener: ItemClickListener
