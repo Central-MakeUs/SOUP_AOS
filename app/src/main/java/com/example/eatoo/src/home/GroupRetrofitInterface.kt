@@ -2,6 +2,7 @@ package com.example.eatoo.src.home
 
 
 import com.example.eatoo.src.home.model.GroupResponse
+import com.example.eatoo.src.home.model.MateConfirmationResponse
 import com.example.eatoo.src.home.model.MateResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -20,4 +21,13 @@ interface GroupRetrofitInterface {
     fun getMate(
         @Path ("userIdx") userIdx : Int
     ): Call<MateResponse>
+
+
+//    @GET("/app/mates/{mateIdx}/end")
+//    fun getMateConfirm(
+//        @Path ("mateIdx") mateIdx : Int
+//    ): Call<MateConfirmationResponse>
+
+
+
 }

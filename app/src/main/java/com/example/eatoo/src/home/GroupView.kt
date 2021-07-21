@@ -1,6 +1,7 @@
 package com.example.eatoo.src.home
 
 import com.example.eatoo.src.home.model.GroupResponse
+import com.example.eatoo.src.home.model.MateConfirmationResponse
 import com.example.eatoo.src.home.model.MateResponse
 
 
@@ -12,4 +13,8 @@ interface GroupView {
     fun onGetMateSuccess(response : MateResponse)
 
     fun onGetMateFail(message : String)
+
+//    fun onGetMateConfirmSuccess(response : MateConfirmationResponse)
+//
+//    fun onGetMateConfirmFail(message : String)
 }
