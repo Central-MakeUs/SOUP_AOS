@@ -24,17 +24,6 @@ import com.google.android.material.chip.ChipGroup
 class Home_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<GetGroupsRes> , var groupsize : Int , var group_status : String) : RecyclerView.Adapter<Home_Group_Kind_RecyclerviewAdapter.CustomViewholder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
         var inflaterview = LayoutInflater.from(parent.context).inflate(R.layout.item_home_has_group,parent,false)
-        Log.d("group_status",group_status)
-        if(group_status == "BASIC")
-        {
-            inflaterview = LayoutInflater.from(parent.context).inflate(R.layout.item_home_has_group,parent,false)
-            return CustomViewholder(inflaterview)
-        }
-        else if(group_status == "LAST")
-        {
-            inflaterview = LayoutInflater.from(parent.context).inflate(R.layout.item_main_group_plus,parent,false)
-            return CustomViewholder(inflaterview)
-        }
         return CustomViewholder(inflaterview)
     }
 
