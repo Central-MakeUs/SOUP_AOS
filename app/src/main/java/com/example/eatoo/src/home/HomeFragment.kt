@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eatoo.R
 import com.example.eatoo.config.ApplicationClass
@@ -12,6 +13,8 @@ import com.example.eatoo.config.ApplicationClass.Companion.USER_IDX
 import com.example.eatoo.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.example.eatoo.config.BaseFragment
 import com.example.eatoo.databinding.FragmentHomeBinding
+import com.example.eatoo.single_status.SingleService
+import com.example.eatoo.single_status.SingleView
 import com.example.eatoo.src.home.adapter.Home_Group_Kind_RecyclerviewAdapter
 import com.example.eatoo.src.home.adapter.Home_Mate_Kind_RecyclerviewAdapter
 import com.example.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
@@ -25,8 +28,10 @@ import com.example.eatoo.util.getUserNickName
 
 
 class HomeFragment
-    : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),GroupView{
+    : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),
+    GroupView, SingleView {
 
+    private var changeToSingle = false
     val userIdx = ApplicationClass.sSharedPreferences.getInt(USER_IDX, -1)
 
     @SuppressLint("SetTextI18n")
@@ -58,6 +63,13 @@ class HomeFragment
         }
 
         binding.usetNameHomeTv.text = getUserNickName() + binding.usetNameHomeTv.text
+
+        binding.customToolbar.rightIcon.setOnClickListener {
+            changeToSingle = binding.customToolbar.rightIcon.drawable.constantState?.equals(
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_icon)?.constantState
+            ) ?:false
+            SingleService(this).tryPatchSingleStatus(getUserIdx())
+        }
     }
 
     override fun onGetGroupSuccess(response: GroupResponse) {
@@ -66,6 +78,7 @@ class HomeFragment
 
 
         if(response.code == 1000) {
+            setSingleStatus(response.result.singleStatus)
             binding.matePlusBtn.isClickable = true
             binding.noneGroupLayoutMain.visibility = View.GONE
             binding.groupRecyclerview.visibility = View.VISIBLE
@@ -107,6 +120,11 @@ class HomeFragment
             }
 
         }
+    }
+
+    private fun setSingleStatus(singleStatus: String) {
+        if(singleStatus == "ON") binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icons)
+        else binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icon)
     }
 
     override fun onGetGroupFail(message: String) {
@@ -152,6 +170,17 @@ class HomeFragment
 
     override fun onGetMateFail(message: String) {
         dismissLoadingDialog()
+    }
+
+    override fun onPatchSingleStatusSuccess() {
+        showCustomToast("on off 전환 성공")
+
+        if(changeToSingle) binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icons)
+        else binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icon)
+    }
+
+    override fun onPatchSingleStatusFail(message: String?) {
+        showCustomToast(message ?: resources.getString(R.string.failed_connection))
     }
 
 }
