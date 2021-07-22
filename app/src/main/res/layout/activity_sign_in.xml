@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".src.signinlogin.signin.SignInActivity">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatTextView"
+        android:layout_width="84.32875061035156dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/ic_eatoo_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/name_edt"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="36dp"
+        android:background="@drawable/edittext_background_radius"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="9sp"
+        android:hint="@string/name_hint"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+        tools:ignore="RtlSymmetry" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView6"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="12dp"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.05"
+        android:lineSpacingExtra="10sp"
+        android:padding="2dp"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/name_edt"
+        app:layout_constraintTop_toBottomOf="@+id/name_edt"
+        tools:text="@string/sign_in_name_bottom"
+        tools:ignore="SmallSp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/name_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/textview_white_background"
+        android:backgroundTint="@color/white"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        android:letterSpacing="0.04"
+        android:lineSpacingExtra="3sp"
+        android:padding="1dp"
+        android:text="@string/name"
+        app:layout_constraintBottom_toTopOf="@+id/name_edt"
+        app:layout_constraintStart_toStartOf="@+id/name_edt"
+        app:layout_constraintTop_toTopOf="@+id/name_edt" />
+
+
+    <EditText
+        android:id="@+id/phone_number_edt"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="36dp"
+        android:background="@drawable/edittext_background_radius"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="9sp"
+        android:hint="@string/phone_number_hint"
+        android:inputType="phone"
+        android:paddingStart="12dp"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6"
+        tools:ignore="Autofill,RtlSymmetry" />
+
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView7"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="12dp"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.05"
+        android:lineSpacingExtra="10sp"
+        android:padding="2dp"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toStartOf="@+id/phone_number_edt"
+        app:layout_constraintTop_toBottomOf="@+id/phone_number_edt"
+        android:text="@string/sign_in_password_bottom"
+        tools:ignore="HardcodedText,SmallSp" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/textview_white_background"
+        android:backgroundTint="@color/white"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        android:letterSpacing="0.04"
+        android:lineSpacingExtra="3sp"
+        android:padding="1dp"
+        android:text="@string/phone_number"
+        app:layout_constraintBottom_toTopOf="@+id/phone_number_edt"
+        app:layout_constraintStart_toStartOf="@+id/phone_number_edt"
+        app:layout_constraintTop_toTopOf="@+id/phone_number_edt"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/sign_in_btn_background_gray"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="@string/sign_in_check"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

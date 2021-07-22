@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".src.review.create_review.create_review1.CreateReview1Activity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="8dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.example.eatoo.custom_view.CustomToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="19dp"
+            app:contentInsetStart="0dp"
+            app:leftIcon="@drawable/ic_back_btn"
+            app:titleText="@string/create_review" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardview_toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/input_hint"
+                android:text="@string/one_over_two"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintTop_toTopOf="@id/tv_review_store_location"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_review_store_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="21dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/store_location"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RelativeLayout
+                android:id="@+id/rl_store_location_review1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edittext_background_radius_litle"
+                android:orientation="horizontal"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_review_store_location"
+                app:layout_constraintTop_toBottomOf="@id/tv_review_store_location">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="13dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/ic_group_search_location" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_search_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_toEndOf="@id/iv_search"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/input_store_location"
+                    android:textColor="@color/input_hint"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_create_review"
+                android:layout_width="0dp"
+                android:layout_height="138dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edittext_background_radius_litle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_review_store_location"
+                app:layout_constraintTop_toBottomOf="@id/rl_store_location_review1">
+
+                <fragment
+                    android:id="@+id/frag_create_review_map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="3dp" />
+
+
+                <LinearLayout
+                    android:id="@+id/ll_container_review_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edittext_background_radius_litle"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="6dp"
+                        android:src="@drawable/ic_gps" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="23dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/find_store_via_map"
+                        android:textColor="@color/input_hint"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_review1_img"
+                    android:visibility="invisible"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_review_store_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/store_name"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_review_store_location"
+                app:layout_constraintTop_toBottomOf="@id/fl_create_review" />
+
+            <RelativeLayout
+                android:id="@+id/rl_store_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/edittext_background_radius_litle"
+                android:orientation="horizontal"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_review_store_location"
+                app:layout_constraintTop_toBottomOf="@id/tv_review_store_name">
+
+                <EditText
+                    android:id="@+id/et_store_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@id/iv_store_name_delete"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="@string/input_store_name"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:textColorHint="@color/input_hint"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_store_name_delete"
+                    android:visibility="invisible"
+                    tools:visibility="visible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_group_137"
+                    android:layout_marginEnd="14dp"
+                    android:layout_centerVertical="true"
+                    />
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_review_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/category"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_review_store_location"
+                app:layout_constraintTop_toBottomOf="@id/rl_store_name" />
+
+            <HorizontalScrollView
+                android:id="@+id/hsv_create_review"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fillViewport="true"
+                android:scrollbars="none"
+                android:overScrollMode="never"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_review_store_location"
+                app:layout_constraintTop_toBottomOf="@id/tv_review_category">
+
+
+                    <RadioGroup
+                        android:id="@+id/rd_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rd_btn_ko"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_korean_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
+
+                        <RadioButton
+                            android:id="@+id/rd_btn_ch"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_chinese_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
+
+                        <RadioButton
+                            android:id="@+id/rd_btn_jp"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_japanese_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
+                        <RadioButton
+                            android:id="@+id/rd_btn_western"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_western_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
+                        <RadioButton
+                            android:id="@+id/rd_btn_street"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_street_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
+                        <RadioButton
+                            android:id="@+id/rd_btn_asian"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_asian_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
+                        <RadioButton
+                            android:id="@+id/rd_btn_desert"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_desert_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
+
+                        <RadioButton
+                            android:id="@+id/rd_btn_etc"
+                            android:layout_width="53dp"
+                            android:layout_height="53dp"
+                            android:button="@android:color/transparent"
+                            android:text="@string/category_etc_food"
+                            android:textColor="@drawable/selector_category_text"
+                            android:gravity="center"
+                            android:background="@drawable/selector_category"
+                            android:layout_marginEnd="11dp"/>
+
+                    </RadioGroup>
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:id="@+id/ll_create_review_exp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="30dp"
+                app:layout_constraintTop_toBottomOf="@+id/hsv_create_review">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/review_exp"
+                    android:textColor="@color/input_hint"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_create_review_next"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/background_review_next"
+                android:fontFamily="@font/roboto_regular"
+                android:stateListAnimator="@null"
+                android:text="@string/next"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_review_store_location"
+                app:layout_constraintTop_toBottomOf="@id/ll_create_review_exp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="20dp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomToolbar">
+        <attr name="leftIcon" format="reference" />
+        <attr name="rightIcon" format="reference" />
+        <attr name="titleText" format="reference|string" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomToggleLayout">
+        <attr name="titleTextCustomToggle" format="reference|string" />
+    </declare-styleable>
+</resources>
