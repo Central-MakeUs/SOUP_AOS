@@ -108,7 +108,9 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
                 startActivity(Intent(this, StoreMapActivity::class.java))
                 finish()
             }
-            R.id.btn_create_review_next ->  validityTest()
+            R.id.btn_create_review_next -> {
+                validityTest()
+            }
             R.id.rl_store_location_review1 -> {
                 startActivity(Intent(this, StoreLocationActivity::class.java))
             }
@@ -118,7 +120,6 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
 
     private fun validityTest() {
 
-        Log.d("createReviewActivity", binding.tvSearchLocation.text.toString())
         var storeLocation = ""
         if(binding.tvSearchLocation.text == resources.getString(R.string.input_store_location)
             || binding.tvSearchLocation.text.isEmpty()){
@@ -137,16 +138,21 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
             return
         }
 
-        val intent = Intent(this, CreateReview2Activity::class.java)
-        intent.apply {
-            putExtra("address", storeLocation)
-            putExtra("lat", lat)
-            putExtra("lng", lng)
-            putExtra("store_name", storeName)
-            putExtra("categoryIdx", categoryIdx)
-            putExtra("storeIdx", storeIdx)
+        if( binding.btnCreateReviewNext.background.constantState==ContextCompat.getDrawable(
+                this@CreateReview1Activity, R.drawable.login_btn_background)?.constantState) {
+            val intent = Intent(this, CreateReview2Activity::class.java)
+            intent.apply {
+                putExtra("address", storeLocation)
+                putExtra("lat", lat)
+                putExtra("lng", lng)
+                putExtra("store_name", storeName)
+                putExtra("categoryIdx", categoryIdx)
+                putExtra("storeIdx", storeIdx)
+            }
+            startActivity(intent)
         }
-        startActivity(intent)
+
+
     }
 
     private fun setupGoogleMap() {
