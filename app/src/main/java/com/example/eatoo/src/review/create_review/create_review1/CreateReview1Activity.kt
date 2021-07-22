@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.RadioGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import org.w3c.dom.Text
 
 class CreateReview1Activity :  BaseActivity<ActivityCreateReviewBinding>(ActivityCreateReviewBinding::inflate),
 View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, CreateReview1View {
@@ -85,6 +87,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
         binding.ivStoreNameDelete.setOnClickListener(this)
         setCancelIcon()
         binding.customToolbar.leftIcon.setOnClickListener { finish() }
+
     }
 
     private fun setCancelIcon() {
@@ -182,7 +185,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
     }
 
     override fun onCheckedChanged(p0: RadioGroup?, p1: Int) {
-        when(p1){
+        when (p1) {
             R.id.rd_btn_ko -> categoryIdx = 1
             R.id.rd_btn_ch -> categoryIdx = 2
             R.id.rd_btn_jp -> categoryIdx = 3
@@ -191,7 +194,26 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
             R.id.rd_btn_asian -> categoryIdx = 6
             R.id.rd_btn_desert -> categoryIdx = 7
             R.id.rd_btn_etc -> categoryIdx = 8
-
+        }
+        if (binding.etStoreName.text.isNotEmpty() &&
+            binding.tvSearchLocation.text != resources.getString(R.string.input_store_location)
+            && binding.tvSearchLocation.text.isNotEmpty()
+        ) {
+            binding.btnCreateReviewNext.background = ContextCompat.getDrawable(
+                this@CreateReview1Activity,
+                R.drawable.login_btn_background
+            )
+            binding.btnCreateReviewNext.setTextColor(
+                ContextCompat.getColor(
+                    this@CreateReview1Activity,
+                    R.color.white
+                )
+            )
+        } else {
+            binding.btnCreateReviewNext.background = ContextCompat.getDrawable(
+                this@CreateReview1Activity,
+                R.drawable.background_review_next
+            )
         }
     }
 

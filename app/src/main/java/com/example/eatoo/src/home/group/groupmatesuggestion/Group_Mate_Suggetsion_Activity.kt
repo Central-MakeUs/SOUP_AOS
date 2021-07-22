@@ -14,6 +14,7 @@ import com.example.eatoo.src.home.GroupView
 import com.example.eatoo.src.home.group.groupmatesuggestion.model.CreateMateRequest
 import com.example.eatoo.src.home.group.groupmatesuggestion.model.CreateMateResponse
 import com.example.eatoo.src.home.model.GroupResponse
+import com.example.eatoo.src.home.model.MainCharResponse
 import com.example.eatoo.src.home.model.MateResponse
 import com.example.eatoo.src.main.MainActivity
 import com.example.eatoo.util.getUserIdx
@@ -74,7 +75,7 @@ class Group_Mate_Suggetsion_Activity
     override fun onGetGroupSuccess(response: GroupResponse) {
         showCustomToast("요청 완료")
 
-        val GroupList = response.result.getGroupsRes
+        val GroupList = response.result
         val GroupListtSize = GroupList.size - 1
         for(i in 0..GroupListtSize){
             val chip  = LayoutInflater.from(this).inflate(R.layout.view_chip_2, null) as Chip
@@ -122,7 +123,11 @@ class Group_Mate_Suggetsion_Activity
     override fun onGetMateFail(message: String) {
     }
 
-//그룹 생성하기
+    override fun onGetMainCharSuccess(response: MainCharResponse) {}
+
+    override fun onGetMainCharFail(message: String) {}
+
+    //그룹 생성하기
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {
         dismissLoadingDialog()
         finish()

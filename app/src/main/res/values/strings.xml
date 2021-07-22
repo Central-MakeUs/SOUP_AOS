@@ -78,7 +78,8 @@
     <string name="category_desert_food">디저트</string>
     <string name="category_etc_food">기타</string>
     <string name="next_step">다음으로</string>
-    <string name="review_exp">이미 등록된 가게를 선택한 경우 가게명과 카테고리는 자동으로 입력됩니다. 새로운 가게의 경우, 직접 입력해주세요!</string>
+    <string name="review_exp">이미 등록된 가게를 선택한 경우 가게명과 카테고리는</string>
+    <string name="review_exp2">자동으로 입력됩니다. 새로운 가게의 경우, 직접 입력해주세요!</string>
     <string name="try_write_review">후기를 작성해보세요!</string>
     <string name="try_write_review_exp1">다녀왔던 가게에 대한 정보와\n평점, 후기를 꼭 작성해주세요 :)</string>
     <string name="try_write_review_exp2">평점, 후기를 꼭 작성해주세요 :)</string>

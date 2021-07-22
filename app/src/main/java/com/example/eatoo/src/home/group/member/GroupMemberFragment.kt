@@ -39,9 +39,6 @@ class GroupMemberFragment : BaseFragment<FragmentGroupMemberBinding>(
         GroupMemberService(this).tryGetGroupMember(getUserIdx(), getGroupIdx())
     }
 
-    fun notifiedSingleStatusChange() {
-        showCustomToast("혼밥 여부 변화!!!!")
-    }
 
     //////server result
 

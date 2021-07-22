@@ -40,7 +40,7 @@
                 android:id="@+id/tv_create_vote_suggest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="19dp"
                 android:layout_marginTop="34dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/create_vote_suggest"
@@ -54,11 +54,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
+                android:layout_marginStart="21dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/vote_name"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/tv_create_vote_suggest"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_create_vote_suggest" />
 
             <EditText
@@ -67,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="23dp"
+                android:layout_marginStart="21dp"
                 android:background="@drawable/edittext_background_radius_litle"
                 android:fontFamily="@font/roboto_regular"
                 android:hint="@string/input_vote_name"
@@ -82,7 +84,7 @@
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_create_vote_suggest"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_vote_name"
                 tools:ignore="Autofill,RtlSymmetry" />
 
@@ -91,12 +93,13 @@
                 android:id="@+id/tv_vote_keyword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="33dp"
+                android:layout_marginStart="19dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/create_group_keyword"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/tv_create_vote_suggest"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/et_vote_name" />
 
 
@@ -104,10 +107,11 @@
                 android:id="@+id/fl_create_vote"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="17dp"
+                android:layout_marginTop="13dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_vote_keyword"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_vote_keyword">
 
 
@@ -150,12 +154,13 @@
                 android:id="@+id/tv_vote_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="39dp"
+                android:layout_marginTop="44dp"
+                android:layout_marginStart="19dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/vote_item"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/tv_create_vote_suggest"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fl_create_vote" />
 
             <LinearLayout
@@ -164,9 +169,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="23dp"
+                android:layout_marginStart="21dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_create_vote_suggest"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_vote_item">
 
                 <EditText
@@ -244,12 +250,13 @@
                 android:id="@+id/tv_vote_etc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="42dp"
+                android:layout_marginStart="20dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/vote_etc"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/tv_create_vote_suggest"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll_vote_item" />
 
 
@@ -257,7 +264,7 @@
                 android:id="@+id/view_due_date"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="21dp"
                 android:layout_marginEnd="23dp"
                 android:background="@color/next_btn"
                 app:layout_constraintBottom_toTopOf="@id/custom_toggle_vote_item" />
@@ -266,7 +273,7 @@
                 android:id="@+id/custom_toggle_vote_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="21dp"
                 android:layout_marginEnd="23dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_vote_due_date"
@@ -276,7 +283,7 @@
                 android:id="@+id/custom_toggle_multi_vote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="21dp"
                 android:layout_marginEnd="23dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/custom_toggle_vote_item"
@@ -286,7 +293,7 @@
                 android:id="@+id/custom_toggle_anonymous_vote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="21dp"
                 android:layout_marginEnd="23dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/custom_toggle_multi_vote"
@@ -296,8 +303,9 @@
                 android:id="@+id/btn_register_vote"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="65dp"
                 android:layout_marginEnd="23dp"
+                android:layout_marginStart="21dp"
                 android:layout_marginBottom="27dp"
                 android:background="@drawable/login_btn_background"
                 android:fontFamily="@font/roboto_regular"
@@ -307,7 +315,7 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_create_vote_suggest"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/custom_toggle_anonymous_vote" />
 
             <!--due date-->
@@ -316,7 +324,7 @@
                 android:id="@+id/cl_vote_due_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="21dp"
                 android:layout_marginEnd="23dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

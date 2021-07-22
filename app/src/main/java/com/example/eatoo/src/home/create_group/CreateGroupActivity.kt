@@ -8,6 +8,8 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.util.TypedValue
 import android.view.*
@@ -79,10 +81,45 @@ class CreateGroupActivity :
         getCurrentLocation()
 
         registerGroup()
-        binding.customToolbar.leftIcon.setOnClickListener { finish() }
+        setRegisterBtnColorChange()
 
 
     }
+
+    private fun setRegisterBtnColorChange(){
+        binding.customToolbar.leftIcon.setOnClickListener { finish() }
+
+//        binding.etGroupName.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+//
+//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//                if (p0.toString().isNotEmpty() &&
+//                    binding.tvSearchLocation.text != resources.getString(R.string.input_location)
+//                    && binding.tvSearchLocation.text.isNotEmpty()
+//                ) {
+//                    binding.registerGroupBtn.background = ContextCompat.getDrawable(
+//                        this@CreateGroupActivity,
+//                        R.drawable.login_btn_background
+//                    )
+//                    binding.registerGroupBtn.setTextColor(
+//                        ContextCompat.getColor(
+//                            this@CreateGroupActivity,
+//                            R.color.white
+//                        )
+//                    )
+//                } else {
+//                    binding.registerGroupBtn.background = ContextCompat.getDrawable(
+//                        this@CreateGroupActivity,
+//                        R.drawable.background_review_next
+//                    )
+//                }
+//            }
+//
+//            override fun afterTextChanged(p0: Editable?) {}
+//
+//        })
+    }
+
     private fun getSearchJson() {
 
         val gson = Gson()

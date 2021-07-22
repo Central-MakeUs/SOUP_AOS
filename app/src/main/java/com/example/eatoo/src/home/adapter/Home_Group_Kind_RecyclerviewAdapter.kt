@@ -13,15 +13,15 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eatoo.R
-import com.example.eatoo.src.home.model.GetGroupsRes
-import com.example.eatoo.src.home.model.GroupKeyword
+import com.example.eatoo.src.home.model.GroupResultResponse
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 
-class Home_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<GetGroupsRes> , var groupsize : Int , var group_status : String) : RecyclerView.Adapter<Home_Group_Kind_RecyclerviewAdapter.CustomViewholder>(){
+class Home_Group_Kind_RecyclerviewAdapter(
+    val GroupList : ArrayList<GroupResultResponse>,
+    var groupsize : Int, var group_status : String
+    ) : RecyclerView.Adapter<Home_Group_Kind_RecyclerviewAdapter.CustomViewholder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
         var inflaterview = LayoutInflater.from(parent.context).inflate(R.layout.item_home_has_group,parent,false)
         return CustomViewholder(inflaterview)

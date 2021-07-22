@@ -51,8 +51,9 @@
 
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/iv_user_char"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="6dp"
         android:src="@drawable/ic_mypage_icon"
         app:layout_constraintBottom_toBottomOf="@+id/user_profile_img"
@@ -193,88 +194,88 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-black"
-        android:textColor="@color/black"
-        android:textStyle="normal"
-        android:textSize="17sp"
-        android:text="@string/taste_keyword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-
-<!--    <com.ramotion.circlemenu.CircleMenuView-->
-<!--        android:layout_width="match_parent"-->
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/appCompatTextView4"-->
+<!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:fontFamily="sans-serif-black"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textStyle="normal"-->
+<!--        android:textSize="17sp"-->
+<!--        android:text="@string/taste_keyword"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4" />-->
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center_horizontal"
-        android:text="@string/edit"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/appCompatTextView4" />
-
-    <FrameLayout
-        android:id="@+id/fl_creategroup_keyword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/appCompatTextView4"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4">
+<!--        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />-->
 
 
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/flexbox_make_group"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:alignContent="stretch"
-            app:alignItems="stretch"
-            app:flexWrap="wrap">
+<!--&lt;!&ndash;    <com.ramotion.circlemenu.CircleMenuView&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4" />&ndash;&gt;-->
 
-            <EditText
-                android:id="@+id/et_keyword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/transparent"
-                android:gravity="top"
-                android:inputType="text"
-                android:maxLength="10"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:textSize="14sp"
-                android:visibility="gone"
-                app:layout_flexGrow="1"
-                tools:visibility="visible" />
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/appCompatTextView6"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:fontFamily="sans-serif-medium"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:text="@string/edit"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="12sp"-->
+<!--        android:textStyle="normal"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView4"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/appCompatTextView4" />-->
 
-        </com.google.android.flexbox.FlexboxLayout>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/keyword_plus_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_group_gray_plus"
-            app:layout_constraintStart_toStartOf="@id/fl_creategroup_keyword"
-            app:layout_constraintTop_toTopOf="@id/fl_creategroup_keyword" />
+<!--    <FrameLayout-->
+<!--        android:id="@+id/fl_creategroup_keyword"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/appCompatTextView4"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4">-->
 
 
-    </FrameLayout>
+<!--        <com.google.android.flexbox.FlexboxLayout-->
+<!--            android:id="@+id/flexbox_make_group"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:alignContent="stretch"-->
+<!--            app:alignItems="stretch"-->
+<!--            app:flexWrap="wrap">-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/et_keyword"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/transparent"-->
+<!--                android:gravity="top"-->
+<!--                android:inputType="text"-->
+<!--                android:maxLength="10"-->
+<!--                android:maxLines="1"-->
+<!--                android:singleLine="true"-->
+<!--                android:textCursorDrawable="@drawable/color_cursor"-->
+<!--                android:textSize="14sp"-->
+<!--                android:visibility="gone"-->
+<!--                app:layout_flexGrow="1"-->
+<!--                tools:visibility="visible" />-->
+
+<!--        </com.google.android.flexbox.FlexboxLayout>-->
+
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@+id/keyword_plus_btn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/ic_group_gray_plus"-->
+<!--            app:layout_constraintStart_toStartOf="@id/fl_creategroup_keyword"-->
+<!--            app:layout_constraintTop_toTopOf="@id/fl_creategroup_keyword" />-->
+
+
+<!--    </FrameLayout>-->
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

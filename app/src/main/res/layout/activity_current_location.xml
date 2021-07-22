@@ -51,33 +51,41 @@
             android:src="@drawable/ic_eva_pin_fill"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="19dp"
+            android:layout_marginTop="25dp"
             android:layout_marginStart="70dp"/>
 
-        <TextView
-            android:id="@+id/tv_current_address"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintStart_toEndOf="@id/iv_pin"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="7dp"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:fontFamily="@font/roboto_bold"
-            tools:text="지번주소"/>
+            android:layout_marginTop="19dp"
+            android:layout_marginStart="7dp">
 
-        <TextView
-            android:id="@+id/tv_road_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_current_address"
-            app:layout_constraintStart_toStartOf="@id/tv_current_address"
-            tools:text="도로명 주소"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:fontFamily="@font/roboto_medium"
-            android:layout_marginTop="8dp"/>
+            <TextView
+                android:id="@+id/tv_current_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:fontFamily="@font/roboto_bold"
+                tools:text="지번주소"/>
+
+            <TextView
+                android:id="@+id/tv_road_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_current_address"
+                android:layout_centerHorizontal="true"
+                tools:text="도로명 주소"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_marginTop="7dp"/>
+
+        </RelativeLayout>
 
 
 

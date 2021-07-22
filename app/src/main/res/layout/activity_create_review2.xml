@@ -39,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="21dp"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/two_over_two"
                 android:textColor="@color/input_hint"
@@ -50,8 +50,8 @@
                 android:id="@+id/tv_review2_menu_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="21dp"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="34dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/menu_name"
                 android:textColor="@color/black"
@@ -63,14 +63,15 @@
                 android:id="@+id/rl_menu_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="21dp"
+                android:layout_marginStart="24dp"
                 android:background="@drawable/edittext_background_radius_litle"
                 android:orientation="horizontal"
                 android:paddingTop="13dp"
                 android:paddingBottom="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_review2_menu_name"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_review2_menu_name">
 
                 <EditText
@@ -110,12 +111,13 @@
                 android:id="@+id/tv_one_sentence_review"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="27dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginStart="21dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/one_sentence_review"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/tv_review2_menu_name"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rl_menu_name" />
 
             <RelativeLayout
@@ -123,10 +125,11 @@
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_marginTop="9dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="21dp"
+                android:layout_marginStart="23dp"
                 android:background="@drawable/edittext_background_radius_litle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_review2_menu_name"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_one_sentence_review">
 
                 <EditText
@@ -159,12 +162,13 @@
                 android:id="@+id/tv_review_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="27dp"
+                android:layout_marginTop="22dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/review_img"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/tv_review2_menu_name"
+                android:layout_marginStart="21dp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rl_review" />
 
             <RelativeLayout
@@ -172,10 +176,11 @@
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="9dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="21dp"
+                android:layout_marginStart="23dp"
                 android:background="@drawable/edittext_background_radius_litle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_review2_menu_name"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_review_img">
 
                 <ImageView
@@ -212,12 +217,13 @@
                 android:id="@+id/tv_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="31dp"
+                android:layout_marginStart="21dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/rating"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/tv_review2_menu_name"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rl_review_img" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -225,8 +231,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:layout_marginStart="25dp"
                 android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@id/tv_review2_menu_name"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_rating"
                 app:singleSelection="false">
 
@@ -298,12 +305,13 @@
                 android:id="@+id/tv_review_keyword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="43dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/create_group_keyword"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/tv_review2_menu_name"
+                android:layout_marginStart="21dp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_rating" />
 
             <TextView
@@ -325,8 +333,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginStart="23dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_review_keyword"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_review_keyword">
 
 
@@ -372,12 +381,13 @@
                 android:id="@+id/tv_review_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="39dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="21dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/store_link"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/tv_review2_menu_name"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fl_create_review_keyword" />
 
             <TextView
@@ -396,14 +406,15 @@
                 android:id="@+id/rl_review_link"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="21dp"
+                android:layout_marginStart="23dp"
                 android:background="@drawable/edittext_background_radius_litle"
                 android:orientation="horizontal"
                 android:paddingTop="13dp"
                 android:paddingBottom="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_review2_menu_name"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_review_link">
 
                 <EditText
@@ -427,8 +438,9 @@
                 android:id="@+id/btn_register_review"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="39dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginStart="22dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/login_btn_background"
                 android:fontFamily="@font/roboto_regular"
@@ -438,7 +450,7 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_review2_menu_name"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rl_review_link" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

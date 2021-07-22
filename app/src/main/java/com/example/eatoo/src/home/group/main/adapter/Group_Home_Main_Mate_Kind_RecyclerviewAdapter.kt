@@ -11,10 +11,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.eatoo.R
-import com.example.eatoo.src.home.group.main.model.GroupMainResponse
-import com.example.eatoo.src.home.group.main.model.GroupMainResult
 import com.example.eatoo.src.home.group.main.model.GroupMateResponse
-import com.example.eatoo.src.home.model.GetGroupsRes
+import com.example.eatoo.util.glideUtil
+import com.example.eatoo.util.roundAll
 
 class Group_Home_Main_Mate_Kind_RecyclerviewAdapter(val MateList : ArrayList<GroupMateResponse>) : RecyclerView.Adapter<Group_Home_Main_Mate_Kind_RecyclerviewAdapter.CustomViewholder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
@@ -32,8 +31,9 @@ class Group_Home_Main_Mate_Kind_RecyclerviewAdapter(val MateList : ArrayList<Gro
 
         val imageUrl: String = MateList[position].imgUrl
         if(imageUrl != null) {
-            Glide.with(holder.view.context).load(imageUrl).into(holder.Mateimg)
-            holder.Mateimg.clipToOutline = true
+            glideUtil(holder.view.context, imageUrl, roundAll(holder.Mateimg, 100f ))
+//            Glide.with(holder.view.context).load(imageUrl).into(holder.Mateimg)
+//            holder.Mateimg.clipToOutline = true
         }
         if(MateList[position].status == 0 ){
             holder.MateStatus.setText(R.string.group_main_mate_matching)

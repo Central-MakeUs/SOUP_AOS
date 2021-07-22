@@ -2,6 +2,7 @@ package com.example.eatoo.src.home
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -23,7 +24,9 @@ import com.example.eatoo.src.home.model.MateResponse
 import com.example.eatoo.util.getUserIdx
 import com.example.eatoo.src.home.create_group.CreateGroupActivity
 import com.example.eatoo.src.home.group.GroupActivity
+import com.example.eatoo.src.home.model.MainCharResponse
 import com.example.eatoo.src.review.create_review.create_review1.CreateReview1Activity
+import com.example.eatoo.util.EatooCharList
 import com.example.eatoo.util.getUserNickName
 
 
@@ -42,6 +45,7 @@ class HomeFragment
         Log.d("유전인덱스",""+getUserIdx())
         Log.d("토큰",X_ACCESS_TOKEN)
 
+        GroupService(this).tryGetMainChar(getUserIdx())
         GroupService(this).tryGetGroupData(getUserIdx())
         GroupService(this).tryGetMateData(getUserIdx())
         context?.let { showLoadingDialog(it) }
@@ -74,18 +78,21 @@ class HomeFragment
 
     override fun onGetGroupSuccess(response: GroupResponse) {
         dismissLoadingDialog()
-        response.message?.let { showCustomToast(it) }
+        Log.d("homefragment", response.toString()) //그룹이 없더라도 single status 는 와야 되는거 아님?
+//        response.message?.let { showCustomToast(it) }
+
 
 
         if(response.code == 1000) {
-            setSingleStatus(response.result.singleStatus)
+
+
             binding.matePlusBtn.isClickable = true
             binding.noneGroupLayoutMain.visibility = View.GONE
             binding.groupRecyclerview.visibility = View.VISIBLE
-            val GroupSize = response.result.getGroupsRes.size
+            val GroupSize = response.result.size
 
             val GroupAdapter = Home_Group_Kind_RecyclerviewAdapter(
-                response.result.getGroupsRes,
+                response.result,
                 GroupSize,
                 "BASIC"
             )
@@ -131,13 +138,13 @@ class HomeFragment
 
     override fun onGetGroupFail(message: String) {
         dismissLoadingDialog()
-        showCustomToast(message)
+//        showCustomToast(message)
 
     }
 //Mate 조회
     override fun onGetMateSuccess(response: MateResponse) {
         dismissLoadingDialog()
-        response.message?.let { showCustomToast(it) }
+//        response.message?.let { showCustomToast(it) }
 
         if(response.code == 2501){
             binding.mateNonePlusLayout.visibility = View.VISIBLE
@@ -174,8 +181,30 @@ class HomeFragment
         dismissLoadingDialog()
     }
 
+    override fun onGetMainCharSuccess(response: MainCharResponse) {
+        setSingleStatus(response.result.singleStatus)
+        setMainChar(response.result.color, response.result.characters, response.result.singleStatus)
+    }
+
+    private fun setMainChar(color: Int, characters: Int, singleStatus: String) {
+        val memberColor = if(color != 0) color -1 else 0
+        val memberChar = if(characters != 0) characters -1 else 0
+        binding.ivMainChar.setImageResource(EatooCharList[(memberColor*5) + memberChar])
+        if(singleStatus == "ON"){
+            val grayScale = floatArrayOf(0.2989f, 0.5870f, 0.1140f,
+                0F, 0f, 0.2989f, 0.5870f, 0.1140f, 0f, 0f, 0.2989f, 0.5870f, 0.1140f, 0f, 0f, 0.0000F, 0.0000F, 0.0000F, 1f, 0f)
+            val matrix = ColorMatrixColorFilter(grayScale)
+            binding.ivMainChar.colorFilter= matrix
+        }
+
+    }
+
+    override fun onGetMainCharFail(message: String) {
+        showCustomToast(message)
+    }
+
     override fun onPatchSingleStatusSuccess() {
-        showCustomToast("on off 전환 성공")
+//        showCustomToast("on off 전환 성공")
 
         if(changeToSingle) binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icons)
         else binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icon)

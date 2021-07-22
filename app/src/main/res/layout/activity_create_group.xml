@@ -18,7 +18,7 @@
             android:id="@+id/custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="19dp"
+            android:layout_marginHorizontal="19dp"
             app:contentInsetStart="0dp"
             app:leftIcon="@drawable/ic_back_btn"
             app:titleText="@string/create_group_toolbar" />
@@ -131,6 +131,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
+                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="@+id/tv_makegroup_color"
                 app:layout_constraintTop_toBottomOf="@id/tv_makegroup_color"
                 app:singleSelection="true">
@@ -138,62 +139,62 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_1"
                     style="@style/CustomChipStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:checked="true"
                     android:tag="1"
                     app:checkedIconEnabled="false"
                     app:chipEndPadding="-10dp"
                     app:chipIcon="@drawable/color_chip1"
-                    app:chipStartPadding="4dp"
+                    app:chipStartPadding="6dp"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_2"
                     style="@style/CustomChipStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:tag="2"
                     app:checkedIconEnabled="false"
                     app:chipEndPadding="-10dp"
                     app:chipIcon="@drawable/color_chip2"
-                    app:chipStartPadding="4dp"
+                    app:chipStartPadding="6dp"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_3"
                     style="@style/CustomChipStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:tag="3"
                     app:checkedIconEnabled="false"
                     app:chipEndPadding="-10dp"
                     app:chipIcon="@drawable/color_chip3"
-                    app:chipStartPadding="4dp"
+                    app:chipStartPadding="6dp"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_4"
                     style="@style/CustomChipStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:tag="4"
                     app:checkedIconEnabled="false"
                     app:chipEndPadding="-10dp"
                     app:chipIcon="@drawable/color_chip4"
-                    app:chipStartPadding="4dp"
+                    app:chipStartPadding="6dp"
                     app:closeIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_5"
                     style="@style/CustomChipStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:tag="5"
                     app:checkedIconEnabled="false"
                     app:chipEndPadding="-10dp"
                     app:chipIcon="@drawable/color_chip5"
-                    app:chipStartPadding="4dp"
+                    app:chipStartPadding="6dp"
                     app:closeIconEnabled="false" />
 
 

@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.eatoo.R
 import com.example.eatoo.src.home.group.main.model.GroupStoreResponse
+import com.example.eatoo.util.glideUtil
+import com.example.eatoo.util.roundTop
 
 class Group_Home_Main_Store_Kind_RecyclerviewAdapter(val StoreList : ArrayList<GroupStoreResponse>) : RecyclerView.Adapter<Group_Home_Main_Store_Kind_RecyclerviewAdapter.CustomViewholder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
@@ -28,9 +30,10 @@ class Group_Home_Main_Store_Kind_RecyclerviewAdapter(val StoreList : ArrayList<G
 
         val imageUrl: String = StoreList[position].imgUrl
         if(imageUrl != null) {
-            Glide.with(holder.view.context).load(imageUrl).into(holder.Storeimg)
-            holder.Storeimg.background = holder.view.context.resources.getDrawable(R.drawable.group_main_home_store_img_background, null)
-            holder.Storeimg.clipToOutline = true
+            glideUtil(holder.view.context, imageUrl, roundTop(holder.Storeimg,20f ) )
+//            Glide.with(holder.view.context).load(imageUrl).into(holder.Storeimg,)
+//            holder.Storeimg.background = holder.view.context.resources.getDrawable(R.drawable.group_main_home_store_img_background, null)
+//            holder.Storeimg.clipToOutline = true
         }
 
         if(StoreList[position].isLiked == "Y"){

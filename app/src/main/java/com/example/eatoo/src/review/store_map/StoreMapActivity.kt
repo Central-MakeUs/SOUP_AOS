@@ -116,7 +116,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         현재 위치 가져오기
      */
     private fun requestPermission() {
-        showCustomToast("request permission")
+//        showCustomToast("request permission")
         if (::locationManager.isInitialized.not()) {
             locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         }

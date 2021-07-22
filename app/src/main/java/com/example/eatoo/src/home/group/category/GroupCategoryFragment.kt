@@ -160,9 +160,9 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {
-        p0.title?.let {
-            showCustomToast(it)
-        }
+//        p0.title?.let {
+//            showCustomToast(it)
+//        }
         //adapter
         return false
     }

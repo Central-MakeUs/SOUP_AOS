@@ -117,7 +117,7 @@ View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener, Vot
 
     override fun onPostVotedSuccess(response: VotedResponse) {
         dismissLoadingDialog()
-        showCustomToast("투표하기 성공!")
+//        showCustomToast("투표하기 성공!")
         isNewItemAdded = false
     }
 
@@ -127,7 +127,7 @@ View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener, Vot
 
     override fun onPostNewItemSuccess(response : NewItemAddedResponse) {
         dismissLoadingDialog()
-        showCustomToast("항목 추가 성공!")
+//        showCustomToast("항목 추가 성공!")
         isNewItemAdded = true
         GroupVoteService(this).tryGetVoteDetail(getUserIdx(), getGroupIdx(), response.result.voteIdx)
 

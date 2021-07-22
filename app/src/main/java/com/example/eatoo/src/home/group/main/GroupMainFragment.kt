@@ -32,7 +32,7 @@ class GroupMainFragment : BaseFragment<FragmentGroupMainBinding>(FragmentGroupMa
     }
 
     override fun onGetGroupMainSuccess(response: GroupMainResponse) {
-        showCustomToast("요청 완료")
+//        showCustomToast("요청 완료")
 
         if(response.result.getMateRes.size == 0){
             binding.findingMateRecyclerview.visibility = View.GONE
