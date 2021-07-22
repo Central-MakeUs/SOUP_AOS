@@ -1,26 +1,90 @@
 package com.example.eatoo.src.main
 
 import android.os.Bundle
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
+import android.util.Log
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseActivity
 import com.example.eatoo.databinding.ActivityMainBinding
+import com.example.eatoo.src.home.GroupService
+import com.example.eatoo.src.home.HomeFragment
+import com.example.eatoo.src.main.model.UserResponse
+import com.example.eatoo.src.mypage.MyPageFragment
+import com.example.eatoo.src.suggestion.SuggestionFragment
+import com.example.eatoo.src.wishlist.WishListFragment
+import com.example.eatoo.util.getUserIdx
+import com.example.eatoo.util.putSharedPrefUser
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate),MainActivityView {
     val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//
+//        // 네비게이션 호스트
+//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+//
+//        // 네비게이션 컨트롤러
+//        val navController = navHostFragment.navController
+//
+//        // 바인딩
+//        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
+        MainService(this).tryGetUserData(getUserIdx())
+        showLoadingDialog(this)
 
-        // 네비게이션 호스트
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        supportFragmentManager.beginTransaction().replace(R.id.nav_host, HomeFragment()).commitAllowingStateLoss()
 
-        // 네비게이션 컨트롤러
-        val navController = navHostFragment.navController
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener(
+            BottomNavigationView.OnNavigationItemSelectedListener { item ->
+                when (item.itemId) {
 
-        // 바인딩
-        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
+                    R.id.homeFragment -> {
+                        MainService(this).tryGetUserData(getUserIdx())
+                        showLoadingDialog(this)
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.nav_host, HomeFragment())
+                            .commitAllowingStateLoss()
+                        return@OnNavigationItemSelectedListener true
+                    }
+
+                    R.id.suggestionFragment -> {
+                        MainService(this).tryGetUserData(getUserIdx())
+                        showLoadingDialog(this)
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.nav_host, SuggestionFragment())
+                            .commitAllowingStateLoss()
+                        return@OnNavigationItemSelectedListener true
+                    }
+                    R.id.wishlistFragment -> {
+                        MainService(this).tryGetUserData(getUserIdx())
+                        showLoadingDialog(this)
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.nav_host, WishListFragment())
+                            .commitAllowingStateLoss()
+                        return@OnNavigationItemSelectedListener true
+                    }
+                    R.id.myPageFragment -> {
+                        MainService(this).tryGetUserData(getUserIdx())
+                        showLoadingDialog(this)
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.nav_host, MyPageFragment())
+                            .commitAllowingStateLoss()
+                        return@OnNavigationItemSelectedListener true
+                    }
+
+                }
+                false
+            })
+
+    }
+
+    override fun onGetUserDateSuccess(response: UserResponse) {
+        dismissLoadingDialog()
+        Log.d("닉네임",response.result.nickName)
+        putSharedPrefUser(response.result.nickName)
+    }
+
+    override fun onGetUserDateFail(message: String) {
     }
 
 }

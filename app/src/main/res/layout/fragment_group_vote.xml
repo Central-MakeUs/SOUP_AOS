@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tv_group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintEnd_toStartOf="@id/tv_group_vote_call"
+        app:layout_constraintStart_toStartOf="@id/tv_vote_suggest"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="6dp"
+        tools:text="잇투그룹"/>
+
+    <TextView
+        android:id="@+id/tv_group_vote_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/call_group_members"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintTop_toTopOf="@id/tv_group_name"
+        app:layout_constraintBottom_toBottomOf="@id/tv_group_name"
+        app:layout_constraintStart_toEndOf="@id/tv_group_name"
+        android:layout_marginStart="6dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_vote_suggest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vote_suggest"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_group_name"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="21dp"
+
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_group_vote"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginHorizontal="14dp"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@id/tv_vote_suggest"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <ImageView
+        android:id="@+id/iv_no_vote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_group_239"
+        tools:visibility="visible"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_vote_suggest"
+        android:layout_marginTop="58dp"/>
+
+
+    <TextView
+        android:id="@+id/tv_no_vote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:visibility="visible"
+        android:visibility="invisible"
+        android:text="@string/no_vote"
+        android:textSize="10sp"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/input_hint"
+        app:layout_constraintTop_toBottomOf="@+id/iv_no_vote"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_group_vote"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_baseline_add_24"
+        app:tint="@color/white"
+        app:backgroundTint="@color/main_orange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

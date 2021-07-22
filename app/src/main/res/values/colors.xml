@@ -7,14 +7,61 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="main_orange">#FF4E16</color>
+    <color name="main_color">#ff4e16</color>
 
-    <!-- Custom colors -->
+
+    <!-- Custom colors -->transparent
+    <color name="transparent">#00000000</color>
     <color name="custom_purple">#6c82d8</color>
     <color name="red">#e82840</color>
     <color name="gray_500">#212121</color>
     <color name="gray_400">#313131</color>
     <color name="gray_300">#545454</color>
     <color name="gray_200">#a0a0a0</color>
-    <color name="gray_100">#d8d8d8</color>
+    <color name="gray_150">#d8d8d8</color>
+    <color name="gray_100">#a8a8a8</color>
     <color name="gray_000">#f1f1f1</color>
+    <color name="gray_101">#dcdcdc</color>
+
+
+    <!--make group-->
+    <color name="chip_ripple_color">#10FFFFFF</color>
+    <color name="group_red">#ff0000</color>
+    <color name="group_orange">#ff4e16</color>
+    <color name="group_orange_litle">#ff8126</color>
+    <color name="group_yellow">#ffb800</color>
+    <color name="group_yellow_litle">#ffde70</color>
+    <color name="change_location">#80FFFFFF</color>
+
+    <!--create review-->
+    <color name="input_background">#dcdcdc</color>
+    <color name="input_hint">#a8a8a8</color>
+    <color name="next_btn">#dadada</color>
+
+    <!--dialog-->
+    <color name="dialog_cancel_background">#f3f3f3</color>
+    <color name="dialog_cancel_text">#a8a8a8</color>
+
+    <!--group vote -->
+
+    <color name="group_vote_rv">#f2b46b</color>
+
+    <array name="groupVoteRVColor">
+        <item>@color/main_orange</item>
+        <item>@color/group_orange_litle</item>
+        <item>@color/group_vote_rv</item>
+    </array>
+
+    <array name="groupRVColor">
+        <item>@color/group_red</item>
+        <item>@color/group_orange</item>
+        <item>@color/group_orange_litle</item>
+        <item>@color/group_yellow</item>
+        <item>@color/group_yellow_litle</item>
+    </array>
+
+
+    <!--mypage-->
+    <color name="positive_orange">#ffdcd1</color>
 </resources>

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Eatoo</string>
 
 
@@ -7,7 +7,324 @@
     <string name="suggestion">제안</string>
     <string name="wishlist">찜</string>
     <string name="myPage">My</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!--main_home-->
+    <string name="user_groups">님의\n"MATE GROUP"</string>
+
+    <string name="user_groups_create">안녕하세요, 잇투님 ! 🖐\nMATE GROUP이 없어요</string>
+    <string name="user_groups_create2">+ 를 눌러 새로운 그룹을 만들어보세요!\n더 다양한 기능을 사용할 수 있어요</string>
+    <string name="main_today">Today</string>
+    <string name="main_my_suggestion_mate">내가 제안한 MATE</string>
+    <string name="main_my_suggestion_mate_together">함께 밥먹을 MATE를 제안해주세요!</string>
+    <string name="main_review_food1">후기를 작성해주세요</string>
+    <string name="main_review_food2">방문했던 가게에 대한\n별점 및 후기를 입력해주세요</string>
+    <string name="main_group_member_count">+11</string>
+    <string name="main_group_none_group_txt1">다양한 GROUP을\n만들어 EAT-TOO 해보세요</string>
+    <string name="main_group_none_group_txt2">여러개의 그룹을 만들 수 있어요!</string>
+
+
+    <!--main_suggestion-->
+    <string name="user_suggestion">님이 제안하신\nMATE 입니다:)</string>
+    <string name="user_suggestion_no">제안하신 MATE가 없습니다.</string>
+    <string name="user_my_suggestion">내 제안</string>
+    <string name="mate_suggestion_title">국밥 드실분</string>
+    <string name="mate_suggestion_date">2021.06.21</string>
+    <string name="mate_suggestion_restaurant">| 할머니 갈비탕</string>
+    <string name="mate_suggestion_time" tools:ignore="TypographyDashes">| 12:00-12:40</string>
+    <string name="mate_suggestion_start_time" tools:ignore="TypographyDashes">| 12:00</string>
+    <string name="mate_suggestion_end_time" tools:ignore="TypographyDashes">-12:40</string>
+    <string name="mate_suggestion_limit_people">5</string>
+
+    <!--main_mate_suggestion -->
+    <string name="main_mate_suggestion">메이트 제안</string>
+    <string name="main_mate_group">MATE GROUP</string>
+    <string name="main_mate_suggestion_name">제안명</string>
+    <string name="main_mate_suggestion_name_hint">제안명을 입력해주세요</string>
+    <string name="main_mate_suggestion_store">가게</string>
+    <string name="main_mate_suggestion_store_hint">가게를 입력해주세요</string>
+    <string name="main_mate_suggestion_store_none_store">입력된 가게가 없습니다.</string>
+    <string name="main_mate_suggestion_store_none_img">입력된 가게의 이미지가 없습니다.</string>
+    <string name="main_mate_suggestion_meal_time">식사 시간</string>
+    <string name="main_mate_suggestion_meal_time_hint">시간 입력</string>
+    <string name="main_mate_suggestion_limit_people">제한 인원</string>
+    <string name="main_mate_suggestion_limit_people_hint">제한인원을 입력해주세요</string>
+    <string name="main_mate_suggestion_limit_time">제한마감 시간</string>
+    <string name="main_mate_suggestion_limit_time_hint">시간을 입력해주세요</string>
+    <string name="main_mate_suggestion_limit_time_hint2">마감시간이 되면 제안참여가 불가능하며, MATE 확정\n알림을 보내드립니다.</string>
+    <string name="main_mate_suggestion_registration">등록하기</string>
+
+    <!--profile-->
+
+
+    <!--review-->
+    <string name="my_review_user_title">님이 작성하신</string>
+    <string name="is_review">후기입니다 :)</string>
+    <string name="no_review">작성하신 후기가 없습니다.</string>
+    <string name="create_review">후기 작성하기</string>
+    <string name="one_over_two">1/2</string>
+    <string name="two_over_two">2/2</string>
+    <string name="store_location">가게 위치</string>
+    <string name="input_store_location">가게 위치를 입력해주세요</string>
+    <string name="find_store_via_map">지도에서 가게 위치 찾기</string>
+    <string name="store_name">가게명</string>
+    <string name="input_store_name">가게명을 입력해주세요</string>
+    <string name="category">카테고리</string>
+    <string name="category_chinese_food">중식</string>
+    <string name="category_japanese_food">일식</string>
+    <string name="category_western_food">양식</string>
+    <string name="category_street_food">분식</string>
+    <string name="category_korean_food">한식</string>
+    <string name="category_asian_food">아시안</string>
+    <string name="category_desert_food">디저트</string>
+    <string name="category_etc_food">기타</string>
+    <string name="next_step">다음으로</string>
+    <string name="review_exp">이미 등록된 가게를 선택한 경우 가게명과 카테고리는</string>
+    <string name="review_exp2">자동으로 입력됩니다. 새로운 가게의 경우, 직접 입력해주세요!</string>
+    <string name="try_write_review">후기를 작성해보세요!</string>
+    <string name="try_write_review_exp1">다녀왔던 가게에 대한 정보와\n평점, 후기를 꼭 작성해주세요 :)</string>
+    <string name="try_write_review_exp2">평점, 후기를 꼭 작성해주세요 :)</string>
+    <string name="my_review">내 후기</string>
+    <string name="register_new_store">새로운 가게 등록</string>
+    <string name="menu_name">메뉴명</string>
+    <string name="input_menu_name">메뉴명을 작성해주세요</string>
+    <string name="one_sentence_review">한줄평</string>
+    <string name="input_review">30자 이내로 짧게 적어주세요</string>
+    <string name="review_img">이미지</string>
+    <string name="input_review_img">사진을 첨부해주세요</string>
+    <string name="rating">별점</string>
+    <string name="optional">(선택)</string>
+    <string name="store_link">가게 정보 링크</string>
+    <string name="input_store_link">가게링크를 입력해주세요</string>
+    <string name="register">등록하기</string>
+    <string name="no_search_result">검색 결과가 없습니다.</string>
+    <string name="try_search_again">검색어를 다시 입력해주세요!</string>
+    <string name="search_example">예) 잇투동 12-13, 잇투로 456, 잇투아파트</string>
+    <string name="goto_map">지도에서 찾기 ></string>
+    <string name="nothing" />
+    <string name="road_address">도로명</string>
+
+    <!--review map dialog-->
+    <string name="dialog_register_new_store_query1">표시된 위치에 새로운 가게를</string>
+    <string name="dialog_register_new_store_query2">등록하시겠습니까?</string>
+    <string name="dialog_register_new_store_exp1">이미 등록된 동일 가게가 없는 경우, 새로운 가게</string>
+    <string name="dialog_register_new_store_exp2">등록 후 계속해서 후기를 남길 수 있습니다</string>
+
+
+    <!--create group-->
+    <string name="create_group_toolbar">그룹 만들기</string>
+    <string name="create_group_suggest1">님의 MATE</string>
+    <string name="create_group_suggest2">GROUP을 만들어보세요!</string>
+    <string name="create_group_name">그룹명</string>
+    <string name="create_group_name_suggest">그룹 이름을 입력해주세요</string>
+    <string name="create_group_color">색상</string>
+    <string name="create_group_keyword">키워드</string>
+    <string name="create_group_keyword_exp">을 나타낼 수 있는</string>
+    <string name="create_group_keyword_exp2">키워드를 입력해주세요!</string>
+    <string name="create_group_location">위치</string>
+    <string name="create_group_register">등록하기</string>
+    <string name="create_group_change_location">변경하기</string>
+    <string name="input_store_keyword">가게를 직접 입력해주세요</string>
+    <string name="input_location">위치를 직접 입력해주세요</string>
+    <string name="set_current_location">현 위치로 주소 설정하기</string>
+    <string name="current_location">현재위치</string>
+    <string name="search_address_fail">현 위치 주소를 가져오지 못 했습니다.</string>
+    <string name="input_jwt_request">JWT를 입력해주세요.</string>
+    <string name="invalid_jwt">유효하지 않은 JWT입니다.</string>
+    <string name="invalid_account">현재 존재하지 않는 계정입니다.</string>
+    <string name="input_group_name_request">그룹명을 입력해주세요.</string>
+    <string name="input_color_request">색상을 입력해주세요.</string>
+    <string name="input_latitude">위도를 입력해주세요.</string>
+    <string name="input_longitude">경도를 입력해주세요.</string>
+    <string name="check_group_name">그룹명 형식을 확인해주세요.</string>
+    <string name="check_color_range">색상 입력 범위를 확인해주세요.</string>
+    <string name="check_latitude">위도 입력 범위를 확인해주세요.</string>
+    <string name="check_longitude">경도 입력 범위를 확인해주세요.</string>
+    <string name="check_keyword_count">키워드 글자수를 확인해주세요.</string>
+    <string name="failed_db_connection">데이터베이스 연결에 실패하였습니다.</string>
+
+
+    <!--group location-->
+    <string name="search_location_fail">검색 결과를 가져오지 못 했습니다.</string>
+    <string name="group_location">위치</string>
+
+    <!--group vote-->
+    <string name="call_group_members">멤버분들!</string>
+    <string name="vote_suggest">투표로 쉽고 빠른 선택하세요</string>
+    <string name="new_vote">새로운 투표를</string>
+    <string name="create_vote_end_sentence">만들어보세요</string>
+    <string name="create_vote">투표 만들기</string>
+    <string name="create_vote_suggest">투표를 만들어보세요!</string>
+    <string name="vote_name">투표명</string>
+    <string name="input_vote_name">투표명을 입력해주세요</string>
+    <string name="vote_item">항목</string>
+    <string name="input_vote_item">항목을 입력해주세요</string>
+    <string name="vote_etc">기타</string>
+    <string name="vote_due_date">마감시간 설정</string>
+    <string name="vote_time_pm">오후 %d : %d</string>
+    <string name="vote_time_am">오전 %d : %d</string>
+    <string name="adding_vote_item_available">항목 추가 허용</string>
+    <string name="multiple_vote_available">복수선택</string>
+    <string name="anonymous_vote">익명투표</string>
+    <string name="input_vote_name_toast">투표명을 입력해주세요</string>
+    <string name="input_vote_keyword_toast">키워드를 입력해주세요</string>
+    <string name="input_vote_item_toast">항목을 입력해주세요</string>
+    <string name="keyword_num_limit">키워드는 최대 다섯 개 입력 가능합니다.</string>
+    <string name="keyword_length_limit">키워드는 최대 10 글자 입력 가능합니다.</string>
+    <string name="failed_connection">통신오류가 발생했습니다</string>
+    <string name="dialog_vote_confirm">투표완료</string>
+    <string name="dialog_vote_num">%d명</string>
+    <string name="dialog_vote_retry">재투표</string>
+    <string name="dialog_vote_add_item">+ 항목추가하기</string>
+    <string name="vote_num">투표인원</string>
+    <string name="no_vote">진행중인 투표가 없습니다.</string>
+    <string name="enter_new_item">항목 입력</string>
+
+    <!--group-->
+    <string name="group_main">MAIN</string>
+    <string name="group_category">카테고리</string>
+    <string name="group_vote">투표</string>
+    <string name="group_member">멤버</string>
+    <string name="group_diet">오늘의 식단✨</string>
+    <string name="group_date">날짜</string>
+    <string name="group_diet_kind">잡곡밥 | 호박잎된장국 | 꽁치구이 | 미역초무침 | 배추김치</string>
+    <string name="group_finding_mate">MATE를 찾아요!</string>
+    <string name="group_mate_title">국밥 드실분</string>
+    <string name="group_mate_restaurant">할매 국밥</string>
+    <string name="group_time" tools:ignore="TypographyDashes">12:00-12:40</string>
+    <string name="group_mate_limit_people">5</string>
+    <string name="group_member_review">멤버 후기</string>
+    <string name="group_recommend_restaurant">추천 맛집!</string>
+    <string name="group_view_more">더보기</string>
+    <string name="group_main_mate_matching">매칭중</string>
+    <string name="group_main_no_mate_matching">MATE</string>
+    <string name="group_main_no_mate_matching_txt">현재 진행중인\nMATE제안이 없어요</string>
+    <string name="group_main_no_mate_matching_txt2">멤버들에게 먼저\nMATE를 제안해보세요</string>
+    <string name="group_main_no_store_txt">의 추천 맛집이 없습니다.</string>
+    <string name="group_main_no_store_txt2">추천 맛집은 후기를 바탕으로 이루어집니다.</string>
+    <string name="group_main_no_store_txt3">마이페이지에서 후기를 먼저 작성해주세요 :)</string>
+    <string name="group_main_no_store_group_name_ex">회사아악</string>
+    <string name="group_main_mate_matching_limit">마감임박</string>
+    <string name="group_main_store_name">할머니 국밥</string>
+    <string name="group_main_store_location">회사 앞 4거리</string>
+    <string name="group_main_store_score">4.5</string>
+
+    <string name="group_main_review1">잇투님이 방문한 가게를 공유해요!</string>
+    <string name="group_main_review2">잇투님이 작성하신 후기를 통해 회사 주변\n가게를 등록하고 멤버들과 공유해요</string>
+    <string name="group_main_review3">잇투님의 그룹만의 맛집지도를 만들어보세요 :)</string>
+
+
+    <string name="main_suggestion_review1">MATE를 제안해보세요!</string>
+    <string name="main_suggestion_review2">그룹을 만들고 멤버들에게 식사\nMATE를 제안해보세요 :)</string>
+
+
+    <!--group member-->
+    <string name="invalid_group">현재 존재하지 않는 그룹입니다.</string>
+
+
+    <!--main home -->
+    <string name="eatoo">EATOO</string>
+    <string name="user_name_title">님의</string>
+    <string name="mate_group">"MATE GROUP"</string>
+    <string name="today">Today</string>
+    <string name="my_mate_suggest">내가 제안한 MATE</string>
+    <string name="welcoming">안녕하세요,&#160;</string>
+    <string name="welcome_user_name_title">님!&#9995;</string>
+    <string name="no_mate_group">MATE GROUP이 없어요</string>
+    <string name="press_plus_suggest1">+를 눌러 새로운 그룹을 만들어보세요!</string>
+    <string name="press_plus_suggest2">더 다양한 기능을 사용할 수 있어요</string>
+    <string name="make_group_suggest1">다양한 GROUP을</string>
+    <string name="make_group_suggest2">만들어&#160;</string>
+    <string name="make_group_suggest3">EAT-TOO&#160;</string>
+    <string name="make_group_suggest4">해보세요&#160;</string>
+    <string name="many_groups_possible">여러개의 그룹을 만들 수 있어요!</string>
+
+
+    <!--group category-->
+    <string name="cateogy_map">지도</string>
+
+    <!--member-->
+    <string name="is_group_member">의 멤버</string>
+
+    <!-- login_sign_in-->
+    <string name="login">로그인</string>
+    <string name="sign_in">회원가입</string>
+    <string name="name">이름</string>
+    <string name="phone_number">휴대폰 번호</string>
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+    <string name="password_check">비밀번호 확인</string>
+    <string name="nickname">닉네임</string>
+    <string name="next">다음으로</string>
+    <string name="sign_in_check">가입하기</string>
+    <string name="sign_in_hint">회원가입</string>
+    <string name="sign_in_start">시작하기</string>
+    <string name="name_hint">이름을 입력해주세요</string>
+    <string name="phone_number_hint">\'-\'를 제외하고 입력해주세요</string>
+    <string name="email_hint">이메일을 입력해주세요</string>
+    <string name="password_hint">비밀번호를 입력해주세요</string>
+    <string name="password_check_hint">비밀번호를 다시 입력해주세요</string>
+    <string name="nickname_hint">닉네임을 입력해주세요</string>
+    <string name="explanation1_1">자유롭고 명확한 의사표현을 통해</string>
+    <string name="explanation1_2">같이 또는 혼자 자유로운 식사</string>
+    <string name="explanation2_1">위치기반 맛집 추천,그룹 추천으로</string>
+    <string name="explanation2_2">쉽고 빠른 식사메뉴 선택</string>
+    <string name="explanation3">EATOO에서 함께해요 :)</string>
+    <string name="sign_in_name_bottom">한글, 영문 입력 가능합니다.</string>
+    <string name="sign_in_phone_bottom">본인 명의의 휴대폰 번호를 입력해주세요.</string>
+    <string name="sign_in_email_bottom">이메일은 중복이 불가능합니다.</string>
+    <string name="sign_in_password_bottom">영문, 숫자 포함 8자 이상</string>
+    <string name="sign_in_nickname_bottom">한글, 영문, 숫자 사용가능</string>
+    <string name="sign_in_explan_bottom">이메일과 비밀번호는 어플 로그인에 사용됩니다 :)</string>
+    <string name="sign_in_explan_bottom2">닉네임 등 프로필은 마이페이지에서\n수정이 가능합니다.</string>
+    <string name="sign_in_last_top1">환영합니다!</string>
+    <string name="sign_in_last_top2">회원가입이 완료되었습니다.</string>
+    <string name="thank_input">입력 감사합니다!</string>
+    <string name="duplicate_email">중복된 이메일입니다!</string>
+    <string name="thank_input_password">비밀번호 입력 감사합니다!</string>
+    <string name="available_nickname">사용가능한 닉네임입니다!</string>
+    <string name="thank_input_email">이메일 입력 감사합니다.</string>
+    <string name="unregistered_email">등록되지 않은 이메일입니다.</string>
+    <string name="unregistered_password">비밀번호가 맞지 않습니다.</string>
+    <string name="go_to_sign_in">회원가입 바로가기></string>
+
+
+    <!--my_page-->
+    <string name="my_page">마이페이지</string>
+    <string name="profile">프로필</string>
+    <string name="nickname_plus">님</string>
+    <string name="profile_setting">프로필 설정</string>
+    <string name="review">후기</string>
+    <string name="invite">초대</string>
+    <string name="inviting">초대하기</string>
+    <string name="my_member">My 멤버</string>
+    <string name="find_invite">초대장 찾기</string>
+    <string name="find_invite_exp">초대장 확인</string>
+    <string name="find_invite_exp2">전달받은 초대코드를 입력해주세요</string>
+    <string name="find_invite_input">초대코드 4자를 입력해주세요</string>
+    <string name="questions">문의사항</string>
+    <string name="account_secession">계정탈퇴</string>
+    <string name="logout">로그아웃</string>
+    <string name="edit">편집</string>
+    <string name="taste_keyword">식성 키워드</string>
+    <string name="character">캐릭터</string>
+
+
+    <!--dialog-->
+    <string name="dialog_confirm">확인</string>
+    <string name="dialog_cancel">취소</string>
+
+    <!--invite-->
+    <string name="invite_query">MATE GROUP에\n새로운 친구를 초대해주세요 :)</string>
+    <string name="invite_query2">MATE GROUP에 가입해주세요!</string>
+
+    <!--Mate_attend dialog-->
+    <string name="mate_attend_qurey">MATE에 참가하시겠습니가?</string>
+    <string name="mate_attend_qurey2">MATE 제안이 완료되었습니다!</string>
+    <!--invite dialog-->
+    <string name="invite_dialog_qurey">의 초대 코드</string>
+    <string name="invite_dialog_confirm">공유하기</string>
+    <string name="invite_dialog_qurey2">A</string>
+
 
 </resources>

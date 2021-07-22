@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_home"
-        android:title="@string/home" />
+        android:icon="@drawable/main_btm_nav_home_item_selector"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:title="@string/home"
+        tools:ignore="AlwaysShowAction" />
     <item
         android:id="@+id/suggestionFragment"
-        android:icon="@drawable/ic_suggestion"
+        android:icon="@drawable/main_btm_nav_suggestion_item_selector"
+        app:showAsAction="always"
         android:title="@string/suggestion" />
     <item
         android:id="@+id/wishlistFragment"
-        android:icon="@drawable/ic_favorite_unchecked"
+        android:icon="@drawable/main_btm_nav_wishlist_item_selector"
+        app:showAsAction="always"
         android:title="@string/wishlist" />
     <item
         android:id="@+id/myPageFragment"
-        android:icon="@drawable/ic_my_page"
+        android:icon="@drawable/main_btm_nav_my_page_item_selector"
+        app:showAsAction="always"
         android:title="@string/myPage" />
 
 </menu>

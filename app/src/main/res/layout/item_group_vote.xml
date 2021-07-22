@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_group_vote"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:layout_marginHorizontal="7dp"
+    android:background="@drawable/background_group_vote"
+    android:minWidth="151dp"
+    android:backgroundTint="@color/main_orange"
+    android:paddingEnd="12dp">
+
+    <TextView
+        android:id="@+id/tv_group_vote_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="19dp"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="회식날짜" />
+
+    <LinearLayout
+        android:id="@+id/ll_group_vote_keyword_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="@id/tv_group_vote_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_group_vote_name">
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_group_vote_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/background_group_vote_num"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:textColor="@color/main_orange"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_group_vote_keyword_container"
+        tools:text="15" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/vote_num"
+        android:textColor="@color/white"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="@id/tv_group_vote_num"
+        app:layout_constraintStart_toStartOf="@id/tv_group_vote_num"
+        app:layout_constraintTop_toBottomOf="@id/tv_group_vote_num" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

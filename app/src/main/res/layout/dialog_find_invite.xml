@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_dialog_confirm_radius">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="280dp"
+        android:layout_height="197dp"
+        android:background="@drawable/background_dialog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_dialog_circle"
+        android:layout_marginTop="43dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_query1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/find_invite_exp"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/main_color"
+            android:lineSpacingExtra="6sp"
+            android:lineHeight="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UnusedAttribute" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_query2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="6sp"
+            android:text="@string/find_invite_exp2"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:lineHeight="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_query1"
+            app:layout_constraintStart_toStartOf="@+id/tv_query1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_query1"
+            tools:ignore="SmallSp,UnusedAttribute" />
+
+
+        <EditText
+            android:id="@+id/invite_code_edt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="23dp"
+            android:maxLines="1"
+            android:maxLength="4"
+            android:padding="5dp"
+            android:background="@drawable/edittext_background_radius4"
+            android:fontFamily="sans-serif-medium"
+            android:hint="@string/find_invite_input"
+            android:inputType="text"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="14sp"
+            android:paddingStart="4dp"
+            android:paddingTop="1dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="1dp"
+            android:textColor="#dcdcdc"
+            android:textSize="10sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@+id/btn_dialog_confirm"
+            app:layout_constraintEnd_toEndOf="@+id/tv_query2"
+            app:layout_constraintStart_toStartOf="@+id/tv_query2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_query2"
+            tools:ignore="Autofill,SmallSp" />
+
+
+
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dialog_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:background="@drawable/background_dialog_confirm"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/dialog_confirm"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_dialog_circle"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:src="@drawable/background_dialog_circle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_dialog_circle_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/eva_link_2_fill"
+        app:layout_constraintTop_toTopOf="@id/iv_dialog_circle"
+        app:layout_constraintBottom_toBottomOf="@id/iv_dialog_circle"
+        app:layout_constraintStart_toStartOf="@id/iv_dialog_circle"
+        app:layout_constraintEnd_toEndOf="@id/iv_dialog_circle"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

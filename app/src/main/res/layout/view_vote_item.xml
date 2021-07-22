@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ll_dynamic_vote_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_dynamic_vote_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/edittext_background_radius_litle"
+        android:fontFamily="@font/roboto_regular"
+        android:hint="@string/input_vote_item"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:maxLength="23"
+        android:maxLines="1"
+        android:paddingStart="9dp"
+        android:paddingTop="13dp"
+        android:paddingBottom="14dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/input_hint"
+        android:textSize="14sp"
+        tools:ignore="Autofill,RtlSymmetry" />
+
+</LinearLayout>

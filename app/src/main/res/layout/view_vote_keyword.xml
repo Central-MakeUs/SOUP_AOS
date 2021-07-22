@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<TextView
+    android:id="@+id/tv_group_vote_keyword"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    android:background="@drawable/background_group_vote_keyword"
+    android:fontFamily="@font/roboto_medium"
+    android:paddingHorizontal="9dp"
+    android:paddingVertical="4dp"
+    android:textColor="@color/white"
+    android:textSize="11sp"
+    tools:text="전체회식" />
+
+</LinearLayout>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:ignore="RtlSymmetry">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/group_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="26dp"
+        android:background="@drawable/main_home_background_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="291dp"
+            android:layout_height="362dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/group_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/create_group_name"
+                android:textColor="@color/white"
+                android:textSize="27sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="17dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/keword_recomand1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_group_keyword_exp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textStyle="normal"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:lineSpacingExtra="10sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/keword_recomand2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_group_keyword_exp2"
+                    android:fontFamily="sans-serif-medium"
+                    android:textStyle="normal"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:lineSpacingExtra="10sp" />
+
+
+                <LinearLayout
+                    android:id="@+id/chip_first"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip1"
+                        style="@style/CustomGroupKeywordChipStyle1"
+                        android:clickable="false"
+                        android:checkable="false"
+                        android:backgroundTint="@color/transparent"
+                        android:fontFamily="sans-serif-medium"
+                        android:textStyle="normal"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="10sp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip2"
+                        style="@style/CustomGroupKeywordChipStyle1"
+                        android:clickable="false"
+                        android:checkable="false"
+                        android:backgroundTint="@color/transparent"
+                        android:layout_marginStart="9dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textStyle="normal"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="10sp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/chip_second"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip2_1"
+                        style="@style/CustomGroupKeywordChipStyle1"
+                        android:clickable="false"
+                        android:checkable="false"
+                        android:backgroundTint="@color/transparent"
+                        android:fontFamily="sans-serif-medium"
+                        android:textStyle="normal"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="10sp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip2_2"
+                        style="@style/CustomGroupKeywordChipStyle1"
+                        android:clickable="false"
+                        android:checkable="false"
+                        android:backgroundTint="@color/transparent"
+                        android:layout_marginStart="9dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textStyle="normal"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="10sp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="118dp"
+                android:layout_marginEnd="143dp"
+                android:layout_marginBottom="44dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/group_member1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_eatoo_charater1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/group_member2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:src="@drawable/ic_eatoo_charater2"
+                    app:layout_constraintBottom_toBottomOf="@+id/group_member1"
+                    app:layout_constraintStart_toStartOf="@+id/group_member1"
+                    app:layout_constraintTop_toTopOf="@+id/group_member1" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/group_member3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:src="@drawable/ic_eatoo_charater3"
+                    app:layout_constraintBottom_toBottomOf="@+id/group_member2"
+                    app:layout_constraintStart_toStartOf="@+id/group_member2"
+                    app:layout_constraintTop_toTopOf="@+id/group_member2" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/group_member_count_tv_background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:src="@drawable/ic_group_user_white"
+                    app:layout_constraintBottom_toBottomOf="@+id/group_member3"
+                    app:layout_constraintStart_toStartOf="@+id/group_member3"
+                    app:layout_constraintTop_toTopOf="@+id/group_member3"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/group_member_count_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:lineSpacingExtra="15sp"
+                    android:text="@string/main_group_member_count"
+                    android:textColor="@color/main_color"
+                    android:textSize="15sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="@+id/group_member_count_tv_background"
+                    app:layout_constraintEnd_toEndOf="@+id/group_member_count_tv_background"
+                    app:layout_constraintStart_toStartOf="@+id/group_member_count_tv_background"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

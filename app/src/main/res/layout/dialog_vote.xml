@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_dialog_vote"
+        android:layout_width="280dp"
+        android:layout_height="355dp"
+        android:layout_marginTop="43dp"
+        android:background="@drawable/background_dialog"
+        android:minHeight="344dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_dialog_circle">
+
+        <TextView
+            android:id="@+id/tv_group_vote_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/main_orange"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="투표명" />
+
+        <TextView
+            android:id="@+id/tv_vote_dialog_top_due_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_group_vote_name"
+            tools:text="2021.08.01" />
+
+
+        <!--복수투표x -->
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            app:layout_constraintTop_toBottomOf="@id/tv_vote_dialog_top_due_date"
+            app:layout_constraintBottom_toTopOf="@id/btn_vote_dialog_done">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <RadioGroup
+                    android:id="@+id/radiogroup_vote_dialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:paddingTop="3dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.1">
+
+                </RadioGroup>
+
+                <LinearLayout
+                    android:id="@+id/ll_nonmuti_vote_item_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/radiogroup_vote_dialog"
+                    app:layout_constraintTop_toTopOf="@+id/radiogroup_vote_dialog"
+                    app:layout_constraintVertical_bias="0.1">
+
+                </LinearLayout>
+
+
+                <!--복수투표 -->
+                <LinearLayout
+                    android:id="@+id/ll_multi_vote_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.1">
+
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_vote_dialog_done"
+            android:layout_width="0dp"
+            android:layout_height="41dp"
+            android:background="@drawable/selector_group_vote_confirm"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/dialog_vote_confirm"
+            android:textColor="@drawable/selector_group_vote_textcolor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/iv_dialog_circle"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:src="@drawable/background_dialog_circle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_dialog_vote"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_eva_shopping_bag_outline"
+        app:layout_constraintBottom_toBottomOf="@id/iv_dialog_circle"
+        app:layout_constraintEnd_toEndOf="@id/iv_dialog_circle"
+        app:layout_constraintStart_toStartOf="@id/iv_dialog_circle"
+        app:layout_constraintTop_toTopOf="@id/iv_dialog_circle" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
