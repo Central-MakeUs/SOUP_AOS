@@ -26,4 +26,13 @@ interface GroupRetrofitInterface {
     fun getMate(
         @Path ("userIdx") userIdx : Int
     ): Call<MateResponse>
+
+
+//    @GET("/app/mates/{mateIdx}/end")
+//    fun getMateConfirm(
+//        @Path ("mateIdx") mateIdx : Int
+//    ): Call<MateConfirmationResponse>
+
+
+
 }

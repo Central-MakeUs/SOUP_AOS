@@ -26,6 +26,7 @@
 
     <!--main_suggestion-->
     <string name="user_suggestion">님이 제안하신\nMATE 입니다:)</string>
+    <string name="user_suggestion_no">제안하신 MATE가 없습니다.</string>
     <string name="user_my_suggestion">내 제안</string>
     <string name="mate_suggestion_title">국밥 드실분</string>
     <string name="mate_suggestion_date">2021.06.21</string>
@@ -314,8 +315,12 @@
     <string name="dialog_cancel">취소</string>
 
     <!--invite-->
-    <string name="invite_query">MATE GROUP에\n새로운 친구를 초대해주세요 :)
-</string>
+    <string name="invite_query">MATE GROUP에\n새로운 친구를 초대해주세요 :)</string>
+    <string name="invite_query2">MATE GROUP에 가입해주세요!</string>
+
+    <!--Mate_attend dialog-->
+    <string name="mate_attend_qurey">MATE에 참가하시겠습니가?</string>
+    <string name="mate_attend_qurey2">MATE 제안이 완료되었습니다!</string>
     <!--invite dialog-->
     <string name="invite_dialog_qurey">의 초대 코드</string>
     <string name="invite_dialog_confirm">공유하기</string>

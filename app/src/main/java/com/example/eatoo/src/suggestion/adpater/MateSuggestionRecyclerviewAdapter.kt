@@ -28,7 +28,7 @@ class MateSuggestionRecyclerviewAdapter (val MateList : ArrayList<SuggestionMate
         holder.GroupName.text = MateList[position].groupName
         holder.MateName.text = MateList[position].mateName
         holder.RestaurantName.text = MateList[position].storeName
-        holder.StartTime.text = "|" +  MateList[position].startTime
+        holder.StartTime.text = "| " +  MateList[position].startTime
         holder.EndTime.text =  "-" + MateList[position].endTime
         holder.Date.text = MateList[position].createdAt
         holder.People.text = MateList[position].membersNumber.toString()

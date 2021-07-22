@@ -1,12 +1,14 @@
 package com.example.eatoo.src.suggestion
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eatoo.R
 import com.example.eatoo.config.BaseFragment
 import com.example.eatoo.databinding.FragmentSuggestionBinding
+import com.example.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
 import com.example.eatoo.src.suggestion.adpater.MateSuggestionRecyclerviewAdapter
 import com.example.eatoo.src.suggestion.model.SuggestionMateResponse
 import com.example.eatoo.util.getUserIdx
@@ -34,18 +36,28 @@ class SuggestionFragment : BaseFragment<FragmentSuggestionBinding>(FragmentSugge
     override fun onGetMateSuccess(response: SuggestionMateResponse) {
         dismissLoadingDialog()
         if(response.code == 1000) {
-            binding.mySuggestionRecyclerview.visibility = View.VISIBLE
-            binding.mySuggestionNoneLayout.visibility = View.GONE
 
-            val MateList = response.result
-            val MateAdapter = MateSuggestionRecyclerviewAdapter(MateList)
-            binding.mySuggestionRecyclerview.adapter = MateAdapter
-            binding.mySuggestionRecyclerview.layoutManager =
-                LinearLayoutManager(activity).also { it.orientation = LinearLayoutManager.VERTICAL }
+            if(response.result.size == 0){
+                binding.mySuggestionRecyclerview.visibility = View.GONE
+                binding.mySuggestionNoneLayout.visibility = View.VISIBLE
+            }
+            else{
+                binding.mySuggestionRecyclerview.visibility = View.VISIBLE
+                binding.mySuggestionNoneLayout.visibility = View.GONE
+
+                val MateList = response.result
+                val MateAdapter = MateSuggestionRecyclerviewAdapter(MateList)
+                binding.mySuggestionRecyclerview.adapter = MateAdapter
+                binding.mySuggestionRecyclerview.layoutManager =
+                    LinearLayoutManager(activity).also { it.orientation = LinearLayoutManager.VERTICAL }
+            }
         }
         else{
             binding.mySuggestionRecyclerview.visibility = View.GONE
             binding.mySuggestionNoneLayout.visibility = View.VISIBLE
+        }
+        binding.mateSuggestionBtn.setOnClickListener {
+            startActivity(Intent(activity, Group_Mate_Suggetsion_Activity::class.java))
         }
     }
 

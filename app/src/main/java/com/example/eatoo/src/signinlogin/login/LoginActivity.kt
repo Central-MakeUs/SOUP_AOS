@@ -125,6 +125,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
     override fun onPostLoginFailure(message: String) {
         dismissLoadingDialog()
-        showCustomToast(message)
+//        showCustomToast(message)
     }
 }

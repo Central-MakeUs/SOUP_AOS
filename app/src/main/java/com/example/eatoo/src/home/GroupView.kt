@@ -14,4 +14,5 @@ interface GroupView {
 
     fun onGetMainCharSuccess(response : MainCharResponse)
     fun onGetMainCharFail(message: String)
+
 }

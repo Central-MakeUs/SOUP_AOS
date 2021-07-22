@@ -78,10 +78,6 @@ class HomeFragment
 
     override fun onGetGroupSuccess(response: GroupResponse) {
         dismissLoadingDialog()
-        Log.d("homefragment", response.toString()) //그룹이 없더라도 single status 는 와야 되는거 아님?
-//        response.message?.let { showCustomToast(it) }
-
-
 
         if(response.code == 1000) {
 
@@ -144,7 +140,6 @@ class HomeFragment
 //Mate 조회
     override fun onGetMateSuccess(response: MateResponse) {
         dismissLoadingDialog()
-//        response.message?.let { showCustomToast(it) }
 
         if(response.code == 2501){
             binding.mateNonePlusLayout.visibility = View.VISIBLE
@@ -204,7 +199,6 @@ class HomeFragment
     }
 
     override fun onPatchSingleStatusSuccess() {
-//        showCustomToast("on off 전환 성공")
 
         if(changeToSingle) binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icons)
         else binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icon)

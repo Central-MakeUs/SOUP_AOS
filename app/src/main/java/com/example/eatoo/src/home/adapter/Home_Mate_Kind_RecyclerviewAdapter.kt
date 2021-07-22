@@ -27,7 +27,7 @@ class Home_Mate_Kind_RecyclerviewAdapter(private val MateList : ArrayList<MateRe
         holder.GroupName.text = MateList[position].groupName
         holder.MateName.text = MateList[position].mateName
         holder.RestaurantName.text = MateList[position].storeName
-        holder.StartTime.text = "|" +  MateList[position].startTime
+        holder.StartTime.text = "| " +  MateList[position].startTime
         holder.EndTime.text =  "-" + MateList[position].endTime
         holder.People.text = MateList[position].membersNumber.toString()
 
