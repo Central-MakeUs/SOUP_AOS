@@ -53,17 +53,22 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/store_location_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="sans-serif"
         android:lineSpacingExtra="2sp"
+        android:maxWidth="120dp"
+        android:maxLines="1"
         android:text="@string/group_main_store_location"
         android:textColor="@color/black"
         android:textSize="10sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/ic_star_img"
-        app:layout_constraintStart_toStartOf="@+id/store_name_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SmallSp" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -73,7 +78,7 @@
         android:layout_marginBottom="10dp"
         android:src="@drawable/star_20"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/store_location_tv" />
+        app:layout_constraintStart_toStartOf="@+id/store_name_tv" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/store_score_tv"
