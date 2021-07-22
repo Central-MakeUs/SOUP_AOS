@@ -18,7 +18,7 @@ tools:context=".src.review.store_location.StoreLocationActivity">
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.example.eatoo.custom_view.CustomToolbar
+        <com.makeus.eatoo.custom_view.CustomToolbar
             android:id="@+id/toolbar_custom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

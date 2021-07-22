@@ -13,7 +13,7 @@
         app:cardElevation="8dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.example.eatoo.custom_view.CustomToolbar
+        <com.makeus.eatoo.custom_view.CustomToolbar
             android:id="@+id/custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -269,7 +269,7 @@
                 android:background="@color/next_btn"
                 app:layout_constraintBottom_toTopOf="@id/custom_toggle_vote_item" />
 
-            <com.example.eatoo.custom_view.CustomToggleLayout
+            <com.makeus.eatoo.custom_view.CustomToggleLayout
                 android:id="@+id/custom_toggle_vote_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -279,7 +279,7 @@
                 app:layout_constraintTop_toBottomOf="@id/cl_vote_due_date"
                 app:titleTextCustomToggle="@string/adding_vote_item_available" />
 
-            <com.example.eatoo.custom_view.CustomToggleLayout
+            <com.makeus.eatoo.custom_view.CustomToggleLayout
                 android:id="@+id/custom_toggle_multi_vote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -289,7 +289,7 @@
                 app:layout_constraintTop_toBottomOf="@id/custom_toggle_vote_item"
                 app:titleTextCustomToggle="@string/multiple_vote_available" />
 
-            <com.example.eatoo.custom_view.CustomToggleLayout
+            <com.makeus.eatoo.custom_view.CustomToggleLayout
                 android:id="@+id/custom_toggle_anonymous_vote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

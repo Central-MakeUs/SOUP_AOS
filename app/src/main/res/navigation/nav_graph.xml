@@ -6,22 +6,22 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.eatoo.src.home.HomeFragment"
+        android:name="com.makeus.eatoo.src.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home"/>
     <fragment
         android:id="@+id/suggestionFragment"
-        android:name="com.example.eatoo.src.suggestion.SuggestionFragment"
+        android:name="com.makeus.eatoo.src.suggestion.SuggestionFragment"
         android:label="SuggestionFragment"
         tools:layout="@layout/fragment_suggestion"/>
     <fragment
         android:id="@+id/wishlistFragment"
-        android:name="com.example.eatoo.src.wishlist.WishListFragment"
+        android:name="com.makeus.eatoo.src.wishlist.WishListFragment"
         android:label="WishListFragment"
         tools:layout="@layout/fragment_wish_list"/>
     <fragment
         android:id="@+id/myPageFragment"
-        android:name="com.example.eatoo.src.mypage.MyPageFragment"
+        android:name="com.makeus.eatoo.src.mypage.MyPageFragment"
         android:label="MyPageFragment"
         tools:layout="@layout/fragment_my_page"/>
 </navigation>

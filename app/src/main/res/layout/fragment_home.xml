@@ -20,7 +20,7 @@
 
 
 
-        <com.example.eatoo.custom_view.CustomToolbar
+        <com.makeus.eatoo.custom_view.CustomToolbar
             android:id="@+id/custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
