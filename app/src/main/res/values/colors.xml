@@ -23,7 +23,7 @@
     <color name="gray_100">#a8a8a8</color>
     <color name="gray_000">#f1f1f1</color>
     <color name="gray_101">#dcdcdc</color>
-
+    <color name="blackshadow">#1A000000</color>
 
     <!--make group-->
     <color name="chip_ripple_color">#10FFFFFF</color>
