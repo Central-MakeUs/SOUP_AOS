@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.ApplicationClass
 import com.makeus.eatoo.config.BaseActivity
