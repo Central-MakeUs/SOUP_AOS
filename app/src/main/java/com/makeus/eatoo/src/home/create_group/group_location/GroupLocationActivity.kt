@@ -138,14 +138,10 @@ class GroupLocationActivity :
 
     override fun onSearchStoreSuccess(response: KakaoSearchResponse) {
         dismissLoadingDialog()
-        if (response.documents.isEmpty()) {
-            if (page == StoreLocationActivity.FIRST_PAGE_NUM) { //결과 없음
+        if (response.documents.isEmpty() && page == StoreLocationActivity.FIRST_PAGE_NUM) {//결과 없음
                 binding.clNoSearchResult.isVisible = true
-            } else { //더이상 결과 없음
-                isLastPage = true
-            }
         } else {
-            isLastPage = false
+            isLastPage = response.meta.is_end
             binding.clNoSearchResult.isVisible = false
             binding.clNoSearchResult.isVisible = false
             locationAdapter.addAllData(response.documents)

@@ -9,6 +9,7 @@ import com.makeus.eatoo.R
 import com.makeus.eatoo.databinding.ItemMyReviewBinding
 import com.makeus.eatoo.src.review.my_review.model.MyReviewResult
 import com.makeus.eatoo.util.glideUtil
+import com.makeus.eatoo.util.showRatingStartUtil
 
 class MyReviewRVAdapter(
     val context : Context,
@@ -23,22 +24,12 @@ class MyReviewRVAdapter(
         fun bindItem(item : MyReviewResult) {
             binding.tvMyreviewStoreName.text = item.storeName
             binding.tvMyreviewStoreLocation.text = item.address
-            setRatingStarIv(item)
+            showRatingStartUtil(context, item.rating.toInt(), binding.ivMyreviewRating)
             binding.tvMyreviewMenuName.text = item.menuName
             binding.tvMyreviewCreatedAt.text = item.createdAt
             glideUtil(context, item.imgUrl, binding.ivMyreview)
             binding.cardviewMyreview.setOnClickListener{
                 listener.onMyReviewClicked(item)
-            }
-        }
-
-        private fun setRatingStarIv(item: MyReviewResult) {
-            when(item.rating.toInt()){
-                1 -> binding.ivMyreviewRating.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.group_369))
-                2-> binding.ivMyreviewRating.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.group_368))
-                3 -> binding.ivMyreviewRating.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.group_367))
-                4 -> binding.ivMyreviewRating.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.group_366))
-                5 -> binding.ivMyreviewRating.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.group_365))
             }
         }
 

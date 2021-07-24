@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import androidx.core.view.isVisible
@@ -84,15 +85,16 @@ StoreLocationView, StoreSearchRVAdapter.OnSearchResultClickListener, View.OnClic
     private fun getSearchStore(query: String?) {
         showLoadingDialog(this)
         storeSearchAdapter.removeAllData()
-        StoreLocationService(this).tryGetStoreSearch(query, FIRST_PAGE_NUM)
+        page = FIRST_PAGE_NUM
+        StoreLocationService(this).tryGetStoreSearch(query, page)
     }
 
     private val mRVScrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
 
-            if(storeSearchAdapter.storeList.isNotEmpty()
-                && !recyclerView.canScrollVertically(1)) { //?
+            if(!mLoadingDialog.isShowing && storeSearchAdapter.storeList.isNotEmpty()
+                && !recyclerView.canScrollVertically(1)) {
                 if(!isLastPage) loadPage(++page)
             }
         }
@@ -105,17 +107,13 @@ StoreLocationView, StoreSearchRVAdapter.OnSearchResultClickListener, View.OnClic
 
     override fun onSearchStoreSuccess(response: KakaoSearchResponse) {
         dismissLoadingDialog()
-        if(response.documents.isEmpty()){
-            if(page == FIRST_PAGE_NUM){ //결과 없음
+        if(response.documents.isEmpty() && page == FIRST_PAGE_NUM){  //결과 없음
                 binding.clNoSearchResult.isVisible = true
-            }else{ //더이상 결과 없음
-                isLastPage = true
-            }
         }else {
-            isLastPage = false
-            binding.clNoSearchResult.isVisible = false
-            binding.clNoSearchResult.isVisible = false
-            storeSearchAdapter.addAllData(response.documents)
+                isLastPage = response.meta.is_end
+                binding.clNoSearchResult.isVisible = false
+                binding.clNoSearchResult.isVisible = false
+                storeSearchAdapter.addAllData(response.documents)
         }
     }
 

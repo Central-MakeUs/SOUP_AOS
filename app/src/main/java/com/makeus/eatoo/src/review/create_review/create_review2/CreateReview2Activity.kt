@@ -262,7 +262,8 @@ class CreateReview2Activity
 
     override fun onPostReview1Success(response: ReviewResponse) {
         dismissLoadingDialog()
-        Log.d("createReview", response.toString())
+        startActivity(Intent(this, MyReviewActivity::class.java))
+        finish()
     }
 
     override fun onPostReview1Fail(message: String?) {
@@ -272,9 +273,9 @@ class CreateReview2Activity
         }
     }
     override fun onPostReview2Success(response: ReviewResponse) {
-        Log.d("createReview", response.toString())
         dismissLoadingDialog()
         startActivity(Intent(this, MyReviewActivity::class.java))
+        finish()
     }
 
     override fun onPostReview2Fail(message: String?) {
