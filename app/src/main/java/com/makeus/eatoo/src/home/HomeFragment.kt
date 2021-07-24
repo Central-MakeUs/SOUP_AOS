@@ -37,6 +37,12 @@ class HomeFragment
     private var changeToSingle = false
     val userIdx = ApplicationClass.sSharedPreferences.getInt(USER_IDX, -1)
 
+    override fun onResume() {
+        super.onResume()
+
+        GroupService(this).tryGetMainChar(getUserIdx())
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,7 +51,7 @@ class HomeFragment
         Log.d("유전인덱스",""+getUserIdx())
         Log.d("토큰",X_ACCESS_TOKEN)
 
-        GroupService(this).tryGetMainChar(getUserIdx())
+
         GroupService(this).tryGetGroupData(getUserIdx())
         GroupService(this).tryGetMateData(getUserIdx())
         context?.let { showLoadingDialog(it) }
@@ -177,11 +183,13 @@ class HomeFragment
     }
 
     override fun onGetMainCharSuccess(response: MainCharResponse) {
+        Log.d("homeFragment", response.toString())
         setSingleStatus(response.result.singleStatus)
         setMainChar(response.result.color, response.result.characters, response.result.singleStatus)
     }
 
     private fun setMainChar(color: Int, characters: Int, singleStatus: String) {
+        Log.d("homeFragment", "here")
         val memberColor = if(color != 0) color -1 else 0
         val memberChar = if(characters != 0) characters -1 else 0
         binding.ivMainChar.setImageResource(EatooCharList[(memberColor*5) + memberChar])
@@ -190,6 +198,8 @@ class HomeFragment
                 0F, 0f, 0.2989f, 0.5870f, 0.1140f, 0f, 0f, 0.2989f, 0.5870f, 0.1140f, 0f, 0f, 0.0000F, 0.0000F, 0.0000F, 1f, 0f)
             val matrix = ColorMatrixColorFilter(grayScale)
             binding.ivMainChar.colorFilter= matrix
+        }else {
+            binding.ivMainChar.colorFilter = null
         }
 
     }
@@ -202,6 +212,8 @@ class HomeFragment
 
         if(changeToSingle) binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icons)
         else binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icon)
+
+        GroupService(this).tryGetMainChar(getUserIdx())
     }
 
     override fun onPatchSingleStatusFail(message: String?) {
