@@ -2,7 +2,9 @@ package com.makeus.eatoo.src.home.group
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityGroupBinding
@@ -17,6 +19,10 @@ import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.getGroupName
 import com.makeus.eatoo.util.getUserIdx
 import com.google.android.material.tabs.TabLayoutMediator
+import com.makeus.eatoo.src.home.group.category.GroupCategoryFragment
+import com.makeus.eatoo.src.home.group.main.GroupMainFragment
+import com.makeus.eatoo.src.home.group.member.GroupMemberFragment
+import com.makeus.eatoo.src.home.group.vote.GroupVoteFragment
 
 
 class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::inflate),
@@ -53,7 +59,7 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
     }
 
     private fun setGroupViewPager() {
-        viewPagerAdapter = GroupViewPagerAdapter(this)
+        viewPagerAdapter = GroupViewPagerAdapter(this, this)
 
         binding.viewpagerGroup.apply {
             adapter = viewPagerAdapter
@@ -77,11 +83,10 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
     }
 
     override fun onPatchSingleStatusSuccess() {
-//        showCustomToast("on off 전환 성공")
-
         if(changeToSingle) binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icons)
         else binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icon)
 
+        viewPagerAdapter.notifyDataSetChanged()
     }
 
 
@@ -90,10 +95,11 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
     }
 
     override fun onGetGroupMemberSuccess(response: GroupMemberResponse) {
-//        showCustomToast("single status 가져오기 성공!")
-//        Log.d("groupActivity", response.toString())
         if(response.result.singleStatus == "ON") binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icons)
         else binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icon)
+
+
+
     }
 
     override fun onGetGroupMemberFail(message: String?) {
