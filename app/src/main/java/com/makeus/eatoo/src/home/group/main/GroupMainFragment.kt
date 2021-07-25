@@ -37,6 +37,8 @@ class GroupMainFragment() : BaseFragment<FragmentGroupMainBinding>(FragmentGroup
             startActivity(Intent(activity,FindMateActivity::class.java))
         }
 
+
+
     }
 
     @SuppressLint("SetTextI18n")

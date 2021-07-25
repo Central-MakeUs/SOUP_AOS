@@ -34,6 +34,9 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
         FindMateService(this).tryGetFindMateData(getUserIdx(), getGroupIdx(),0)
         showLoadingDialog(this)
 
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
 
     }
 
