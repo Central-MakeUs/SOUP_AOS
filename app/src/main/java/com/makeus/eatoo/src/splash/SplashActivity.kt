@@ -17,16 +17,16 @@ import com.makeus.eatoo.src.explanation.ExplanationActivity
 import com.makeus.eatoo.src.main.MainActivity
 
 
-class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate) , FcmView{
+class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initFCM()
+
 
         Log.d("토큰", X_ACCESS_TOKEN)
         //디버깅용
-        //ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
+       // ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
         Handler(Looper.getMainLooper()).postDelayed({
 
             if (ApplicationClass.sSharedPreferences.contains(X_ACCESS_TOKEN)) {
@@ -48,20 +48,5 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
     // 로그인 상태이면, 로그인 액티비티를 거치지 않고 바로 홈 화면으로 넘어갑니다.
     // 현재는 임시로 3초 뒤에 메인 액티비티로 넘어가는 방식으로 세팅해놓았습니다.
 
-    private fun initFCM() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.d("fcm test : token", task.result.toString())
-                FcmRetrofitService(this).tryPostFcmToken(task.result!!)
-            }
-        }
-    }
 
-    override fun onPostFcmSuccess() {
-        showCustomToast("fcm 등록!")
-    }
-
-    override fun onPostFcmFail(message: String?) {
-        showCustomToast(message?:resources.getString(R.string.failed_connection))
-    }
 }

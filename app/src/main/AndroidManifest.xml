@@ -46,6 +46,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_map" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/main_orange" />
         <service android:name=".fcm.FcmService" android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>

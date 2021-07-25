@@ -88,7 +88,7 @@ class HomeFragment
         if(response.code == 1000) {
 
 
-            binding.matePlusBtn.isClickable = true
+//            binding.matePlusBtn.isClickable = true
             binding.noneGroupLayoutMain.visibility = View.GONE
             binding.groupRecyclerview.visibility = View.VISIBLE
             val GroupSize = response.result.size

@@ -118,4 +118,9 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
         binding.tablayoutGroup.setScrollPosition(1, 0f, true)
         viewPagerAdapter.notifyDataSetChanged()
     }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+    }
 }

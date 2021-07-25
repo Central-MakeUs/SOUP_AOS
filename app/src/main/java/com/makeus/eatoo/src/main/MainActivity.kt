@@ -13,12 +13,17 @@ import com.makeus.eatoo.src.wishlist.WishListFragment
 import com.makeus.eatoo.util.getUserIdx
 import com.makeus.eatoo.util.putSharedPrefUser
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.messaging.FirebaseMessaging
+import com.makeus.eatoo.fcm.FcmRetrofitService
+import com.makeus.eatoo.fcm.FcmView
 
-class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate),MainActivityView {
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate),MainActivityView, FcmView {
     val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        initFCM()
 //
 //        // 네비게이션 호스트
 //        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
@@ -77,12 +82,29 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     }
 
+    private fun initFCM() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d("fcmtest", task.result.toString())
+                FcmRetrofitService(this).tryPostFcmToken(task.result!!)
+            }
+        }
+    }
+
+    override fun onPostFcmSuccess() {
+    }
+
+    override fun onPostFcmFail(message: String?) {
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
+    }
+
     override fun onGetUserDateSuccess(response: UserResponse) {
         dismissLoadingDialog()
-        putSharedPrefUser(response.result.nickName)
+        putSharedPrefUser(response.result.nickName?: "")
     }
 
     override fun onGetUserDateFail(message: String) {
+        dismissLoadingDialog()
     }
 
 }
