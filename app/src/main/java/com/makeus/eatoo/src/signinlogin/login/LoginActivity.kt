@@ -14,6 +14,7 @@ import com.makeus.eatoo.src.main.MainActivity
 import com.makeus.eatoo.src.signinlogin.login.model.LoginRequest
 import com.makeus.eatoo.src.signinlogin.login.model.LoginResponse
 import com.makeus.eatoo.util.putSharedPref
+import com.makeus.eatoo.util.putSharedPrefUser
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate),LoginActivityView {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -116,9 +117,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 //        showCustomToast(response.message)
         if(response.code == 1000){
             ExplanationActivity().finish()
+
             Log.d("jwt", response.result.jwt)
             Log.d("userIdx", response.result.userIdx.toString())
-
+            putSharedPrefUser(response.result.nickName)
             putSharedPref(response.result.jwt, response.result.userIdx)
             startActivity(Intent(this, MainActivity::class.java))
             finish()

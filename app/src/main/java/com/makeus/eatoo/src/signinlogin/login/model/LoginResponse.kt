@@ -17,5 +17,7 @@ data class Result(
         @SerializedName("jwt")
         val jwt : String,
         @SerializedName("userIdx")
-        val userIdx : Int
+        val userIdx : Int,
+        @SerializedName("nickName")
+        val nickName : String
 )
