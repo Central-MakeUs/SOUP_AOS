@@ -36,6 +36,13 @@
     <string name="mate_suggestion_end_time" tools:ignore="TypographyDashes">-12:40</string>
     <string name="mate_suggestion_limit_people">5</string>
 
+    <!--group_suggestion -->
+
+    <string name="group_suggestion">MATE 제안</string>
+    <string name="group_suggestion_exp">님, 함께 식사할\nMATE를 찾아보세요 !</string>
+    <string name="group_suggestion_exp2">그룹에 제안된 MATE가 없습니다.</string>
+    <string name="group_mate_limit_people_exp">최대 5명</string>
+
     <!--main_mate_suggestion -->
     <string name="main_mate_suggestion">메이트 제안</string>
     <string name="main_mate_group">MATE GROUP</string>
@@ -197,6 +204,7 @@
     <string name="group_recommend_restaurant">추천 맛집!</string>
     <string name="group_view_more">더보기</string>
     <string name="group_main_mate_matching">매칭중</string>
+    <string name="group_main_mate_matching_end">매칭 완료</string>
     <string name="group_main_no_mate_matching">MATE</string>
     <string name="group_main_no_mate_matching_txt">현재 진행중인\nMATE제안이 없어요</string>
     <string name="group_main_no_mate_matching_txt2">멤버들에게 먼저\nMATE를 제안해보세요</string>

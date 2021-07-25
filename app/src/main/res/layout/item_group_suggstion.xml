@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="RtlSymmetry">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mate_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/background_dialog"
+        android:elevation="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="KeyboardInaccessibleWidget">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/food_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="23dp"
+            android:src="@drawable/group_385"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/mate_suggestion_title"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/food_img"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginStart="113dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="12dp"
+            android:background="@color/gray_101"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_txt" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mate_store"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/background_keyword"
+            android:fontFamily="sans-serif-medium"
+            android:paddingStart="4dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="3dp"
+            android:text="@string/store_name"
+            android:textColor="@color/main_color"
+            android:textSize="10sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="@+id/title_txt"
+            app:layout_constraintTop_toBottomOf="@+id/view5"
+            tools:ignore="SmallSp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/meal_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/background_keyword"
+            android:fontFamily="sans-serif-medium"
+            android:paddingStart="4dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="3dp"
+            android:text="@string/group_time"
+            android:textColor="@color/main_color"
+            android:textSize="10sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@+id/mate_store"
+            app:layout_constraintStart_toEndOf="@+id/mate_store"
+            app:layout_constraintTop_toTopOf="@+id/mate_store"
+            tools:ignore="SmallSp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/limit_people_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5.5dp"
+            android:background="@drawable/background_keyword"
+            android:fontFamily="sans-serif-medium"
+            android:paddingStart="4dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="3dp"
+            android:text="@string/group_mate_limit_people_exp"
+            android:textColor="@color/main_color"
+            android:textSize="10sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="@+id/mate_store"
+            app:layout_constraintTop_toBottomOf="@+id/mate_store"
+            tools:ignore="SmallSp" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/limit_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/background_keyword"
+            android:fontFamily="sans-serif-medium"
+            android:paddingStart="4dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="3dp"
+            android:text="@string/main_mate_suggestion_limit_time"
+            android:textColor="@color/main_color"
+            android:textSize="10sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@+id/limit_people_tv"
+            app:layout_constraintStart_toEndOf="@+id/limit_people_tv"
+            app:layout_constraintTop_toTopOf="@+id/limit_people_tv"
+            tools:ignore="SmallSp" />
+
+
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="166dp"
+            android:layout_marginTop="96dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="13dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/food_img"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/limit_people_number_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="@string/mate_suggestion_limit_people"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="@+id/group_status_img"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/group_status_img"
+
+                tools:ignore="SmallSp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/group_status_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:src="@drawable/ic_hello"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/limit_people_number_tv"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/group_status_end_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:src="@drawable/group"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/limit_people_number_tv"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/mate_status_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/group_name_background"
+        android:elevation="5dp"
+        android:fontFamily="sans-serif"
+        android:lineSpacingExtra="20sp"
+        android:padding="1.5dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:text="@string/create_group_name"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/mate_layout"
+        app:layout_constraintStart_toStartOf="@+id/mate_layout"
+        app:layout_constraintTop_toTopOf="@+id/mate_layout"
+        tools:ignore="SmallSp" />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

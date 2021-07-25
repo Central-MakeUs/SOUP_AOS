@@ -79,7 +79,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     override fun onGetUserDateSuccess(response: UserResponse) {
         dismissLoadingDialog()
-        Log.d("닉네임",response.result.nickName)
         putSharedPrefUser(response.result.nickName)
     }
 

@@ -9,6 +9,7 @@ import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseFragment
 import com.makeus.eatoo.databinding.FragmentGroupMainBinding
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.findmate.FindMateActivity
 import com.makeus.eatoo.src.home.group.main.adapter.Group_Home_Main_Mate_Kind_RecyclerviewAdapter
 import com.makeus.eatoo.src.home.group.main.adapter.Group_Home_Main_Store_Kind_RecyclerviewAdapter
 import com.makeus.eatoo.src.home.group.main.model.GroupMainResponse
@@ -31,6 +32,10 @@ class GroupMainFragment() : BaseFragment<FragmentGroupMainBinding>(FragmentGroup
         }
 
         GroupMainService(this).tryGetGroupMain(getUserIdx(),GroupIdx)
+
+        binding.findGroupMateBtn.setOnClickListener {
+            startActivity(Intent(activity,FindMateActivity::class.java))
+        }
 
     }
 

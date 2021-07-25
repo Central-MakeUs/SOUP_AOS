@@ -3,7 +3,7 @@ package com.makeus.eatoo.src.home.model
 import com.makeus.eatoo.config.BaseResponse
 import com.google.gson.annotations.SerializedName
 
-data class MainCharResponse(
+data class  MainCharResponse(
     @SerializedName("result") val result : MainCharResult
 ): BaseResponse()
 
