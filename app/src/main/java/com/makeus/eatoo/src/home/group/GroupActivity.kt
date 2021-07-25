@@ -20,13 +20,15 @@ import com.makeus.eatoo.util.getGroupName
 import com.makeus.eatoo.util.getUserIdx
 import com.google.android.material.tabs.TabLayoutMediator
 import com.makeus.eatoo.src.home.group.category.GroupCategoryFragment
+import com.makeus.eatoo.src.home.group.category.category_list.GroupCategoryListFragment
+import com.makeus.eatoo.src.home.group.category.category_map.OnListClickListener
 import com.makeus.eatoo.src.home.group.main.GroupMainFragment
 import com.makeus.eatoo.src.home.group.member.GroupMemberFragment
 import com.makeus.eatoo.src.home.group.vote.GroupVoteFragment
 
 
 class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::inflate),
-    SingleView, GroupMemberView {
+    SingleView, GroupMemberView, OnListClickListener {
 
     private lateinit var viewPagerAdapter : GroupViewPagerAdapter
     private var changeToSingle = false
@@ -104,5 +106,16 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
 
     override fun onGetGroupMemberFail(message: String?) {
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
+    }
+
+    override fun onListClick() {
+
+        viewPagerAdapter.fragmentList = arrayListOf<Fragment>(GroupMainFragment(), GroupCategoryListFragment(), GroupVoteFragment(), GroupMemberFragment())
+        binding.viewpagerGroup.apply {
+            adapter = viewPagerAdapter
+            currentItem = 1
+        }
+        binding.tablayoutGroup.setScrollPosition(1, 0f, true)
+        viewPagerAdapter.notifyDataSetChanged()
     }
 }

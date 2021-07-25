@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginEnd="6dp"
+    >
+<com.google.android.material.chip.Chip
+    style="@style/CustomStoreKeywordChipStyle"
+    android:layout_height="41dp"
+    android:layout_width="wrap_content"
+    android:textColor="@color/main_orange"
+    tools:text="키워드"
+    android:fontFamily="@font/roboto_medium"
+    android:textSize="13sp"
+    app:closeIconEnabled="false"
+    android:id="@+id/chip_keyword"
+   />
+
+
+</LinearLayout>

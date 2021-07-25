@@ -2,6 +2,7 @@ package com.makeus.eatoo.src.home.group.category
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
@@ -32,17 +33,25 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.makeus.eatoo.like.LikeService
 import com.makeus.eatoo.like.LikeView
+import com.makeus.eatoo.src.home.group.GroupActivity
+import com.makeus.eatoo.src.home.group.category.category_detail.CategoryStoreDetailActivity
+import com.makeus.eatoo.src.home.group.category.category_detail.adapter.StoreDetailImageRVAdapter
+import com.makeus.eatoo.src.home.group.category.category_map.OnListClickListener
 import com.makeus.eatoo.src.home.group.category.category_map.adapter.CategoryStoreRVAdapter
 import com.makeus.eatoo.src.home.group.category.category_map.model.CategoryMapStoreInfo
+import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialog
+import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialogInterface
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
 
 
-class GroupCategoryFragment
+class GroupCategoryFragment(val listener : OnListClickListener)
     : BaseFragment<FragmentGroupCategoryBinding>(
     FragmentGroupCategoryBinding::bind,
     R.layout.fragment_group_category
 ),
 CategoryMapView, View.OnClickListener, OnMapReadyCallback,
-    GoogleMap.OnMarkerClickListener, CategoryStoreRVAdapter.OnStoreClickListener, LikeView{
+    GoogleMap.OnMarkerClickListener, CategoryStoreRVAdapter.OnStoreClickListener, LikeView,
+StoreToMateSuggestDialogInterface{
 
     private lateinit var map: GoogleMap
     private lateinit var locationManager: LocationManager //내 위치 가져오기
@@ -67,11 +76,7 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback,
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.ll_category_list -> {
-                //not working currently.
-//                (context as GroupActivity).supportFragmentManager.beginTransaction()
-//                    .add(R.id.nav_host, GroupCategoryListFragment())
-//                    .addToBackStack(null)
-//                    .commitAllowingStateLoss()
+                listener.onListClick()
             }
         }
     }
@@ -255,14 +260,26 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback,
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
     }
 
-    override fun onStoreClicked(item: CategoryMapStoreInfo) {
-        showCustomToast("category review clicked!!!")
+    override fun onStoreClicked(storeIdx: Int, address : String) {
         //가게 상세로 이동.
+        val intent = Intent(requireContext(), CategoryStoreDetailActivity::class.java)
+        intent.apply {
+            putExtra("storeIdx", storeIdx)
+            putExtra("address", address)
+        }
+        startActivity(intent)
+
+    }
+    override fun onStoreLongClicked(storeName: String) {
+        val dialog = StoreToMateSuggestDialog(requireContext(), this, storeName)
+        dialog.show()
     }
 
     override fun onLikeClicked(storeIdx: Int) {
         LikeService(this).tryPatchLike(getUserIdx(), storeIdx)
     }
+
+
 
     override fun onPostLikeSuccess() {}
     
@@ -276,6 +293,12 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback,
 
     override fun onPatchLikeFail(message: String?) {
         showCustomToast(message?:resources.getString(R.string.failed_connection))
+    }
+
+    override fun onGotoMateSuggestClicked(storeName : String) {
+        val intent = Intent(requireContext(), Group_Mate_Suggetsion_Activity::class.java)
+        intent.putExtra("storeName", storeName)
+        startActivity(intent)
     }
 
 

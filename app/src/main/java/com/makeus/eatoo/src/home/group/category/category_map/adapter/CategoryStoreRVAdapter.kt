@@ -2,7 +2,9 @@ package com.makeus.eatoo.src.home.group.category.category_map.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.eatoo.R
 import com.makeus.eatoo.databinding.ItemCategoryStoreBinding
@@ -19,17 +21,24 @@ class CategoryStoreRVAdapter(
     : RecyclerView.Adapter<CategoryStoreRVAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding : ItemCategoryStoreBinding)
-        : RecyclerView.ViewHolder(binding.root) {
+        : RecyclerView.ViewHolder(binding.root){
 
         fun bindItem(item : CategoryMapStoreInfo) {
+
             binding.tvStoreName.text = item.name
             binding.tvStoreLocation.text = item.address
             glideUtil(context, item.imgUrl, roundLeft(binding.ivStore, 20f))
             showRatingStartUtil(context, item.rating.toInt(), binding.ivReviewStar)
             if(item.isLiked == "Y") binding.ivReviewLike.setImageResource(R.drawable.eva_heart_outline)
             binding.tvStoreReviewNum.text = item.reviewsNumber.toString()
+
             binding.clCategoryMapStore.setOnClickListener{
-                listener.onStoreClicked(item)
+                listener.onStoreClicked(item.storeIdx, item.address)
+            }
+            binding.clCategoryMapStore.setOnLongClickListener{
+                listener.onStoreLongClicked(item.name)
+
+                return@setOnLongClickListener true
             }
             binding.ivReviewLike.setOnClickListener {
                 if(item.isLiked == "Y"){
@@ -42,8 +51,9 @@ class CategoryStoreRVAdapter(
     }
 
     interface OnStoreClickListener {
-        fun onStoreClicked(item : CategoryMapStoreInfo)
+        fun onStoreClicked(storeIdx : Int, address : String)
         fun onLikeClicked(storeIdx : Int)
+        fun onStoreLongClicked(storeName : String)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
