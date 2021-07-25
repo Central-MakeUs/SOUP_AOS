@@ -65,6 +65,7 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
                         binding.nextBtn.setBackgroundColor(binding.nextBtn.context.resources.getColor(
                             R.color.gray_100))
                     }
+
                     if(binding.nickNameEdt.text.length > 1){
                         binding.nickNameHint.setText(R.string.thank_input)
                         binding.nickNameHint.setTextColor(binding.nickNameHint.context.resources.getColor(R.color.main_color))

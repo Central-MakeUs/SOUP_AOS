@@ -2,15 +2,18 @@ package com.makeus.eatoo.src.home.group.category
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseFragment
 import com.makeus.eatoo.databinding.FragmentGroupCategoryBinding
@@ -28,19 +31,35 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.makeus.eatoo.like.LikeService
+import com.makeus.eatoo.like.LikeView
+import com.makeus.eatoo.src.home.group.GroupActivity
+import com.makeus.eatoo.src.home.group.category.category_detail.CategoryStoreDetailActivity
+import com.makeus.eatoo.src.home.group.category.category_detail.adapter.StoreDetailImageRVAdapter
+import com.makeus.eatoo.src.home.group.category.category_map.OnListClickListener
+import com.makeus.eatoo.src.home.group.category.category_map.adapter.CategoryStoreRVAdapter
+import com.makeus.eatoo.src.home.group.category.category_map.model.CategoryMapStoreInfo
+import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialog
+import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialogInterface
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
 
 
-class GroupCategoryFragment
+class GroupCategoryFragment(val listener : OnListClickListener)
     : BaseFragment<FragmentGroupCategoryBinding>(
     FragmentGroupCategoryBinding::bind,
     R.layout.fragment_group_category
 ),
-CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
+CategoryMapView, View.OnClickListener, OnMapReadyCallback,
+    GoogleMap.OnMarkerClickListener, CategoryStoreRVAdapter.OnStoreClickListener, LikeView,
+StoreToMateSuggestDialogInterface{
 
     private lateinit var map: GoogleMap
     private lateinit var locationManager: LocationManager //내 위치 가져오기
     private lateinit var myLocationListener: GroupCategoryFragment.MyLocationListener
     private lateinit var locationLatLngEntity: LocationLatLngEntity
+
+    private lateinit var storeReviewList : List<CategoryMapStoreInfo>
+    private lateinit var storeRVAdapter: CategoryStoreRVAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,11 +76,7 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.ll_category_list -> {
-                //not working currently.
-//                (context as GroupActivity).supportFragmentManager.beginTransaction()
-//                    .add(R.id.nav_host, GroupCategoryListFragment())
-//                    .addToBackStack(null)
-//                    .commitAllowingStateLoss()
+                listener.onListClick()
             }
         }
     }
@@ -158,10 +173,12 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {
-//        p0.title?.let {
-//            showCustomToast(it)
-//        }
-        //adapter
+        val storeList = storeReviewList.filter { it.name == p0.title }
+        storeRVAdapter = CategoryStoreRVAdapter(requireContext(), storeList, this)
+        binding.rvGroupCategory.apply {
+            adapter = storeRVAdapter
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
         return false
     }
 
@@ -224,11 +241,14 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
     override fun onGetCategoryMapStoreSuccess(response: CategoryMapResponse) {
         dismissLoadingDialog()
         //add marker.
+        Log.d("groupCategoryFrag", response.toString())
+        storeReviewList = response.result.getStoresRes
         response.result.getStoresRes.forEach {
             val markerOptions = MarkerOptions().apply {
                 position(LatLng(it.latitude, it.longitude))
                 title(it.name)
                 snippet(it.address)
+
             }
             map.addMarker(markerOptions)
         }
@@ -240,6 +260,46 @@ CategoryMapView, View.OnClickListener, OnMapReadyCallback, GoogleMap.OnMarkerCli
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
     }
 
+    override fun onStoreClicked(storeIdx: Int, address : String) {
+        //가게 상세로 이동.
+        val intent = Intent(requireContext(), CategoryStoreDetailActivity::class.java)
+        intent.apply {
+            putExtra("storeIdx", storeIdx)
+            putExtra("address", address)
+        }
+        startActivity(intent)
+
+    }
+    override fun onStoreLongClicked(storeName: String) {
+        val dialog = StoreToMateSuggestDialog(requireContext(), this, storeName)
+        dialog.show()
+    }
+
+    override fun onLikeClicked(storeIdx: Int) {
+        LikeService(this).tryPatchLike(getUserIdx(), storeIdx)
+    }
+
+
+
+    override fun onPostLikeSuccess() {}
+    
+    override fun onPostLikeFail(message: String?) {
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
+    }
+
+    override fun onPatchLikeSuccess() {
+        showCustomToast("좋아요 취소 성공!")
+    }
+
+    override fun onPatchLikeFail(message: String?) {
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
+    }
+
+    override fun onGotoMateSuggestClicked(storeName : String) {
+        val intent = Intent(requireContext(), Group_Mate_Suggetsion_Activity::class.java)
+        intent.putExtra("storeName", storeName)
+        startActivity(intent)
+    }
 
 
 }

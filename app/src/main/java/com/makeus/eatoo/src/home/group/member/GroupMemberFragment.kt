@@ -39,6 +39,10 @@ class GroupMemberFragment : BaseFragment<FragmentGroupMemberBinding>(
         GroupMemberService(this).tryGetGroupMember(getUserIdx(), getGroupIdx())
     }
 
+    fun reload() {
+        getGroupMember()
+    }
+
 
     //////server result
 

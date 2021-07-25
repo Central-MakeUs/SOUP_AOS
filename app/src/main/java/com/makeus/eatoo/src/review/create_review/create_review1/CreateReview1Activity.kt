@@ -139,6 +139,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
 
         if( binding.btnCreateReviewNext.background.constantState==ContextCompat.getDrawable(
                 this@CreateReview1Activity, R.drawable.login_btn_background)?.constantState) {
+
             val intent = Intent(this, CreateReview2Activity::class.java)
             intent.apply {
                 putExtra("address", storeLocation)

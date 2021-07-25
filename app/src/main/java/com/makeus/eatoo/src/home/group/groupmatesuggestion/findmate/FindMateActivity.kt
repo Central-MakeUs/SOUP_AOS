@@ -16,6 +16,7 @@ import com.makeus.eatoo.src.home.group.groupmatesuggestion.findmate.adpater.Find
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.findmate.model.GroupMateResponse
 import com.makeus.eatoo.src.home.group.main.MateAttendDialog
 import com.makeus.eatoo.src.home.group.main.adapter.Group_Home_Main_Mate_Kind_RecyclerviewAdapter
+import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.getUserIdx
 import com.makeus.eatoo.util.getUserNickName
 
@@ -27,26 +28,25 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setSpinner()
 
-
         binding.suggestionTxt.text = "'" +getUserNickName() + "'" + binding.suggestionTxt.text
-        FindMateService(this).tryGetFindMateData(getUserIdx(), 0)
+        FindMateService(this).tryGetFindMateData(getUserIdx(), getGroupIdx(),0)
         showLoadingDialog(this)
+
+
     }
 
     override fun onGetFindMateSuccess(response: GroupMateResponse) {
         dismissLoadingDialog()
 
-
-        val MateAdapter = Find_Mate_Recyclerview_Adapter(response.result)
-
-        if(response.result.size == 0){
+        if(response.code != 1000){
             binding.suggestionRecyclerview.visibility = View.GONE
             binding.mySuggestionNoneLayout.visibility = View.VISIBLE
         }
         else {
+            val MateAdapter = Find_Mate_Recyclerview_Adapter(response.result)
+            binding.statusSpinner.visibility = View.VISIBLE
             binding.suggestionRecyclerview.visibility = View.VISIBLE
             binding.mySuggestionNoneLayout.visibility = View.GONE
             binding.suggestionRecyclerview.adapter = MateAdapter
@@ -64,8 +64,11 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
     }
 
     override fun onGetFindMateFail(message: String?) {
+        dismissLoadingDialog()
         binding.suggestionRecyclerview.visibility = View.GONE
         binding.mySuggestionNoneLayout.visibility = View.VISIBLE
+        binding.statusSpinner.visibility = View.GONE
+
     }
 
     fun setSpinner() {
@@ -78,7 +81,7 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
         binding.statusSpinner.setAdapter(arrayAdapter)
         binding.statusSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {//스피너가 선택 되었을때
-                FindMateService(this@FindMateActivity).tryGetFindMateData(getUserIdx(), i)
+                FindMateService(this@FindMateActivity).tryGetFindMateData(getUserIdx(), getGroupIdx(),i)
 
             }
 

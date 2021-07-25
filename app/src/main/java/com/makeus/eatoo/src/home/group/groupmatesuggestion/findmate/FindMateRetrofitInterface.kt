@@ -8,9 +8,9 @@ import retrofit2.http.Query
 
 interface FindMateRetrofitInterface {
 
-        @GET("/app/mates/{userIdx}")
+        @GET("/app/mates/{userIdx}/{groupIdx}")
     fun getFindMate(
-        @Path ("userIdx") userIdx : Int, @Query("status") status: Int
+        @Path ("userIdx") userIdx : Int,@Path ("groupIdx") groupIdx : Int, @Query("status") status: Int
     ) : Call<GroupMateResponse>
 
 }
