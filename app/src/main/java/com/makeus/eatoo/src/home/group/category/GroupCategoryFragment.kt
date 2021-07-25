@@ -76,7 +76,8 @@ StoreToMateSuggestDialogInterface{
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.ll_category_list -> {
-                listener.onListClick()
+//                listener.onListClick()
+                showCustomToast("서비스 준비 중입니다.")
             }
         }
     }

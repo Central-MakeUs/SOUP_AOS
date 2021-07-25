@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:207816271218:android:742c6bec256fc7710a29eb",
         "android_client_info": {
-          "package_name": "com.makeus.eatoo"
+          "package_name": "com.example.eatoo"
         }
       },
       "oauth_client": [
@@ -18,6 +18,43 @@
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.eatoo",
+            "certificate_hash": "70e5f04e565634836e55a343174b96b6a8df6368"
+          }
+        },
+        {
+          "client_id": "207816271218-uqhmb0rs09nvcbaf985afkr62iopoks8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfMncf4yGv9HTCWKQBQ-G6LEw0mvFktjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207816271218-uqhmb0rs09nvcbaf985afkr62iopoks8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207816271218:android:8633b335409428090a29eb",
+        "android_client_info": {
+          "package_name": "com.makeus.eatoo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207816271218-3f6j4s9or0clm14mtfkv4jhoqitqt2l6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.makeus.eatoo",
             "certificate_hash": "70e5f04e565634836e55a343174b96b6a8df6368"
           }
         },

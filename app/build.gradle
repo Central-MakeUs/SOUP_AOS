@@ -88,6 +88,9 @@ dependencies {
     //firebase storage
     implementation 'com.google.firebase:firebase-storage'
 
+    //firebase fcm
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+
 //    //toggle_btn_library
 //    implementation 'com.nex3z:toggle-button-group:1.1.9'
 
