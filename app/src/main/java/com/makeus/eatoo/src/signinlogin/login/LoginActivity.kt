@@ -9,6 +9,7 @@ import android.util.Log
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityLoginBinding
+import com.makeus.eatoo.src.explanation.ExplanationActivity
 import com.makeus.eatoo.src.main.MainActivity
 import com.makeus.eatoo.src.signinlogin.login.model.LoginRequest
 import com.makeus.eatoo.src.signinlogin.login.model.LoginResponse
@@ -114,11 +115,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         dismissLoadingDialog()
 //        showCustomToast(response.message)
         if(response.code == 1000){
+            ExplanationActivity().finish()
             Log.d("jwt", response.result.jwt)
             Log.d("userIdx", response.result.userIdx.toString())
 
             putSharedPref(response.result.jwt, response.result.userIdx)
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 

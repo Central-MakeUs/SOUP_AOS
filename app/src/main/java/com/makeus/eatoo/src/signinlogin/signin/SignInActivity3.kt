@@ -95,6 +95,8 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
         if(response.code == 1000) {
             putSharedPref(response.result.jwt, response.result.userIdx)
             //showCustomToast(response.message)
+
+            finish()
             startActivity(Intent(this, LoginActivity::class.java))
         }
         else if(response.code == 2025){
