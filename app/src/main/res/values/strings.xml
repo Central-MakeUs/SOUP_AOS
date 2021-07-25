@@ -41,7 +41,16 @@
     <string name="group_suggestion">MATE 제안</string>
     <string name="group_suggestion_exp">님, 함께 식사할\nMATE를 찾아보세요 !</string>
     <string name="group_suggestion_exp2">그룹에 제안된 MATE가 없습니다.</string>
+    <string name="group_suggestion_status0">전체보기</string>
+    <string name="group_suggestion_status1">매칭중</string>
+    <string name="group_suggestion_status2">매칭완료</string>
     <string name="group_mate_limit_people_exp">최대 5명</string>
+
+    <string-array name="matestatus">
+        <item>@string/group_suggestion_status0</item>
+        <item>@string/group_suggestion_status1</item>
+        <item>@string/group_suggestion_status2</item>
+    </string-array>
 
     <!--main_mate_suggestion -->
     <string name="main_mate_suggestion">메이트 제안</string>

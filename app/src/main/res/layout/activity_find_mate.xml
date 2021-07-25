@@ -79,6 +79,16 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
+            <Spinner
+                android:id="@+id/status_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:singleLine="true"
+                android:spinnerMode="dropdown"
+                app:layout_constraintBottom_toBottomOf="@+id/suggestion_txt"
+                app:layout_constraintEnd_toEndOf="parent" />
+
             <LinearLayout
                 android:id="@+id/my_suggestion_layout"
                 android:layout_width="match_parent"

@@ -4,7 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityFindMateBinding
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
@@ -18,13 +22,17 @@ import com.makeus.eatoo.util.getUserNickName
 class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
     ActivityFindMateBinding::inflate), FindMateView {
 
+    var spinner_item = arrayOf("전체보기", "매칭중", "매칭완료")
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setSpinner()
+
 
         binding.suggestionTxt.text = "'" +getUserNickName() + "'" + binding.suggestionTxt.text
-        FindMateService(this).tryGetFindMateData(getUserIdx())
+        FindMateService(this).tryGetFindMateData(getUserIdx(), 0)
         showLoadingDialog(this)
     }
 
@@ -56,6 +64,26 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
     }
 
     override fun onGetFindMateFail(message: String?) {
-        TODO("Not yet implemented")
+        binding.suggestionRecyclerview.visibility = View.GONE
+        binding.mySuggestionNoneLayout.visibility = View.VISIBLE
+    }
+
+    fun setSpinner() {
+        val arrayAdapter = ArrayAdapter(
+            this,
+            R.layout.mate_status_spinner_item,
+            spinner_item
+        )
+
+        binding.statusSpinner.setAdapter(arrayAdapter)
+        binding.statusSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {//스피너가 선택 되었을때
+                FindMateService(this@FindMateActivity).tryGetFindMateData(getUserIdx(), i)
+
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>) {}
+        })
+
     }
 }

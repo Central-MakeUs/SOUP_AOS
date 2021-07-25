@@ -8,9 +8,9 @@ import retrofit2.Response
 
 class FindMateService (val view : FindMateView) {
 
-    fun tryGetFindMateData(userIdx : Int ) {
+    fun tryGetFindMateData(userIdx : Int , status : Int) {
         val mateinerface = ApplicationClass.sRetrofit.create(FindMateRetrofitInterface::class.java)
-        mateinerface.getFindMate(userIdx,0).enqueue(object : Callback<GroupMateResponse> {
+        mateinerface.getFindMate(userIdx,status).enqueue(object : Callback<GroupMateResponse> {
             override fun onResponse(call: Call<GroupMateResponse>, response: Response<GroupMateResponse>) {
                 view.onGetFindMateSuccess(response.body() as GroupMateResponse)
             }

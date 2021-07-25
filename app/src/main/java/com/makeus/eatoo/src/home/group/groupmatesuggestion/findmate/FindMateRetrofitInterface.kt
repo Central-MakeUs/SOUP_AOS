@@ -10,7 +10,7 @@ interface FindMateRetrofitInterface {
 
         @GET("/app/mates/{userIdx}")
     fun getFindMate(
-        @Path ("userIdx") userIdx : Int,@Query("status") status: Int
+        @Path ("userIdx") userIdx : Int, @Query("status") status: Int
     ) : Call<GroupMateResponse>
 
 }
