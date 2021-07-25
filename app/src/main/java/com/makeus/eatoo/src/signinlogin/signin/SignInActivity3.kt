@@ -40,46 +40,42 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
             }
 
 
-            binding.nickNameEdt.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(p0: Editable?) {
-                    //텍스트를 입력 후
-                }
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    // 텍스트 입력 전
-                }
-                //
-                @SuppressLint("ResourceAsColor")
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    //텍스트 입력 중
-
-                    if(binding.nickNameEdt.text.length > 1){
-
-                        binding.nextBtn.isClickable = true // 버튼 클릭할수 있게
-                        binding.nextBtn.isEnabled = true // 버튼 활성화
-                        binding.nextBtn.setBackgroundColor(binding.nextBtn.context.resources.getColor(
-                            R.color.main_color))
-
-
-                    }
-                    else {
-                        binding.nextBtn.setBackgroundColor(binding.nextBtn.context.resources.getColor(
-                            R.color.gray_100))
-                    }
-
-                    if(binding.nickNameEdt.text.length > 1){
-                        binding.nickNameHint.setText(R.string.thank_input)
-                        binding.nickNameHint.setTextColor(binding.nickNameHint.context.resources.getColor(R.color.main_color))
-                    }
-                    else if(binding.nickNameEdt.text.length <= 1){
-                        binding.nickNameHint.setText(R.string.sign_in_name_bottom)
-                        binding.nickNameHint.setTextColor(binding.nickNameHint.context.resources.getColor(R.color.black))
-                    }
-
-
-                }
-            })
-
         }
+
+        binding.nickNameEdt.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                //텍스트를 입력 후
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                // 텍스트 입력 전
+            }
+            //
+            @SuppressLint("ResourceAsColor")
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //텍스트 입력 중
+                Log.d("길이",""+binding.nickNameEdt.text.length)
+
+                if(binding.nickNameEdt.text.length > 1){
+
+                    binding.nextBtn.isClickable = true // 버튼 클릭할수 있게
+                    binding.nextBtn.isEnabled = true // 버튼 활성화
+                    binding.nextBtn.setBackgroundColor(binding.nextBtn.context.resources.getColor(
+                        R.color.main_color))
+                    binding.nickNameHint.setText(R.string.thank_input)
+                    binding.nickNameHint.setTextColor(binding.nickNameHint.context.resources.getColor(R.color.main_color))
+
+
+                }
+                else {
+                    binding.nextBtn.setBackgroundColor(binding.nextBtn.context.resources.getColor(
+                        R.color.gray_100))
+                    binding.nickNameHint.setText(R.string.sign_in_password_bottom)
+                    binding.nickNameHint.setTextColor(binding.nickNameHint.context.resources.getColor(R.color.black))
+
+                }
+
+            }
+        })
     }
 
     override fun onGetUserSuccess(response: SignInResponse) {

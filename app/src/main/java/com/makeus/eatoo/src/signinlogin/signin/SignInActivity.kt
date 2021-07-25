@@ -27,6 +27,7 @@ class SignInActivity :  BaseActivity<ActivitySignInBinding>(ActivitySignInBindin
             Log.d("인텐트 종류",""+binding.nameEdt.text+ binding.phoneNumberEdt.text)
 
             startActivity(intent)
+            finish()
         }
 
 

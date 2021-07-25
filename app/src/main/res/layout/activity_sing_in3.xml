@@ -92,7 +92,7 @@
         android:fontFamily="sans-serif"
         android:textStyle="normal"
         android:textSize="15sp"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="9sp"
         android:hint="@string/nickname_hint"
@@ -101,9 +101,8 @@
         android:singleLine="true"
         app:layout_constraintBottom_toTopOf="@+id/nick_name_hint"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="Autofill,RtlSymmetry" />
+        tools:ignore="RtlSymmetry" />
 
 
     <androidx.appcompat.widget.AppCompatTextView

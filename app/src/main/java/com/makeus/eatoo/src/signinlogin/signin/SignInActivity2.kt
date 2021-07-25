@@ -32,6 +32,7 @@ class SignInActivity2 : BaseActivity<ActivitySingIn2Binding>(ActivitySingIn2Bind
             Log.d("인텐트 종류",""+binding.emailEdt.text+ binding.passwordEdt.text+binding.passwordCheckEdt.text)
 
             startActivity(intent1)
+            finish()
         }
 
 
