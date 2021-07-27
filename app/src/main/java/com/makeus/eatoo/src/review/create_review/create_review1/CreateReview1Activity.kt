@@ -55,7 +55,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
             showLoadingDialog(this)
             getStoreInfo(storeIdx)
             binding.ivReview1Img.isVisible = true
-            glideUtil(this, intent.getStringExtra("imgUrl")?:"", roundAll(binding.ivReview1Img, 5f))
+            glideUtil(this, intent.getStringExtra("imgUrl")?:"", roundAll(binding.ivReview1Img, 5))
 
         }else {
             lat = intent.getDoubleExtra("lat", -1.0)

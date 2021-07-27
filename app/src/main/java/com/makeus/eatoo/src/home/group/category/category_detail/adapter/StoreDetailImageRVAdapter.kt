@@ -19,7 +19,7 @@ class StoreDetailImageRVAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindItem(item: GetReviewImgRe) {
-            glideUtil(context, item.imgUrl, roundAll(binding.ivStoreDetailImage, 10f))
+            glideUtil(context, item.imgUrl, roundAll(binding.ivStoreDetailImage, 10))
         }
 
     }

@@ -1,13 +1,18 @@
 package com.makeus.eatoo.util
 
+import android.content.res.Resources
 import android.graphics.Outline
 import android.os.Build
 import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
+import com.makeus.eatoo.config.ApplicationClass
 
-fun roundLeft(iv: ImageView, curveRadius : Float)  : ImageView {
+val Int.dpToFloat: Float
+    get() = (this * Resources.getSystem().displayMetrics.density).toFloat()
+
+fun roundLeft(iv: ImageView, curveRadius : Int)  : ImageView {
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
@@ -15,7 +20,7 @@ fun roundLeft(iv: ImageView, curveRadius : Float)  : ImageView {
 
             @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
             override fun getOutline(view: View?, outline: Outline?) {
-                outline?.setRoundRect(0, 0, (view!!.width+curveRadius).toInt(), (view.height).toInt(), curveRadius)
+                outline?.setRoundRect(0, 0, (view!!.width+curveRadius).toInt(), (view.height).toInt(), curveRadius.dpToFloat)
             }
         }
 
@@ -24,7 +29,7 @@ fun roundLeft(iv: ImageView, curveRadius : Float)  : ImageView {
     return iv
 }
 
-fun roundAll(iv: ImageView, curveRadius : Float)  : ImageView {
+fun roundAll(iv: ImageView, curveRadius : Int)  : ImageView {
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
@@ -32,7 +37,7 @@ fun roundAll(iv: ImageView, curveRadius : Float)  : ImageView {
 
             @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
             override fun getOutline(view: View?, outline: Outline?) {
-                outline?.setRoundRect(0, 0, view!!.width, view.height, curveRadius)
+                outline?.setRoundRect(0, 0, view!!.width, view.height, curveRadius.dpToFloat)
             }
         }
 
@@ -41,7 +46,7 @@ fun roundAll(iv: ImageView, curveRadius : Float)  : ImageView {
     return iv
 }
 
-fun roundTop(iv: ImageView, curveRadius : Float)  : ImageView {
+fun roundTop(iv: ImageView, curveRadius : Int)  : ImageView {
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
@@ -49,7 +54,7 @@ fun roundTop(iv: ImageView, curveRadius : Float)  : ImageView {
 
             @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
             override fun getOutline(view: View?, outline: Outline?) {
-                outline?.setRoundRect(0, 0, view!!.width, (view.height+curveRadius).toInt(), curveRadius)
+                outline?.setRoundRect(0, 0, view!!.width, (view.height+curveRadius).toInt(), curveRadius.dpToFloat)
             }
         }
 

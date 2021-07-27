@@ -80,15 +80,6 @@
         <item name="chipStrokeColor">@color/chip_stroke_color</item>
     </style>
 
-
-    <!--    <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">-->
-    <!--        <item name="materialThemeOverlay">@style/ThemeOverlay.App.FloatingActionButton</item>-->
-    <!--    </style>-->
-
-    <!--    <style name="ThemeOverlay.App.FloatingActionButton" parent="">-->
-    <!--        <item name="srcCompat">@drawable/ic_fab</item>-->
-    <!--    </style>-->
-
     <style name="ShapeAppearanceOverlay.App.SelectedCornerRadius" parent="">
         <item name="cornerSizeTopLeft">75dp</item>
         <item name="cornerFamilyTopLeft">rounded</item>
@@ -103,6 +94,10 @@
     <style name="ThemeOverlay.App.TimePicker" parent="@style/ThemeOverlay.MaterialComponents.TimePicker">
         <item name="colorPrimary">@color/main_orange</item>
     </style>
+
+<!--    <style name="SpinnerTheme" parent="android:Widget.Spinner">-->
+<!--        <item name="android:background">@drawable/ic_vector_5</item>-->
+<!--    </style>-->
 
 
 </resources>

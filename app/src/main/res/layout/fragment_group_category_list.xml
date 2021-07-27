@@ -114,6 +114,18 @@
         </RadioGroup>
     </HorizontalScrollView>
 
+    <Spinner
+        android:id="@+id/spinner_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="20dp"
+        android:singleLine="true"
+        android:spinnerMode="dropdown"
+        android:gravity="end"
+        app:layout_constraintBottom_toTopOf="@id/rv_category_list"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_category_list"
         android:layout_width="match_parent"

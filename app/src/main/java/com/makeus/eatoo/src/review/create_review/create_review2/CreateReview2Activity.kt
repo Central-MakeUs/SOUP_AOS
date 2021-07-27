@@ -251,7 +251,7 @@ class CreateReview2Activity
             ref.downloadUrl
         }.addOnCompleteListener {
             reviewImage = it.result.toString()
-            glideUtil(this, reviewImage, roundAll(binding.ivReviewImg, 5f))
+            glideUtil(this, reviewImage, roundAll(binding.ivReviewImg, 5))
 
             binding.ivReviewImg.isVisible = true
             binding.ivReviewImgIcon.isVisible = false

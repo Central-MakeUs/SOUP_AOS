@@ -352,5 +352,10 @@
     <string name="invite_dialog_confirm">공유하기</string>
     <string name="invite_dialog_qurey2">A</string>
 
+        <string name="category_spinner_item">SpinnerCategory</string>
+        <string-array name="spinner_category">
+            <item>별점 수</item>
+            <item>이름 순</item>
+        </string-array>
 
 </resources>

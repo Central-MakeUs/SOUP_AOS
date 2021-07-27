@@ -27,7 +27,7 @@ class CategoryStoreRVAdapter(
 
             binding.tvStoreName.text = item.name
             binding.tvStoreLocation.text = item.address
-            glideUtil(context, item.imgUrl, roundLeft(binding.ivStore, 20f))
+            glideUtil(context, item.imgUrl, roundLeft(binding.ivStore, 20))
             showRatingStartUtil(context, item.rating.toInt(), binding.ivReviewStar)
             if(item.isLiked == "Y") binding.ivReviewLike.setImageResource(R.drawable.eva_heart_outline)
             binding.tvStoreReviewNum.text = item.reviewsNumber.toString()
