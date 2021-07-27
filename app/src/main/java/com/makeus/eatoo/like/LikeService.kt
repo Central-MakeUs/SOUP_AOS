@@ -21,7 +21,9 @@ class LikeService(val view : LikeView) {
             ) {
                 response.body()?.let {
                     if(it.isSuccess) view.onPostLikeSuccess()
-                    else view.onPostLikeFail(it.message)
+                    else {
+                        if(it.code != 2600) view.onPostLikeFail(it.message)
+                    }
                 }
 
             }
@@ -44,7 +46,9 @@ class LikeService(val view : LikeView) {
             ) {
                 response.body()?.let {
                     if(it.isSuccess) view.onPatchLikeSuccess()
-                    else view.onPatchLikeFail(it.message)
+                    else {
+                        if(it.code != 2601) view.onPatchLikeFail(it.message)
+                    }
                 }
 
             }

@@ -260,12 +260,11 @@ StoreToMateSuggestDialogInterface{
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
     }
 
-    override fun onStoreClicked(storeIdx: Int, address : String) {
+    override fun onStoreClicked(storeIdx: Int) {
         //가게 상세로 이동.
         val intent = Intent(requireContext(), CategoryStoreDetailActivity::class.java)
         intent.apply {
             putExtra("storeIdx", storeIdx)
-            putExtra("address", address)
         }
         startActivity(intent)
 

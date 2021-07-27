@@ -268,6 +268,8 @@
     <string name="category_dialog_query2">제안하시겠습니까?</string>
     <string name="category_dialog_exp1">선택한 가게를 바탕으로 함께 식사할 사람을</string>
     <string name="category_dialog_exp2">구한다면 MATE를 제안하세요!</string>
+    <string name="no_category_result_exp1">등록된 가게가 없습니다.</string>
+    <string name="no_category_result_exp2">후기 작성을 통해 가게를 등록할 수 있습니다.</string>
 
     <!--member-->
     <string name="is_group_member">의 멤버</string>

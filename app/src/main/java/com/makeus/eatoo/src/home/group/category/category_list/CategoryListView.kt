@@ -4,5 +4,5 @@ import com.makeus.eatoo.src.home.group.category.category_list.model.StoreCategor
 
 interface CategoryListView {
     fun onGetCategoryListSuccess(response : StoreCategoryListResponse)
-    fun onGetCategoryListFail(message : String?)
+    fun onGetCategoryListFail(code : Int, message : String?)
 }

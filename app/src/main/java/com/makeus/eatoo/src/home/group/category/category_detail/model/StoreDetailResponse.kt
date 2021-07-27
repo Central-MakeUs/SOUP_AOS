@@ -15,6 +15,7 @@ data class StoreDetailResult(
     @SerializedName("isLiked")  val isLiked: String,
     @SerializedName("latitude")  val latitude: Double,
     @SerializedName("longitude")  val longitude: Double,
+    @SerializedName("address")  val address: String,
     @SerializedName("storeName")  val storeName: String
 )
 

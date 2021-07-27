@@ -21,12 +21,12 @@ class CategoryListService (val view : CategoryListView){
                 ) {
                     response.body()?.let {
                         if (it.isSuccess) view.onGetCategoryListSuccess(response.body() as StoreCategoryListResponse)
-                        else view.onGetCategoryListFail(it.message)
+                        else view.onGetCategoryListFail(it.code, it.message)
                     }
                 }
 
                 override fun onFailure(call: Call<StoreCategoryListResponse>, t: Throwable) {
-                    view.onGetCategoryListFail(t.message)
+                    view.onGetCategoryListFail(0, t.message)
                 }
 
             })

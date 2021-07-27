@@ -33,7 +33,6 @@ StoreDetailView, View.OnClickListener, LikeView{
     private lateinit var storeImgAdapter : StoreDetailImageRVAdapter
     private lateinit var storeReviewAdapter : StoreDetailReviewRVAdapter
 
-    var storeAddress : String? = null
     var isLike = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,8 +47,7 @@ StoreDetailView, View.OnClickListener, LikeView{
 
     private fun getStoreIntent() {
         val storeIdx = intent.getIntExtra("storeIdx", -1)
-        storeAddress = intent.getStringExtra("address")
-        if(storeIdx != -1 && storeAddress != null) getStoreDetail(storeIdx)
+        if(storeIdx != -1) getStoreDetail(storeIdx)
     }
 
     private fun setImgRV(imgList: List<GetReviewImgRe>) {
@@ -87,7 +85,7 @@ StoreDetailView, View.OnClickListener, LikeView{
 
         glideUtil(this, response.result.imgUrl, binding.ivStoreImage)
         binding.tvStoreName.text = response.result.storeName
-        binding.tvStoreAddress.text = storeAddress
+        binding.tvStoreAddress.text = response.result.address
         if(response.result.isLiked == "Y") {
             isLike = true
             binding.ibtnLike.setBackgroundResource(R.drawable.eva_heart_outline)
