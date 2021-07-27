@@ -27,7 +27,7 @@ class Group_Home_Main_Store_Kind_RecyclerviewAdapter(val StoreList : ArrayList<G
 
         val imageUrl : String? = StoreList[position].imgUrl
         if(imageUrl != null) {
-            glideUtil(holder.view.context, imageUrl, roundTop(holder.Storeimg,20f ) )
+            glideUtil(holder.view.context, imageUrl, roundTop(holder.Storeimg,20 ) )
         }
 
         if(StoreList[position].isLiked == "Y"){

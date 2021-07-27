@@ -1,11 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <HorizontalScrollView
+        android:id="@+id/hsv_category_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="15dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <RadioGroup
+            android:id="@+id/rd_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rd_btn_ko"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_marginEnd="11dp"
+                android:background="@drawable/selector_category"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/category_korean_food"
+                android:textColor="@drawable/selector_category_text" />
+
+            <RadioButton
+                android:id="@+id/rd_btn_ch"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_marginEnd="11dp"
+                android:background="@drawable/selector_category"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/category_chinese_food"
+                android:textColor="@drawable/selector_category_text" />
+
+            <RadioButton
+                android:id="@+id/rd_btn_jp"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_marginEnd="11dp"
+                android:background="@drawable/selector_category"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/category_japanese_food"
+                android:textColor="@drawable/selector_category_text" />
+
+            <RadioButton
+                android:id="@+id/rd_btn_western"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_marginEnd="11dp"
+                android:background="@drawable/selector_category"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/category_western_food"
+                android:textColor="@drawable/selector_category_text" />
+
+            <RadioButton
+                android:id="@+id/rd_btn_street"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_marginEnd="11dp"
+                android:background="@drawable/selector_category"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/category_street_food"
+                android:textColor="@drawable/selector_category_text" />
+
+            <RadioButton
+                android:id="@+id/rd_btn_asian"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_marginEnd="11dp"
+                android:background="@drawable/selector_category"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/category_asian_food"
+                android:textColor="@drawable/selector_category_text" />
+
+            <RadioButton
+                android:id="@+id/rd_btn_desert"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_marginEnd="11dp"
+                android:background="@drawable/selector_category"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/category_desert_food"
+                android:textColor="@drawable/selector_category_text" />
+
+            <RadioButton
+                android:id="@+id/rd_btn_etc"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:layout_marginEnd="11dp"
+                android:background="@drawable/selector_category"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/category_etc_food"
+                android:textColor="@drawable/selector_category_text" />
+
+        </RadioGroup>
+    </HorizontalScrollView>
+
+    <Spinner
+        android:id="@+id/spinner_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="20dp"
+        android:singleLine="true"
+        android:spinnerMode="dropdown"
+        android:gravity="end"
+        app:layout_constraintBottom_toTopOf="@id/rv_category_list"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_category_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="list fragment"/>
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="74.8dp"
+        app:layout_constraintTop_toBottomOf="@id/hsv_category_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:overScrollMode="never"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
