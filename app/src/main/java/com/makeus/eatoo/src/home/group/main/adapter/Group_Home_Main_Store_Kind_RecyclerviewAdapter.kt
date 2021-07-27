@@ -20,15 +20,12 @@ class Group_Home_Main_Store_Kind_RecyclerviewAdapter(val StoreList : ArrayList<G
     }
 
 
-    override fun getItemCount() = 2
+    override fun getItemCount() = StoreList.size
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onBindViewHolder(holder: CustomViewholder, position : Int) {
 
-
-
-
-        val imageUrl: String = StoreList[position].imgUrl
+        val imageUrl : String? = StoreList[position].imgUrl
         if(imageUrl != null) {
             glideUtil(holder.view.context, imageUrl, roundTop(holder.Storeimg,20f ) )
         }

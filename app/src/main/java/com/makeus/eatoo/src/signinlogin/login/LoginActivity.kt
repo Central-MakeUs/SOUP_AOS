@@ -116,7 +116,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         dismissLoadingDialog()
 //        showCustomToast(response.message)
         if(response.code == 1000){
-            ExplanationActivity().finish()
 
             Log.d("jwt", response.result.jwt)
             Log.d("userIdx", response.result.userIdx.toString())
@@ -124,6 +123,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             putSharedPref(response.result.jwt, response.result.userIdx)
             startActivity(Intent(this, MainActivity::class.java))
             finish()
+            ExplanationActivity().finish()
         }
     }
 

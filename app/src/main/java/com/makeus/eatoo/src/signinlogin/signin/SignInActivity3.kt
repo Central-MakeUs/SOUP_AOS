@@ -17,19 +17,27 @@ import com.makeus.eatoo.util.putSharedPref
 
 class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Binding::inflate), SignInActivityView{
 
+
+
+    lateinit var name : String
+    lateinit var phone : String
+    lateinit var email : String
+    lateinit var password : String
+    lateinit var password_check : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding.nextBtn.setOnClickListener {
             if(intent.hasExtra("name") &&intent.hasExtra("phone")&&intent.hasExtra("email")&&intent.hasExtra("password")&&intent.hasExtra("password_check")){
 
-                val name = intent.getStringExtra("name")
-                val phone = intent.getStringExtra("phone")
-                val email = intent.getStringExtra("email")
-                val password = intent.getStringExtra("password")
-                val password_check = intent.getStringExtra("password_check")
+                name = intent.getStringExtra("name").toString()
+                phone = intent.getStringExtra("phone").toString()
+                email = intent.getStringExtra("email").toString()
+                password = intent.getStringExtra("password").toString()
+                password_check = intent.getStringExtra("password_check").toString()
 
-                val postRequest = SignInRequest(name = name.toString(),phone = phone.toString(),email = email.toString(), password = password.toString(), passwordConfirm = password_check.toString(), nickName = binding.nickNameEdt.text.toString() )
+                val postRequest = SignInRequest(name = name,phone = phone,email = email, password = password, passwordConfirm = password_check, nickName = binding.nickNameEdt.text.toString() )
                 Log.d("요청사항", ""+ postRequest)
                 showLoadingDialog(this)
                 SignInActivityService(this).tryPostSignUp(postRequest)
@@ -98,11 +106,22 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
         }
         else if(response.code == 2025){
             showCustomToast(response.message)
-            startActivity(Intent(this, SignInActivity::class.java))
+            val intent = Intent(this, SignInActivity::class.java)
+
+            intent.putExtra("name", name)
+            intent.putExtra("phone",phone)
+
+            startActivity(intent)
         }
         else if(response.code == 2016 || response.code == 2027 ||response.code == 2028){
             showCustomToast(response.message)
-            startActivity(Intent(this, SignInActivity2::class.java))
+            val intent = Intent(this, SignInActivity2::class.java)
+
+            intent.putExtra("email", email)
+            intent.putExtra("password",password)
+            intent.putExtra("password_check",password_check)
+
+            startActivity(intent)
         }
         else if(response.code == 2033){
             showCustomToast(response.message)
