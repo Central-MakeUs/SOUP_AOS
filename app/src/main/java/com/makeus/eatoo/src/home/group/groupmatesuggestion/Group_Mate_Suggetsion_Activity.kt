@@ -122,8 +122,7 @@ class Group_Mate_Suggetsion_Activity
     }
 
     override fun onGetMainCharSuccess(response: MainCharResponse) {}
-
-    override fun onGetMainCharFail(message: String) {}
+    override fun onGetMainCharFail(message: String?) {}
 
     //그룹 생성하기
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {

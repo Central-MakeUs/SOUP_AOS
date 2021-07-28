@@ -72,7 +72,6 @@ RadioGroup.OnCheckedChangeListener, CategoryListView, CategoryListRVAdapter.OnSt
     }
 
     private fun getCategoryList(order: Int) {
-        //서버. 세 번 불러야함.
         context?.let {
             showLoadingDialog(it)
             CategoryListService(this).tryGetStoreCategoryList(getUserIdx(), getGroupIdx(), categoryIdx, order)
@@ -96,7 +95,6 @@ RadioGroup.OnCheckedChangeListener, CategoryListView, CategoryListRVAdapter.OnSt
 
     override fun onGetCategoryListSuccess(response: StoreCategoryListResponse) {
         dismissLoadingDialog()
-        Log.d("categorylist", response.toString())
         binding.llNoCategoryResult.isVisible = false
         storeListAdapter.removeAllData()
         storeListAdapter.addAllData(response.result.getStoresRes)
@@ -132,8 +130,8 @@ RadioGroup.OnCheckedChangeListener, CategoryListView, CategoryListRVAdapter.OnSt
     }
 
     override fun onLikeClicked(storeIdx: Int, isLiked : Boolean) {
-        if(isLiked) LikeService(this).tryPostLike(getUserIdx(), getGroupIdx())
-        else LikeService(this).tryPatchLike(getUserIdx(), getGroupIdx())
+        if(isLiked) LikeService(this).tryPostLike(getUserIdx(),storeIdx)
+        else LikeService(this).tryPatchLike(getUserIdx(),storeIdx)
     }
 
     override fun onGotoMateSuggestClicked(storeName: String) {

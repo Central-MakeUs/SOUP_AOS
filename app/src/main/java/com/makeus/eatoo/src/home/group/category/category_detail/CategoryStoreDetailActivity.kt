@@ -34,6 +34,7 @@ StoreDetailView, View.OnClickListener, LikeView{
     private lateinit var storeReviewAdapter : StoreDetailReviewRVAdapter
 
     var isLike = false
+    var storeIdx = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +47,7 @@ StoreDetailView, View.OnClickListener, LikeView{
     }
 
     private fun getStoreIntent() {
-        val storeIdx = intent.getIntExtra("storeIdx", -1)
+        storeIdx = intent.getIntExtra("storeIdx", -1)
         if(storeIdx != -1) getStoreDetail(storeIdx)
     }
 
@@ -117,10 +118,10 @@ StoreDetailView, View.OnClickListener, LikeView{
             R.id.ibtn_like -> {
                 if(isLike) {
                     binding.ibtnLike.setBackgroundResource(R.drawable.vector)
-                    LikeService(this).tryPatchLike(getUserIdx(), getGroupIdx())
+                    LikeService(this).tryPatchLike(getUserIdx(), storeIdx)
                 }else {
                     binding.ibtnLike.setBackgroundResource(R.drawable.eva_heart_outline)
-                    LikeService(this).tryPostLike(getUserIdx(), getGroupIdx())
+                    LikeService(this).tryPostLike(getUserIdx(), storeIdx)
                 }
             }
         }

@@ -12,7 +12,6 @@
     android:layout_width="153dp"
     android:layout_height="wrap_content">
 
-
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/store_img"
         android:layout_width="153dp"

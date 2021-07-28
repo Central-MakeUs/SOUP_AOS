@@ -14,7 +14,11 @@ class GroupService(val view: GroupView) {
         val groupRetrofitInterface = ApplicationClass.sRetrofit.create(GroupRetrofitInterface::class.java)
         groupRetrofitInterface.getMainChar(userIdx).enqueue(object : Callback<MainCharResponse> {
             override fun onResponse(call: Call<MainCharResponse>, response: Response<MainCharResponse>) {
-                view.onGetMainCharSuccess(response.body() as MainCharResponse)
+                response.body()?.let {
+                    if(it.isSuccess)view.onGetMainCharSuccess(response.body() as MainCharResponse)
+                    else view.onGetMainCharFail(it.message)
+                }
+
             }
 
             override fun onFailure(call: Call<MainCharResponse>, t: Throwable) {

@@ -204,8 +204,8 @@ class HomeFragment
 
     }
 
-    override fun onGetMainCharFail(message: String) {
-        showCustomToast(message)
+    override fun onGetMainCharFail(message: String?) {
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
 
     override fun onPatchSingleStatusSuccess() {
