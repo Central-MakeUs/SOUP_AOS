@@ -7,6 +7,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MyPageService(val view : MyPageView) {
+
     fun tryGetMyPage(userIdx: Int) {
         val myPageRetrofitInterface = ApplicationClass.sRetrofit.create(
             MyPageRetrofitInterface::class.java

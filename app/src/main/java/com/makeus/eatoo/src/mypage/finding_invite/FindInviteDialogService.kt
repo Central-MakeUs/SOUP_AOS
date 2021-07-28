@@ -11,11 +11,13 @@ class FindInviteDialogService (val view : FindInviteDialogView){
 
 
     fun tryPostParticipate(postRequest: FindGroupRequest ,userIdx :Int){
-        val logininerface = ApplicationClass.sRetrofit.create(FindInviteDialogInterface::class.java)
-        logininerface.postGroupParticipate(postRequest,userIdx).enqueue(object :
+        val findInviteRetrofitInterface = ApplicationClass.sRetrofit.create(FindInviteDialogInterface::class.java)
+        findInviteRetrofitInterface.postGroupParticipate(postRequest,userIdx).enqueue(object :
             Callback<FindGroupResponse> {
             override fun onResponse(call: Call<FindGroupResponse>, response: Response<FindGroupResponse>) {
-                view.onPostGroupParticipateSuccess(response.body() as FindGroupResponse)
+                response.body()?.let {
+                    if(it.isSuccess) view.onPostGroupParticipateSuccess(response.body() as FindGroupResponse)
+                }
             }
 
             override fun onFailure(call: Call<FindGroupResponse>, t: Throwable) {

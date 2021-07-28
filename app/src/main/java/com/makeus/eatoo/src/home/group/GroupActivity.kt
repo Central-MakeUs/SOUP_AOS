@@ -25,6 +25,7 @@ import com.makeus.eatoo.src.home.group.category.category_map.OnListClickListener
 import com.makeus.eatoo.src.home.group.main.GroupMainFragment
 import com.makeus.eatoo.src.home.group.member.GroupMemberFragment
 import com.makeus.eatoo.src.home.group.vote.GroupVoteFragment
+import com.makeus.eatoo.src.mypage.invite.model.InviteCodeResponse
 
 
 class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::inflate),
@@ -99,13 +100,16 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
     override fun onGetGroupMemberSuccess(response: GroupMemberResponse) {
         if(response.result.singleStatus == "ON") binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icons)
         else binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icon)
-
-
-
     }
 
     override fun onGetGroupMemberFail(message: String?) {
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
+    }
+
+    override fun onGetInviteCodeDateSuccess(response: InviteCodeResponse) {
+    }
+
+    override fun onGetInviteCodeDateFail(message: String?) {
     }
 
     override fun onListClick() {

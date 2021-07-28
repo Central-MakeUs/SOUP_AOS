@@ -239,6 +239,10 @@
 
     <!--group member-->
     <string name="invalid_group">현재 존재하지 않는 그룹입니다.</string>
+    <string name="new_member1">\'%s\'에 새로운 멤버를</string>
+    <string name="new_member2">초대 하시겠습니까?</string>
+    <string name="new_member_provide_code">동의 한다면 인증코드를 제공해드립니다.</string>
+    <string name="dialog_agree">동의</string>
 
 
     <!--main home -->
@@ -358,7 +362,7 @@
     <string name="mate_attend_qurey">MATE에 참가하시겠습니가?</string>
     <string name="mate_attend_qurey2">MATE 제안이 완료되었습니다!</string>
     <!--invite dialog-->
-    <string name="invite_dialog_qurey">의 초대 코드</string>
+    <string name="invite_dialog_query">\'%s\'의 초대 코드</string>
     <string name="invite_dialog_confirm">공유하기</string>
     <string name="invite_dialog_qurey2">A</string>
 

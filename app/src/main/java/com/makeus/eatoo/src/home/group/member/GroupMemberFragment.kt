@@ -7,8 +7,13 @@ import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseFragment
 import com.makeus.eatoo.databinding.FragmentGroupMemberBinding
 import com.makeus.eatoo.src.home.group.member.adapter.MemberRVAdapter
+import com.makeus.eatoo.src.home.group.member.dialog.AddMemberDialog
+import com.makeus.eatoo.src.home.group.member.dialog.AddMemberDialogInterface
 import com.makeus.eatoo.src.home.group.member.model.GroupMember
 import com.makeus.eatoo.src.home.group.member.model.GroupMemberResponse
+import com.makeus.eatoo.src.mypage.invite.InviteDialog
+import com.makeus.eatoo.src.mypage.invite.InviteService
+import com.makeus.eatoo.src.mypage.invite.model.InviteCodeResponse
 import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.getGroupName
 import com.makeus.eatoo.util.getUserIdx
@@ -16,7 +21,7 @@ import com.makeus.eatoo.util.getUserIdx
 class GroupMemberFragment : BaseFragment<FragmentGroupMemberBinding>(
     FragmentGroupMemberBinding::bind,
     R.layout.fragment_group_member
-), GroupMemberView{
+), GroupMemberView, AddMemberDialogInterface, MemberRVAdapter.OnAddMemberClickListener {
 
     private lateinit var memberAdapter: MemberRVAdapter
 
@@ -43,6 +48,13 @@ class GroupMemberFragment : BaseFragment<FragmentGroupMemberBinding>(
         getGroupMember()
     }
 
+    override fun onDialogAddMemberClicked() {
+        context?.let {
+            showLoadingDialog(it)
+            GroupMemberService(this).tryGetInviteCode(getUserIdx(), getGroupIdx())
+        }
+    }
+
 
     //////server result
 
@@ -60,9 +72,7 @@ class GroupMemberFragment : BaseFragment<FragmentGroupMemberBinding>(
                 singleStatus = " "
             )
         )
-
-
-        memberAdapter = MemberRVAdapter(requireContext(), memberList.toList())
+        memberAdapter = MemberRVAdapter(requireContext(), memberList.toList(), this)
         binding.rvMember.apply {
             adapter = memberAdapter
             layoutManager = GridLayoutManager(requireContext(), 4)
@@ -74,5 +84,28 @@ class GroupMemberFragment : BaseFragment<FragmentGroupMemberBinding>(
         dismissLoadingDialog()
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
     }
+
+    override fun onGetInviteCodeDateSuccess(response: InviteCodeResponse) {
+        dismissLoadingDialog()
+        context?.let {
+            val dialog = InviteDialog(it, response.result.code)
+            dialog.show()
+        }
+
+    }
+
+    override fun onGetInviteCodeDateFail(message: String?) {
+        dismissLoadingDialog()
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
+    }
+
+    override fun onAddMemberClicked() {
+        context?.let {
+            val dialog = AddMemberDialog(it, this)
+            dialog.show()
+        }
+
+    }
+
 
 }

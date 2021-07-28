@@ -13,8 +13,13 @@ import com.makeus.eatoo.util.EatooCharList
 
 class MemberRVAdapter(
     val context : Context,
-    private val memberList : List<GroupMember>
+    private val memberList : List<GroupMember>,
+    val listener : OnAddMemberClickListener
     ): RecyclerView.Adapter<MemberRVAdapter.ViewHolder>() {
+
+    interface OnAddMemberClickListener {
+        fun onAddMemberClicked()
+    }
 
     inner class ViewHolder(val binding : ItemMemberBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -41,6 +46,9 @@ class MemberRVAdapter(
                 binding.ivMemberContainer.setImageResource(R.drawable.background_member_gray)
                 binding.ivMember.isVisible = false
                 binding.ivAddMember.isVisible = true
+                binding.ivMemberContainer.setOnClickListener {
+                    listener.onAddMemberClicked()
+                }
             }
 
 
