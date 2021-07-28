@@ -1,6 +1,7 @@
 package com.makeus.eatoo.src.home.group.main.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,79 +9,70 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.eatoo.R
+import com.makeus.eatoo.databinding.ItemRecommendStoreBinding
+import com.makeus.eatoo.databinding.ItemRecommendStoreDetailBinding
+import com.makeus.eatoo.src.home.group.main.model.GroupMateResponse
 import com.makeus.eatoo.src.home.group.main.model.GroupStoreResponse
+import com.makeus.eatoo.src.home.group.main.store_rec.adapter.StoreRecRVAdapter
+import com.makeus.eatoo.src.home.group.main.store_rec.model.StoreRecResult
 import com.makeus.eatoo.util.glideUtil
 import com.makeus.eatoo.util.roundTop
 
-class Group_Home_Main_Store_Kind_RecyclerviewAdapter(val StoreList : ArrayList<GroupStoreResponse>) : RecyclerView.Adapter<Group_Home_Main_Store_Kind_RecyclerviewAdapter.CustomViewholder>(){
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
-        val inflaterview = LayoutInflater.from(parent.context).inflate(R.layout.item_recommend_store,parent,false)
+class Group_Home_Main_Store_Kind_RecyclerviewAdapter(
+    val context: Context,
+    val listener: OnStoreClickListener,
+    val storeList : ArrayList<GroupStoreResponse>
+) : RecyclerView.Adapter<Group_Home_Main_Store_Kind_RecyclerviewAdapter.ViewHolder>() {
 
-        return CustomViewholder(inflaterview)
+    interface OnStoreClickListener {
+        fun onStoreClicked(storeIdx: Int)
+        fun onStoreLongClicked(storeName: String)
+        fun onLikeClicked(storeIdx: Int, isLiked: Boolean)
     }
 
+    inner class ViewHolder(val binding: ItemRecommendStoreBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-    override fun getItemCount() = StoreList.size
+        fun bindItem(item: GroupStoreResponse) {
+            glideUtil(context, item.imgUrl, binding.ivStore)
+            binding.tvStoreName.text = item.storeName
+            binding.tvStoreLocation.text = item.address
+            binding.tvStoreRating.text = item.rating.toInt().toString()
+            binding.toggleStoreLike.isChecked = item.isLiked == "Y"
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    override fun onBindViewHolder(holder: CustomViewholder, position : Int) {
+            binding.clMainStoreRec.setOnClickListener {
+                listener.onStoreClicked(item.storeIdx)
+            }
+            binding.clMainStoreRec.setOnLongClickListener {
+                listener.onStoreLongClicked(item.storeName)
 
-        val imageUrl : String? = StoreList[position].imgUrl
-        if(imageUrl != null) {
-            glideUtil(holder.view.context, imageUrl, roundTop(holder.Storeimg,20 ) )
+                return@setOnLongClickListener true
+            }
+            binding.toggleStoreLike.setOnCheckedChangeListener { compoundButton, isChecked ->
+                if(isChecked) listener.onLikeClicked(item.storeIdx, true)
+                else listener.onLikeClicked(item.storeIdx, false)
+            }
         }
-
-        if(StoreList[position].isLiked == "Y"){
-            holder.Storeimg.background = holder.view.context.resources.getDrawable(R.drawable.eva_heart_outline, null)
-        }
-        else{
-            holder.Storeimg.background = holder.view.context.resources.getDrawable(R.drawable.vector, null)
-        }
-
-        holder.StoreName.text = StoreList[position].storeName
-        holder.ResraurantLocation.text = StoreList[position].address
-        holder.StoreScore.text = StoreList[position].rating.toString()
-
-//        val imageUrl: String = StoreList[position].imgUrl
-//        if(imageUrl != null) {
-//            Glide.with(holder.view.context).load(imageUrl).into(holder.Storeimg)
-//            holder.Storeimg.background = holder.view.context.resources.getDrawable(R.drawable.group_main_home_store_img_background, null)
-//            holder.Storeimg.clipToOutline = true
-//        }
-//
-//        if(StoreList[position].isLiked == "Y"){
-//            holder.Storeimg.background = holder.view.context.resources.getDrawable(R.drawable.eva_heart_outline, null)
-//        }
-//        else{
-//            holder.Storeimg.background = holder.view.context.resources.getDrawable(R.drawable.vector, null)
-//        }
-//
-//        holder.StoreName.text = StoreList[position].storeName
-//        holder.ResraurantLocation.text = StoreList[position].address
-//        holder.StoreScore.text = StoreList[position].rating.toString()
-
-
     }
 
-
-    class CustomViewholder(val view : View) : RecyclerView.ViewHolder(view){
-        val Storeimg : AppCompatImageView = view.findViewById(R.id.store_img)
-        val StoreName : AppCompatTextView = view.findViewById(R.id.store_name_tv)
-        val ResraurantLocation : AppCompatTextView = view.findViewById(R.id.store_location_tv)
-        val StoreScore : AppCompatTextView = view.findViewById(R.id.store_score_tv)
-        val StoreWish : AppCompatImageView = view.findViewById(R.id.store_wish)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): Group_Home_Main_Store_Kind_RecyclerviewAdapter.ViewHolder {
+        val view =
+            ItemRecommendStoreBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        return ViewHolder(view)
     }
 
-    interface ItemClickListener {
-        fun onClick(view: View, position: Int)
+    override fun onBindViewHolder(holder: Group_Home_Main_Store_Kind_RecyclerviewAdapter.ViewHolder, position: Int) {
+        holder.bindItem(storeList[position])
     }
 
-    private lateinit var itemClickListener: ItemClickListener
-
-    fun setItemClickListener(itemClickListener: ItemClickListener){
-        this.itemClickListener = itemClickListener
-    }
-
+    override fun getItemCount(): Int = storeList.size
 
 
 }

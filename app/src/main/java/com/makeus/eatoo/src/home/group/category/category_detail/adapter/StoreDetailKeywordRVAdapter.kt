@@ -9,7 +9,7 @@ import com.makeus.eatoo.src.home.group.category.category_detail.model.GetStoreKe
 
 class StoreDetailKeywordRVAdapter (
     val context : Context,
-    private val storeKeywordList : List<GetStoreKeywordRe>
+    storeKeywordList : List<GetStoreKeywordRe>
 )
     : RecyclerView.Adapter<StoreDetailKeywordRVAdapter.ViewHolder>() {
 

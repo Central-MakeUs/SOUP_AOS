@@ -135,21 +135,15 @@ RadioGroup.OnCheckedChangeListener, CategoryListView, CategoryListRVAdapter.OnSt
     }
 
     override fun onGotoMateSuggestClicked(storeName: String) {
-        val intent = Intent(requireContext(), Group_Mate_Suggetsion_Activity::class.java)
-        intent.putExtra("storeName", storeName)
-        startActivity(intent)
-    }
-
-    override fun onPostLikeSuccess() {
-        showCustomToast("좋아요 성공")
+        context?.let {
+            val intent = Intent(it, Group_Mate_Suggetsion_Activity::class.java)
+            intent.putExtra("storeName", storeName)
+            startActivity(intent)
+        }
     }
 
     override fun onPostLikeFail(message: String?) {
         showCustomToast(message?:resources.getString(R.string.failed_connection))
-    }
-
-    override fun onPatchLikeSuccess() {
-        showCustomToast("좋아요 취소 성공")
     }
 
     override fun onPatchLikeFail(message: String?) {

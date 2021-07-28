@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.CompoundButton
 import android.widget.LinearLayout
+import android.widget.ToggleButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
@@ -27,13 +29,12 @@ import okhttp3.internal.applyConnectionSpec
 
 class CategoryStoreDetailActivity
     : BaseActivity<ActivityCategoryStoreDetailBinding>(ActivityCategoryStoreDetailBinding::inflate),
-StoreDetailView, View.OnClickListener, LikeView{
+StoreDetailView, View.OnClickListener, LikeView, CompoundButton.OnCheckedChangeListener{
 
     private lateinit var storeKeywordAdapter : StoreDetailKeywordRVAdapter
     private lateinit var storeImgAdapter : StoreDetailImageRVAdapter
     private lateinit var storeReviewAdapter : StoreDetailReviewRVAdapter
 
-    var isLike = false
     var storeIdx = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +43,7 @@ StoreDetailView, View.OnClickListener, LikeView{
         getStoreIntent()
         binding.btnSuggestMate.setOnClickListener(this)
         binding.ibtnBackArrow.setOnClickListener(this)
-        binding.ibtnLike.setOnClickListener(this)
+        binding.toggleStoreLike.setOnCheckedChangeListener(this)
 
     }
 
@@ -87,13 +88,7 @@ StoreDetailView, View.OnClickListener, LikeView{
         glideUtil(this, response.result.imgUrl, binding.ivStoreImage)
         binding.tvStoreName.text = response.result.storeName
         binding.tvStoreAddress.text = response.result.address
-        if(response.result.isLiked == "Y") {
-            isLike = true
-            binding.ibtnLike.setBackgroundResource(R.drawable.eva_heart_outline)
-        }else {
-            isLike = false
-            binding.ibtnLike.setBackgroundResource(R.drawable.vector)
-        }
+        binding.toggleStoreLike.isChecked = response.result.isLiked == "Y"
 
         setKeywordRV(response.result.getStoreKeywordRes)
         setImgRV(response.result.getReviewImgRes)
@@ -115,31 +110,18 @@ StoreDetailView, View.OnClickListener, LikeView{
             R.id.ibtn_back_arrow -> {
                 finish()
             }
-            R.id.ibtn_like -> {
-                if(isLike) {
-                    binding.ibtnLike.setBackgroundResource(R.drawable.vector)
-                    LikeService(this).tryPatchLike(getUserIdx(), storeIdx)
-                }else {
-                    binding.ibtnLike.setBackgroundResource(R.drawable.eva_heart_outline)
-                    LikeService(this).tryPostLike(getUserIdx(), storeIdx)
-                }
-            }
         }
     }
-
-    override fun onPostLikeSuccess() {
-        isLike = true
-    }
-
     override fun onPostLikeFail(message: String?) {
         showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
 
-    override fun onPatchLikeSuccess() {
-        isLike= false
-    }
-
     override fun onPatchLikeFail(message: String?) {
         showCustomToast(message?:resources.getString(R.string.failed_connection))
+    }
+
+    override fun onCheckedChanged(p0: CompoundButton?, isChecked: Boolean) {
+        if(isChecked) LikeService(this).tryPostLike(getUserIdx(), storeIdx)
+        else  LikeService(this).tryPatchLike(getUserIdx(), storeIdx)
     }
 }

@@ -278,16 +278,9 @@ StoreToMateSuggestDialogInterface{
         LikeService(this).tryPatchLike(getUserIdx(), storeIdx)
     }
 
-
-
-    override fun onPostLikeSuccess() {}
     
     override fun onPostLikeFail(message: String?) {
         showCustomToast(message?:resources.getString(R.string.failed_connection))
-    }
-
-    override fun onPatchLikeSuccess() {
-        showCustomToast("좋아요 취소 성공!")
     }
 
     override fun onPatchLikeFail(message: String?) {

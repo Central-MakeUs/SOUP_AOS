@@ -69,7 +69,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
                 android:maxLines="1"
-                android:maxLength="12"
                 android:ellipsize="end"
                 tools:text="@string/group_main_store_location"
                 android:textColor="@color/black"

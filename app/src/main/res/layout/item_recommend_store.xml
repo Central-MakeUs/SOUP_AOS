@@ -1,97 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/background_dialog"
-    android:layout_marginEnd="9dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
-    android:layout_marginStart="5dp"
-    android:elevation="5dp"
-    android:layout_width="153dp"
-    android:layout_height="wrap_content">
+    android:id="@+id/cl_main_store_rec"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="10dp"
+    android:background="@android:color/transparent">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/store_img"
-        android:layout_width="153dp"
-        android:layout_height="159dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/group_main_home_store_img_background"
-        android:src="@drawable/ic_recommand_store_no_img"
-        app:layout_constraintBottom_toTopOf="@+id/store_name_tv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginStart="2dp"
+        app:cardCornerRadius="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/store_wish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="15dp"
-        android:src="@drawable/vector"
-        app:layout_constraintBottom_toBottomOf="@+id/store_img"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/store_name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:fontFamily="sans-serif"
-        android:lineSpacingExtra="2sp"
-        android:text="@string/group_main_store_name"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/store_location_tv"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/store_location_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="sans-serif"
-        android:lineSpacingExtra="2sp"
-        android:maxWidth="120dp"
-        android:maxLines="1"
-        android:text="@string/group_main_store_location"
-        android:textColor="@color/black"
-        android:textSize="10sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/ic_star_img"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="SmallSp" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ic_star_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/star_20"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/store_name_tv" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/store_score_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:fontFamily="sans-serif"
-        android:lineSpacingExtra="2sp"
-        android:text="@string/group_main_store_score"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/ic_star_img"
-        app:layout_constraintStart_toEndOf="@+id/ic_star_img"
-        app:layout_constraintTop_toTopOf="@+id/ic_star_img" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="153dp"
+            android:layout_height="228dp">
 
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_store"
+                android:layout_width="match_parent"
+                android:layout_height="159dp"
+                android:src="@drawable/ic_recommand_store_no_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ToggleButton
+                android:id="@+id/toggle_store_like"
+                android:layout_width="15.1dp"
+                android:layout_height="12.7dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="13dp"
+                android:background="@drawable/selector_like_white"
+                android:button="@color/transparent"
+                android:textOff="@string/nothing"
+                android:textOn="@string/nothing"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_store"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_store_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto_bold"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_store"
+                tools:text="@string/group_main_store_name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_store_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="5dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto_medium"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_store_name"
+                tools:ignore="SmallSp"
+                tools:text="@string/group_main_store_location" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_store_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/star_20"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_store_name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_store_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_store_star"
+                app:layout_constraintStart_toEndOf="@+id/iv_store_star"
+                app:layout_constraintTop_toTopOf="@+id/iv_store_star"
+                tools:text="@string/group_main_store_score" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
