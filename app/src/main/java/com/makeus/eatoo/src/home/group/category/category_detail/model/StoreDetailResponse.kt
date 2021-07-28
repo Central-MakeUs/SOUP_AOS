@@ -33,5 +33,5 @@ data class GetReviewRe(
 )
 
 data class GetStoreKeywordRe(
-    val name: String
+    @SerializedName("name") val name: String
 )

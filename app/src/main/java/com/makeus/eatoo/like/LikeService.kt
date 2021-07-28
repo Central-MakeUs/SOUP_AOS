@@ -40,7 +40,8 @@ class LikeService(val view : LikeView) {
                 response: Response<BaseResponse>
             ) {
                 response.body()?.let {
-                    if(!it.isSuccess && it.code != 2601) view.onPatchLikeFail(it.message)
+                    if(it.isSuccess) view.onPatchLikeSuccess()
+                    else if( it.code != 2601)  view.onPatchLikeFail(it.message)
                 }
             }
 

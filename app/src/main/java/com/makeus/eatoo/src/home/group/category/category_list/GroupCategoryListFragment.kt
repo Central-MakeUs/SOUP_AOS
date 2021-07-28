@@ -146,6 +146,9 @@ RadioGroup.OnCheckedChangeListener, CategoryListView, CategoryListRVAdapter.OnSt
         showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
 
+    override fun onPatchLikeSuccess() {
+    }
+
     override fun onPatchLikeFail(message: String?) {
         showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
