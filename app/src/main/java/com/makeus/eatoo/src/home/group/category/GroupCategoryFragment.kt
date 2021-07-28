@@ -260,12 +260,11 @@ StoreToMateSuggestDialogInterface{
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
     }
 
-    override fun onStoreClicked(storeIdx: Int, address : String) {
+    override fun onStoreClicked(storeIdx: Int) {
         //가게 상세로 이동.
         val intent = Intent(requireContext(), CategoryStoreDetailActivity::class.java)
         intent.apply {
             putExtra("storeIdx", storeIdx)
-            putExtra("address", address)
         }
         startActivity(intent)
 
@@ -279,16 +278,12 @@ StoreToMateSuggestDialogInterface{
         LikeService(this).tryPatchLike(getUserIdx(), storeIdx)
     }
 
-
-
-    override fun onPostLikeSuccess() {}
     
     override fun onPostLikeFail(message: String?) {
         showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
 
     override fun onPatchLikeSuccess() {
-        showCustomToast("좋아요 취소 성공!")
     }
 
     override fun onPatchLikeFail(message: String?) {

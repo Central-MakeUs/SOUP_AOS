@@ -14,8 +14,9 @@
         android:roundIcon="@mipmap/ic_eatoo_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".src.home.group.category.category_detail.CategoryStoreDetailActivity"/>
-        <activity android:name=".src.home.group.groupmatesuggestion.findmate.FindMateActivity"/>
+        <activity android:name=".src.home.group.main.store_rec.StoreRecListActivity"></activity>
+        <activity android:name=".src.home.group.category.category_detail.CategoryStoreDetailActivity" />
+        <activity android:name=".src.home.group.groupmatesuggestion.findmate.FindMateActivity" />
         <activity android:name=".src.home.create_group.group_location.current_location.CurrentLocationActivity" />
         <activity android:name=".src.mypage.invite.InviteActivity" />
         <activity android:name=".src.mypage.profile.ProfileActivity" />
@@ -26,7 +27,7 @@
         <activity android:name=".src.review.my_review.MyReviewActivity" />
         <activity android:name=".src.review.create_review.create_review1.CreateReview1Activity" />
         <activity android:name=".src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity" />
-        <activity android:name=".src.home.group.GroupActivity"></activity>
+        <activity android:name=".src.home.group.GroupActivity" />
         <activity android:name=".src.home.create_group.group_location.GroupLocationActivity" />
         <activity android:name=".src.signinlogin.signin.SignInActivity3" />
         <activity android:name=".src.signinlogin.signin.SignInActivity2" />
@@ -38,7 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".src.home.create_group.CreateGroupActivity"></activity>
+        <activity android:name=".src.home.create_group.CreateGroupActivity" />
         <activity android:name=".src.signinlogin.signin.SignInActivity" />
         <activity android:name=".src.signinlogin.login.LoginActivity" />
         <activity android:name=".src.main.MainActivity" />
@@ -49,9 +50,12 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/main_orange" />
-        <service android:name=".fcm.FcmService" android:exported="false">
+
+        <service
+            android:name=".fcm.FcmService"
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>

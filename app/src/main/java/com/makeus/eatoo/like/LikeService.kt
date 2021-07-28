@@ -20,12 +20,9 @@ class LikeService(val view : LikeView) {
                 response: Response<LikeResponse>
             ) {
                 response.body()?.let {
-                    if(it.isSuccess) view.onPostLikeSuccess()
-                    else view.onPostLikeFail(it.message)
+                    if(!it.isSuccess && it.code != 2600) view.onPostLikeFail(it.message)
+                    }
                 }
-
-            }
-
             override fun onFailure(call: Call<LikeResponse>, t: Throwable) {
                 view.onPostLikeFail(t.message?:ApplicationClass.applicationResources.getString(R.string.failed_db_connection))
             }
@@ -44,9 +41,8 @@ class LikeService(val view : LikeView) {
             ) {
                 response.body()?.let {
                     if(it.isSuccess) view.onPatchLikeSuccess()
-                    else view.onPatchLikeFail(it.message)
+                    else if( it.code != 2601)  view.onPatchLikeFail(it.message)
                 }
-
             }
 
             override fun onFailure(call: Call<BaseResponse>, t: Throwable) {

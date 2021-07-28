@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="19dp"
             app:contentInsetStart="0dp"
-            app:titleText="@string/wishlist_store" />
+            app:leftIcon="@drawable/ic_back_btn"
+            app:titleText="@string/store_rec" />
 
     </androidx.cardview.widget.CardView>
 
@@ -134,7 +135,7 @@
     </HorizontalScrollView>
 
     <Spinner
-        android:id="@+id/spinner_wishlist"
+        android:id="@+id/spinner_store_rec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="34dp"
@@ -142,11 +143,11 @@
         android:singleLine="true"
         android:spinnerMode="dropdown"
         android:gravity="end"
-        app:layout_constraintBottom_toTopOf="@id/rv_wishlist"
+        app:layout_constraintBottom_toTopOf="@id/rv_store_rec_list"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_wishlist"
+        android:id="@+id/rv_store_rec_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
@@ -157,7 +158,7 @@
         android:overScrollMode="never"/>
 
     <LinearLayout
-        android:id="@+id/ll_no_wishlist_result"
+        android:id="@+id/ll_no_store_rec_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
@@ -180,11 +181,22 @@
             android:id="@+id/tv_no_result1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_wishlist"
+            android:text="@string/no_store_rec"
             android:textSize="10sp"
             android:fontFamily="@font/roboto_medium"
             android:textColor="@color/input_hint"
             android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_no_result2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_store_rec2"
+            android:textSize="10sp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/input_hint"
+            android:layout_marginTop="4dp"
             />
 
     </LinearLayout>

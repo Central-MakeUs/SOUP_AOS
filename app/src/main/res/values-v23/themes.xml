@@ -47,6 +47,7 @@
         <item name="chipBackgroundColor">@color/white</item>
         <item name="chipStrokeColor">@color/main_orange</item>
         <item name="rippleColor">@color/chip_ripple_color</item>
+        <item name="chipStrokeWidth">1dp</item>
     </style>
 
     <style name="CustomKeywordChipStyle3" parent="Widget.MaterialComponents.Chip.Action">

@@ -37,15 +37,19 @@
                 android:layout_marginTop="41dp"
                 android:layout_marginStart="21dp"/>
 
-            <ImageButton
-                android:id="@+id/ibtn_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+
+            <ToggleButton
+                android:id="@+id/toggle_store_like"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
                 app:layout_constraintBottom_toTopOf="@id/cardview_store_info"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="24.2dp"
                 android:layout_marginBottom="15dp"
-                android:background="@color/transparent"/>
+                android:background="@drawable/selector_like_white"
+                android:button="@color/transparent"
+                android:textOff="@string/nothing"
+                android:textOn="@string/nothing" />
 
 
             <androidx.cardview.widget.CardView

@@ -8,7 +8,7 @@ data class StoreCategoryListResponse(
 ) : BaseResponse()
 
 data class StoreCategoryListResult(
-    @SerializedName("getStoresRes")  val getStoresRes: List<GetStoresRe>,
+    @SerializedName("getStoresRes")  val getStoresRes: ArrayList<GetStoresRe>,
     @SerializedName("singleStatus")  val singleStatus: String
 )
 
@@ -16,7 +16,7 @@ data class GetStoresRe(
     @SerializedName("getStoreKeywordRes") val getStoreKeywordRes: List<GetStoreKeywordRe>,
     @SerializedName("imgUrl") val imgUrl: String,
     @SerializedName("isLiked") val isLiked: String,
-    @SerializedName("name") val name: String,
+    @SerializedName("storeName") val storeName: String,
     @SerializedName("rating") val rating: Double,
     @SerializedName("storeIdx") val storeIdx: Int
 )

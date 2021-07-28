@@ -8,11 +8,11 @@ import retrofit2.Response
 
 class CategoryListService (val view : CategoryListView){
 
-    fun tryGetStoreCategoryList(userIdx: Int, storeIdx : Int, storeCategoryIdx : Int, order : Int) {
+    fun tryGetStoreCategoryList(userIdx: Int, groupIdx : Int, storeCategoryIdx : Int, order : Int) {
         val categoryListRetrofitInterface = ApplicationClass.sRetrofit.create(
             CategoryListRetrofitInterface::class.java
         )
-        categoryListRetrofitInterface.getStoreCategoryList(userIdx, storeIdx, storeCategoryIdx, order)
+        categoryListRetrofitInterface.getStoreCategoryList(userIdx, groupIdx, storeCategoryIdx, order)
             .enqueue(object :
                 Callback<StoreCategoryListResponse> {
                 override fun onResponse(
@@ -21,12 +21,12 @@ class CategoryListService (val view : CategoryListView){
                 ) {
                     response.body()?.let {
                         if (it.isSuccess) view.onGetCategoryListSuccess(response.body() as StoreCategoryListResponse)
-                        else view.onGetCategoryListFail(it.message)
+                        else view.onGetCategoryListFail(it.code, it.message)
                     }
                 }
 
                 override fun onFailure(call: Call<StoreCategoryListResponse>, t: Throwable) {
-                    view.onGetCategoryListFail(t.message)
+                    view.onGetCategoryListFail(0, t.message)
                 }
 
             })
