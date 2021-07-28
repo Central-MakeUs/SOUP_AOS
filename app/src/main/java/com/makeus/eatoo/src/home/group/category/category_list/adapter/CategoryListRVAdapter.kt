@@ -1,6 +1,7 @@
 package com.makeus.eatoo.src.home.group.category.category_list.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -9,6 +10,7 @@ import com.makeus.eatoo.R
 import com.makeus.eatoo.databinding.ItemCategoryListStoreBinding
 import com.makeus.eatoo.src.home.group.category.category_list.model.GetStoresRe
 import com.makeus.eatoo.src.review.store_location.model.KakaoSearchDoc
+import com.makeus.eatoo.src.wishlist.model.WishListResult
 import com.makeus.eatoo.util.glideUtil
 
 class CategoryListRVAdapter(
@@ -30,16 +32,9 @@ class CategoryListRVAdapter(
             binding.tvStoreName.text = item.storeName
             binding.tvRating.text = item.rating.toInt().toString()
             binding.toggleStoreLike.isChecked = item.isLiked == "Y"
-            item.getStoreKeywordRes.forEach {
-                if(it.name != "" && it.name.length <=5){
-                    if(binding.tvStoreKeyword1.text.isEmpty()){
-                        binding.tvStoreKeyword1.text = it.name
-                    }else if(binding.tvStoreKeyword2.text.isEmpty()){
-                            binding.tvStoreKeyword2.text = it.name
-                            binding.llKeyword2.isVisible = true
-                    }
-                }
-            }
+
+            setKeyword(item)
+
             binding.clCategoryStoreList.setOnClickListener{
                 listener.onStoreClicked(item.storeIdx)
             }
@@ -51,6 +46,32 @@ class CategoryListRVAdapter(
             binding.toggleStoreLike.setOnClickListener {
                 if(binding.toggleStoreLike.isChecked) listener.onLikeClicked(item.storeIdx, true)
                 else listener.onLikeClicked(item.storeIdx, false)
+            }
+        }
+
+        private fun setKeyword(item: GetStoresRe) {
+            var keyword1: String? = null
+            var keyword2: String? = null
+
+            item.getStoreKeywordRes.forEach {
+                if (it.name != "" && it.name.length <= 5) {
+                    if (keyword1 == null) {
+                        Log.d("wishlist1", it.name)
+                        keyword1 = it.name
+                    } else if (keyword2 == null) {
+                        Log.d("wishlist2", it.name)
+                        keyword2 = it.name
+                    }
+                }
+            }
+
+            if (keyword1 != null) binding.tvStoreKeyword1.text = keyword1
+            else binding.tvStoreKeyword1.text = ""
+            if (keyword2 != null) {
+                binding.tvStoreKeyword2.text = keyword2
+                binding.llKeyword2.isVisible = true
+            }else{
+                binding.llKeyword2.isVisible = false
             }
         }
     }

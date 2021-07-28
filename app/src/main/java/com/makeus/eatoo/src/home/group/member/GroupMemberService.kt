@@ -3,6 +3,8 @@ package com.makeus.eatoo.src.home.group.member
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.ApplicationClass
 import com.makeus.eatoo.src.home.group.member.model.GroupMemberResponse
+import com.makeus.eatoo.src.mypage.invite.InviteInterface
+import com.makeus.eatoo.src.mypage.invite.model.InviteCodeResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,6 +50,24 @@ class GroupMemberService (val view : GroupMemberView) {
                 view.onGetGroupMemberFail(ApplicationClass.applicationResources.getString(R.string.failed_db_connection))
             }
 
+        })
+    }
+
+    fun tryGetInviteCode(userIdx : Int , groupIdx : Int ) {
+
+        val inviteInterface = ApplicationClass.sRetrofit.create(InviteInterface::class.java)
+        inviteInterface.getInviteCode(userIdx,groupIdx).enqueue(object : Callback<InviteCodeResponse> {
+            override fun onResponse(call: Call<InviteCodeResponse>, response: Response<InviteCodeResponse>) {
+                response.body()?.let {
+                    if(it.isSuccess) view.onGetInviteCodeDateSuccess(response.body() as InviteCodeResponse)
+                    else view.onGetInviteCodeDateFail(it.message)
+                }
+
+            }
+
+            override fun onFailure(call: Call<InviteCodeResponse>, t: Throwable) {
+                view.onGetInviteCodeDateFail(t.message ?:ApplicationClass.applicationResources.getString(R.string.failed_db_connection))
+            }
         })
     }
 

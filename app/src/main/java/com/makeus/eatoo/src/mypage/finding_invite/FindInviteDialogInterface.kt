@@ -11,5 +11,5 @@ import retrofit2.http.Path
 interface FindInviteDialogInterface {
 
     @POST("app/groups/{userIdx}/enter")
-    fun postGroupParticipate(@Body body : FindGroupRequest, @Path ("userIdx") userIdx : Int ): Call<FindGroupResponse>
+    fun postGroupParticipate(@Body body : FindGroupRequest, @Path("userIdx") userIdx : Int ): Call<FindGroupResponse>
 }

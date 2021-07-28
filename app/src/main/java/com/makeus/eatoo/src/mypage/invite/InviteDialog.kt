@@ -1,6 +1,7 @@
 package com.makeus.eatoo.src.mypage.invite
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.app.Dialog
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -13,10 +14,12 @@ import android.view.Gravity
 import android.view.WindowManager
 import android.widget.Toast
 import com.makeus.eatoo.R
+import com.makeus.eatoo.config.ApplicationClass
 import com.makeus.eatoo.databinding.DialogInviteBinding
+import com.makeus.eatoo.util.getGroupName
 
 
-class InviteDialog(context: Context , val code : String , val GroupName : String) : Dialog(context) {
+class InviteDialog(context: Context , val code : String) : Dialog(context) {
 
     private lateinit var binding : DialogInviteBinding
 
@@ -27,7 +30,6 @@ class InviteDialog(context: Context , val code : String , val GroupName : String
         binding = DialogInviteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var mContext = context
         setCancelable(false)
         setCanceledOnTouchOutside(true)
         val window = window
@@ -44,7 +46,7 @@ class InviteDialog(context: Context , val code : String , val GroupName : String
             // UI 상단 정렬
             window.setGravity(Gravity.CENTER)
         }
-        binding.tvQuery1.text = GroupName + binding.tvQuery1.text
+        binding.tvQuery1.text = String.format(ApplicationClass.applicationResources.getString(R.string.invite_dialog_query), getGroupName())
         binding.inviteCode1.text = code[0].toString()
         binding.inviteCode2.text = code[1].toString()
         binding.inviteCode3.text = code[2].toString()

@@ -75,7 +75,7 @@ class InviteActivity :  BaseActivity<ActivityInviteBinding>(ActivityInviteBindin
     }
 
     override fun onGetInviteCodeDateSuccess(response: InviteCodeResponse) {
-        val dialog = InviteDialog(this,response.result.code,GroupName)
+        val dialog = InviteDialog(this,response.result.code)
         dialog.show()
     }
 
