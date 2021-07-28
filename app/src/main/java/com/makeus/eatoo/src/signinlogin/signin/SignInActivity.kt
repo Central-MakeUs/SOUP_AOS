@@ -30,6 +30,15 @@ class SignInActivity :  BaseActivity<ActivitySignInBinding>(ActivitySignInBindin
             finish()
         }
 
+        if (intent.hasExtra("name") &&intent.hasExtra("phone")){
+
+            val name = intent.getStringExtra("name").toString()
+            val phone = intent.getStringExtra("phone").toString()
+            binding.nameEdt.setText(name)
+            binding.phoneNumberEdt.setText(phone)
+
+        }
+
 
         binding.nameEdt.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {

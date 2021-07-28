@@ -36,6 +36,18 @@ class SignInActivity2 : BaseActivity<ActivitySingIn2Binding>(ActivitySingIn2Bind
         }
 
 
+        if (intent.hasExtra("email") &&intent.hasExtra("password")&&intent.hasExtra("password_check")){
+
+            val email = intent.getStringExtra("email").toString()
+            val password = intent.getStringExtra("password").toString()
+            val password_check = intent.getStringExtra("password_check").toString()
+            binding.emailEdt.setText(email)
+            binding.passwordEdt.setText(password)
+            binding.passwordCheckEdt.setText(password_check)
+
+        }
+
+
         binding.emailEdt.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 //텍스트를 입력 후
