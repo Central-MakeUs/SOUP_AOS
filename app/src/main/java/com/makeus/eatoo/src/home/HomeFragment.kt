@@ -27,12 +27,13 @@ import com.makeus.eatoo.src.home.group.GroupActivity
 import com.makeus.eatoo.src.home.model.MainCharResponse
 import com.makeus.eatoo.src.review.create_review.create_review1.CreateReview1Activity
 import com.makeus.eatoo.util.EatooCharList
+import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.getUserNickName
 
 
 class HomeFragment
     : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),
-    GroupView, SingleView {
+    GroupView, SingleView, Home_Group_Kind_RecyclerviewAdapter.OnGroupLongClick, GroupDeleteDialogInterface{
 
     private var changeToSingle = false
     val userIdx = ApplicationClass.sSharedPreferences.getInt(USER_IDX, -1)
@@ -52,10 +53,8 @@ class HomeFragment
         Log.d("토큰",X_ACCESS_TOKEN)
 
 
-        GroupService(this).tryGetGroupData(getUserIdx())
-        GroupService(this).tryGetMateData(getUserIdx())
-        context?.let { showLoadingDialog(it) }
-
+        loadGroup()
+        loadMate()
 
 //        binding.groupPlusBtn.setOnClickListener {
 //            startActivity(Intent(activity, CreateGroupActivity::class.java))
@@ -82,6 +81,19 @@ class HomeFragment
         }
     }
 
+    private fun loadMate() {
+        context?.let {
+            GroupService(this).tryGetMateData(getUserIdx())
+        }
+    }
+
+    private fun loadGroup() {
+        context?.let {
+            showLoadingDialog(it)
+            GroupService(this).tryGetGroupData(getUserIdx())
+        }
+    }
+
     override fun onGetGroupSuccess(response: GroupResponse) {
         dismissLoadingDialog()
 
@@ -96,7 +108,8 @@ class HomeFragment
             val GroupAdapter = Home_Group_Kind_RecyclerviewAdapter(
                 response.result,
                 GroupSize,
-                "BASIC"
+                "BASIC",
+                this
             )
             binding.groupRecyclerview.adapter = GroupAdapter
             binding.groupRecyclerview.layoutManager = LinearLayoutManager(activity).also { it.orientation = LinearLayoutManager.HORIZONTAL }
@@ -132,6 +145,23 @@ class HomeFragment
 
         }
     }
+    override fun onGroupLongClicked(groupIdx : Int, groupName : String) {
+        //그룹 삭제 다이얼로그
+        context?.let {
+            val dialog =  GroupDeleteDialog(it, this, groupIdx, groupName)
+            dialog.show()
+        }
+
+
+    }
+
+    override fun onGroupDeleteClicked(groupIdx: Int) {
+        context?.let {
+            showLoadingDialog(it)
+            GroupService(this).tryDeleteGroup(getUserIdx(), groupIdx)
+        }
+
+    }
 
     private fun setSingleStatus(singleStatus: String) {
         if(singleStatus == "ON") binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icons)
@@ -140,7 +170,7 @@ class HomeFragment
 
     override fun onGetGroupFail(message: String) {
         dismissLoadingDialog()
-//        showCustomToast(message)
+        showCustomToast(message)
 
     }
 //Mate 조회
@@ -208,6 +238,17 @@ class HomeFragment
         showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
 
+    override fun onDeleteGroupSuccess() {
+        dismissLoadingDialog()
+        showCustomToast("삭제 성공!")
+        loadGroup()
+    }
+
+    override fun onDeleteGroupFail(message: String?) {
+        dismissLoadingDialog()
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
+    }
+
     override fun onPatchSingleStatusSuccess() {
 
         if(changeToSingle) binding.customToolbar.rightIcon.setImageResource(R.drawable.ic_icons)
@@ -219,5 +260,8 @@ class HomeFragment
     override fun onPatchSingleStatusFail(message: String?) {
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
     }
+
+
+
 
 }

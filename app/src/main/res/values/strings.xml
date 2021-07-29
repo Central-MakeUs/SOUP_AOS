@@ -261,6 +261,8 @@
     <string name="make_group_suggest3">EAT-TOO&#160;</string>
     <string name="make_group_suggest4">해보세요&#160;</string>
     <string name="many_groups_possible">여러개의 그룹을 만들 수 있어요!</string>
+    <string name="delete_group">정말 \'%s\' MATE group을</string>
+    <string name="delete_group2">삭제하시겠습니까?</string>
 
 
     <!--group category-->

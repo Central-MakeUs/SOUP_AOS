@@ -1,6 +1,7 @@
 package com.makeus.eatoo.src.home.adapter
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.graphics.ColorMatrixColorFilter
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,18 +14,28 @@ import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.eatoo.R
 import com.makeus.eatoo.src.home.model.GroupResultResponse
 import com.google.android.material.chip.Chip
+import com.makeus.eatoo.config.ApplicationClass
 import com.makeus.eatoo.src.home.model.GroupMembers
 import com.makeus.eatoo.util.EatooCharList
 
 class Home_Group_Kind_RecyclerviewAdapter(
     val GroupList: ArrayList<GroupResultResponse>,
-    var groupsize: Int, var group_status: String
+    var groupsize: Int,
+    var group_status: String,
+    val listener : OnGroupLongClick
 ) : RecyclerView.Adapter<Home_Group_Kind_RecyclerviewAdapter.CustomViewholder>() {
+
+    val colorArray = ApplicationClass.applicationResources.getIntArray(R.array.groupRVColor)
+
+    interface OnGroupLongClick{
+        fun onGroupLongClicked(groupIdx: Int, groupName: String)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
         var inflaterview =
@@ -46,6 +57,15 @@ class Home_Group_Kind_RecyclerviewAdapter(
             val ivMemberContainerList =
                 listOf<ImageView>(holder.member1Container, holder.member2Container, holder.member3Container)
             setMemberChar(GroupList[position].getGroupMembersRes, ivMemberList, ivMemberContainerList)
+
+            holder.GroupLayout.setOnLongClickListener {
+                listener.onGroupLongClicked(GroupList[position].groupIdx, GroupList[position].name)
+                true
+            }
+
+            holder.GroupLayout.backgroundTintList = ColorStateList.valueOf(colorArray[GroupList[position].color-1])
+
+
 
 
             holder.LastLayout.visibility = GONE
@@ -75,11 +95,18 @@ class Home_Group_Kind_RecyclerviewAdapter(
             holder.GroupLayout.visibility = GONE
             holder.LastLayout.visibility = VISIBLE
         } else {
+
             val ivMemberList =
                 listOf<AppCompatImageView>(holder.GroupMember1, holder.GroupMember2, holder.GroupMember3)
             val ivMemberContainerList =
                 listOf<ImageView>(holder.member1Container, holder.member2Container, holder.member3Container)
             setMemberChar(GroupList[position].getGroupMembersRes, ivMemberList, ivMemberContainerList)
+
+            holder.GroupLayout.setOnLongClickListener {
+                listener.onGroupLongClicked(GroupList[position].groupIdx, GroupList[position].name)
+                true
+            }
+            holder.GroupLayout.backgroundTintList = ColorStateList.valueOf(colorArray[GroupList[position].color-1])
 
             holder.LastLayout.visibility = GONE
             holder.GroupName.text = GroupList[position].name
@@ -143,6 +170,9 @@ class Home_Group_Kind_RecyclerviewAdapter(
 
                 holder.GroupNameLayouttext1.visibility = GONE
                 holder.GroupNameLayouttext2.visibility = GONE
+
+                holder.GroupKeyword1.chipBackgroundColor = ColorStateList.valueOf(colorArray[GroupList[position].color-1])
+                holder.GroupKeyword2.chipBackgroundColor = ColorStateList.valueOf(colorArray[GroupList[position].color-1])
 
                 if (GroupList[position].getGroupKeywordRes.size == 1) {
                     holder.GroupKeywordChip1.visibility = VISIBLE
@@ -215,7 +245,7 @@ class Home_Group_Kind_RecyclerviewAdapter(
 
 
     class CustomViewholder(val view: View) : RecyclerView.ViewHolder(view) {
-        val GroupLayout: ConstraintLayout = view.findViewById(R.id.group_layout)
+        val GroupLayout: CardView = view.findViewById(R.id.group_layout)
         val LastLayout: ConstraintLayout = view.findViewById(R.id.last_layout)
         val GroupName: AppCompatTextView = view.findViewById(R.id.group_name_tv)
         val GroupPlus: AppCompatImageButton = view.findViewById(R.id.group_plus_btn)

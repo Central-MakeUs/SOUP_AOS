@@ -1,6 +1,7 @@
 package com.makeus.eatoo.src.home
 
 import com.makeus.eatoo.config.ApplicationClass
+import com.makeus.eatoo.config.BaseResponse
 import com.makeus.eatoo.src.home.model.GroupResponse
 import com.makeus.eatoo.src.home.model.MainCharResponse
 import com.makeus.eatoo.src.home.model.MateResponse
@@ -52,6 +53,24 @@ class GroupService(val view: GroupView) {
             }
         })
     }
+
+    fun tryDeleteGroup(userIdx : Int , groupIdx : Int) {
+        val groupRetrofitInterface = ApplicationClass.sRetrofit.create(GroupRetrofitInterface::class.java)
+        groupRetrofitInterface.deleteGroup(userIdx, groupIdx).enqueue(object : Callback<BaseResponse> {
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                response.body()?.let {
+                    if(it.isSuccess)view.onDeleteGroupSuccess()
+                    else view.onDeleteGroupFail(it.message)
+                }
+
+            }
+
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                view.onDeleteGroupFail(t.message ?: "통신 오류")
+            }
+        })
+    }
+
 // // 메이트 확정 부분입니다. 아직 완벽하게 되어 있지 않아서 일단 이렇게 둘게요!
 //    fun tryGetCofirmData(mateIdx : Int ) {
 //        val mateinerface = ApplicationClass.sRetrofit.create(GroupRetrofitInterface::class.java)

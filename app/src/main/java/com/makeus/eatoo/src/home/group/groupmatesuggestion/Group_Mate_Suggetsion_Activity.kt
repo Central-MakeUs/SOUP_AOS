@@ -20,7 +20,7 @@ import com.google.android.material.chip.Chip
 
 class Group_Mate_Suggetsion_Activity
     : BaseActivity<ActivityGroupMateSuggetsionBinding>(ActivityGroupMateSuggetsionBinding::inflate)
-    ,GroupView,Mate_Suggestion_ActivityView, TimeDialogInterface{
+    , Mate_Suggestion_ActivityView, TimeDialogInterface{
 
 
     private var GroupIndex : Int = 0
@@ -29,7 +29,7 @@ class Group_Mate_Suggetsion_Activity
         super.onCreate(savedInstanceState)
 
 
-        GroupService(this).tryGetGroupData(getUserIdx())
+        MateCreateService(this).tryGetGroupData(getUserIdx())
 
         binding.gourpChipGroup.isSingleSelection = true
         binding.gourpChipGroup.isSelectionRequired = true
@@ -110,19 +110,6 @@ class Group_Mate_Suggetsion_Activity
     }
 
 //Mate 보이기
-
-    override fun onGetMateSuccess(response: MateResponse) {
-        if(response.code == 1000) {
-            val dialog = Mate_completeDialog(this)
-            dialog.show()
-        }
-    }
-
-    override fun onGetMateFail(message: String) {
-    }
-
-    override fun onGetMainCharSuccess(response: MainCharResponse) {}
-    override fun onGetMainCharFail(message: String?) {}
 
     //그룹 생성하기
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {
