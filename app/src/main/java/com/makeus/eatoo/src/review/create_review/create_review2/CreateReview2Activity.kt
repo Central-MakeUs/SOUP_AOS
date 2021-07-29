@@ -15,7 +15,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.ToggleButton
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.children
 import androidx.core.view.isVisible
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
@@ -40,7 +42,7 @@ class CreateReview2Activity
 
     private var reviewImage = ""
     private var rating = 0.0
-
+    private var checkedIdx = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +63,11 @@ class CreateReview2Activity
             override fun afterTextChanged(p0: Editable?) {}
         })
         binding.customToolbar.leftIcon.setOnClickListener { finish() }
+        binding.btnStar1.setOnClickListener(this)
+        binding.btnStar2.setOnClickListener(this)
+        binding.btnStar3.setOnClickListener(this)
+        binding.btnStar4.setOnClickListener(this)
+        binding.btnStar5.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -73,6 +80,15 @@ class CreateReview2Activity
                 binding.etKeyword.visibility = View.VISIBLE
                 initKeywordChips()
             }
+            R.id.btn_star1 -> checkedIdx = 0
+            R.id.btn_star2 -> checkedIdx = 1
+            R.id.btn_star3 -> checkedIdx = 2
+            R.id.btn_star4 -> checkedIdx = 3
+            R.id.btn_star5 -> checkedIdx = 4
+        }
+
+        binding.clRating.children.forEachIndexed { index, view ->
+            (view as ToggleButton).isChecked = index <= checkedIdx
         }
     }
 

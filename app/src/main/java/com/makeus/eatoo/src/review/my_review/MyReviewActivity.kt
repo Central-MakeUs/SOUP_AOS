@@ -14,6 +14,7 @@ import com.makeus.eatoo.src.review.create_review.create_review1.CreateReview1Act
 import com.makeus.eatoo.src.review.my_review.adapter.MyReviewRVAdapter
 import com.makeus.eatoo.src.review.my_review.model.MyReviewResponse
 import com.makeus.eatoo.src.review.my_review.model.MyReviewResult
+import com.makeus.eatoo.src.review.review_detail.ReviewDetailActivity
 import com.makeus.eatoo.util.getUserIdx
 import com.makeus.eatoo.util.getUserNickName
 
@@ -22,11 +23,18 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
 
     private lateinit var myReviewAdapter : MyReviewRVAdapter
 
+    override fun onResume() {
+        super.onResume()
+
+        getMyReview()
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bindView()
-        getMyReview()
+        setViews()
+
     }
 
     private fun getMyReview() {
@@ -34,7 +42,7 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
         MyReviewService(this).tryGetMyReview(getUserIdx())
     }
 
-    private fun bindView() {
+    private fun setViews() {
         binding.fabMyreview.setOnClickListener(this)
         binding.tvMyReviewUserName.text = getUserNickName()
         binding.customToolbar.leftIcon.setOnClickListener { finish() }
@@ -60,6 +68,7 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
                 adapter = myReviewAdapter
                 layoutManager = LinearLayoutManager(this@MyReviewActivity)
             }
+            myReviewAdapter.notifyDataSetChanged()
         }else {
             binding.tvNoReview.isVisible = true
             binding.ivNoReview.isVisible = true
@@ -69,12 +78,13 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
 
     override fun onGetMyReviewFail(message: String?) {
         dismissLoadingDialog()
-//        showCustomToast(message?:"통신오류가 발생했습니다.")
         binding.tvNoReview.isVisible = true
         binding.ivNoReview.isVisible = true
     }
 
-    override fun onMyReviewClicked(item: MyReviewResult) {
-        showCustomToast("${item.storeName} clicked!!")
+    override fun onMyReviewClicked(reviewIdx : Int) {
+        val intent = Intent(this, ReviewDetailActivity::class.java)
+        intent.putExtra("reviewIdx", reviewIdx)
+        startActivity(intent)
     }
 }

@@ -1,6 +1,7 @@
 package com.makeus.eatoo.src.home.adapter
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.graphics.ColorMatrixColorFilter
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,18 +14,29 @@ import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.eatoo.R
 import com.makeus.eatoo.src.home.model.GroupResultResponse
 import com.google.android.material.chip.Chip
+import com.makeus.eatoo.config.ApplicationClass
 import com.makeus.eatoo.src.home.model.GroupMembers
 import com.makeus.eatoo.util.EatooCharList
 
 class Home_Group_Kind_RecyclerviewAdapter(
     val GroupList: ArrayList<GroupResultResponse>,
-    var groupsize: Int, var group_status: String
+    var groupsize: Int,
+    var group_status: String,
+    val listener : OnGroupLongClick
 ) : RecyclerView.Adapter<Home_Group_Kind_RecyclerviewAdapter.CustomViewholder>() {
+
+    val colorArray = ApplicationClass.applicationResources.getIntArray(R.array.groupRVColor)
+
+    interface OnGroupLongClick{
+        fun onGroupLongClicked(groupIdx: Int, groupName: String)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
         var inflaterview =
             LayoutInflater.from(parent.context).inflate(R.layout.item_home_has_group, parent, false)
@@ -37,10 +49,25 @@ class Home_Group_Kind_RecyclerviewAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CustomViewholder, position: Int) {
         Log.d("position", "" + position)
-//        val ivMemberList =
-//            listOf<ImageView>(holder.GroupMember1, holder.GroupMember2, holder.GroupMember3)
-//        setMemberChar(GroupList[position].getGroupMembersRes, ivMemberList)
+
         if (position == GroupList.size - 1) {
+
+            val ivMemberList =
+                listOf<AppCompatImageView>(holder.GroupMember1, holder.GroupMember2, holder.GroupMember3)
+            val ivMemberContainerList =
+                listOf<ImageView>(holder.member1Container, holder.member2Container, holder.member3Container)
+            setMemberChar(GroupList[position].getGroupMembersRes, ivMemberList, ivMemberContainerList)
+
+            holder.GroupLayout.setOnLongClickListener {
+                listener.onGroupLongClicked(GroupList[position].groupIdx, GroupList[position].name)
+                true
+            }
+
+            holder.GroupLayout.backgroundTintList = ColorStateList.valueOf(colorArray[GroupList[position].color-1])
+
+
+
+
             holder.LastLayout.visibility = GONE
             group_status = "LAST"
             holder.GroupName.text = GroupList[position].name
@@ -48,12 +75,15 @@ class Home_Group_Kind_RecyclerviewAdapter(
                 holder.GroupMemberCount.text =
                     "+" + (GroupList[position].membersNumber - 3).toString()
             } else if (GroupList[position].membersNumber == 1) {
-                holder.GroupMember2.visibility = View.GONE
-                holder.GroupMember3.visibility = View.GONE
+                holder.member2Container.visibility = View.INVISIBLE
+                holder.member3Container.visibility = View.INVISIBLE
+                holder.GroupMember2.visibility = View.INVISIBLE
+                holder.GroupMember3.visibility = View.INVISIBLE
                 holder.GroupMemberCount.visibility = View.GONE
                 holder.GroupMemberCountBackground.visibility = View.GONE
             } else if (GroupList[position].membersNumber == 2) {
-                holder.GroupMember3.visibility = View.GONE
+                holder.GroupMember3.visibility = View.INVISIBLE
+                holder.member3Container.visibility = View.INVISIBLE
                 holder.GroupMemberCount.visibility = View.GONE
                 holder.GroupMemberCountBackground.visibility = View.GONE
             } else if (GroupList[position].membersNumber == 3) {
@@ -65,18 +95,34 @@ class Home_Group_Kind_RecyclerviewAdapter(
             holder.GroupLayout.visibility = GONE
             holder.LastLayout.visibility = VISIBLE
         } else {
+
+            val ivMemberList =
+                listOf<AppCompatImageView>(holder.GroupMember1, holder.GroupMember2, holder.GroupMember3)
+            val ivMemberContainerList =
+                listOf<ImageView>(holder.member1Container, holder.member2Container, holder.member3Container)
+            setMemberChar(GroupList[position].getGroupMembersRes, ivMemberList, ivMemberContainerList)
+
+            holder.GroupLayout.setOnLongClickListener {
+                listener.onGroupLongClicked(GroupList[position].groupIdx, GroupList[position].name)
+                true
+            }
+            holder.GroupLayout.backgroundTintList = ColorStateList.valueOf(colorArray[GroupList[position].color-1])
+
             holder.LastLayout.visibility = GONE
             holder.GroupName.text = GroupList[position].name
             if (GroupList[position].membersNumber > 3) {
                 holder.GroupMemberCount.text =
                     "+" + (GroupList[position].membersNumber - 3).toString()
             } else if (GroupList[position].membersNumber == 1) {
-                holder.GroupMember2.visibility = View.GONE
-                holder.GroupMember3.visibility = View.GONE
+                holder.member2Container.visibility = View.INVISIBLE
+                holder.member3Container.visibility = View.INVISIBLE
+                holder.GroupMember2.visibility = View.INVISIBLE
+                holder.GroupMember3.visibility = View.INVISIBLE
                 holder.GroupMemberCount.visibility = View.GONE
                 holder.GroupMemberCountBackground.visibility = View.GONE
             } else if (GroupList[position].membersNumber == 2) {
-                holder.GroupMember3.visibility = View.GONE
+                holder.member3Container.visibility = View.INVISIBLE
+                holder.GroupMember3.visibility = View.INVISIBLE
                 holder.GroupMemberCount.visibility = View.GONE
                 holder.GroupMemberCountBackground.visibility = View.GONE
             } else if (GroupList[position].membersNumber == 3) {
@@ -125,6 +171,9 @@ class Home_Group_Kind_RecyclerviewAdapter(
                 holder.GroupNameLayouttext1.visibility = GONE
                 holder.GroupNameLayouttext2.visibility = GONE
 
+                holder.GroupKeyword1.chipBackgroundColor = ColorStateList.valueOf(colorArray[GroupList[position].color-1])
+                holder.GroupKeyword2.chipBackgroundColor = ColorStateList.valueOf(colorArray[GroupList[position].color-1])
+
                 if (GroupList[position].getGroupKeywordRes.size == 1) {
                     holder.GroupKeywordChip1.visibility = VISIBLE
 //                    holder.GroupKeywordChip2.visibility = GONE
@@ -165,30 +214,38 @@ class Home_Group_Kind_RecyclerviewAdapter(
 
     }
 
-    private fun setMemberChar(memberList: ArrayList<GroupMembers>, ivMemberList: List<ImageView>) {
+    private fun setMemberChar(memberList: ArrayList<GroupMembers>, ivMemberList: List<AppCompatImageView>, ivMemberContainerList: List<ImageView>) {
 
         var memberColor: Int
         var memberChar: Int
         memberList.forEachIndexed { index, groupMembers ->
-            memberColor = if (groupMembers.color != 0) groupMembers.color - 1 else 0
-            memberChar = if (groupMembers.characters != 0) groupMembers.characters - 1 else 0
-            ivMemberList[index].setImageResource(EatooCharList[(memberColor * 5) + memberChar])
 
-            if (groupMembers.singleStatus == "ON") {
-                val grayScale = floatArrayOf(
-                    0.2989f, 0.5870f, 0.1140f, 0F, 0f, 0.2989f, 0.5870f, 0.1140f, 0f, 0f, 0.2989f,
-                    0.5870f, 0.1140f, 0f, 0f, 0.0000F, 0.0000F, 0.0000F, 1f, 0f
-                )
-                val matrix = ColorMatrixColorFilter(grayScale)
-                ivMemberList[index].colorFilter = matrix
-            }else  ivMemberList[index].colorFilter = null
+            if(index <3) {
+                memberColor = if (groupMembers.color != 0) groupMembers.color - 1 else 0
+                memberChar = if (groupMembers.characters != 0) groupMembers.characters - 1 else 0
+                ivMemberList[index].setImageResource(EatooCharList[(memberColor * 5) + memberChar])
+
+                if (groupMembers.singleStatus == "ON") {
+                    val grayScale = floatArrayOf(
+                        0.2989f, 0.5870f, 0.1140f, 0F, 0f, 0.2989f, 0.5870f, 0.1140f, 0f, 0f, 0.2989f,
+                        0.5870f, 0.1140f, 0f, 0f, 0.0000F, 0.0000F, 0.0000F, 1f, 0f
+                    )
+                    val matrix = ColorMatrixColorFilter(grayScale)
+                    ivMemberList[index].colorFilter = matrix
+                    ivMemberContainerList[index].setImageResource(R.drawable.background_member_gray)
+                }else  {
+                    ivMemberList[index].colorFilter = null
+                    ivMemberContainerList[index].setImageResource(R.drawable.background_member_orange)
+                }
+
+            }
 
         }
     }
 
 
     class CustomViewholder(val view: View) : RecyclerView.ViewHolder(view) {
-        val GroupLayout: ConstraintLayout = view.findViewById(R.id.group_layout)
+        val GroupLayout: CardView = view.findViewById(R.id.group_layout)
         val LastLayout: ConstraintLayout = view.findViewById(R.id.last_layout)
         val GroupName: AppCompatTextView = view.findViewById(R.id.group_name_tv)
         val GroupPlus: AppCompatImageButton = view.findViewById(R.id.group_plus_btn)
@@ -198,6 +255,9 @@ class Home_Group_Kind_RecyclerviewAdapter(
         val GroupMember1: AppCompatImageView = view.findViewById(R.id.group_member1)
         val GroupMember2: AppCompatImageView = view.findViewById(R.id.group_member2)
         val GroupMember3: AppCompatImageView = view.findViewById(R.id.group_member3)
+        val member1Container : ImageView = view.findViewById(R.id.iv_member1_container)
+        val member2Container : ImageView = view.findViewById(R.id.iv_member2_container)
+        val member3Container : ImageView = view.findViewById(R.id.iv_member3_container)
         val GroupNameLayouttext1: AppCompatTextView = view.findViewById(R.id.keword_recomand1)
         val GroupNameLayouttext2: AppCompatTextView = view.findViewById(R.id.keword_recomand2)
         val GroupKeywordChip1: LinearLayout = view.findViewById(R.id.chip_first)

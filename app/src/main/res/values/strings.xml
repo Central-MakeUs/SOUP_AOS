@@ -121,6 +121,8 @@
     <string name="goto_map">지도에서 찾기 ></string>
     <string name="nothing" />
     <string name="road_address">도로명</string>
+    <string name="review_detail">후기 상세</string>
+    <string name="edit_review">수정하기</string>
 
     <!--review map dialog-->
     <string name="dialog_register_new_store_query1">표시된 위치에 새로운 가게를</string>
@@ -261,6 +263,8 @@
     <string name="make_group_suggest3">EAT-TOO&#160;</string>
     <string name="make_group_suggest4">해보세요&#160;</string>
     <string name="many_groups_possible">여러개의 그룹을 만들 수 있어요!</string>
+    <string name="delete_group">정말 \'%s\' MATE group을</string>
+    <string name="delete_group2">삭제하시겠습니까?</string>
 
 
     <!--group category-->
@@ -370,6 +374,17 @@
     <string-array name="spinner_category">
         <item>별점순</item>
         <item>이름순</item>
+    </string-array>
+
+    <string-array name="category_food">
+        <item>한식</item>
+        <item>중식</item>
+        <item>일식</item>
+        <item>양식</item>
+        <item>분식</item>
+        <item>아시안</item>
+        <item>디저트</item>
+        <item>기타</item>
     </string-array>
 
 </resources>

@@ -15,4 +15,7 @@ interface GroupView {
     fun onGetMainCharSuccess(response : MainCharResponse)
     fun onGetMainCharFail(message: String?)
 
+    fun onDeleteGroupSuccess()
+    fun onDeleteGroupFail(message: String?)
+
 }

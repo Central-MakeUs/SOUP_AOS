@@ -7,12 +7,13 @@
     android:layout_height="wrap_content"
     tools:ignore="RtlSymmetry">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/group_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="25dp"
-        android:background="@drawable/main_home_background_radius"
+        app:cardCornerRadius="20dp"
+        android:backgroundTint="@color/main_orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -157,42 +158,71 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/group_member1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_eatoo_charater1"
+                <ImageView
+                    android:id="@+id/iv_member1_container"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/background_member_orange" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/group_member1"
+                    android:layout_width="25.5dp"
+                    android:layout_height="25.5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/iv_member1_container"
+                    app:layout_constraintEnd_toEndOf="@id/iv_member1_container"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_member2_container"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="26dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/background_member_orange" />
 
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/group_member2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25.5dp"
+                    android:layout_height="25.5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/iv_member2_container"
+                    app:layout_constraintEnd_toEndOf="@id/iv_member2_container"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_member3_container"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
                     android:layout_marginStart="26dp"
-                    android:src="@drawable/ic_eatoo_charater2"
-                    app:layout_constraintBottom_toBottomOf="@+id/group_member1"
-                    app:layout_constraintStart_toStartOf="@+id/group_member1"
-                    app:layout_constraintTop_toTopOf="@+id/group_member1" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/iv_member2_container"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/background_member_orange" />
+
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/group_member3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="26dp"
-                    android:src="@drawable/ic_eatoo_charater3"
-                    app:layout_constraintBottom_toBottomOf="@+id/group_member2"
-                    app:layout_constraintStart_toStartOf="@+id/group_member2"
-                    app:layout_constraintTop_toTopOf="@+id/group_member2" />
+                    android:layout_width="25.5dp"
+                    android:layout_height="25.5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/iv_member3_container"
+                    app:layout_constraintEnd_toEndOf="@id/iv_member3_container"
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="26dp"
+                    android:layout_marginStart="19dp"
                     app:layout_constraintBottom_toBottomOf="@+id/group_member3"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/group_member3"
                     app:layout_constraintTop_toTopOf="@+id/group_member3">
 
@@ -230,7 +260,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
