@@ -29,14 +29,14 @@ class MyReviewRVAdapter(
             binding.tvMyreviewCreatedAt.text = item.createdAt
             glideUtil(context, item.imgUrl, binding.ivMyreview)
             binding.cardviewMyreview.setOnClickListener{
-                listener.onMyReviewClicked(item)
+                listener.onMyReviewClicked(item.reviewIdx)
             }
         }
 
     }
 
     interface OnMyReviewClickListener {
-        fun onMyReviewClicked(item : MyReviewResult)
+        fun onMyReviewClicked(reviewIdx : Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_eatoo_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".src.home.group.main.store_rec.StoreRecListActivity"></activity>
+        <activity android:name=".src.review.review_detail.ReviewDetailActivity"></activity>
+        <activity android:name=".src.home.group.main.store_rec.StoreRecListActivity" />
         <activity android:name=".src.home.group.category.category_detail.CategoryStoreDetailActivity" />
         <activity android:name=".src.home.group.groupmatesuggestion.findmate.FindMateActivity" />
         <activity android:name=".src.home.create_group.group_location.current_location.CurrentLocationActivity" />

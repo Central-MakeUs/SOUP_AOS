@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="8dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.makeus.eatoo.custom_view.CustomToolbar
+            android:id="@+id/custom_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="19dp"
+            app:contentInsetStart="0dp"
+            app:leftIcon="@drawable/ic_back_btn"
+            app:titleText="@string/review_detail" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardview_toolbar">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/iv_store_image"
+                android:layout_width="match_parent"
+                android:layout_height="195dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview_store_info"
+                android:layout_width="match_parent"
+                android:layout_height="149dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="79dp"
+                app:cardCornerRadius="20dp"
+                android:elevation="1dp"
+                app:layout_constraintTop_toTopOf="@+id/iv_store_image">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:paddingHorizontal="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_store_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/roboto_black"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        tools:text="가게 이름" />
+
+                    <TextView
+                        android:id="@+id/tv_store_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="9dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        tools:text="가게 위치" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal"
+                        app:singleSelection="false">
+
+
+                        <androidx.appcompat.widget.AppCompatToggleButton
+                            android:id="@+id/btn_star1"
+                            android:layout_width="27dp"
+                            android:layout_height="25dp"
+                            android:layout_marginEnd="20dp"
+                            android:background="@drawable/selector_rating_star"
+                            android:button="@color/transparent"
+                            android:textOff="@string/nothing"
+                            android:textOn="@string/nothing"
+                            app:layout_constraintEnd_toStartOf="@id/btn_star2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatToggleButton
+                            android:id="@+id/btn_star2"
+                            android:layout_width="27dp"
+                            android:layout_height="25dp"
+                            android:layout_marginEnd="18dp"
+                            android:background="@drawable/selector_rating_star"
+                            android:button="@color/transparent"
+                            android:textOff="@string/nothing"
+                            android:textOn="@string/nothing"
+                            app:layout_constraintEnd_toStartOf="@id/btn_star3"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatToggleButton
+                            android:id="@+id/btn_star3"
+                            android:layout_width="27dp"
+                            android:layout_height="25dp"
+                            android:layout_marginEnd="18dp"
+                            android:background="@drawable/selector_rating_star"
+                            android:button="@color/transparent"
+                            android:textOff="@string/nothing"
+                            android:textOn="@string/nothing"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_star4"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatToggleButton
+                            android:id="@+id/btn_star4"
+                            android:layout_width="27dp"
+                            android:layout_height="25dp"
+                            android:layout_marginEnd="18dp"
+                            android:background="@drawable/selector_rating_star"
+                            android:button="@color/transparent"
+                            android:textOff="@string/nothing"
+                            android:textOn="@string/nothing"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_star5"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatToggleButton
+                            android:id="@+id/btn_star5"
+                            android:layout_width="27dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/selector_rating_star"
+                            android:button="@color/transparent"
+                            android:textOff="@string/nothing"
+                            android:textOn="@string/nothing"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_store_category"
+                android:layout_width="84dp"
+                android:layout_height="32dp"
+                android:elevation="2dp"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:background="@drawable/mathing_status_background"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="67dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="32dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_review_menu_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="31dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/menu_name"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardview_store_info"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_menu_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="21dp"
+                android:layout_marginStart="23dp"
+                android:background="@drawable/edittext_background_radius_litle"
+                android:orientation="horizontal"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_review_menu_name">
+
+                <EditText
+                    android:id="@+id/et_menu_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toStartOf="@+id/iv_menu_name_delete"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:hint="@string/input_menu_name"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/input_hint"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_menu_name_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="14dp"
+                    android:src="@drawable/ic_group_137"
+                    android:visibility="visible" />
+
+            </RelativeLayout>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_one_sentence_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:layout_marginStart="21dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/one_sentence_review"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rl_menu_name" />
+
+            <RelativeLayout
+                android:id="@+id/rl_review"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="21dp"
+                android:layout_marginStart="23dp"
+                android:background="@drawable/edittext_background_radius_litle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_one_sentence_review">
+
+                <EditText
+                    android:id="@+id/et_short_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="top"
+                    android:hint="@string/input_review"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:inputType="text|textMultiLine"
+                    android:maxLength="30"
+                    android:maxLines="3"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/input_hint"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_review_keyword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="43dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/create_group_keyword"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginStart="21dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rl_review" />
+
+            <FrameLayout
+                android:id="@+id/fl_create_review_keyword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="23dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_review_keyword">
+
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/flexbox_review"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:alignContent="stretch"
+                app:alignItems="stretch"
+                app:flexWrap="wrap">
+
+                <EditText
+                    android:id="@+id/et_keyword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:gravity="top"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    android:inputType="text"
+                    android:visibility="invisible"
+                    android:nextFocusDown="@id/et_keyword"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    app:layout_flexGrow="1"/>
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_review_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="21dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/store_link"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fl_create_review_keyword" />
+
+            <RelativeLayout
+                android:id="@+id/rl_review_link"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="21dp"
+                android:layout_marginStart="23dp"
+                android:background="@drawable/edittext_background_radius_litle"
+                android:orientation="horizontal"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_review_link">
+
+                <EditText
+                    android:id="@+id/et_review_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/roboto_regular"
+                    android:ellipsize="end"
+                    android:hint="@string/input_store_link"
+                    android:textColor="@color/black"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textColorHint="@color/input_hint"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_register_review"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginStart="22dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/login_btn_background"
+                android:fontFamily="@font/roboto_regular"
+                android:stateListAnimator="@null"
+                android:text="@string/edit_review"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rl_review_link" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

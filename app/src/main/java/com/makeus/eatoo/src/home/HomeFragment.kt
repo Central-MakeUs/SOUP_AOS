@@ -240,7 +240,6 @@ class HomeFragment
 
     override fun onDeleteGroupSuccess() {
         dismissLoadingDialog()
-        showCustomToast("삭제 성공!")
         loadGroup()
     }
 

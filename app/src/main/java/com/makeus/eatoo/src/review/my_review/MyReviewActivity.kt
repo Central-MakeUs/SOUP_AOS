@@ -14,6 +14,7 @@ import com.makeus.eatoo.src.review.create_review.create_review1.CreateReview1Act
 import com.makeus.eatoo.src.review.my_review.adapter.MyReviewRVAdapter
 import com.makeus.eatoo.src.review.my_review.model.MyReviewResponse
 import com.makeus.eatoo.src.review.my_review.model.MyReviewResult
+import com.makeus.eatoo.src.review.review_detail.ReviewDetailActivity
 import com.makeus.eatoo.util.getUserIdx
 import com.makeus.eatoo.util.getUserNickName
 
@@ -69,12 +70,13 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
 
     override fun onGetMyReviewFail(message: String?) {
         dismissLoadingDialog()
-//        showCustomToast(message?:"통신오류가 발생했습니다.")
         binding.tvNoReview.isVisible = true
         binding.ivNoReview.isVisible = true
     }
 
-    override fun onMyReviewClicked(item: MyReviewResult) {
-        showCustomToast("${item.storeName} clicked!!")
+    override fun onMyReviewClicked(reviewIdx : Int) {
+        val intent = Intent(this, ReviewDetailActivity::class.java)
+        intent.putExtra("reviewIdx", reviewIdx)
+        startActivity(intent)
     }
 }
