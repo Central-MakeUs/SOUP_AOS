@@ -48,28 +48,30 @@ class SignInActivity :  BaseActivity<ActivitySignInBinding>(ActivitySignInBindin
                 // 텍스트 입력 전
             }
             //
-            @SuppressLint("ResourceAsColor")
+            @SuppressLint("ResourceAsColor", "UseCompatLoadingForDrawables")
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 //텍스트 입력 중
 
-                if(binding.nameEdt.text.length > 1 && binding.phoneNumberEdt.text.length > 10){
+                if((isValidNameK(binding.nameEdt.text.toString())|| isValidName(binding.nameEdt.text.toString())||isValidNameE(binding.nameEdt.text.toString()) )&& isValidPhone(binding.phoneNumberEdt.text.toString())){
 
                     binding.nextBtn.isClickable = true // 버튼 클릭할수 있게
                     binding.nextBtn.isEnabled = true // 버튼 활성화
                     binding.nextBtn.setBackgroundColor(binding.nextBtn.context.resources.getColor(
                         R.color.main_color))
+                    binding.nextBtn.setBackgroundDrawable(binding.nextBtn.getContext().getDrawable(R.drawable.sign_in_btn_background_main_color))
 
 
                 }
                 else {
                     binding.nextBtn.setBackgroundColor(binding.nextBtn.context.resources.getColor(
                         R.color.gray_100))
+                    binding.nextBtn.setBackgroundDrawable(binding.nextBtn.getContext().getDrawable(R.drawable.sign_in_btn_background_gray))
                 }
-                if(binding.nameEdt.text.length > 1){
+                if(isValidNameK(binding.nameEdt.text.toString())|| isValidName(binding.nameEdt.text.toString())||isValidNameE(binding.nameEdt.text.toString()) ){
                     binding.nameHint.setText(R.string.thank_input)
                     binding.nameHint.setTextColor(binding.nameHint.context.resources.getColor(R.color.main_color))
                 }
-                else if(binding.nameEdt.text.length <= 1){
+                else{
                     binding.nameHint.setText(R.string.sign_in_name_bottom)
                     binding.nameHint.setTextColor(binding.nameHint.context.resources.getColor(R.color.black))
                 }
@@ -86,31 +88,33 @@ class SignInActivity :  BaseActivity<ActivitySignInBinding>(ActivitySignInBindin
                 // 텍스트 입력 전
             }
             //
-            @SuppressLint("ResourceAsColor")
+            @SuppressLint("ResourceAsColor", "UseCompatLoadingForDrawables")
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 //텍스트 입력 중
 
-                if(binding.nameEdt.text.length > 1 && binding.phoneNumberEdt.text.length > 10){
+                if( (isValidNameK(binding.nameEdt.text.toString())|| isValidName(binding.nameEdt.text.toString())||isValidNameE(binding.nameEdt.text.toString()) ) && isValidPhone(binding.phoneNumberEdt.text.toString()) ){
 
                     binding.nextBtn.isClickable = true // 버튼 클릭할수 있게
                     binding.nextBtn.isEnabled = true // 버튼 활성화
                     binding.nextBtn.setBackgroundColor(binding.nextBtn.context.resources.getColor(
                         R.color.main_color))
+                    binding.nextBtn.setBackgroundDrawable(binding.nextBtn.getContext().getDrawable(R.drawable.sign_in_btn_background_main_color))
 
 
                 }
                 else {
                     binding.nextBtn.setBackgroundColor(binding.nextBtn.context.resources.getColor(
                         R.color.gray_100))
+                    binding.nextBtn.setBackgroundDrawable(binding.nextBtn.getContext().getDrawable(R.drawable.sign_in_btn_background_gray))
 
                 }
-                if(binding.phoneNumberEdt.text.length > 10)
+                if(isValidPhone(binding.phoneNumberEdt.text.toString()))
                 {
                     binding.phoneHint.setText(R.string.thank_input)
                     binding.phoneHint.setTextColor(binding.phoneHint.context.resources.getColor(R.color.main_color))
                 }
-                else if(binding.phoneNumberEdt.text.length <= 10){
-                    binding.phoneHint.setText(R.string.sign_in_password_bottom)
+                else{
+                    binding.phoneHint.setText(R.string.sign_in_phone_bottom)
                     binding.phoneHint.setTextColor(binding.phoneHint.context.resources.getColor(R.color.black))
                 }
 
@@ -118,5 +122,32 @@ class SignInActivity :  BaseActivity<ActivitySignInBinding>(ActivitySignInBindin
             }
         })
 
+    }
+
+    fun isValidNameK(name: String?): Boolean {
+        val trimmedName = name?.trim().toString()
+        val exp = Regex("^[가-힣]+\$")
+        return !trimmedName.isNullOrEmpty() && exp.matches(trimmedName)
+    }
+
+    fun isValidNameE(name: String?): Boolean {
+        val trimmedName = name?.trim().toString()
+        val exp = Regex("^[a-zA-Z]+\$")
+        return !trimmedName.isNullOrEmpty() && exp.matches(trimmedName)
+    }
+
+
+    fun isValidName(name: String?): Boolean {
+        val trimmedName = name?.trim().toString()
+        val exp = Regex("^[가-힣a-zA-Z]+\$")
+        return !trimmedName.isNullOrEmpty() && exp.matches(trimmedName)
+    }
+
+
+
+    fun isValidPhone(phone: String?): Boolean {
+        val trimmedPhone = phone?.trim().toString()
+        val exp = Regex("^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})\$")
+        return !trimmedPhone.isNullOrEmpty() && exp.matches(trimmedPhone)
     }
 }

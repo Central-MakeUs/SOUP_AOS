@@ -17,6 +17,10 @@ import com.makeus.eatoo.util.putSharedPref
 import com.makeus.eatoo.util.putSharedPrefUser
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate),LoginActivityView {
+
+
+    private val passwordPattern : String = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&]).{8,20}.\$"
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -41,7 +45,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 //텍스트 입력 중
 
-                if(binding.emailEdt.text.length > 6 && binding.passwordEdt.text.length > 7){
+                if(android.util.Patterns.EMAIL_ADDRESS.matcher(binding.emailEdt.text).matches() && isValidPassword(binding.passwordEdt.text.toString())){
 
                     binding.loginBtn.isClickable = true // 버튼 클릭할수 있게
                     binding.loginBtn.isEnabled = true // 버튼 활성화
@@ -52,11 +56,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                     binding.loginBtn.setBackgroundColor(binding.loginBtn.context.resources.getColor(R.color.gray_100))
 
                 }
-                if (binding.emailEdt.text.length > 6){
+                if (android.util.Patterns.EMAIL_ADDRESS.matcher(binding.emailEdt.text).matches()){
                     binding.emailHint.setText(R.string.thank_input)
                     binding.emailHint.setTextColor(binding.emailHint.context.resources.getColor(R.color.main_color))
                 }
-                else if(binding.emailEdt.text.length <= 6){
+                else {
                     binding.emailHint.setText(R.string.sign_in_email_bottom)
                     binding.emailHint.setTextColor(binding.emailHint.context.resources.getColor(R.color.black))
                 }
@@ -72,33 +76,33 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 // 텍스트 입력 전
             }
             //
-            @SuppressLint("ResourceAsColor")
+            @SuppressLint("ResourceAsColor", "UseCompatLoadingForDrawables")
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 //텍스트 입력 중
 
                 Log.v( "email 텍스트 길이", " : "+binding.emailEdt.text.length )
                 Log.v( "password 텍스트 길이", " : "+binding.passwordEdt.text.length )
 
-                if(binding.emailEdt.text.length > 6 && binding.passwordEdt.text.length > 7){
+                if(android.util.Patterns.EMAIL_ADDRESS.matcher(binding.emailEdt.text).matches() &&  isValidPassword(binding.passwordEdt.text.toString())){
 
 
                     binding.loginBtn.isClickable = true // 버튼 클릭할수 있게
                     binding.loginBtn.isEnabled = true // 버튼 활성화
                     binding.loginBtn.setBackgroundColor(binding.loginBtn.getContext().getResources().getColor(
                         R.color.main_color))
-
+                    binding.loginBtn.setBackgroundDrawable(binding.loginBtn.getContext().getDrawable(R.drawable.sign_in_btn_background_main_color))
 
                 }
                 else {
                     binding.loginBtn.setBackgroundColor(binding.loginBtn.getContext().getResources().getColor(R.color.gray_100))
-
+                    binding.loginBtn.setBackgroundDrawable(binding.loginBtn.getContext().getDrawable(R.drawable.sign_in_btn_background_gray))
 
                 }
-                if(binding.passwordEdt.text.length > 7){
+                if( isValidPassword(binding.passwordEdt.text.toString())){
                     binding.passwordHint.setText(R.string.thank_input_password)
                     binding.passwordHint.setTextColor(binding.passwordHint.context.resources.getColor(R.color.main_color))
                 }
-                else if(binding.passwordEdt.text.length <= 7){
+                else{
                     binding.passwordHint.setText(R.string.sign_in_password_bottom)
                     binding.passwordHint.setTextColor(binding.passwordHint.context.resources.getColor(R.color.black))
                 }
@@ -121,9 +125,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             Log.d("userIdx", response.result.userIdx.toString())
             putSharedPrefUser(response.result.nickName)
             putSharedPref(response.result.jwt, response.result.userIdx)
-            startActivity(Intent(this, MainActivity::class.java))
             finish()
             ExplanationActivity().finish()
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
@@ -131,4 +135,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         dismissLoadingDialog()
         showCustomToast(message)
     }
+
+    fun isValidPassword(password: String?): Boolean {
+        val trimmedPassword = password?.trim().toString()
+        val exp = Regex("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&]).{8,20}.\$")
+        return !trimmedPassword.isNullOrEmpty() && exp.matches(trimmedPassword)
+    }
+
+
+
 }

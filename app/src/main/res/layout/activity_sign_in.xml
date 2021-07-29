@@ -117,7 +117,7 @@
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="@+id/phone_number_edt"
         app:layout_constraintTop_toBottomOf="@+id/phone_number_edt"
-        android:text="@string/sign_in_password_bottom"
+        android:text="@string/sign_in_phone_bottom"
         tools:ignore="HardcodedText,SmallSp" />
 
 
@@ -151,7 +151,7 @@
         android:background="@drawable/sign_in_btn_background_gray"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="@string/sign_in_check"
+        android:text="@string/next"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="normal"
