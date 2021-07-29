@@ -353,6 +353,20 @@
     <string name="taste_keyword">식성 키워드</string>
     <string name="character">캐릭터</string>
 
+    <!--notification-->
+    <string name="notification">알림</string>
+    <string name="mate_noti_title">MATE 확정</string>
+    <string name="review_noti_title">후기를 작성해주세요!</string>
+    <string name="review_noti_mid1">후기 작성을 통해 가게 등록과</string>
+    <string name="review_noti_mid2">추천 맛집 선정이 가능합니다!</string>
+    <string name="review_noti_exp1">후기 작성을 통해 우리 그룹 주변</string>
+    <string name="review_noti_exp2">맛집지도를 만들어보세요:)</string>
+    <string name="signup_noti_title">회원가입을 축하드립니다</string>
+    <string name="signup_noti_mid1">안녕하세요, %s님!</string>
+    <string name="signup_noti_mid2">회원가입을 축하드립니다.</string>
+    <string name="signup_noti_exp1">궁금한 점은 도움말과</string>
+    <string name="signup_noti_exp2">문의하기를 통해 문의해주세요.</string>
+
 
     <!--dialog-->
     <string name="dialog_confirm">확인</string>

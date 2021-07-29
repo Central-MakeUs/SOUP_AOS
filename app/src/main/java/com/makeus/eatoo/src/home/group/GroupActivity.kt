@@ -123,8 +123,5 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
         viewPagerAdapter.notifyDataSetChanged()
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        setIntent(intent)
-    }
+
 }

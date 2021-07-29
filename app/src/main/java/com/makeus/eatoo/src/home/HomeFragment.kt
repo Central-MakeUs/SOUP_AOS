@@ -25,6 +25,7 @@ import com.makeus.eatoo.util.getUserIdx
 import com.makeus.eatoo.src.home.create_group.CreateGroupActivity
 import com.makeus.eatoo.src.home.group.GroupActivity
 import com.makeus.eatoo.src.home.model.MainCharResponse
+import com.makeus.eatoo.src.home.notification.NotificationActivity
 import com.makeus.eatoo.src.review.create_review.create_review1.CreateReview1Activity
 import com.makeus.eatoo.util.EatooCharList
 import com.makeus.eatoo.util.getGroupIdx
@@ -78,6 +79,10 @@ class HomeFragment
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_icon)?.constantState
             ) ?:false
             SingleService(this).tryPatchSingleStatus(getUserIdx())
+        }
+
+        binding.customToolbar.leftIcon.setOnClickListener {
+            startActivity(Intent(activity, NotificationActivity::class.java))
         }
     }
 
