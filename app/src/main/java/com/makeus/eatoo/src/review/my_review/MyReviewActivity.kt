@@ -23,11 +23,18 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
 
     private lateinit var myReviewAdapter : MyReviewRVAdapter
 
+    override fun onResume() {
+        super.onResume()
+
+        getMyReview()
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bindView()
-        getMyReview()
+        setViews()
+
     }
 
     private fun getMyReview() {
@@ -35,7 +42,7 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
         MyReviewService(this).tryGetMyReview(getUserIdx())
     }
 
-    private fun bindView() {
+    private fun setViews() {
         binding.fabMyreview.setOnClickListener(this)
         binding.tvMyReviewUserName.text = getUserNickName()
         binding.customToolbar.leftIcon.setOnClickListener { finish() }
@@ -61,6 +68,7 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
                 adapter = myReviewAdapter
                 layoutManager = LinearLayoutManager(this@MyReviewActivity)
             }
+            myReviewAdapter.notifyDataSetChanged()
         }else {
             binding.tvNoReview.isVisible = true
             binding.ivNoReview.isVisible = true

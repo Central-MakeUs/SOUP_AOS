@@ -24,6 +24,7 @@ import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.config.BaseResponse
 import com.makeus.eatoo.databinding.ActivityReviewDetailBinding
 import com.makeus.eatoo.src.home.create_group.model.Keyword
+import com.makeus.eatoo.src.review.review_detail.model.PatchReviewRequest
 import com.makeus.eatoo.src.review.review_detail.model.ReviewDetailResponse
 import com.makeus.eatoo.src.review.review_detail.model.ReviewDetailResult
 import com.makeus.eatoo.util.getUserIdx
@@ -35,11 +36,12 @@ class ReviewDetailActivity
 ReviewDetailView, View.OnClickListener{
 
     private var checkedIdx = 0
+    private var reviewIdx = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val reviewIdx = intent.getIntExtra("reviewIdx", -1)
+        reviewIdx = intent.getIntExtra("reviewIdx", -1)
         getReviewDetail(reviewIdx)
         setClickListeners()
 
@@ -54,6 +56,7 @@ ReviewDetailView, View.OnClickListener{
         binding.btnStar3.setOnClickListener(this)
         binding.btnStar4.setOnClickListener(this)
         binding.btnStar5.setOnClickListener(this)
+        binding.btnEditReview.setOnClickListener(this)
     }
     override fun onClick(p0: View?) {
         when(p0?.id){
@@ -67,12 +70,15 @@ ReviewDetailView, View.OnClickListener{
             R.id.btn_star3 ->  checkedIdx = 2
             R.id.btn_star4 ->  checkedIdx = 3
             R.id.btn_star5 ->  checkedIdx = 4
+            R.id.btn_edit_review -> getChangedReview()
         }
 
         binding.clRating.children.forEachIndexed { index, view ->
             (view as ToggleButton).isChecked = index <= checkedIdx
         }
     }
+
+
 
     private fun getReviewDetail(reviewIdx : Int) {
         if(reviewIdx != -1){
@@ -166,6 +172,53 @@ ReviewDetailView, View.OnClickListener{
         return keywordList
     }
 
+    ////////edit review
+
+    private fun getChangedReview() {
+        var rating = 0
+        binding.clRating.children.forEach {
+            if((it as ToggleButton).isChecked) rating++
+        }
+        var menuName = ""
+        var shortReview = ""
+
+        if(binding.etMenuName.text.isEmpty()){
+            showCustomToast("메뉴 이름을 입력해주세요")
+            return
+        }else {
+            menuName = binding.etMenuName.text.toString()
+        }
+
+        if(binding.etShortReview.text.isEmpty()){
+            showCustomToast("한줄평을 입력해주세요")
+            return
+        }else {
+            shortReview = binding.etShortReview.text.toString()
+        }
+
+
+
+        val link = if(binding.etReviewLink.text.isEmpty()) "" else binding.etReviewLink.text.toString()
+
+        val patchReview = PatchReviewRequest(
+            contents = shortReview,
+            link = link,
+            menuName = menuName,
+            patchReviewKeywordReq =  binding.flexboxReview.getAllChips(),
+            rating = rating.toDouble()
+        )
+
+        patchReviewToServer(patchReview)
+
+    }
+
+    private fun patchReviewToServer(changedReview: PatchReviewRequest) {
+        if(reviewIdx != -1) {
+            showLoadingDialog(this)
+            ReviewDetailService(this).tryPatchReview(getUserIdx(), reviewIdx, changedReview)
+        }
+
+    }
 
 
     ////////server result
@@ -179,14 +232,20 @@ ReviewDetailView, View.OnClickListener{
 
     override fun onGetReviewDetailFail(message: String?) {
         dismissLoadingDialog()
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
+        finish()
     }
 
     override fun onPatchReviewSuccess(response: BaseResponse) {
         dismissLoadingDialog()
+        showCustomToast("후기 수정을 완료했습니다!")
+        finish()
     }
 
     override fun onPatchReviewFail(message: String?) {
         dismissLoadingDialog()
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
+        finish()
     }
 
 

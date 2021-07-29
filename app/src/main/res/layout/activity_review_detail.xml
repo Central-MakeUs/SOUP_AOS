@@ -386,7 +386,7 @@
             </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_register_review"
+                android:id="@+id/btn_edit_review"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
