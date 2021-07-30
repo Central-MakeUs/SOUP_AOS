@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityGroupMateSuggetsionBinding
@@ -16,15 +19,15 @@ import com.makeus.eatoo.src.home.model.MainCharResponse
 import com.makeus.eatoo.src.home.model.MateResponse
 import com.makeus.eatoo.util.getUserIdx
 import com.google.android.material.chip.Chip
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.findmate.FindMateService
+import com.makeus.eatoo.util.getGroupIdx
 
 
-class Group_Mate_Suggetsion_Activity
-    : BaseActivity<ActivityGroupMateSuggetsionBinding>(ActivityGroupMateSuggetsionBinding::inflate)
-    , Mate_Suggestion_ActivityView, TimeDialogInterface{
+class Group_Mate_Suggetsion_Activity : BaseActivity<ActivityGroupMateSuggetsionBinding>(ActivityGroupMateSuggetsionBinding::inflate), Mate_Suggestion_ActivityView, TimeDialogInterface{
 
 
     private var GroupIndex : Int = 0
-
+    private var Limit_people = arrayListOf<String>("")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,11 +37,12 @@ class Group_Mate_Suggetsion_Activity
         binding.gourpChipGroup.isSingleSelection = true
         binding.gourpChipGroup.isSelectionRequired = true
 
+        setSpinner()
 
 
 
         binding.registerMateBtn.setOnClickListener {
-            val postRequest = CreateMateRequest(groupIdx = GroupIndex,name = binding.suggestionNameEdt.text.toString(), storeName = binding.storeEdt.text.toString(), startTime =  binding.startTimeBtn.text.toString() ,endTime =  binding.startTimeBtn.text.toString() ,headCount = Integer.parseInt(binding.limitPeopleEdt.text.toString()),timeLimit = binding.limitTimeTv.text.toString() ,imgUrl = "" )
+            val postRequest = CreateMateRequest(groupIdx = GroupIndex,name = binding.suggestionNameEdt.text.toString(), storeName = binding.storeEdt.text.toString(), startTime =  binding.startTimeBtn.text.toString() ,endTime =  binding.startTimeBtn.text.toString() ,headCount = Integer.parseInt(binding.limitPeopleTv.text.toString()),timeLimit = binding.limitTimeTv.text.toString() ,imgUrl = "" )
             Log.d("요청사항", ""+ postRequest)
             MateCreateService(this).postCreateMate(postRequest,getUserIdx())
             showLoadingDialog(this)
@@ -138,5 +142,38 @@ class Group_Mate_Suggetsion_Activity
     @SuppressLint("SetTextI18n")
     override fun onSetLimitTime(hour: String, minute: String) {
         binding.limitTimeTv.text = "$hour:$minute"
+    }
+
+    fun setSpinner() {
+        for(i in 1..99) {
+            Limit_people.add((i+1).toString())
+        }
+        val arrayAdapter = ArrayAdapter(
+            this,
+            R.layout.limit_people_spinner_item,
+            Limit_people
+        )
+
+        binding.limitPeopleSpinner.adapter = arrayAdapter
+        binding.limitPeopleSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {//스피너가 선택 되었을때
+                if(i == 0){
+                    binding.limitPeopleTv.setText(R.string.main_mate_suggestion_limit_people_hint)
+                    binding.limitPeopleTv.setTextColor(binding.limitPeopleTv.context.resources.getColor(R.color.gray_100))
+                }
+                else {
+                    binding.limitPeopleTv.text = (i + 1).toString()
+                    binding.limitPeopleTv.setTextColor(
+                        binding.limitPeopleTv.context.resources.getColor(
+                            R.color.black
+                        )
+                    )
+                }
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>) {
+            }
+        }
+
     }
 }
