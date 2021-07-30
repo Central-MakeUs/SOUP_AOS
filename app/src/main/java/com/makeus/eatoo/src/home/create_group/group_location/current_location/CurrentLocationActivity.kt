@@ -22,17 +22,14 @@ import com.makeus.eatoo.src.review.store_map.model.KakaoAddressResponse
 import com.makeus.googlemapsapiprac.model.LocationLatLngEntity
 import com.google.gson.Gson
 import com.makeus.eatoo.src.home.create_group.CreateGroupActivity.Companion.PERMISSION_REQUEST_CODE
-import com.naver.maps.map.CameraAnimation
-import com.naver.maps.map.CameraUpdate
-import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
 import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.*
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
 
 class CurrentLocationActivity
     : BaseActivity<ActivityCurrentLocationBinding>(ActivityCurrentLocationBinding::inflate),
-    ReverseGeoView, com.naver.maps.map.OnMapReadyCallback, View.OnClickListener {
+    ReverseGeoView, OnMapReadyCallback, View.OnClickListener {
 
     private lateinit var naverMap : NaverMap
     private lateinit var locationSource: FusedLocationSource

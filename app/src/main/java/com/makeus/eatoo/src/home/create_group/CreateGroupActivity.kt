@@ -27,7 +27,6 @@ import com.makeus.eatoo.src.home.create_group.model.Keyword
 import com.makeus.eatoo.src.home.group.GroupActivity
 import com.makeus.eatoo.util.getUserIdx
 import com.naver.maps.geometry.LatLng
-import com.makeus.googlemapsapiprac.model.LocationLatLngEntity
 import com.makeus.eatoo.src.home.create_group.model.SearchResultEntity
 import com.makeus.eatoo.util.getUserNickName
 import com.google.android.flexbox.FlexboxLayout
@@ -158,7 +157,7 @@ class CreateGroupActivity :
         val mapFragment =
             fm.findFragmentById(R.id.frag_create_group_map) as MapFragment?
                 ?: MapFragment.newInstance().also {
-                    fm.beginTransaction().add(R.id.frag_current_location_map, it).commit()
+                    fm.beginTransaction().add(R.id.frag_create_group_map, it).commit()
                 }
         mapFragment.getMapAsync(this)
     }

@@ -1,6 +1,7 @@
 package com.makeus.eatoo.src.review.create_review.create_review1
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,7 +13,6 @@ import androidx.core.view.isVisible
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityCreateReviewBinding
-import com.makeus.eatoo.src.home.create_group.CreateGroupActivity
 import com.makeus.eatoo.src.review.create_review.create_review2.CreateReview2Activity
 import com.makeus.eatoo.src.review.create_review.model.ExistingStoreReviewResponse
 import com.makeus.eatoo.src.review.store_location.StoreLocationActivity
@@ -20,22 +20,24 @@ import com.makeus.eatoo.src.review.store_map.StoreMapActivity
 import com.makeus.eatoo.util.getUserIdx
 import com.makeus.eatoo.util.glideUtil
 import com.makeus.eatoo.util.roundAll
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.CameraAnimation
+import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.MapFragment
+import com.naver.maps.map.NaverMap
+import com.naver.maps.map.util.MarkerIcons
 
 class CreateReview1Activity :  BaseActivity<ActivityCreateReviewBinding>(ActivityCreateReviewBinding::inflate),
-View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, CreateReview1View {
+View.OnClickListener, com.naver.maps.map.OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, CreateReview1View {
+
 
     private var lat : Double = 0.0
     private var lng : Double = 0.0
     private var roadAddress = ""
     private var mapShowing = false
 
-    private lateinit var map: GoogleMap
+    private lateinit var naverMap: NaverMap
     private var categoryIdx = 0
     private var storeIdx = -1
 
@@ -43,7 +45,7 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
         super.onCreate(savedInstanceState)
 
         closeMap()
-        setupGoogleMap()
+        setupMap()
         setViewListeners()
         getIntentExtras()
     }
@@ -62,17 +64,15 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
             lng = intent.getDoubleExtra("lng", -1.0)
             if(lat >0 && lng >0) {
                 mapShowing = true
-                setupGoogleMap()
+                setupMap()
             }
         }
         roadAddress = intent.getStringExtra("address").toString()
         if(roadAddress != "null") binding.tvSearchLocation.text = roadAddress
-        Log.d("createReviewAct", "roadaddress : $roadAddress, lat : $lat, lng : $lng")
 
     }
 
     private fun getStoreInfo(storeIdx : Int) {
-
         CreateReview1Service(this).tryGetStoreInfo(getUserIdx(), storeIdx)
     }
 
@@ -117,6 +117,12 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
         }
     }
 
+    /*
+
+    review 2로 이동
+
+     */
+
     private fun validityTest() {
 
         var storeLocation = ""
@@ -151,29 +157,40 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
             }
             startActivity(intent)
         }
-
-
     }
 
-    private fun setupGoogleMap() {
+    /*
+
+    지도 보이기
+
+     */
+
+    private fun setupMap() {
+        val fm = supportFragmentManager
         val mapFragment =
-            supportFragmentManager.findFragmentById(R.id.frag_create_review_map) as? SupportMapFragment
-        mapFragment?.getMapAsync(this)
+            fm.findFragmentById(R.id.frag_create_review_map) as MapFragment?
+                ?: MapFragment.newInstance().also {
+                    fm.beginTransaction().add(R.id.frag_current_location_map, it).commit()
+                }
+        mapFragment.getMapAsync(this)
     }
 
-    override fun onMapReady(map: GoogleMap) {
-       this.map = map
+    override fun onMapReady(map: NaverMap) {
+        naverMap = map
         if(mapShowing) {
             val markerPosition = LatLng(lat, lng)
-            val markerOptions = MarkerOptions().apply {
-                position(markerPosition)
+            val cameraUpdate = CameraUpdate.scrollTo(markerPosition).animate(CameraAnimation.Easing)
+
+            if (::naverMap.isInitialized) naverMap.moveCamera(cameraUpdate)
+            else setupMap()
+
+            val marker = Marker()
+            marker.apply {
+                position = markerPosition
+                setMap(naverMap)
+                icon = MarkerIcons.BLACK
+                iconTintColor = Color.RED
             }
-            map.moveCamera(
-                CameraUpdateFactory.newLatLngZoom(
-                    markerPosition,
-                    CreateGroupActivity.CAMERA_ZOOM_LEVEL
-            ))
-            map.addMarker(markerOptions)?.showInfoWindow()
             showMap()
         }
     }
@@ -188,6 +205,25 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
         binding.llContainerReviewMap.isVisible = true
         binding.ivReview1Img.isVisible = false
         mapShowing = false
+    }
+
+    /*
+
+    카테고리 인덱스
+
+     */
+
+    private fun setCategoryIdx(storeCategoryIdx: Int) {
+        when(storeCategoryIdx){
+            1 -> binding.rdBtnKo.isChecked = true
+            2 -> binding.rdBtnCh.isChecked = true
+            3 -> binding.rdBtnJp.isChecked = true
+            4 -> binding.rdBtnWestern.isChecked = true
+            5 -> binding.rdBtnStreet.isChecked = true
+            6 -> binding.rdBtnAsian.isChecked = true
+            7 -> binding.rdBtnDesert.isChecked = true
+            8 -> binding.rdBtnEtc.isChecked = true
+        }
     }
 
     override fun onCheckedChanged(p0: RadioGroup?, p1: Int) {
@@ -223,6 +259,12 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
         }
     }
 
+    /*
+
+    server result
+
+     */
+
     override fun onGetStoreInfoSuccess(response: ExistingStoreReviewResponse) {
         dismissLoadingDialog()
         binding.etStoreName.setText(response.result.storeName)
@@ -231,19 +273,8 @@ View.OnClickListener, OnMapReadyCallback, RadioGroup.OnCheckedChangeListener, Cr
 
     override fun onGetStoreInfoFail(message: String?) {
         dismissLoadingDialog()
-        showCustomToast(message?:"통신오류가 발생했습니다.")
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
 
-    private fun setCategoryIdx(storeCategoryIdx: Int) {
-        when(storeCategoryIdx){
-            1 -> binding.rdBtnKo.isChecked = true
-            2 -> binding.rdBtnCh.isChecked = true
-            3 -> binding.rdBtnJp.isChecked = true
-            4 -> binding.rdBtnWestern.isChecked = true
-            5 -> binding.rdBtnStreet.isChecked = true
-            6 -> binding.rdBtnAsian.isChecked = true
-            7 -> binding.rdBtnDesert.isChecked = true
-            8 -> binding.rdBtnEtc.isChecked = true
-        }
-    }
+
 }

@@ -4,10 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.PointF
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -32,22 +35,25 @@ import com.makeus.eatoo.src.review.store_map.model.KakaoAddressResponse
 import com.makeus.eatoo.src.review.store_map.model.Store
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
+import com.naver.maps.geometry.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Overlay
+import com.naver.maps.map.util.FusedLocationSource
+import com.naver.maps.map.util.MarkerIcons
 
 class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapBinding::inflate),
-    OnMapReadyCallback, GoogleMap.OnMapClickListener,
-    GoogleMap.OnMarkerClickListener, View.OnClickListener, RegisterNewStoreDialogInterface,
+    OnMapReadyCallback, NaverMap.OnMapClickListener, Overlay.OnClickListener, View.OnClickListener,
+    RegisterNewStoreDialogInterface,
     StoreMapView, ExistingStoreRVAdapter.OnReviewClickListener, ReverseGeoView {
 
 
     private lateinit var storeRegisterDialog: RegisterNewStoreDialog
+    private lateinit var naverMap: NaverMap
+    private lateinit var locationSource: FusedLocationSource
 
-    private lateinit var map: GoogleMap
-    private var currentSelectMarker: Marker? = null
     private lateinit var locationManager: LocationManager
     private lateinit var myLocationListener: StoreMapActivity.MyLocationListener
     private lateinit var locationLatLngEntity: LocationLatLngEntity
@@ -56,66 +62,65 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     private var storeLat: Double = 0.0
     private lateinit var storeAdapter: ExistingStoreRVAdapter
     private var roadAddress: String? = ""
+    private var addedMarkerList = arrayListOf<Marker>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         requestPermission()
-        bindView()
-        getAllReviewLocation()
+        setOnClickListeners()
+
     }
 
     private fun getAllReviewLocation() {
         StoreMapService(this).tryGetAllStore(getUserIdx())
     }
 
-    private fun bindView() {
+    private fun setOnClickListeners() {
         binding.btnRegisterNewStore.setOnClickListener(this)
         binding.customToolbar.leftIcon.setOnClickListener { finish() }
     }
 
-    private fun setupGoogleMap() {
-        val mapFragment =
-            supportFragmentManager.findFragmentById(R.id.frag_store_location_map) as? SupportMapFragment
-        mapFragment?.getMapAsync(this)
-    }
-
-    override fun onMapReady(map: GoogleMap) {
-        showLoadingDialog(this)
-        this.map = map
-
-        setMyLocationListener()
-        this.map.setOnMapClickListener(this)
-        this.map.setOnMarkerClickListener(this)
-
-    }
-
-    private fun setupMarker(locationLatLngEntity: LocationLatLngEntity): Marker? { //검색한 위도경도
-
-        val positionLatLng = LatLng(
-            locationLatLngEntity.latitude.toDouble(),
-            locationLatLngEntity.longitude.toDouble()
-        )
-        val markerOptions = MarkerOptions().apply {
-            position(positionLatLng)
-            title(locationLatLngEntity.latitude.toString())
-            snippet(locationLatLngEntity.longitude.toString())
+    override fun onClick(p0: View?) {
+        when (p0?.id) {
+            R.id.btn_register_new_store -> {
+                storeRegisterDialog = RegisterNewStoreDialog(this)
+                storeRegisterDialog.show()
+            }
         }
-        map.moveCamera(
-            CameraUpdateFactory.newLatLngZoom(
-                positionLatLng,
-                CreateGroupActivity.CAMERA_ZOOM_LEVEL
-            )
-        )
-        dismissLoadingDialog()
-        return map.addMarker(markerOptions)
     }
 
     /*
-        현재 위치 가져오기
-     */
+      현재 위치 가져오기
+
+   */
+
+    private fun setupMap() {
+        val fm = supportFragmentManager
+        val mapFragment =
+            fm.findFragmentById(R.id.frag_store_location_map) as MapFragment?
+                ?: MapFragment.newInstance().also {
+                    fm.beginTransaction().add(R.id.frag_store_location_map, it).commit()
+                }
+        mapFragment.getMapAsync(this)
+    }
+
+    override fun onMapReady(map: NaverMap) {
+        naverMap = map
+        naverMap.maxZoom = 19.0
+        naverMap.minZoom = 10.0
+        setMyLocationListener()
+        naverMap.onMapClickListener = this
+
+        locationSource = FusedLocationSource(this, PERMISSION_REQUEST_CODE)
+        naverMap.locationSource = locationSource
+
+        getAllReviewLocation()
+    }
+
+
     private fun requestPermission() {
-//        showCustomToast("request permission")
         if (::locationManager.isInitialized.not()) {
             locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         }
@@ -137,7 +142,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
                     ),
                     PERMISSION_REQUEST_CODE
                 )
-            } else setupGoogleMap() //권한 있음.
+            } else setupMap()
         }
     }
 
@@ -151,7 +156,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED
                 && grantResults[1] == PackageManager.PERMISSION_GRANTED
             ) {
-                setupGoogleMap()
+                setupMap()
             } else {
                 Toast.makeText(this, "권한을 받지 못 했습니다.", Toast.LENGTH_SHORT).show()
             }
@@ -190,16 +195,25 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     }
 
     private fun onCurrentLocationChanged(locationLatLngEntity: LocationLatLngEntity) {
-        map.moveCamera(
-            CameraUpdateFactory.newLatLngZoom(
-                LatLng(
-                    locationLatLngEntity.latitude.toDouble(),
-                    locationLatLngEntity.longitude.toDouble()
-                ),
-                CreateGroupActivity.CAMERA_ZOOM_LEVEL
+        val cameraUpdate = CameraUpdate.scrollTo(
+            LatLng(
+                locationLatLngEntity.latitude.toDouble(),
+                locationLatLngEntity.longitude.toDouble()
             )
-        )
-        setupMarker(locationLatLngEntity)
+        ).animate(CameraAnimation.Easing)
+        if (::naverMap.isInitialized) naverMap.moveCamera(cameraUpdate)
+        else setupMap()
+
+        val marker = Marker()
+        marker.apply {
+            position = LatLng(
+                locationLatLngEntity.latitude.toDouble(),
+                locationLatLngEntity.longitude.toDouble()
+            )
+            map = naverMap
+            icon = MarkerIcons.BLACK
+            iconTintColor = Color.RED
+        }
         removeLocationListener()
     }
 
@@ -208,38 +222,76 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
             locationManager.removeUpdates(myLocationListener)
         }
     }
+
     /*
-        맵 터치 마커
+        클릭 이벤트
      */
 
-    override fun onMapClick(latlng: LatLng) {
-        val markerOptions = MarkerOptions().position(latlng)
+    override fun onMapClick(p0: PointF, p1: LatLng) {
 
-        map.addMarker(markerOptions)
+        addedMarkerList.forEach {
+            it.map = null
+        }
 
-        storeLng = latlng.longitude
-        storeLat = latlng.latitude
+        val cameraUpdate = CameraUpdate.scrollTo(
+            LatLng(p1.latitude, p1.longitude)
+        ).animate(CameraAnimation.Easing)
 
-        StoreMapService(this).tryGetStore(getUserIdx(), latlng.longitude, latlng.latitude)
+        if (::naverMap.isInitialized) naverMap.moveCamera(cameraUpdate)
+        else setupMap()
+
+        val marker = Marker()
+        marker.apply {
+            position = LatLng(p1.latitude, p1.longitude)
+            map = naverMap
+            icon = MarkerIcons.BLACK
+            iconTintColor = Color.RED
+        }
+
+        addedMarkerList.add(marker)
+
+        storeLng = p1.longitude
+        storeLat = p1.latitude
+
+        StoreMapService(this).tryGetStore(getUserIdx(), p1.longitude, p1.latitude)
     }
 
-    override fun onMarkerClick(marker: Marker): Boolean {
-        storeLng = marker.position.longitude
-        storeLat = marker.position.latitude
+    override fun onClick(p0: Overlay): Boolean {
+        val tag : String = p0.tag.toString()
+        val latitude = tag.split(",")[0].toDouble()
+        val longitude = tag.split(",")[1].toDouble()
+
+        val cameraUpdate = CameraUpdate.scrollTo(
+            LatLng(latitude, longitude)
+        ).animate(CameraAnimation.Easing)
+
+        if (::naverMap.isInitialized) naverMap.moveCamera(cameraUpdate)
+        else setupMap()
+
+        storeLat = latitude
+        storeLng = longitude
 
         StoreMapService(this).tryGetStore(getUserIdx(), storeLng, storeLat)
 
-        return false
+        return true
     }
 
-    override fun onClick(p0: View?) {
-        when (p0?.id) {
-            R.id.btn_register_new_store -> {
-                storeRegisterDialog = RegisterNewStoreDialog(this)
-                storeRegisterDialog.show()
-            }
+   /*
+
+   interface click listeners
+
+    */
+    override fun onReviewClicked(item: Store) {
+        val intent = Intent(this, CreateReview1Activity::class.java)
+        intent.apply {
+            putExtra("storeIdx", item.storeIdx)
+            putExtra("imgUrl", item.imgUrl)
+            putExtra("address", item.address)
         }
+
+        startActivity(intent)
     }
+
 
     override fun onRegisterNewStoreConfirm() {
 
@@ -254,8 +306,38 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
 
     }
 
+    /*
+
+    server result
+
+     */
+
+    override fun onGetAllStoreSuccess(response: AllStoreResponse) {
+        if(::naverMap.isInitialized){
+            response.result.forEach {
+                val marker = Marker()
+                marker.apply {
+                    position = LatLng(it.latitude, it.longitude)
+                    map = naverMap
+                    icon = MarkerIcons.BLACK
+                    iconTintColor = Color.BLACK
+                    tag ="${position.latitude},${position.longitude}"
+                    onClickListener = this@StoreMapActivity
+                }
+            }
+        }else {
+            setupMap()
+        }
+
+    }
+
+    override fun onGetAllStoreFail(message: String?) {
+        showCustomToast(message ?: "통신오류가 발생했습니다.")
+    }
+
     override fun onGetStoreSuccess(response: StoreResponse) {
         //recyclerview 로 등록 스토어 보여주기.
+        binding.rvExistingStore.isVisible = true
         binding.btnRegisterNewStore.isVisible = false
         storeAdapter = ExistingStoreRVAdapter(this, response.result, this)
         binding.rvExistingStore.apply {
@@ -266,6 +348,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
     }
 
     override fun onGetStoreFail(message: String?, code: Int) {
+        binding.rvExistingStore.isVisible = false
         binding.btnRegisterNewStore.isVisible = true
         if (code == 2010) {
             ReverseGeoService(this).tryGetAddress(storeLat, storeLng)
@@ -274,43 +357,20 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
 
     override fun onGetAddressSuccess(response: KakaoAddressResponse?) {
         //도로명 주소 변환! 도로명 주소가 없다면 지번 주소로 설정.
-        roadAddress = if (response?.documents?.get(0)?.road_address == null) {
-            response?.documents?.get(0)?.address?.address_name
-        } else {
-            response.documents[0].road_address.address_name
-        }
-
+      if(response?.meta?.total_count != 0){
+          roadAddress = if (response?.documents?.get(0)?.road_address == null) {
+              response?.documents?.get(0)?.address?.address_name
+          } else {
+              response.documents?.get(0).road_address.address_name
+          }
+      }
     }
 
     override fun onGetAddressFail(message: String?) {
         startActivity(Intent(this, CreateReview1Activity::class.java))
     }
 
-    override fun onGetAllStoreSuccess(response: AllStoreResponse) {
-        response.result.forEach {
-            val markerOptions = MarkerOptions().apply {
-                position(LatLng(it.latitude, it.longitude))
-                title(it.name)
-            }
-            map.addMarker(markerOptions)
-        }
-    }
 
-    override fun onGetAllStoreFail(message: String?) {
-        showCustomToast(message ?: "통신오류가 발생했습니다.")
-    }
-
-    //adapter click listener
-    override fun onReviewClicked(item: Store) {
-        val intent = Intent(this, CreateReview1Activity::class.java)
-        intent.apply {
-            putExtra("storeIdx", item.storeIdx)
-            putExtra("imgUrl", item.imgUrl)
-            putExtra("address", item.address)
-        }
-
-        startActivity(intent)
-    }
 
 
 }
