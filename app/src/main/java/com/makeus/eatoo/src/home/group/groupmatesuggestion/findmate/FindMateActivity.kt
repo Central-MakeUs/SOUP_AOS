@@ -37,6 +37,9 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
         binding.backBtn.setOnClickListener {
             finish()
         }
+        binding.fabGroupMate.setOnClickListener {
+            startActivity(Intent(this, Group_Mate_Suggetsion_Activity::class.java))
+        }
 
     }
 

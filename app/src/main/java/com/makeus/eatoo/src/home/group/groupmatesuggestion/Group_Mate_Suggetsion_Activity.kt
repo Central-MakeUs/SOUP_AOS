@@ -28,6 +28,7 @@ class Group_Mate_Suggetsion_Activity : BaseActivity<ActivityGroupMateSuggetsionB
 
     private var GroupIndex : Int = 0
     private var Limit_people = arrayListOf<String>("")
+    private var limit_headcount : Int = 2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,7 +43,7 @@ class Group_Mate_Suggetsion_Activity : BaseActivity<ActivityGroupMateSuggetsionB
 
 
         binding.registerMateBtn.setOnClickListener {
-            val postRequest = CreateMateRequest(groupIdx = GroupIndex,name = binding.suggestionNameEdt.text.toString(), storeName = binding.storeEdt.text.toString(), startTime =  binding.startTimeBtn.text.toString() ,endTime =  binding.startTimeBtn.text.toString() ,headCount = Integer.parseInt(binding.limitPeopleTv.text.toString()),timeLimit = binding.limitTimeTv.text.toString() ,imgUrl = "" )
+            val postRequest = CreateMateRequest(groupIdx = GroupIndex,name = binding.suggestionNameEdt.text.toString(), storeName = binding.storeEdt.text.toString(), startTime =  binding.startTimeBtn.text.toString() ,endTime =  binding.startTimeBtn.text.toString() ,headCount = limit_headcount,timeLimit = binding.limitTimeTv.text.toString() ,imgUrl = "" )
             Log.d("요청사항", ""+ postRequest)
             MateCreateService(this).postCreateMate(postRequest,getUserIdx())
             showLoadingDialog(this)
@@ -67,13 +68,16 @@ class Group_Mate_Suggetsion_Activity : BaseActivity<ActivityGroupMateSuggetsionB
             dialog.show()
         }
 
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
+
     }
 
 
 
 
     override fun onGetGroupSuccess(response: GroupResponse) {
-        showCustomToast("요청 완료")
 
         val GroupList = response.result
         val GroupListtSize = GroupList.size - 1
@@ -156,13 +160,15 @@ class Group_Mate_Suggetsion_Activity : BaseActivity<ActivityGroupMateSuggetsionB
 
         binding.limitPeopleSpinner.adapter = arrayAdapter
         binding.limitPeopleSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            @SuppressLint("SetTextI18n")
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {//스피너가 선택 되었을때
                 if(i == 0){
                     binding.limitPeopleTv.setText(R.string.main_mate_suggestion_limit_people_hint)
                     binding.limitPeopleTv.setTextColor(binding.limitPeopleTv.context.resources.getColor(R.color.gray_100))
                 }
                 else {
-                    binding.limitPeopleTv.text = (i + 1).toString()
+                    binding.limitPeopleTv.text = (i + 1).toString() + '명'
+                    limit_headcount = i+1
                     binding.limitPeopleTv.setTextColor(
                         binding.limitPeopleTv.context.resources.getColor(
                             R.color.black
