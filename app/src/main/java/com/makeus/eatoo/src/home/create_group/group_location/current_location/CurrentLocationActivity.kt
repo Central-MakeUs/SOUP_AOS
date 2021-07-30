@@ -15,24 +15,18 @@ import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityCurrentLocationBinding
 import com.makeus.eatoo.reverse_geo.ReverseGeoService
 import com.makeus.eatoo.reverse_geo.ReverseGeoView
-import com.makeus.eatoo.src.home.create_group.CreateGroupActivity
+import com.naver.maps.map.overlay.Marker
 import com.makeus.eatoo.src.home.create_group.model.SearchResultEntity
 import com.makeus.eatoo.src.review.store_map.model.Document
 import com.makeus.eatoo.src.review.store_map.model.KakaoAddressResponse
 import com.makeus.googlemapsapiprac.model.LocationLatLngEntity
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
 import com.makeus.eatoo.src.home.create_group.CreateGroupActivity.Companion.PERMISSION_REQUEST_CODE
 import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
 
@@ -115,7 +109,7 @@ class CurrentLocationActivity
     private fun onCurrentLocationChanged(locationLatLngEntity: LocationLatLngEntity) {
 
         val cameraUpdate = CameraUpdate.scrollTo(
-            com.naver.maps.geometry.LatLng(
+            LatLng(
                 locationLatLngEntity.latitude.toDouble(),
                 locationLatLngEntity.longitude.toDouble()
             )
@@ -123,7 +117,7 @@ class CurrentLocationActivity
         if(::naverMap.isInitialized) naverMap.moveCamera(cameraUpdate)
         else setupMap()
 
-        val marker = com.naver.maps.map.overlay.Marker()
+        val marker = Marker()
         marker.apply {  //태그 달 수 있음.
             position = com.naver.maps.geometry.LatLng(
                 locationLatLngEntity.latitude.toDouble(),
