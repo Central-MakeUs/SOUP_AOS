@@ -13,7 +13,7 @@ import com.makeus.eatoo.like.LikeView
 import com.makeus.eatoo.src.home.group.category.category_detail.CategoryStoreDetailActivity
 import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialog
 import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialogInterface
-import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.MateSuggestionActivity
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.findmate.FindMateActivity
 import com.makeus.eatoo.src.home.group.main.adapter.Group_Home_Main_Mate_Kind_RecyclerviewAdapter
 import com.makeus.eatoo.src.home.group.main.adapter.Group_Home_Main_Store_Kind_RecyclerviewAdapter
@@ -68,7 +68,7 @@ class GroupMainFragment
             binding.findingMateRecyclerview.visibility = View.GONE
             binding.findingMateNoScroll.visibility = View.VISIBLE
             binding.matePlusBtn.setOnClickListener {
-                startActivity(Intent(activity,Group_Mate_Suggetsion_Activity::class.java))
+                startActivity(Intent(activity,MateSuggestionActivity::class.java))
             }
         }
         else{
@@ -136,7 +136,7 @@ class GroupMainFragment
 
     override fun onGotoMateSuggestClicked(storeName: String) {
         context?.let {
-            val intent = Intent(it, Group_Mate_Suggetsion_Activity::class.java)
+            val intent = Intent(it, MateSuggestionActivity::class.java)
             intent.putExtra("storeName", storeName)
             startActivity(intent)
         }

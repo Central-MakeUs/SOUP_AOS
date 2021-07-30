@@ -7,20 +7,16 @@ import android.view.LayoutInflater
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityGroupMateSuggetsionBinding
-import com.makeus.eatoo.src.home.GroupService
-import com.makeus.eatoo.src.home.GroupView
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.model.CreateMateRequest
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.model.CreateMateResponse
 import com.makeus.eatoo.src.home.model.GroupResponse
-import com.makeus.eatoo.src.home.model.MainCharResponse
-import com.makeus.eatoo.src.home.model.MateResponse
 import com.makeus.eatoo.util.getUserIdx
 import com.google.android.material.chip.Chip
 
 
-class Group_Mate_Suggetsion_Activity
+class MateSuggestionActivity
     : BaseActivity<ActivityGroupMateSuggetsionBinding>(ActivityGroupMateSuggetsionBinding::inflate)
-    , Mate_Suggestion_ActivityView, TimeDialogInterface{
+    , MateSuggestionView, TimeDialogInterface{
 
 
     private var GroupIndex : Int = 0
@@ -29,7 +25,7 @@ class Group_Mate_Suggetsion_Activity
         super.onCreate(savedInstanceState)
 
 
-        MateCreateService(this).tryGetGroupData(getUserIdx())
+        MateSuggestionService(this).tryGetGroupData(getUserIdx())
 
         binding.gourpChipGroup.isSingleSelection = true
         binding.gourpChipGroup.isSelectionRequired = true
@@ -40,7 +36,7 @@ class Group_Mate_Suggetsion_Activity
         binding.registerMateBtn.setOnClickListener {
             val postRequest = CreateMateRequest(groupIdx = GroupIndex,name = binding.suggestionNameEdt.text.toString(), storeName = binding.storeEdt.text.toString(), startTime =  binding.startTimeBtn.text.toString() ,endTime =  binding.startTimeBtn.text.toString() ,headCount = Integer.parseInt(binding.limitPeopleEdt.text.toString()),timeLimit = binding.limitTimeTv.text.toString() ,imgUrl = "" )
             Log.d("요청사항", ""+ postRequest)
-            MateCreateService(this).postCreateMate(postRequest,getUserIdx())
+            MateSuggestionService(this).postCreateMate(postRequest,getUserIdx())
             showLoadingDialog(this)
         }
 
@@ -109,12 +105,11 @@ class Group_Mate_Suggetsion_Activity
     override fun onGetGroupFail(message: String) {
     }
 
-//Mate 보이기
 
     //그룹 생성하기
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {
         dismissLoadingDialog()
-        val dialog = Mate_completeDialog(this)
+        val dialog = MateSuggestionCompleteDialog(this)
         dialog.show()
         finish()
 

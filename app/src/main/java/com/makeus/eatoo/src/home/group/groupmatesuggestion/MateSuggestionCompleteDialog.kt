@@ -10,7 +10,7 @@ import android.view.WindowManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.databinding.DialogMateCompleteBinding
 
-class Mate_completeDialog (context: Context) : Dialog(context){
+class MateSuggestionCompleteDialog (context: Context) : Dialog(context){
     private lateinit var binding : DialogMateCompleteBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

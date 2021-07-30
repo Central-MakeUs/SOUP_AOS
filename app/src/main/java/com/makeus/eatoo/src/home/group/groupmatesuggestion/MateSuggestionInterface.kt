@@ -7,7 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Path
 
-interface MateCreateInterface {
+interface MateSuggestionInterface {
 
     @POST("/app/mates/{userIdx}")
     fun postCreateMate(@Body body : CreateMateRequest,@Path("userIdx") userIdx : Int): Call<CreateMateResponse>

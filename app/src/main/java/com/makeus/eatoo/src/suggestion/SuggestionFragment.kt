@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseFragment
 import com.makeus.eatoo.databinding.FragmentSuggestionBinding
-import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.MateSuggestionActivity
 import com.makeus.eatoo.src.suggestion.adpater.MateSuggestionRecyclerviewAdapter
 import com.makeus.eatoo.src.suggestion.model.SuggestionMateResponse
 import com.makeus.eatoo.util.getUserIdx
@@ -57,7 +57,7 @@ class SuggestionFragment : BaseFragment<FragmentSuggestionBinding>(FragmentSugge
             binding.mySuggestionNoneLayout.visibility = View.VISIBLE
         }
         binding.mateSuggestionBtn.setOnClickListener {
-            startActivity(Intent(activity, Group_Mate_Suggetsion_Activity::class.java))
+            startActivity(Intent(activity, MateSuggestionActivity::class.java))
         }
     }
 

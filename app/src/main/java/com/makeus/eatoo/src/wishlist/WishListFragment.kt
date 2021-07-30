@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.RadioGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseFragment
@@ -15,14 +14,11 @@ import com.makeus.eatoo.databinding.FragmentWishListBinding
 import com.makeus.eatoo.like.LikeService
 import com.makeus.eatoo.like.LikeView
 import com.makeus.eatoo.src.home.group.category.category_detail.CategoryStoreDetailActivity
-import com.makeus.eatoo.src.home.group.category.category_list.CategoryListService
-import com.makeus.eatoo.src.home.group.category.category_list.adapter.CategoryListRVAdapter
 import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialog
 import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialogInterface
-import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.MateSuggestionActivity
 import com.makeus.eatoo.src.wishlist.adapter.WishListRVAdapter
 import com.makeus.eatoo.src.wishlist.model.WishListResponse
-import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.getUserIdx
 
 
@@ -110,7 +106,7 @@ WishListView, WishListRVAdapter.OnStoreClickListener, RadioGroup.OnCheckedChange
 
     override fun onGotoMateSuggestClicked(storeName: String) {
         context?.let {
-            val intent = Intent(it, Group_Mate_Suggetsion_Activity::class.java)
+            val intent = Intent(it, MateSuggestionActivity::class.java)
             intent.putExtra("storeName", storeName)
             startActivity(intent)
         }

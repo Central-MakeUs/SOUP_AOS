@@ -21,7 +21,6 @@ import com.makeus.eatoo.src.home.create_group.CreateGroupActivity
 import com.makeus.eatoo.src.home.group.category.category_map.CategoryMapService
 import com.makeus.eatoo.src.home.group.category.category_map.CategoryMapView
 import com.makeus.eatoo.src.home.group.category.category_map.model.CategoryMapResponse
-import com.makeus.eatoo.src.main.MainActivity
 import com.makeus.eatoo.util.getUserIdx
 import com.makeus.googlemapsapiprac.model.LocationLatLngEntity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -35,13 +34,12 @@ import com.makeus.eatoo.like.LikeService
 import com.makeus.eatoo.like.LikeView
 import com.makeus.eatoo.src.home.group.GroupActivity
 import com.makeus.eatoo.src.home.group.category.category_detail.CategoryStoreDetailActivity
-import com.makeus.eatoo.src.home.group.category.category_detail.adapter.StoreDetailImageRVAdapter
 import com.makeus.eatoo.src.home.group.category.category_map.OnListClickListener
 import com.makeus.eatoo.src.home.group.category.category_map.adapter.CategoryStoreRVAdapter
 import com.makeus.eatoo.src.home.group.category.category_map.model.CategoryMapStoreInfo
 import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialog
 import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialogInterface
-import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.MateSuggestionActivity
 
 
 class GroupCategoryFragment(val listener : OnListClickListener)
@@ -291,7 +289,7 @@ StoreToMateSuggestDialogInterface{
     }
 
     override fun onGotoMateSuggestClicked(storeName : String) {
-        val intent = Intent(requireContext(), Group_Mate_Suggetsion_Activity::class.java)
+        val intent = Intent(requireContext(), MateSuggestionActivity::class.java)
         intent.putExtra("storeName", storeName)
         startActivity(intent)
     }

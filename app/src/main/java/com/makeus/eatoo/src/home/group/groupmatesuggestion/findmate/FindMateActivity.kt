@@ -1,21 +1,17 @@
 package com.makeus.eatoo.src.home.group.groupmatesuggestion.findmate
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityFindMateBinding
-import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.findmate.adpater.Find_Mate_Recyclerview_Adapter
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.findmate.model.GroupMateResponse
 import com.makeus.eatoo.src.home.group.main.MateAttendDialog
-import com.makeus.eatoo.src.home.group.main.adapter.Group_Home_Main_Mate_Kind_RecyclerviewAdapter
 import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.getUserIdx
 import com.makeus.eatoo.util.getUserNickName

@@ -31,7 +31,7 @@ class NotificationRVAdapter(
 
         fun bindItem(item : NotificationResult){
             binding.tvNotiDate.text = item.createdAt
-            //NEW 확인.
+            binding.ivNew.isVisible = item.isChecked == "N"
             when(item.noticeStatus){
                 0 -> bindSignInNoti()
                 1 -> reviewNoti()

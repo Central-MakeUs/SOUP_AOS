@@ -1,13 +1,9 @@
 package com.makeus.eatoo.src.home.group.category.category_detail
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.CompoundButton
-import android.widget.LinearLayout
-import android.widget.ToggleButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
@@ -21,11 +17,9 @@ import com.makeus.eatoo.src.home.group.category.category_detail.model.GetReviewI
 import com.makeus.eatoo.src.home.group.category.category_detail.model.GetReviewRe
 import com.makeus.eatoo.src.home.group.category.category_detail.model.GetStoreKeywordRe
 import com.makeus.eatoo.src.home.group.category.category_detail.model.StoreDetailResponse
-import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
-import com.makeus.eatoo.util.getGroupIdx
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.MateSuggestionActivity
 import com.makeus.eatoo.util.getUserIdx
 import com.makeus.eatoo.util.glideUtil
-import okhttp3.internal.applyConnectionSpec
 
 class CategoryStoreDetailActivity
     : BaseActivity<ActivityCategoryStoreDetailBinding>(ActivityCategoryStoreDetailBinding::inflate),
@@ -105,7 +99,7 @@ StoreDetailView, View.OnClickListener, LikeView, CompoundButton.OnCheckedChangeL
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.btn_suggest_mate -> {
-                startActivity(Intent(this, Group_Mate_Suggetsion_Activity::class.java))
+                startActivity(Intent(this, MateSuggestionActivity::class.java))
             }
             R.id.ibtn_back_arrow -> {
                 finish()

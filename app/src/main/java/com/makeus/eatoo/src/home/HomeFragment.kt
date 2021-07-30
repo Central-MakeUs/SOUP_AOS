@@ -18,7 +18,7 @@ import com.makeus.eatoo.single_status.SingleService
 import com.makeus.eatoo.single_status.SingleView
 import com.makeus.eatoo.src.home.adapter.Home_Group_Kind_RecyclerviewAdapter
 import com.makeus.eatoo.src.home.adapter.Home_Mate_Kind_RecyclerviewAdapter
-import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.MateSuggestionActivity
 import com.makeus.eatoo.src.home.model.GroupResponse
 import com.makeus.eatoo.src.home.model.MateResponse
 import com.makeus.eatoo.util.getUserIdx
@@ -28,7 +28,6 @@ import com.makeus.eatoo.src.home.model.MainCharResponse
 import com.makeus.eatoo.src.home.notification.NotificationActivity
 import com.makeus.eatoo.src.review.create_review.create_review1.CreateReview1Activity
 import com.makeus.eatoo.util.EatooCharList
-import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.getUserNickName
 
 
@@ -62,7 +61,7 @@ class HomeFragment
 //        }
 
         binding.matePlusBtn.setOnClickListener {
-            startActivity(Intent(activity, Group_Mate_Suggetsion_Activity::class.java))
+            startActivity(Intent(activity, MateSuggestionActivity::class.java))
         }
 
         binding.mateOverviewBtn.setOnClickListener {

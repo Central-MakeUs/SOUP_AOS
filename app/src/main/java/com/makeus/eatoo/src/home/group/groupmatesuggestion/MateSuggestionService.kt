@@ -1,5 +1,6 @@
 package com.makeus.eatoo.src.home.group.groupmatesuggestion
 
+import com.makeus.eatoo.R
 import com.makeus.eatoo.config.ApplicationClass
 import com.makeus.eatoo.src.home.GroupRetrofitInterface
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.model.CreateMateRequest
@@ -9,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MateCreateService (val view : Mate_Suggestion_ActivityView){
+class MateSuggestionService (val view : MateSuggestionView){
 
     fun tryGetGroupData(userIdx : Int ) {
         val groupInterface = ApplicationClass.sRetrofit.create(GroupRetrofitInterface::class.java)
@@ -17,28 +18,35 @@ class MateCreateService (val view : Mate_Suggestion_ActivityView){
             override fun onResponse(call: Call<GroupResponse>, response: Response<GroupResponse>) {
                 response.body()?.let {
                     if(it.isSuccess)  view.onGetGroupSuccess(response.body() as GroupResponse)
-                    else  view.onGetGroupFail(it.message?: "통신 오류")
+                    else  view.onGetGroupFail(it.message?: ApplicationClass.applicationResources.getString(
+                        R.string.failed_connection))
                 }
 
             }
 
             override fun onFailure(call: Call<GroupResponse>, t: Throwable) {
-                view.onGetGroupFail(t.message ?: "통신 오류")
+                view.onGetGroupFail(t.message ?: ApplicationClass.applicationResources.getString(
+                    R.string.failed_connection))
             }
         })
     }
 
 
     fun postCreateMate(postCreateMateRequest: CreateMateRequest,userIdx : Int){
-        val createmateinerface = ApplicationClass.sRetrofit.create(MateCreateInterface::class.java)
-        createmateinerface.postCreateMate(postCreateMateRequest,userIdx).enqueue(object :
+        val mateSuggestionInterface = ApplicationClass.sRetrofit.create(MateSuggestionInterface::class.java)
+        mateSuggestionInterface.postCreateMate(postCreateMateRequest,userIdx).enqueue(object :
                 Callback<CreateMateResponse> {
             override fun onResponse(call: Call<CreateMateResponse>, response: Response<CreateMateResponse>) {
-                view.onPostMateCreateSuccess(response.body() as CreateMateResponse)
-            }
+                response.body()?.let {
+                    if(it.isSuccess) view.onPostMateCreateSuccess(response.body() as CreateMateResponse)
+                    else  view.onPostMateCreateFailure(it.message ?: ApplicationClass.applicationResources.getString(
+                        R.string.failed_connection))
+                }
 
+            }
             override fun onFailure(call: Call<CreateMateResponse>, t: Throwable) {
-                view.onPostMateCreateFailure(t.message ?: "통신 오류")
+                view.onPostMateCreateFailure(t.message ?: ApplicationClass.applicationResources.getString(
+                    R.string.failed_connection))
             }
         })
     }
