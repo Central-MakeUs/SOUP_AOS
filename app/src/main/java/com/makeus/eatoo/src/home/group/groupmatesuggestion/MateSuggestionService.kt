@@ -32,7 +32,7 @@ class MateSuggestionService (val view : MateSuggestionView){
     }
 
 
-    fun postCreateMate(postCreateMateRequest: CreateMateRequest,userIdx : Int){
+    fun tryPostMate(postCreateMateRequest: CreateMateRequest,userIdx : Int){
         val mateSuggestionInterface = ApplicationClass.sRetrofit.create(MateSuggestionInterface::class.java)
         mateSuggestionInterface.postCreateMate(postCreateMateRequest,userIdx).enqueue(object :
                 Callback<CreateMateResponse> {

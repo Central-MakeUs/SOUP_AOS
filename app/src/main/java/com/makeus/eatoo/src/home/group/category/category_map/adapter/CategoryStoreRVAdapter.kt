@@ -36,7 +36,7 @@ class CategoryStoreRVAdapter(
                 listener.onStoreClicked(item.storeIdx)
             }
             binding.clCategoryMapStore.setOnLongClickListener{
-                listener.onStoreLongClicked(item.name)
+                listener.onStoreLongClicked(item.name, item.imgUrl)
 
                 return@setOnLongClickListener true
             }
@@ -53,7 +53,7 @@ class CategoryStoreRVAdapter(
     interface OnStoreClickListener {
         fun onStoreClicked(storeIdx : Int)
         fun onLikeClicked(storeIdx : Int)
-        fun onStoreLongClicked(storeName : String)
+        fun onStoreLongClicked(storeName : String, storeImg : String)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

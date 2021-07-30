@@ -122,8 +122,8 @@ RadioGroup.OnCheckedChangeListener, CategoryListView, CategoryListRVAdapter.OnSt
 
     }
 
-    override fun onStoreLongClicked(storeName: String) {
-        val dialog = StoreToMateSuggestDialog(requireContext(), this, storeName)
+    override fun onStoreLongClicked(storeName: String, storeImg : String) {
+        val dialog = StoreToMateSuggestDialog(requireContext(), this, storeName, storeImg)
         dialog.show()
     }
 
@@ -132,10 +132,13 @@ RadioGroup.OnCheckedChangeListener, CategoryListView, CategoryListRVAdapter.OnSt
         else LikeService(this).tryPatchLike(getUserIdx(),storeIdx)
     }
 
-    override fun onGotoMateSuggestClicked(storeName: String) {
+    override fun onGotoMateSuggestClicked(storeName: String, storeImg: String) {
         context?.let {
             val intent = Intent(it, MateSuggestionActivity::class.java)
-            intent.putExtra("storeName", storeName)
+            intent.apply {
+                putExtra("storeName", storeName)
+                putExtra("storeImg", storeImg)
+            }
             startActivity(intent)
         }
     }

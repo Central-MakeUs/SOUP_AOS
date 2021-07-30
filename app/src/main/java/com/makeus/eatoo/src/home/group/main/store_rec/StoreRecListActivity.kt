@@ -13,6 +13,7 @@ import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityStoreRecListBinding
 import com.makeus.eatoo.like.LikeService
 import com.makeus.eatoo.like.LikeView
+import androidx.core.view.isVisible
 import com.makeus.eatoo.src.home.group.GroupActivity
 import com.makeus.eatoo.src.home.group.category.category_detail.CategoryStoreDetailActivity
 import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialog
@@ -110,8 +111,8 @@ class StoreRecListActivity :
         startActivity(intent)
     }
 
-    override fun onStoreLongClicked(storeName: String) {
-        val dialog = StoreToMateSuggestDialog(this, this, storeName)
+    override fun onStoreLongClicked(storeName: String, storeImg : String) {
+        val dialog = StoreToMateSuggestDialog(this, this, storeName, storeImg)
         dialog.show()
     }
 
@@ -138,9 +139,12 @@ class StoreRecListActivity :
         }
     }
 
-    override fun onGotoMateSuggestClicked(storeName: String) {
+    override fun onGotoMateSuggestClicked(storeName: String, storeImg: String) {
         val intent = Intent(this, MateSuggestionActivity::class.java)
-        intent.putExtra("storeName", storeName)
+        intent.apply {
+            putExtra("storeName", storeName)
+            putExtra("storeImg", storeImg)
+        }
         startActivity(intent)
     }
 

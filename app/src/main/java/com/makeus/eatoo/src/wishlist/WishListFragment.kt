@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.RadioGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.eatoo.R
+import androidx.core.view.isVisible
 import com.makeus.eatoo.config.BaseFragment
 import com.makeus.eatoo.databinding.FragmentWishListBinding
 import com.makeus.eatoo.like.LikeService
@@ -99,15 +100,18 @@ WishListView, WishListRVAdapter.OnStoreClickListener, RadioGroup.OnCheckedChange
         }
     }
 
-    override fun onStoreLongClicked(storeName: String) {
-        val dialog = StoreToMateSuggestDialog(requireContext(), this, storeName)
+    override fun onStoreLongClicked(storeName: String, storeImg : String) {
+        val dialog = StoreToMateSuggestDialog(requireContext(), this, storeName, storeImg)
         dialog.show()
     }
 
-    override fun onGotoMateSuggestClicked(storeName: String) {
+    override fun onGotoMateSuggestClicked(storeName: String, storeImg : String) {
         context?.let {
             val intent = Intent(it, MateSuggestionActivity::class.java)
-            intent.putExtra("storeName", storeName)
+            intent.apply {
+                putExtra("storeName", storeName)
+                putExtra("storeImg", storeImg)
+            }
             startActivity(intent)
         }
     }

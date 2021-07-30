@@ -267,8 +267,8 @@ StoreToMateSuggestDialogInterface{
         startActivity(intent)
 
     }
-    override fun onStoreLongClicked(storeName: String) {
-        val dialog = StoreToMateSuggestDialog(requireContext(), this, storeName)
+    override fun onStoreLongClicked(storeName: String, storeImg : String) {
+        val dialog = StoreToMateSuggestDialog(requireContext(), this, storeName, storeImg)
         dialog.show()
     }
 
@@ -288,9 +288,12 @@ StoreToMateSuggestDialogInterface{
         showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
 
-    override fun onGotoMateSuggestClicked(storeName : String) {
+    override fun onGotoMateSuggestClicked(storeName : String, storeImg : String) {
         val intent = Intent(requireContext(), MateSuggestionActivity::class.java)
-        intent.putExtra("storeName", storeName)
+        intent.apply {
+            putExtra("storeName", storeName)
+            putExtra("storeImg", storeImg)
+        }
         startActivity(intent)
     }
 

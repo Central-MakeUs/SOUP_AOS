@@ -30,6 +30,7 @@ StoreDetailView, View.OnClickListener, LikeView, CompoundButton.OnCheckedChangeL
     private lateinit var storeReviewAdapter : StoreDetailReviewRVAdapter
 
     var storeIdx = -1
+    var storeImg = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +81,7 @@ StoreDetailView, View.OnClickListener, LikeView, CompoundButton.OnCheckedChangeL
         dismissLoadingDialog()
 
         glideUtil(this, response.result.imgUrl, binding.ivStoreImage)
+        storeImg = response.result.imgUrl
         binding.tvStoreName.text = response.result.storeName
         binding.tvStoreAddress.text = response.result.address
         binding.toggleStoreLike.isChecked = response.result.isLiked == "Y"
@@ -99,7 +101,12 @@ StoreDetailView, View.OnClickListener, LikeView, CompoundButton.OnCheckedChangeL
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.btn_suggest_mate -> {
-                startActivity(Intent(this, MateSuggestionActivity::class.java))
+                val intent = Intent(this, MateSuggestionActivity::class.java)
+                intent.apply {
+                    putExtra("storeName", binding.tvStoreName.text.toString())
+                    putExtra("storeImg", storeImg)
+                }
+                startActivity(intent)
             }
             R.id.ibtn_back_arrow -> {
                 finish()

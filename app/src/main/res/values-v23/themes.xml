@@ -70,7 +70,8 @@
 
     <style name="CustomKeywordChipStyle2" parent="Widget.MaterialComponents.Chip.Action">
         <item name="chipBackgroundColor">@color/white</item>
-        <item name="chipStrokeColor">@color/chip_stroke_color</item>
+        <item name="chipStrokeColor">@color/chip_stroke_color2</item>
+        <item name="rippleColor">@color/chip_ripple_color</item>
         <item name="chipStrokeWidth">1dp</item>
     </style>
 
