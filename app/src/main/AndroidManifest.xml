@@ -14,7 +14,12 @@
         android:roundIcon="@mipmap/ic_eatoo_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".src.home.notification.NotificationActivity"></activity>
+
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="@string/naver_map_api_client_id"/>
+
+        <activity android:name=".src.home.notification.NotificationActivity" />
         <activity android:name=".src.review.review_detail.ReviewDetailActivity" />
         <activity android:name=".src.home.group.main.store_rec.StoreRecListActivity" />
         <activity android:name=".src.home.group.category.category_detail.CategoryStoreDetailActivity" />

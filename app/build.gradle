@@ -102,6 +102,10 @@ dependencies {
     //google gson
     implementation 'com.google.code.gson:gson:2.8.7'
 
+    //naver map
+    implementation("com.naver.maps:map-sdk:3.12.0")
+
+
 
 
 }

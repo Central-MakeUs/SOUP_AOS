@@ -260,42 +260,6 @@ class CreateGroupActivity :
         }
     }
 
-    private fun setupGoogleMap() {
-        val mapFragment =
-            supportFragmentManager.findFragmentById(R.id.frag_create_group_map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-    }
-
-
-    override fun onMapReady(map: GoogleMap) { //구글맵 객체 //아래 내용 없으면 세계지도 나옴.
-        this.map = map
-        if (mapShowing) {
-            currentSelectMarker = setupMarker(searchResult)
-            currentSelectMarker?.showInfoWindow()
-            showMap()
-        }
-    }
-
-    private fun setupMarker(searchResult: SearchResultEntity): Marker? { //검색한 위도경도
-        latitude = searchResult.locationLatLng.latitude.toDouble()
-        longitude = searchResult.locationLatLng.longitude.toDouble()
-
-        val positionLatLng = LatLng(latitude, longitude)
-        val markerOptions = MarkerOptions().apply {
-            position(positionLatLng)
-            title(searchResult.buildingName)
-            snippet(searchResult.fullAddress)
-        }
-        map.moveCamera(
-            CameraUpdateFactory.newLatLngZoom(
-                positionLatLng,
-                CAMERA_ZOOM_LEVEL
-            )
-        )
-
-        return map.addMarker(markerOptions)
-    }
-
     private fun requestPermission() {
         if (::locationManager.isInitialized.not()) {
             locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -337,6 +301,43 @@ class CreateGroupActivity :
                 Toast.makeText(this, "권한을 받지 못 했습니다.", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+
+    private fun setupGoogleMap() {
+        val mapFragment =
+            supportFragmentManager.findFragmentById(R.id.frag_create_group_map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
+
+
+    override fun onMapReady(map: GoogleMap) { //구글맵 객체 //아래 내용 없으면 세계지도 나옴.
+        this.map = map
+        if (mapShowing) {
+            currentSelectMarker = setupMarker(searchResult)
+            currentSelectMarker?.showInfoWindow()
+            showMap()
+        }
+    }
+
+    private fun setupMarker(searchResult: SearchResultEntity): Marker? { //검색한 위도경도
+        latitude = searchResult.locationLatLng.latitude.toDouble()
+        longitude = searchResult.locationLatLng.longitude.toDouble()
+
+        val positionLatLng = LatLng(latitude, longitude)
+        val markerOptions = MarkerOptions().apply {
+            position(positionLatLng)
+            title(searchResult.buildingName)
+            snippet(searchResult.fullAddress)
+        }
+        map.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                positionLatLng,
+                CAMERA_ZOOM_LEVEL
+            )
+        )
+
+        return map.addMarker(markerOptions)
     }
 
     override fun onPostGroupSuccess(response: CreateGroupResponse) {
