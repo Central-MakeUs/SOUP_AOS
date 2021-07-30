@@ -58,12 +58,12 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
                 // 텍스트 입력 전
             }
             //
-            @SuppressLint("ResourceAsColor")
+            @SuppressLint("ResourceAsColor", "UseCompatLoadingForDrawables")
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 //텍스트 입력 중
                 Log.d("길이",""+binding.nickNameEdt.text.length)
 
-                if(binding.nickNameEdt.text.length > 1){
+                if(isValidNickname(binding.nickNameEdt.text.toString()) ||isValidNicknameE(binding.nickNameEdt.text.toString())|| isValidNicknameK(binding.nickNameEdt.text.toString())){
 
                     binding.nextBtn.isClickable = true // 버튼 클릭할수 있게
                     binding.nextBtn.isEnabled = true // 버튼 활성화
@@ -71,6 +71,7 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
                         R.color.main_color))
                     binding.nickNameHint.setText(R.string.thank_input)
                     binding.nickNameHint.setTextColor(binding.nickNameHint.context.resources.getColor(R.color.main_color))
+                    binding.nextBtn.setBackgroundDrawable(binding.nextBtn.getContext().getDrawable(R.drawable.sign_in_btn_background_main_color))
 
 
                 }
@@ -79,12 +80,33 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
                         R.color.gray_100))
                     binding.nickNameHint.setText(R.string.sign_in_password_bottom)
                     binding.nickNameHint.setTextColor(binding.nickNameHint.context.resources.getColor(R.color.black))
+                    binding.nextBtn.setBackgroundDrawable(binding.nextBtn.getContext().getDrawable(R.drawable.sign_in_btn_background_gray))
 
                 }
 
             }
         })
     }
+
+    fun isValidNicknameK(nickname: String?): Boolean {
+        val trimmedNickname = nickname?.trim().toString()
+        val exp = Regex("^[가-힣]+\$")
+        return !trimmedNickname.isNullOrEmpty() && exp.matches(trimmedNickname)
+    }
+
+    fun isValidNicknameE(nickname: String?): Boolean {
+        val trimmedNickname = nickname?.trim().toString()
+        val exp = Regex("^[a-zA-Z]+\$")
+        return !trimmedNickname.isNullOrEmpty() && exp.matches(trimmedNickname)
+    }
+
+
+    fun isValidNickname(nickname: String?): Boolean {
+        val trimmedNickname = nickname?.trim().toString()
+        val exp = Regex("^[가-힣a-zA-Z]+\$")
+        return !trimmedNickname.isNullOrEmpty() && exp.matches(trimmedNickname)
+    }
+
 
     override fun onGetUserSuccess(response: SignInResponse) {
 
