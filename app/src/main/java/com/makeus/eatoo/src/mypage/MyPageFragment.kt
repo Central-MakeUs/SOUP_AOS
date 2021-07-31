@@ -4,15 +4,21 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.ActivityCompat
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.ApplicationClass
+import com.makeus.eatoo.config.ApplicationClass.Companion.GROUP_IDX
+import com.makeus.eatoo.config.ApplicationClass.Companion.USER_IDX
 import com.makeus.eatoo.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.makeus.eatoo.config.BaseFragment
 import com.makeus.eatoo.databinding.FragmentMyPageBinding
 import com.makeus.eatoo.src.mypage.finding_invite.FindInviteDialog
 import com.makeus.eatoo.src.mypage.invite.InviteActivity
+import com.makeus.eatoo.src.mypage.model.AccountDeleteResponse
 import com.makeus.eatoo.src.mypage.model.MyPageResponse
 import com.makeus.eatoo.src.mypage.profile.ProfileActivity
+import com.makeus.eatoo.src.mypage.withdrawal.AccountWithdrawDialog
+import com.makeus.eatoo.src.mypage.withdrawal.AccountWithdrawalDialogInterface
 import com.makeus.eatoo.src.review.my_review.MyReviewActivity
 import com.makeus.eatoo.src.splash.SplashActivity
 import com.makeus.eatoo.util.EatooCharList
@@ -22,7 +28,7 @@ import com.makeus.eatoo.util.getUserNickName
 
 class MyPageFragment
     : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page),
-    MyPageView {
+    MyPageView, View.OnClickListener, AccountWithdrawalDialogInterface {
 
     override fun onResume() {
         super.onResume()
@@ -33,30 +39,49 @@ class MyPageFragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setOnClickListeners()
 
-        binding.logoutLayout.setOnClickListener {
-            ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
-            startActivity(Intent(activity, SplashActivity::class.java))
-        }
-
-        binding.reviewLayout.setOnClickListener {
-            startActivity(Intent(activity, MyReviewActivity::class.java))
-        }
-
-        binding.profileLayout.setOnClickListener {
-            startActivity(Intent(activity, ProfileActivity::class.java))
-        }
-        binding.inviteLayout.setOnClickListener {
-            startActivity(Intent(activity, InviteActivity::class.java))
-        }
-        binding.findInviteLayout.setOnClickListener {
-            val dialog = FindInviteDialog(this)
-            dialog.show()
-        }
 
         binding.nickNameTxt.text = getUserNickName() + binding.nickNameTxt.text
 
 
+    }
+
+    private fun setOnClickListeners() {
+        binding.logoutLayout.setOnClickListener (this)
+        binding.reviewLayout.setOnClickListener (this)
+        binding.profileLayout.setOnClickListener (this)
+        binding.inviteLayout.setOnClickListener (this)
+        binding.findInviteLayout.setOnClickListener (this)
+        binding.accountSecessionLayout.setOnClickListener(this)
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0?.id){
+            R.id.logout_layout -> {
+                ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
+                startActivity(Intent(activity, SplashActivity::class.java))
+            }
+            R.id.review_layout -> {
+                startActivity(Intent(activity, MyReviewActivity::class.java))
+            }
+            R.id.profile_layout -> {
+                startActivity(Intent(activity, ProfileActivity::class.java))
+            }
+            R.id.invite_layout -> {
+                startActivity(Intent(activity, InviteActivity::class.java))
+            }
+            R.id.find_invite_layout -> {
+                val dialog = FindInviteDialog(this)
+                dialog.show()
+            }
+            R.id.account_secession_layout -> {
+                context?.let {
+                    val dialog = AccountWithdrawDialog(it, this)
+                    dialog.show()
+                }
+            }
+        }
     }
 
     private fun getMyPage() {
@@ -97,6 +122,13 @@ class MyPageFragment
 //        binding.chipgroupMypage.addView(negativeChip)
 //    }
 
+    override fun onWithdrawClicked() {
+        //server
+        context?.let {
+            showLoadingDialog(it)
+            MyPageService(this).tryDeleteAccount(getUserIdx())
+        }
+    }
 
 
     override fun onGetMyPageSuccess(response: MyPageResponse) {
@@ -112,6 +144,21 @@ class MyPageFragment
     override fun onGetMyPageFail(message: String?) {
         dismissLoadingDialog()
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
+    }
+
+    override fun onDeleteAccountSuccess(response: AccountDeleteResponse) {
+        dismissLoadingDialog()
+        ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
+        ApplicationClass.sSharedPreferences.edit().putString(GROUP_IDX, null).apply()
+        ApplicationClass.sSharedPreferences.edit().putString(USER_IDX, null).apply()
+        activity?.let {
+            ActivityCompat.finishAffinity(it)
+        }
+
+    }
+
+    override fun onDeleteAccountFail(message: String?) {
+        dismissLoadingDialog()
     }
 
 
