@@ -32,7 +32,7 @@ class Find_Mate_Recyclerview_Adapter(val MateList : ArrayList<GroupMateResult>) 
             holder.LimitPeople_img.visibility = VISIBLE
             holder.LimitPeople_end_img.visibility = GONE
             holder.MateLayout.setOnClickListener {
-                itemClickListener.onClick(it,position,MateList[position].mateIdx)
+                itemClickListener.onClick(it,position,MateList[position].mateIdx, MateList[position].isAttended)
             }
 
         }
@@ -81,7 +81,7 @@ class Find_Mate_Recyclerview_Adapter(val MateList : ArrayList<GroupMateResult>) 
     }
 
     interface ItemClickListener {
-        fun onClick(view: View, position: Int, mateIdx : Int)
+        fun onClick(view: View, position: Int, mateIdx : Int, isAttended : String)
     }
 
     private lateinit var itemClickListener: ItemClickListener

@@ -14,7 +14,11 @@ import com.makeus.eatoo.databinding.DialogMateAttendBinding
 import com.makeus.eatoo.src.home.group.main.model.MateAttendResponse
 import com.makeus.eatoo.util.getUserIdx
 
-class MateAttendDialog(context: Context , val mateIdx: Int) : Dialog(context) , MateAttendView {
+class MateAttendDialog(
+    context: Context ,
+    val mateIdx: Int,
+    val listener : MateAttendDialogInterface
+    ) : Dialog(context){
     private lateinit var binding : DialogMateAttendBinding
 
     @SuppressLint("SetTextI18n")
@@ -43,19 +47,11 @@ class MateAttendDialog(context: Context , val mateIdx: Int) : Dialog(context) , 
         }
 
         binding.btnDialogConfirm.setOnClickListener {
-            MateAttendService(this).tryPostMateAttend(getUserIdx(),mateIdx)
+            listener.onMateAttendClicked(mateIdx)
             dismiss()
         }
 
 
 
-    }
-
-    override fun onGetMateAttendSuccess(response: MateAttendResponse) {
-        Log.d("메이트 참가 결과",""+response.message)
-    }
-
-    override fun onGetMateAttendFail(message: String?) {
-        Log.d("메이트 참가 결과",""+message)
     }
 }

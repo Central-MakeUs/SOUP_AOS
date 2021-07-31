@@ -24,15 +24,19 @@ class SuggestionFragment
 
     private lateinit var mateAdapter : MateSuggestionRecyclerviewAdapter
 
+
+    override fun onResume() {
+        super.onResume()
+
+        getMySuggestion()
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
         binding.userNameSuggestionTxt.text = getUserNickName() + binding.userNameSuggestionTxt.text
-
-
-        getMySuggestion()
 
 
     }

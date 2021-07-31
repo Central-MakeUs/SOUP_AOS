@@ -35,7 +35,7 @@ class HomeMateKindRecyclerviewAdapter(
         holder.EndTime.text =  "-" + MateList[position].endTime
         holder.People.text = MateList[position].membersNumber.toString()
         if(MateList[position].imgUrl.isNotEmpty()) glideUtil(context, MateList[position].imgUrl, holder.mateImg)
-
+        else holder.mateImg.setImageResource(R.drawable.group_421)
 
     }
 

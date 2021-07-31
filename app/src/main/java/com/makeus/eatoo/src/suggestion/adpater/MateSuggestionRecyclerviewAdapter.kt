@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.eatoo.R
 import com.makeus.eatoo.src.suggestion.model.SuggestionMateResultResponse
@@ -43,6 +44,7 @@ class MateSuggestionRecyclerviewAdapter (
         holder.People.text = MateList[position].membersNumber.toString()
 
         if(MateList[position].imgUrl.isNotEmpty()) glideUtil(context, MateList[position].imgUrl, holder.mateImg)
+        else holder.mateImg.setImageResource(R.drawable.group_421)
 
         holder.container.setOnLongClickListener {
             listener.mySuggestLongClicked(MateList[position].mateName,MateList[position].mateIdx )
