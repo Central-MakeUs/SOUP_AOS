@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.makeus.eatoo.R
@@ -25,6 +26,7 @@ import com.makeus.eatoo.util.getUserIdx
 import com.makeus.eatoo.src.home.create_group.CreateGroupActivity
 import com.makeus.eatoo.src.home.group.GroupActivity
 import com.makeus.eatoo.src.home.model.MainCharResponse
+import com.makeus.eatoo.src.home.model.NotiCountResponse
 import com.makeus.eatoo.src.home.notification.NotificationActivity
 import com.makeus.eatoo.src.main.MainActivity
 import com.makeus.eatoo.src.review.create_review.create_review1.CreateReview1Activity
@@ -45,6 +47,7 @@ View.OnClickListener{
         super.onResume()
 
         GroupService(this).tryGetMainChar(getUserIdx())
+        GroupService(this).tryGetNotiCount(getUserIdx())
     }
 
     @SuppressLint("SetTextI18n")
@@ -61,10 +64,10 @@ View.OnClickListener{
 
     private fun setOnClickListeners() {
         binding.customToolbar.setRightIconClickListener(this)
-        binding.customToolbar.setLeftIconClickListener(this)
         binding.mateOverviewBtn.setOnClickListener(this)
         binding.matePlusBtn.setOnClickListener(this)
         binding.cardviewReviewSuggest.setOnClickListener(this)
+        binding.layoutNoti.ivBell.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -89,7 +92,7 @@ View.OnClickListener{
                 ) ?:false
                 SingleService(this).tryPatchSingleStatus(getUserIdx())
             }
-            R.id.iv_toolbar_left -> {
+            R.id.iv_bell -> {
                 startActivity(Intent(activity, NotificationActivity::class.java))
             }
         }
@@ -235,13 +238,11 @@ View.OnClickListener{
     }
 
     override fun onGetMainCharSuccess(response: MainCharResponse) {
-        Log.d("homeFragment", response.toString())
         setSingleStatus(response.result.singleStatus)
         setMainChar(response.result.color, response.result.characters, response.result.singleStatus)
     }
 
     private fun setMainChar(color: Int, characters: Int, singleStatus: String) {
-        Log.d("homeFragment", "here")
         val memberColor = if(color != 0) color -1 else 0
         val memberChar = if(characters != 0) characters -1 else 0
         binding.ivMainChar.setImageResource(EatooCharList[(memberColor*5) + memberChar])
@@ -267,6 +268,20 @@ View.OnClickListener{
 
     override fun onDeleteGroupFail(message: String?) {
         dismissLoadingDialog()
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
+    }
+
+    override fun onGetNotiCountSuccess(response: NotiCountResponse) {
+        if(response.result.count != 0){
+            binding.layoutNoti.cardviewNotiNumContainer.isVisible = true
+            binding.layoutNoti.tvNotiNum.text = response.result.count.toString()
+        }else {
+            binding.layoutNoti.cardviewNotiNumContainer.isVisible = false
+        }
+
+    }
+
+    override fun onGetNotiCountFail(message: String?) {
         showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
 

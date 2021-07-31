@@ -5,6 +5,7 @@ import com.makeus.eatoo.config.BaseResponse
 import com.makeus.eatoo.src.home.model.GroupResponse
 import com.makeus.eatoo.src.home.model.MainCharResponse
 import com.makeus.eatoo.src.home.model.MateResponse
+import com.makeus.eatoo.src.home.model.NotiCountResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.PATCH
@@ -34,6 +35,11 @@ interface GroupRetrofitInterface {
         @Path ("userIdx") userIdx : Int,
         @Path ("groupIdx") groupIdx : Int
     ): Call<BaseResponse>
+
+    @GET("/app/users/{userIdx}/notice-count")
+    fun getNotiCount(
+        @Path ("userIdx") userIdx : Int
+    ): Call<NotiCountResponse>
 
 
 //    @GET("/app/mates/{mateIdx}/end")
