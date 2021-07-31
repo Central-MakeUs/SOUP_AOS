@@ -22,7 +22,6 @@ import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityStoreMapBinding
 import com.makeus.eatoo.reverse_geo.ReverseGeoService
 import com.makeus.eatoo.reverse_geo.ReverseGeoView
-import com.makeus.eatoo.src.home.create_group.CreateGroupActivity
 import com.makeus.eatoo.src.home.create_group.CreateGroupActivity.Companion.PERMISSION_REQUEST_CODE
 import com.makeus.eatoo.src.review.create_review.create_review1.CreateReview1Activity
 import com.makeus.eatoo.src.review.store_map.adapter.ExistingStoreRVAdapter
@@ -33,12 +32,8 @@ import com.makeus.eatoo.util.getUserIdx
 import com.makeus.googlemapsapiprac.model.LocationLatLngEntity
 import com.makeus.eatoo.src.review.store_map.model.KakaoAddressResponse
 import com.makeus.eatoo.src.review.store_map.model.Store
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
 import com.naver.maps.map.overlay.Marker
-import com.google.android.gms.maps.SupportMapFragment
 import com.naver.maps.geometry.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.util.FusedLocationSource
@@ -126,7 +121,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         }
         val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         if (isGpsEnabled) {
-            if (ContextCompat.checkSelfPermission(  //권한 없는 경우
+            if (ContextCompat.checkSelfPermission(
                     this,
                     android.Manifest.permission.ACCESS_FINE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
@@ -212,7 +207,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
             )
             map = naverMap
             icon = MarkerIcons.BLACK
-            iconTintColor = Color.RED
+            iconTintColor = Color.BLACK
         }
         removeLocationListener()
     }
@@ -320,7 +315,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
                     position = LatLng(it.latitude, it.longitude)
                     map = naverMap
                     icon = MarkerIcons.BLACK
-                    iconTintColor = Color.BLACK
+                    iconTintColor = Color.RED
                     tag ="${position.latitude},${position.longitude}"
                     onClickListener = this@StoreMapActivity
                 }

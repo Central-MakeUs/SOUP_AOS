@@ -122,7 +122,7 @@ class CurrentLocationActivity
             )
             map = naverMap
             icon = MarkerIcons.BLACK
-            iconTintColor = Color.RED
+            iconTintColor = Color.BLACK
         }
 
         loadReverseGeoInfo(
