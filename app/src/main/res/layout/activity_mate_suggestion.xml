@@ -31,6 +31,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardview_toolbar">
 
@@ -266,18 +267,18 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
+                android:background="@drawable/edittext_background_radius"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView19"
-                android:background="@drawable/edittext_background_radius">
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView19">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/start_time_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
                     android:background="@color/transparent"
+                    android:clickable="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/appCompatImageView8"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -337,8 +338,8 @@
                     android:id="@+id/end_time_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
                     android:background="@color/transparent"
+                    android:clickable="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/appCompatImageView8"
                     app:layout_constraintTop_toTopOf="parent">
@@ -349,8 +350,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/transparent"
-                        android:fontFamily="sans-serif"
                         android:clickable="false"
+                        android:fontFamily="sans-serif"
                         android:hint="@string/main_mate_suggestion_meal_time_hint"
                         android:inputType="text"
                         android:letterSpacing="0.01"
@@ -384,12 +385,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -407,30 +403,55 @@
                 app:layout_constraintTop_toBottomOf="@+id/time_layout" />
 
             <!--spinner 구현 예정-->
-            <EditText
-                android:id="@+id/limit_people_edt"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/limit_people_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/edittext_background_radius"
-                android:fontFamily="sans-serif"
-                android:hint="@string/main_mate_suggestion_limit_people_hint"
-                android:inputType="number"
-                android:letterSpacing="0.01"
-                android:lineSpacingExtra="9sp"
-                android:paddingStart="12dp"
-                android:paddingTop="13dp"
-                android:paddingBottom="13dp"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView20"
-                tools:ignore="Autofill,RtlSymmetry" />
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView20">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/limit_people_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.01"
+                    android:lineSpacingExtra="9sp"
+                    android:paddingStart="12dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:singleLine="true"
+                    android:text="@string/main_mate_suggestion_limit_people_hint"
+                    android:textColor="@color/gray_100"
+                    android:textSize="15sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry" />
+
+
+                <Spinner
+                    android:id="@+id/limit_people_spinner"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/ic_down_btn"
+                    android:singleLine="true"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -445,9 +466,8 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/limit_people_edt" />
+                app:layout_constraintTop_toBottomOf="@+id/limit_people_layout" />
 
-            <!--spinner 구현 예정-->
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -466,9 +486,9 @@
                     android:id="@+id/limit_time_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contextClickable="false"
                     android:background="@color/transparent"
                     android:clickable="false"
+                    android:contextClickable="false"
                     android:fontFamily="sans-serif"
                     android:hint="@string/main_mate_suggestion_limit_time_hint"
                     android:inputType="text"
@@ -497,7 +517,6 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
             <androidx.appcompat.widget.AppCompatTextView

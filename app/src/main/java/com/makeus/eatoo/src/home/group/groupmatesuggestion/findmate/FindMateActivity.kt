@@ -1,6 +1,7 @@
 package com.makeus.eatoo.src.home.group.groupmatesuggestion.findmate
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityFindMateBinding
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.MateSuggestionActivity
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.findmate.adpater.Find_Mate_Recyclerview_Adapter
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.findmate.model.GroupMateResponse
 import com.makeus.eatoo.src.home.group.main.MateAttendDialog
@@ -32,6 +34,9 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
 
         binding.backBtn.setOnClickListener {
             finish()
+        }
+        binding.fabGroupMate.setOnClickListener {
+            startActivity(Intent(this, MateSuggestionActivity::class.java))
         }
 
     }

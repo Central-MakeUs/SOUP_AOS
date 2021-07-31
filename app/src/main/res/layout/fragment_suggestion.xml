@@ -57,22 +57,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/mate_suggestion_btn"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/sign_in_btn_background_main_color"
-                android:fontFamily="sans-serif-medium"
-                android:gravity="center"
-                android:text="@string/main_mate_suggestion"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/user_name_suggestion_txt"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/user_name_suggestion_txt" />
 
             <LinearLayout
                 android:id="@+id/my_suggestion_layout"

@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
@@ -30,6 +32,8 @@ class MateSuggestionActivity
 
     private var groupIdx : Int = -1
     private var storeImg : Uri? = null
+    private var Limit_people = arrayListOf<String>("")
+    private var limit_headcount : Int = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +43,8 @@ class MateSuggestionActivity
         loadGroup()
 
         setViewListeners()
+
+        setSpinner()
 
 
     }
@@ -125,6 +131,10 @@ class MateSuggestionActivity
             showCustomToast("식사 끝 시간을 입력해주세요.")
             return
         }
+        if(binding.limitPeopleTv.text == resources.getString(R.string.main_mate_suggestion_limit_people_hint)){
+            showCustomToast("제한 인원을 입력해주세요.")
+            return
+        }
         if(binding.limitTimeTv.text.isEmpty()){
             showCustomToast("마감 시간을 입력해주세요.")
             return
@@ -139,7 +149,7 @@ class MateSuggestionActivity
                 storeName = binding.storeEdt.text.toString(),
                 startTime = binding.startTimeBtn.text.toString(),
                 endTime = binding.endTimeBtn.text.toString(),
-                headCount = binding.limitPeopleEdt.text.toString().toInt(),
+                headCount =limit_headcount,
                 timeLimit = binding.limitTimeTv.text.toString(),
                 imgUrl = ""
             )
@@ -170,7 +180,7 @@ class MateSuggestionActivity
                 storeName = binding.storeEdt.text.toString(),
                 startTime = binding.startTimeBtn.text.toString(),
                 endTime = binding.endTimeBtn.text.toString(),
-                headCount = binding.limitPeopleEdt.text.toString().toInt(),
+                headCount = limit_headcount,
                 timeLimit = binding.limitTimeTv.text.toString(),
                 imgUrl = it.result.toString()
             )
@@ -230,6 +240,41 @@ class MateSuggestionActivity
     @SuppressLint("SetTextI18n")
     override fun onSetLimitTime(hour: String, minute: String) {
         binding.limitTimeTv.text = "$hour:$minute"
+    }
+
+    fun setSpinner() {
+        for(i in 1..99) {
+            Limit_people.add((i+1).toString())
+        }
+        val arrayAdapter = ArrayAdapter(
+            this,
+            R.layout.limit_people_spinner_item,
+            Limit_people
+        )
+
+        binding.limitPeopleSpinner.adapter = arrayAdapter
+        binding.limitPeopleSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            @SuppressLint("SetTextI18n")
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {//스피너가 선택 되었을때
+                if(i == 0){
+                    binding.limitPeopleTv.setText(R.string.main_mate_suggestion_limit_people_hint)
+                    binding.limitPeopleTv.setTextColor(binding.limitPeopleTv.context.resources.getColor(R.color.gray_100))
+                }
+                else {
+                    binding.limitPeopleTv.text = (i + 1).toString() + '명'
+                    limit_headcount = i+1
+                    binding.limitPeopleTv.setTextColor(
+                        binding.limitPeopleTv.context.resources.getColor(
+                            R.color.black
+                        )
+                    )
+                }
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>) {
+            }
+        }
+
     }
 
 

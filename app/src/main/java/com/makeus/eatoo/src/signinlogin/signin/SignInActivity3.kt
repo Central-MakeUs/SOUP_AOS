@@ -43,6 +43,7 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
                 SignInActivityService(this).tryPostSignUp(postRequest)
 
             }
+
             else{
                 //showCustomToast("전달받은 인텐트 없음")
             }
