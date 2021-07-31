@@ -57,6 +57,7 @@
         tools:text="15" />
 
     <TextView
+        android:id="@+id/tv_group_vote_num2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
