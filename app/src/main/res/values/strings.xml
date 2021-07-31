@@ -74,6 +74,11 @@
     <string name="main_mate_suggestion_limit_time_hint2">마감시간이 되면 제안참여가 불가능하며, MATE 확정\n알림을 보내드립니다.</string>
     <string name="main_mate_suggestion_registration">등록하기</string>
 
+    <!--my suggestion-->
+    <string name="delete_suggestion_query1">정말 \'%s\'</string>
+    <string name="delete_suggestion_query2">MATE 제안을 삭제하시겠습니까?</string>
+    <string name="delete_suggestion_exp1">삭제 시 \'%s\'님만 MATE에서 삭제되며</string>
+    <string name="delete_suggestion_exp2">참여 MATE가 있는 경우, 제안은 그대로 유지됩니다.</string>
 
     <!--review-->
     <string name="my_review_user_title">님이 작성하신</string>

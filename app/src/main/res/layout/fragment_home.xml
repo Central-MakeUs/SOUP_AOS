@@ -451,6 +451,7 @@
                     android:id="@+id/home_mate_recylerview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18dp"
                     android:overScrollMode="never"
                     android:scrollbars="none" />
 
