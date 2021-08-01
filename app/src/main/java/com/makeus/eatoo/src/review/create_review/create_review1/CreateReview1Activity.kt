@@ -1,6 +1,9 @@
 package com.makeus.eatoo.src.review.create_review.create_review1
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -10,6 +13,7 @@ import android.view.View
 import android.widget.RadioGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.gson.Gson
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.ApplicationClass
@@ -58,7 +62,31 @@ class CreateReview1Activity :
         closeMap()
         setupMap()
         setViewListeners()
+        registerBr()
 
+    }
+
+    private val reviewBr = object : BroadcastReceiver() {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            if(p1?.action.equals("finish_review1")) {
+                this@CreateReview1Activity.finish()
+            }
+        }
+
+    }
+
+    private fun registerBr() {
+        val filter = IntentFilter("finish_review1")
+        LocalBroadcastManager.getInstance(this).registerReceiver(reviewBr, filter)
+    }
+
+    private fun unregisterBr() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(reviewBr)
+    }
+
+    override fun onDestroy() {
+        unregisterBr()
+        super.onDestroy()
     }
 
     /**
@@ -100,6 +128,7 @@ class CreateReview1Activity :
     }
 
     private fun setSearchLocation(searchResult: SearchResultEntity) {
+
         binding.tvSearchLocation.text = searchResult.fullAddress
         lat = searchResult.locationLatLng.latitude.toDouble()
         lng = searchResult.locationLatLng.longitude.toDouble()
@@ -114,7 +143,8 @@ class CreateReview1Activity :
     }
 
     private fun setExistingReviewInfo(reviewInfo: ExistingStoreInfo) {
-        getStoreInfo(reviewInfo.storeIdx)
+        storeIdx = reviewInfo.storeIdx
+        getStoreInfo(storeIdx)
         binding.tvSearchLocation.text = reviewInfo.address
         binding.ivReview1Img.isVisible = true
         glideUtil(

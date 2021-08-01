@@ -19,6 +19,7 @@ import android.widget.ToggleButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.children
 import androidx.core.view.isVisible
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityCreateReview2Binding
@@ -64,7 +65,7 @@ class CreateReview2Activity
 
             override fun afterTextChanged(p0: Editable?) {}
         })
-        binding.customToolbar.leftIcon.setOnClickListener { finish() }
+        binding.customToolbar.setLeftIconClickListener(this)
         binding.btnStar1.setOnClickListener(this)
         binding.btnStar2.setOnClickListener(this)
         binding.btnStar3.setOnClickListener(this)
@@ -81,6 +82,9 @@ class CreateReview2Activity
                 binding.ivKeyword.visibility = View.GONE
                 binding.etKeyword.visibility = View.VISIBLE
                 initKeywordChips()
+            }
+            R.id.iv_toolbar_left -> {
+                finish()
             }
             R.id.btn_star1 -> checkedIdx = 0
             R.id.btn_star2 -> checkedIdx = 1
@@ -282,7 +286,7 @@ class CreateReview2Activity
 
     override fun onPostReview1Success(response: ReviewResponse) {
         dismissLoadingDialog()
-        startActivity(Intent(this, MyReviewActivity::class.java))
+        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("finish_review1"))
         finish()
     }
 
@@ -295,7 +299,7 @@ class CreateReview2Activity
 
     override fun onPostReview2Success(response: ReviewResponse) {
         dismissLoadingDialog()
-        startActivity(Intent(this, MyReviewActivity::class.java))
+        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("finish_review1"))
         finish()
     }
 
