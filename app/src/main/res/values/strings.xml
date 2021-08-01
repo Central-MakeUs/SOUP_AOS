@@ -131,6 +131,7 @@
     <string name="dialog_register_new_store_exp2">등록 후 계속해서 후기를 남길 수 있습니다</string>
 
 
+
     <!--create group-->
     <string name="create_group_toolbar">그룹 만들기</string>
     <string name="create_group_suggest1">님의 MATE</string>
@@ -358,9 +359,15 @@
     <string name="dialog_confirm">확인</string>
     <string name="dialog_cancel">취소</string>
 
+
     <!--invite-->
     <string name="invite_query">MATE GROUP에\n새로운 친구를 초대해주세요 :)</string>
     <string name="invite_query2">MATE GROUP에 가입해주세요!</string>
+
+
+    <!--logout_dialog-->
+    <string name="logout_dialog_query1">님, 로그아웃 하시겠습니까?</string>
+    <string name="logout_dialog_query2">로그아웃시 앱은 종료됩니다.</string>
 
     <!--Mate_attend dialog-->
     <string name="mate_attend_qurey">MATE에 참가하시겠습니가?</string>

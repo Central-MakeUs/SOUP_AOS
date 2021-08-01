@@ -56,9 +56,7 @@ class SuggestionFragment : BaseFragment<FragmentSuggestionBinding>(FragmentSugge
             binding.mySuggestionRecyclerview.visibility = View.GONE
             binding.mySuggestionNoneLayout.visibility = View.VISIBLE
         }
-        binding.mateSuggestionBtn.setOnClickListener {
-            startActivity(Intent(activity, Group_Mate_Suggetsion_Activity::class.java))
-        }
+
     }
 
     override fun onGetMateFail(message: String) {

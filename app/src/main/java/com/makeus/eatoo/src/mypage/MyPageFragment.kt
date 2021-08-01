@@ -9,6 +9,7 @@ import com.makeus.eatoo.config.ApplicationClass
 import com.makeus.eatoo.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.makeus.eatoo.config.BaseFragment
 import com.makeus.eatoo.databinding.FragmentMyPageBinding
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.TimeDialogInterface
 import com.makeus.eatoo.src.mypage.finding_invite.FindInviteDialog
 import com.makeus.eatoo.src.mypage.invite.InviteActivity
 import com.makeus.eatoo.src.mypage.model.MyPageResponse
@@ -22,7 +23,7 @@ import com.makeus.eatoo.util.getUserNickName
 
 class MyPageFragment
     : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page),
-    MyPageView {
+    MyPageView, LogoutInterface {
 
     override fun onResume() {
         super.onResume()
@@ -35,8 +36,8 @@ class MyPageFragment
 
 
         binding.logoutLayout.setOnClickListener {
-            ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
-            startActivity(Intent(activity, SplashActivity::class.java))
+            val dialog = LogoutDialog(this,this)
+            dialog.show()
         }
 
         binding.reviewLayout.setOnClickListener {
@@ -46,9 +47,11 @@ class MyPageFragment
         binding.profileLayout.setOnClickListener {
             startActivity(Intent(activity, ProfileActivity::class.java))
         }
+
         binding.inviteLayout.setOnClickListener {
             startActivity(Intent(activity, InviteActivity::class.java))
         }
+
         binding.findInviteLayout.setOnClickListener {
             val dialog = FindInviteDialog(this)
             dialog.show()
@@ -112,6 +115,12 @@ class MyPageFragment
     override fun onGetMyPageFail(message: String?) {
         dismissLoadingDialog()
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
+    }
+
+    override fun Setlogout(status: String) {
+        if(status == "YES") {
+            startActivity(Intent(activity, SplashActivity::class.java))
+        }
     }
 
 
