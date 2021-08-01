@@ -65,6 +65,7 @@ class MyPageFragment
             R.id.logout_layout -> {
                 ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
                 startActivity(Intent(activity, SplashActivity::class.java))
+                activity?.finish()
             }
             R.id.review_layout -> {
                 startActivity(Intent(activity, MyReviewActivity::class.java))

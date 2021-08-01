@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityLoginBinding
@@ -125,13 +126,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             Log.d("userIdx", response.result.userIdx.toString())
             putSharedPrefUser(response.result.nickName)
             putSharedPref(response.result.jwt, response.result.userIdx)
-            finish()
             val intent = Intent(this, MainActivity::class.java)
-            intent.apply {
-               flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-            }
             startActivity(intent)
+            LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("finish_explanation"))
+            finish()
         }
     }
 
