@@ -143,6 +143,8 @@ WishListView, WishListRVAdapter.OnStoreClickListener, RadioGroup.OnCheckedChange
         }
     }
 
+    override fun onPostLikeSuccess() {
+    }
 
 
     override fun onPostLikeFail(message: String?) {

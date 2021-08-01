@@ -20,7 +20,8 @@ class LikeService(val view : LikeView) {
                 response: Response<LikeResponse>
             ) {
                 response.body()?.let {
-                    if(!it.isSuccess && it.code != 2600) view.onPostLikeFail(it.message)
+                    if(it.isSuccess) view.onPostLikeSuccess()
+                    else if(it.code != 2600) view.onPostLikeFail(it.message)
                     }
                 }
             override fun onFailure(call: Call<LikeResponse>, t: Throwable) {

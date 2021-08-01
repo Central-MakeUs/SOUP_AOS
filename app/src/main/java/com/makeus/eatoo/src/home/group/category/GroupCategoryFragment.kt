@@ -64,8 +64,10 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
     private lateinit var myLocationListener: GroupCategoryFragment.MyLocationListener
     private lateinit var locationLatLngEntity: LocationLatLngEntity
 
-    private lateinit var storeReviewList: List<CategoryMapStoreInfo>
+    private lateinit var storeReviewList: ArrayList<CategoryMapStoreInfo>
     private lateinit var storeRVAdapter: CategoryStoreRVAdapter
+
+    private var storeMarkerList = arrayListOf<Marker>()
 
 
     override fun onResume() {
@@ -272,6 +274,7 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
+        storeRVAdapter.notifyDataSetChanged()
         return false
     }
 
@@ -295,8 +298,12 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
         dialog.show()
     }
 
-    override fun onLikeClicked(storeIdx: Int) {
+    override fun onUnLikeClicked(storeIdx: Int) {
         LikeService(this).tryPatchLike(getUserIdx(), storeIdx)
+    }
+
+    override fun onLikeClicked(storeIdx: Int) {
+        LikeService(this).tryPostLike(getUserIdx(), storeIdx)
     }
 
     override fun onGotoMateSuggestClicked(storeName: String, storeImg: String) {
@@ -320,6 +327,7 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
 
         if (::naverMap.isInitialized) {
             storeReviewList = response.result.getStoresRes
+            if(storeMarkerList.isNotEmpty()) storeMarkerList.forEach { it.map = null }
             response.result.getStoresRes.forEach {
                 val marker = Marker()
                 marker.apply {
@@ -330,6 +338,7 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
                     tag = "${position.latitude},${position.longitude},${it.name}"
                     onClickListener = this@GroupCategoryFragment
                 }
+                storeMarkerList.add(marker)
             }
         } else setUpMap()
 
@@ -340,12 +349,16 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
     }
 
+    override fun onPostLikeSuccess() {
+        getCategoryMapStore()
+    }
 
     override fun onPostLikeFail(message: String?) {
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
     }
 
     override fun onPatchLikeSuccess() {
+        getCategoryMapStore()
     }
 
     override fun onPatchLikeFail(message: String?) {

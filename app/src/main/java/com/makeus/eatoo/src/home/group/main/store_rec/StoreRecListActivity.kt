@@ -148,6 +148,10 @@ class StoreRecListActivity :
         startActivity(intent)
     }
 
+    override fun onPostLikeSuccess() {
+
+    }
+
     override fun onPostLikeFail(message: String?) {
         showCustomToast(message?:resources.getString(R.string.failed_connection))
     }

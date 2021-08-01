@@ -30,6 +30,7 @@ class CategoryStoreRVAdapter(
             glideUtil(context, item.imgUrl, binding.ivStore)
             showRatingStartUtil(context, item.rating.toInt(), binding.ivReviewStar)
             if(item.isLiked == "Y") binding.ivReviewLike.setImageResource(R.drawable.eva_heart_outline)
+            else  binding.ivReviewLike.setImageResource(R.drawable.ic_eva_heart_outline)
             binding.tvStoreReviewNum.text = item.reviewsNumber.toString()
 
             binding.clCategoryMapStore.setOnClickListener{
@@ -42,8 +43,11 @@ class CategoryStoreRVAdapter(
             }
             binding.ivReviewLike.setOnClickListener {
                 if(item.isLiked == "Y"){
+                    listener.onUnLikeClicked(item.storeIdx)
+                    binding.ivReviewLike.setImageResource(R.drawable.ic_eva_heart_outline)
+                }else {
                     listener.onLikeClicked(item.storeIdx)
-                    binding.ivReviewLike.setImageResource(R.drawable.vector)
+                    binding.ivReviewLike.setImageResource(R.drawable.eva_heart_outline)
                 }
             }
         }
@@ -53,6 +57,7 @@ class CategoryStoreRVAdapter(
     interface OnStoreClickListener {
         fun onStoreClicked(storeIdx : Int)
         fun onLikeClicked(storeIdx : Int)
+        fun onUnLikeClicked(storeIdx: Int)
         fun onStoreLongClicked(storeName : String, storeImg : String)
     }
 
