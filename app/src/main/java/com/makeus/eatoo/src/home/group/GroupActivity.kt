@@ -2,7 +2,7 @@ package com.makeus.eatoo.src.home.group
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.makeus.eatoo.R
@@ -19,8 +19,6 @@ import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.getGroupName
 import com.makeus.eatoo.util.getUserIdx
 import com.google.android.material.tabs.TabLayoutMediator
-import com.makeus.eatoo.src.home.group.adapter.GroupVPAdapter
-import com.makeus.eatoo.src.home.group.category.GroupCategoryFragment
 import com.makeus.eatoo.src.home.group.category.category_list.GroupCategoryListFragment
 import com.makeus.eatoo.src.home.group.category.category_map.OnListClickListener
 import com.makeus.eatoo.src.home.group.main.GroupMainFragment
@@ -30,7 +28,7 @@ import com.makeus.eatoo.src.mypage.invite.model.InviteCodeResponse
 
 
 class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::inflate),
-    SingleView, GroupMemberView, OnListClickListener {
+    SingleView, GroupMemberView, OnListClickListener ,LeaveGroupActivityInterface, View.OnClickListener{
 
 //    private lateinit var vpAdapter: GroupVPAdapter
     private lateinit var viewPagerAdapter : GroupViewPagerAdapter
@@ -65,15 +63,32 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
 
 
     private fun setOnClickListeners() {
-        binding.customToolbar.leftIcon.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+        binding.customToolbar.leftIcon.setOnClickListener (this)
+        binding.customToolbar.rightIcon.setOnClickListener (this)
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0?.id){
+            R.id.iv_toolbar_left-> {
+                val dialog = LeaveGroupActivityDialog(this, this, getGroupName()?:"")
+                dialog.show()
+            }
+            R.id.iv_toolbar_right -> {
+                changeToSingle = binding.customToolbar.rightIcon.drawable.constantState?.equals(
+                    ContextCompat.getDrawable(this, R.drawable.ic_icon)?.constantState
+                ) ?:false
+                SingleService(this).tryPatchSingleStatus(getUserIdx())
+            }
         }
-        binding.customToolbar.rightIcon.setOnClickListener {
-            changeToSingle = binding.customToolbar.rightIcon.drawable.constantState?.equals(
-                ContextCompat.getDrawable(this, R.drawable.ic_icon)?.constantState
-            ) ?:false
-            SingleService(this).tryPatchSingleStatus(getUserIdx())
-        }
+    }
+
+    override fun onBackPressed() {
+        val dialog = LeaveGroupActivityDialog(this, this, getGroupName()?:"")
+        dialog.show()
+    }
+
+    override fun onLeaveGroupClicked() {
+        finish()
     }
 
     private fun setGroupViewPager() {

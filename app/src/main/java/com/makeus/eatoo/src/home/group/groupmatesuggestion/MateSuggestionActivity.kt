@@ -22,12 +22,14 @@ import com.makeus.eatoo.util.getUserIdx
 import com.google.android.material.chip.Chip
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.dialog.LeaveMateSuggDialog
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.dialog.LeaveMateSuggDialogInterface
 import com.makeus.eatoo.util.glideUtil
 
 
 class MateSuggestionActivity
     : BaseActivity<ActivityMateSuggestionBinding>(ActivityMateSuggestionBinding::inflate)
-    , MateSuggestionView, TimeDialogInterface, View.OnClickListener{
+    , MateSuggestionView, TimeDialogInterface, View.OnClickListener, LeaveMateSuggDialogInterface{
 
 
     private var groupIdx : Int = -1
@@ -71,6 +73,7 @@ class MateSuggestionActivity
         binding.limitTimeLayout.setOnClickListener(this)
         binding.registerMateBtn.setOnClickListener(this)
         binding.llImgHint.setOnClickListener(this)
+        binding.customToolbar.setLeftIconClickListener(this)
     }
 
     private fun loadGroup() {
@@ -93,8 +96,13 @@ class MateSuggestionActivity
             }
             R.id.register_mate_btn -> checkValidation()
             R.id.ll_img_hint -> loadGallery()
+            R.id.iv_toolbar_left -> {
+                val dialog = LeaveMateSuggDialog(this, this)
+                dialog.show()
+            }
         }
     }
+
 
     private fun loadGallery() {
         getImage.launch("image/*")
@@ -195,7 +203,21 @@ class MateSuggestionActivity
         MateSuggestionService(this).tryPostMate(mateReq, getUserIdx())
     }
 
+    override fun onLeaveMateSuggClicked() {
+        finish()
+    }
 
+    override fun onBackPressed() {
+        val dialog = LeaveMateSuggDialog(this, this)
+        dialog.show()
+    }
+
+
+    /*
+
+    server result
+
+     */
     override fun onGetGroupSuccess(response: GroupResponse) {
         response.result.forEach {
             val chip  = LayoutInflater.from(this).inflate(R.layout.view_chip_2, null) as Chip
@@ -212,7 +234,6 @@ class MateSuggestionActivity
     }
 
 
-    //그룹 생성하기
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {
         dismissLoadingDialog()
         val dialog = MateSuggestionCompleteDialog(this)

@@ -20,6 +20,7 @@ import com.makeus.eatoo.src.home.group.category.category_detail.model.StoreDetai
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.MateSuggestionActivity
 import com.makeus.eatoo.util.getUserIdx
 import com.makeus.eatoo.util.glideUtil
+import com.makeus.eatoo.util.showRatingStartUtil
 
 class CategoryStoreDetailActivity
     : BaseActivity<ActivityCategoryStoreDetailBinding>(ActivityCategoryStoreDetailBinding::inflate),
@@ -31,6 +32,7 @@ StoreDetailView, View.OnClickListener, LikeView, CompoundButton.OnCheckedChangeL
 
     var storeIdx = -1
     var storeImg = ""
+    var link = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +87,8 @@ StoreDetailView, View.OnClickListener, LikeView, CompoundButton.OnCheckedChangeL
         binding.tvStoreName.text = response.result.storeName
         binding.tvStoreAddress.text = response.result.address
         binding.toggleStoreLike.isChecked = response.result.isLiked == "Y"
+        showRatingStartUtil(this, response.result.rating.toInt(), binding.ivRatingStar)
+        link = response.result.link
 
         setKeywordRV(response.result.getStoreKeywordRes)
         setImgRV(response.result.getReviewImgRes)

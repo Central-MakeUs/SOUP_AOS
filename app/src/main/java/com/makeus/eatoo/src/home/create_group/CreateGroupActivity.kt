@@ -383,7 +383,9 @@ class CreateGroupActivity :
     override fun onPostGroupSuccess(response: CreateGroupResponse) {
         dismissLoadingDialog()
         ApplicationClass.sSharedPreferences.edit()
-            .putInt(ApplicationClass.GROUP_IDX, response.result.groupIdx).apply()
+            .putInt(ApplicationClass.GROUP_IDX,  response.result.groupIdx).apply()
+        ApplicationClass.sSharedPreferences.edit()
+            .putString(ApplicationClass.GROUP_NAME,  binding.etGroupName.text.toString()).apply()
         startActivity(Intent(this, GroupActivity::class.java))
         finish()
     }
