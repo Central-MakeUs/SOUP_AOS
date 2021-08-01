@@ -52,7 +52,7 @@ class SignInActivity :  BaseActivity<ActivitySignInBinding>(ActivitySignInBindin
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 //텍스트 입력 중
 
-                if((isValidNameK(binding.nameEdt.text.toString())|| isValidName(binding.nameEdt.text.toString())||isValidNameE(binding.nameEdt.text.toString()) )&& isValidPhone(binding.phoneNumberEdt.text.toString())){
+                if((isValidNameK(binding.nameEdt.text.toString())|| isValidName(binding.nameEdt.text.toString())||isValidNameE(binding.nameEdt.text.toString()) ) && isValidPhone(binding.phoneNumberEdt.text.toString())){
 
                     binding.nextBtn.isClickable = true // 버튼 클릭할수 있게
                     binding.nextBtn.isEnabled = true // 버튼 활성화
@@ -73,7 +73,7 @@ class SignInActivity :  BaseActivity<ActivitySignInBinding>(ActivitySignInBindin
                 }
                 else{
                     binding.nameHint.setText(R.string.sign_in_name_bottom)
-                    binding.nameHint.setTextColor(binding.nameHint.context.resources.getColor(R.color.black))
+                    binding.nameHint.setTextColor(binding.nameHint.context.resources.getColor(R.color.gray_100))
                 }
 
 
@@ -115,7 +115,7 @@ class SignInActivity :  BaseActivity<ActivitySignInBinding>(ActivitySignInBindin
                 }
                 else{
                     binding.phoneHint.setText(R.string.sign_in_phone_bottom)
-                    binding.phoneHint.setTextColor(binding.phoneHint.context.resources.getColor(R.color.black))
+                    binding.phoneHint.setTextColor(binding.phoneHint.context.resources.getColor(R.color.gray_100))
                 }
 
 
