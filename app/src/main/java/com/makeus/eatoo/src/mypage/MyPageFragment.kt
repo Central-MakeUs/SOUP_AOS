@@ -2,6 +2,7 @@ package com.makeus.eatoo.src.mypage
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.app.ActivityCompat
@@ -17,8 +18,10 @@ import com.makeus.eatoo.src.mypage.invite.InviteActivity
 import com.makeus.eatoo.src.mypage.model.AccountDeleteResponse
 import com.makeus.eatoo.src.mypage.model.MyPageResponse
 import com.makeus.eatoo.src.mypage.profile.ProfileActivity
-import com.makeus.eatoo.src.mypage.withdrawal.AccountWithdrawDialog
-import com.makeus.eatoo.src.mypage.withdrawal.AccountWithdrawalDialogInterface
+import com.makeus.eatoo.src.mypage.dialog.AccountWithdrawDialog
+import com.makeus.eatoo.src.mypage.dialog.AccountWithdrawalDialogInterface
+import com.makeus.eatoo.src.mypage.dialog.QuestionDialog
+import com.makeus.eatoo.src.mypage.dialog.QuestionDialogInterface
 import com.makeus.eatoo.src.review.my_review.MyReviewActivity
 import com.makeus.eatoo.src.splash.SplashActivity
 import com.makeus.eatoo.util.EatooCharList
@@ -28,7 +31,7 @@ import com.makeus.eatoo.util.getUserNickName
 
 class MyPageFragment
     : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page),
-    MyPageView, View.OnClickListener, AccountWithdrawalDialogInterface {
+    MyPageView, View.OnClickListener, AccountWithdrawalDialogInterface, QuestionDialogInterface {
 
     override fun onResume() {
         super.onResume()
@@ -54,6 +57,7 @@ class MyPageFragment
         binding.inviteLayout.setOnClickListener (this)
         binding.findInviteLayout.setOnClickListener (this)
         binding.accountSecessionLayout.setOnClickListener(this)
+        binding.questionsLayout.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -81,7 +85,22 @@ class MyPageFragment
                     dialog.show()
                 }
             }
+            R.id.questions_layout -> {
+                context?.let {
+                    val dialog = QuestionDialog(it, this)
+                    dialog.show()
+                }
+            }
         }
+    }
+
+    override fun onGoToGoogleStoreClicked() {
+        context?.let {
+            val marketIntent = Intent(Intent.ACTION_VIEW)
+            marketIntent.data = Uri.parse("market://details?id=" + it.packageName)
+            startActivity(marketIntent)
+        }
+
     }
 
     private fun getMyPage() {

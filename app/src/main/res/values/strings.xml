@@ -289,7 +289,9 @@
     <string name="category_dialog_exp2">구한다면 MATE를 제안하세요!</string>
     <string name="no_category_result_exp1">등록된 가게가 없습니다.</string>
     <string name="no_category_result_exp2">후기 작성을 통해 가게를 등록할 수 있습니다.</string>
-
+    <string name="dialog_store_link_exp1">식당에 대한 더 자세한 정보 제공을 위해</string>
+    <string name="dialog_store_link_exp2">링크된 페이지로 이동합니다.</string>
+    <string name="dialog_store_link_exp3">네이버 또는 구글 등 검색사이트로 이동합니다.</string>
 
     <!--store rec-->
     <string name="store_rec">추천맛집</string>
@@ -364,6 +366,9 @@
     <string name="account_withdraw_query1">정말 계정을 탈퇴하시겠습니까?</string>
     <string name="account_withdraw_exp1">계정 삭제 시 앱은 종료되며</string>
     <string name="account_withdraw_exp2">기존의 정보는 모두 삭제됩니다.</string>
+    <string name="dialog_question_exp1">문의사항이 있다면 GOOGLE PLAY</string>
+    <string name="dialog_question_exp2">STORE에 남겨주시기 바랍니다.</string>
+    <string name="dialog_question_goto">구글플레이스토어 바로가기 ></string>
 
     <!--notification-->
     <string name="notification">알림</string>

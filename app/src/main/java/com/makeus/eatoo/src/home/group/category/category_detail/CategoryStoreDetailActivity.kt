@@ -1,6 +1,7 @@
 package com.makeus.eatoo.src.home.group.category.category_detail
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
@@ -8,11 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityCategoryStoreDetailBinding
+import com.makeus.eatoo.databinding.DialogStoreLinkBinding
 import com.makeus.eatoo.like.LikeService
 import com.makeus.eatoo.like.LikeView
 import com.makeus.eatoo.src.home.group.category.category_detail.adapter.StoreDetailImageRVAdapter
 import com.makeus.eatoo.src.home.group.category.category_detail.adapter.StoreDetailKeywordRVAdapter
 import com.makeus.eatoo.src.home.group.category.category_detail.adapter.StoreDetailReviewRVAdapter
+import com.makeus.eatoo.src.home.group.category.category_detail.dialog.StoreLinkDialog
+import com.makeus.eatoo.src.home.group.category.category_detail.dialog.StoreLinkDialogInterface
 import com.makeus.eatoo.src.home.group.category.category_detail.model.GetReviewImgRe
 import com.makeus.eatoo.src.home.group.category.category_detail.model.GetReviewRe
 import com.makeus.eatoo.src.home.group.category.category_detail.model.GetStoreKeywordRe
@@ -24,7 +28,8 @@ import com.makeus.eatoo.util.showRatingStartUtil
 
 class CategoryStoreDetailActivity
     : BaseActivity<ActivityCategoryStoreDetailBinding>(ActivityCategoryStoreDetailBinding::inflate),
-StoreDetailView, View.OnClickListener, LikeView, CompoundButton.OnCheckedChangeListener{
+StoreDetailView, View.OnClickListener, LikeView, CompoundButton.OnCheckedChangeListener,
+    StoreLinkDialogInterface {
 
     private lateinit var storeKeywordAdapter : StoreDetailKeywordRVAdapter
     private lateinit var storeImgAdapter : StoreDetailImageRVAdapter
@@ -41,12 +46,42 @@ StoreDetailView, View.OnClickListener, LikeView, CompoundButton.OnCheckedChangeL
         binding.btnSuggestMate.setOnClickListener(this)
         binding.ibtnBackArrow.setOnClickListener(this)
         binding.toggleStoreLike.setOnCheckedChangeListener(this)
+        binding.tvMoreStoreInfo.setOnClickListener(this)
 
     }
 
     private fun getStoreIntent() {
         storeIdx = intent.getIntExtra("storeIdx", -1)
         if(storeIdx != -1) getStoreDetail(storeIdx)
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0?.id){
+            R.id.btn_suggest_mate -> {
+                val intent = Intent(this, MateSuggestionActivity::class.java)
+                intent.apply {
+                    putExtra("storeName", binding.tvStoreName.text.toString())
+                    putExtra("storeImg", storeImg)
+                }
+                startActivity(intent)
+            }
+            R.id.ibtn_back_arrow -> {
+                finish()
+            }
+            R.id.tv_more_store_info -> {
+                if(link.isNotEmpty()){
+                    val dialog = StoreLinkDialog(this, this)
+                    dialog.show()
+                }else {
+                    showCustomToast("저장된 가게 링크가 없습니다.")
+                }
+            }
+        }
+    }
+
+    override fun goToStoreLinkClicked() {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+        startActivity(browserIntent)
     }
 
     private fun setImgRV(imgList: List<GetReviewImgRe>) {
@@ -102,21 +137,7 @@ StoreDetailView, View.OnClickListener, LikeView, CompoundButton.OnCheckedChangeL
         showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
 
-    override fun onClick(p0: View?) {
-        when(p0?.id){
-            R.id.btn_suggest_mate -> {
-                val intent = Intent(this, MateSuggestionActivity::class.java)
-                intent.apply {
-                    putExtra("storeName", binding.tvStoreName.text.toString())
-                    putExtra("storeImg", storeImg)
-                }
-                startActivity(intent)
-            }
-            R.id.ibtn_back_arrow -> {
-                finish()
-            }
-        }
-    }
+
     override fun onPostLikeFail(message: String?) {
         showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
