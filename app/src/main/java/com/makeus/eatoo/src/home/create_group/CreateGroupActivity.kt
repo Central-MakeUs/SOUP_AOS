@@ -49,8 +49,6 @@ class CreateGroupActivity :
     private var mapShowing = false
 
     companion object {
-        const val SEARCH_RESULT_EXTRA_KEY: String = "SEARCH_RESULT_EXTRA_KEY"
-        const val CAMERA_ZOOM_LEVEL = 17f
         const val PERMISSION_REQUEST_CODE = 101
     }
 

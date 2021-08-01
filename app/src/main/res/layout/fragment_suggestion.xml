@@ -130,6 +130,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/my_suggestion_layout">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_mate_sugg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 

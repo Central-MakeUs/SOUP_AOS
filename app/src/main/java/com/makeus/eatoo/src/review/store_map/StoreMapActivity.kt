@@ -17,21 +17,21 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.makeus.eatoo.R
+import com.makeus.eatoo.config.ApplicationClass
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityStoreMapBinding
 import com.makeus.eatoo.reverse_geo.ReverseGeoService
 import com.makeus.eatoo.reverse_geo.ReverseGeoView
 import com.makeus.eatoo.src.home.create_group.CreateGroupActivity.Companion.PERMISSION_REQUEST_CODE
+import com.makeus.eatoo.src.home.create_group.model.SearchResultEntity
 import com.makeus.eatoo.src.review.create_review.create_review1.CreateReview1Activity
 import com.makeus.eatoo.src.review.store_map.adapter.ExistingStoreRVAdapter
-import com.makeus.eatoo.src.review.store_map.model.StoreResponse
 import com.makeus.eatoo.src.review.store_map.dialog.RegisterNewStoreDialog
-import com.makeus.eatoo.src.review.store_map.model.AllStoreResponse
+import com.makeus.eatoo.src.review.store_map.model.*
 import com.makeus.eatoo.util.getUserIdx
 import com.makeus.googlemapsapiprac.model.LocationLatLngEntity
-import com.makeus.eatoo.src.review.store_map.model.KakaoAddressResponse
-import com.makeus.eatoo.src.review.store_map.model.Store
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
@@ -86,7 +86,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         }
     }
 
-    /*
+    /**
       현재 위치 가져오기
 
    */
@@ -218,7 +218,7 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         }
     }
 
-    /*
+    /**
         클릭 이벤트
      */
 
@@ -271,37 +271,47 @@ class StoreMapActivity : BaseActivity<ActivityStoreMapBinding>(ActivityStoreMapB
         return true
     }
 
-   /*
+   /**
 
    interface click listeners
 
     */
     override fun onReviewClicked(item: Store) {
-        val intent = Intent(this, CreateReview1Activity::class.java)
-        intent.apply {
-            putExtra("storeIdx", item.storeIdx)
-            putExtra("imgUrl", item.imgUrl)
-            putExtra("address", item.address)
-        }
 
-        startActivity(intent)
+       val searchResult = ExistingStoreInfo(
+           imgUrl = item.imgUrl,
+           storeIdx =  item.storeIdx,
+           address = item.address
+       )
+       val gson = Gson()
+       val jsonStoreLocation = gson.toJson(searchResult)
+
+       ApplicationClass.sSharedPreferences.edit()
+           .putString("EXISTING_REVIEW_INFO", jsonStoreLocation).apply()
+
+       finish()
+
     }
 
 
     override fun onRegisterNewStoreConfirm() {
 
-        val intent = Intent(this, CreateReview1Activity::class.java)
-        intent.apply {
-            putExtra("address", roadAddress)
-            putExtra("lat", storeLat)
-            putExtra("lng", storeLng)
-        }
-        startActivity(intent)
+        val searchResult = SearchResultEntity(
+            buildingName = "가게",
+            fullAddress = roadAddress?:"",
+            locationLatLng = LocationLatLngEntity(storeLat.toFloat() , storeLng.toFloat() )
+        )
+        val gson = Gson()
+        val jsonStoreLocation = gson.toJson(searchResult)
+
+        ApplicationClass.sSharedPreferences.edit()
+            .putString("STORE_MAP_LOCATION", jsonStoreLocation).apply()
+
         finish()
 
     }
 
-    /*
+    /**
 
     server result
 

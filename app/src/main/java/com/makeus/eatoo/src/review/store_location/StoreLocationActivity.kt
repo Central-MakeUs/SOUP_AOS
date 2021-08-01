@@ -10,14 +10,18 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.makeus.eatoo.R
+import com.makeus.eatoo.config.ApplicationClass
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityStoreLocationBinding
+import com.makeus.eatoo.src.home.create_group.model.SearchResultEntity
 import com.makeus.eatoo.src.review.create_review.create_review1.CreateReview1Activity
 import com.makeus.eatoo.src.review.store_location.adaper.StoreSearchRVAdapter
 import com.makeus.eatoo.src.review.store_location.model.KakaoSearchDoc
 import com.makeus.eatoo.src.review.store_location.model.KakaoSearchResponse
 import com.makeus.eatoo.src.review.store_map.StoreMapActivity
+import com.makeus.googlemapsapiprac.model.LocationLatLngEntity
 
 class StoreLocationActivity
     : BaseActivity<ActivityStoreLocationBinding>(ActivityStoreLocationBinding::inflate),
@@ -125,13 +129,23 @@ StoreLocationView, StoreSearchRVAdapter.OnSearchResultClickListener, View.OnClic
     override fun onSearchResultClick(item: KakaoSearchDoc) {
         val address = if(item.road_address_name.isEmpty()) item.address_name else item.road_address_name
 
-        val intent = Intent(this, CreateReview1Activity::class.java)
-        intent.apply {
-            putExtra("address", address)
-            putExtra("lat", item.y.toDouble())
-            putExtra("lng", item.x.toDouble())
-        }
-        startActivity(intent)
+        val searchResult = SearchResultEntity(
+            buildingName = item.place_name,
+            fullAddress = address,
+            locationLatLng = LocationLatLngEntity(
+                item.y.toFloat(),
+                item.x.toFloat()
+
+            )
+        )
+
+        val gson = Gson()
+        val jsonLocationSearch = gson.toJson(searchResult)
+
+        ApplicationClass.sSharedPreferences.edit()
+            .putString("REVIEW_LOCATION_SEARCH", jsonLocationSearch).apply()
+
+        finish()
 
     }
 

@@ -18,6 +18,7 @@
         android:layout_width="10dp"
         android:layout_height="10dp"
         app:cardCornerRadius="30dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@id/iv_bell"
         app:layout_constraintBottom_toBottomOf="@id/iv_bell"
         android:layout_marginStart="11dp"

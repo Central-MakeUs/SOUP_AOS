@@ -19,7 +19,8 @@ import com.makeus.eatoo.util.getUserNickName
 
 class SuggestionFragment
     : BaseFragment<FragmentSuggestionBinding>(FragmentSuggestionBinding::bind, R.layout.fragment_suggestion),
-    MySuggestionView , MateSuggestionRecyclerviewAdapter.OnMySuggestClick, MySuggestDeleteDialogInterface{
+    MySuggestionView , MateSuggestionRecyclerviewAdapter.OnMySuggestClick, MySuggestDeleteDialogInterface,
+View.OnClickListener{
 
 
     private lateinit var mateAdapter : MateSuggestionRecyclerviewAdapter
@@ -37,8 +38,20 @@ class SuggestionFragment
 
 
         binding.userNameSuggestionTxt.text = getUserNickName() + binding.userNameSuggestionTxt.text
+        binding.clMateSugg.setOnClickListener(this)
 
 
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0?.id){
+            R.id.cl_mate_sugg -> {
+                context?.let {
+                    startActivity(Intent(it, MateSuggestionActivity::class.java))
+                }
+
+            }
+        }
     }
     private fun getMySuggestion() {
         context?.let {
