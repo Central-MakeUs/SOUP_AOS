@@ -4,7 +4,7 @@ import com.makeus.eatoo.src.home.group.groupmatesuggestion.model.CreateMateRespo
 import com.makeus.eatoo.src.home.model.GroupResponse
 
 
-interface Mate_Suggestion_ActivityView {
+interface MateSuggestionView {
 
     fun onGetGroupSuccess(response : GroupResponse)
     fun onGetGroupFail(message : String)

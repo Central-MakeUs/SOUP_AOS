@@ -98,6 +98,7 @@
                 android:background="@drawable/edittext_background_radius_litle"
                 android:fontFamily="@font/roboto_regular"
                 android:hint="@string/create_group_name_suggest"
+                android:maxLength="10"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:inputType="text"
                 android:paddingStart="6dp"
@@ -328,10 +329,11 @@
 
                 <fragment
                     android:id="@+id/frag_create_group_map"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:name="com.naver.maps.map.MapFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp" />
+
 
                 <LinearLayout
                     android:id="@+id/ll_container_map"
@@ -360,6 +362,16 @@
                 </LinearLayout>
 
             </FrameLayout>
+
+            <com.naver.maps.map.widget.ZoomControlView
+                android:id="@+id/zoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintTop_toTopOf="@id/fl_creategroup"
+                app:layout_constraintStart_toStartOf="@id/fl_creategroup"
+                android:layout_marginStart="25dp"
+                app:layout_constraintBottom_toBottomOf="@id/fl_creategroup"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_change_location"

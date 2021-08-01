@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.TypedValue
@@ -25,37 +26,29 @@ import com.makeus.eatoo.src.home.create_group.model.CreateGroupResponse
 import com.makeus.eatoo.src.home.create_group.model.Keyword
 import com.makeus.eatoo.src.home.group.GroupActivity
 import com.makeus.eatoo.util.getUserIdx
-import com.makeus.googlemapsapiprac.model.LocationLatLngEntity
+import com.naver.maps.geometry.LatLng
 import com.makeus.eatoo.src.home.create_group.model.SearchResultEntity
 import com.makeus.eatoo.util.getUserNickName
 import com.google.android.flexbox.FlexboxLayout
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.naver.maps.map.overlay.Marker
 import com.google.android.material.chip.Chip
 import com.google.gson.Gson
+import com.naver.maps.map.*
+import com.naver.maps.map.util.MarkerIcons
 import kotlin.math.roundToInt
 
 class CreateGroupActivity :
     BaseActivity<ActivityCreateGroupBinding>(ActivityCreateGroupBinding::inflate),
-    OnMapReadyCallback, CreateGroupView {
+    OnMapReadyCallback, CreateGroupView, View.OnClickListener {
 
-    private lateinit var map: GoogleMap
+    private lateinit var naverMap: NaverMap
     private lateinit var searchResult: SearchResultEntity
-    private var currentSelectMarker: Marker? = null
     private lateinit var locationManager: LocationManager
-    private lateinit var locationLatLngEntity: LocationLatLngEntity
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
     private var mapShowing = false
 
     companion object {
-        const val SEARCH_RESULT_EXTRA_KEY: String = "SEARCH_RESULT_EXTRA_KEY"
-        const val CAMERA_ZOOM_LEVEL = 17f
         const val PERMISSION_REQUEST_CODE = 101
     }
 
@@ -72,42 +65,135 @@ class CreateGroupActivity :
         closeMap()
         setKeyword()
 
-        searchLocation()
         getCurrentLocation()
 
-        registerGroup()
-        setRegisterBtnColorChange()
+        setOnClickListeners()
 
 
     }
 
-    private fun setRegisterBtnColorChange(){
+    override fun onClick(p0: View?) {
+        when (p0?.id) {
+            R.id.register_group_btn -> checkValidation()
+            R.id.tv_search_location -> startActivity(
+                Intent(
+                    this,
+                    GroupLocationActivity::class.java
+                )
+            )
+            R.id.btn_change_location -> if (mapShowing) startActivity(
+                Intent(
+                    this,
+                    GroupLocationActivity::class.java
+                )
+            )
+        }
+    }
+
+    private fun setOnClickListeners() {
         binding.customToolbar.leftIcon.setOnClickListener { finish() }
+        binding.registerGroupBtn.setOnClickListener(this)
+        binding.tvSearchLocation.setOnClickListener(this)
+        binding.btnChangeLocation.setOnClickListener(this)
 
     }
 
+    /*
+
+  지도 보이기
+
+   */
     private fun getSearchJson() {
 
         val gson = Gson()
-        val jsonFromCurrentLocation =  ApplicationClass.sSharedPreferences.getString("CURRENT_LOCATION", "")
-        val jsonFromLocationSearch = ApplicationClass.sSharedPreferences.getString("LOCATION_SEARCH", "")
+        val jsonFromCurrentLocation =
+            ApplicationClass.sSharedPreferences.getString("CURRENT_LOCATION", "")
+        val jsonFromLocationSearch =
+            ApplicationClass.sSharedPreferences.getString("LOCATION_SEARCH", "")
 
-        if(jsonFromCurrentLocation != "" || jsonFromLocationSearch != "") {
-            if(jsonFromCurrentLocation != ""){
-                searchResult = gson.fromJson(jsonFromCurrentLocation, SearchResultEntity::class.java)
-            } else if(jsonFromLocationSearch != "") {
+        if (jsonFromCurrentLocation != "" || jsonFromLocationSearch != "") {
+            if (jsonFromCurrentLocation != "") {
+                searchResult =
+                    gson.fromJson(jsonFromCurrentLocation, SearchResultEntity::class.java)
+            } else if (jsonFromLocationSearch != "") {
                 searchResult = gson.fromJson(jsonFromLocationSearch, SearchResultEntity::class.java)
             }
 
             mapShowing = true
             setAddressTv(searchResult.fullAddress)
-            setupGoogleMap()
+            setupMap()
             ApplicationClass.sSharedPreferences.edit().putString("CURRENT_LOCATION", null).apply()
             ApplicationClass.sSharedPreferences.edit().putString("LOCATION_SEARCH", null).apply()
         }
-
-
     }
+
+    private fun setAddressTv(fullAddress: String) {
+        binding.tvSearchLocation.text = fullAddress
+    }
+
+    private fun enableMap() {
+        setupMap()
+    }
+
+    private fun showMap() {
+        binding.llContainerMap.isVisible = false
+        mapShowing = true
+        binding.btnChangeLocation.isVisible = true
+
+        binding.zoom.map = naverMap
+        binding.zoom.isVisible = true
+    }
+
+    private fun closeMap() {
+        binding.llContainerMap.isVisible = true
+        mapShowing = false
+        binding.btnChangeLocation.isVisible = false
+    }
+
+    private fun setupMap() {
+        val fm = supportFragmentManager
+        val mapFragment =
+            fm.findFragmentById(R.id.frag_create_group_map) as MapFragment?
+                ?: MapFragment.newInstance().also {
+                    fm.beginTransaction().add(R.id.frag_create_group_map, it).commit()
+                }
+        mapFragment.getMapAsync(this)
+    }
+
+    override fun onMapReady(map: NaverMap) {
+        naverMap = map
+        naverMap.maxZoom = 19.0
+        naverMap.minZoom = 10.0
+
+        if (mapShowing) {
+            setupMarker(searchResult)
+            val uiSetting = naverMap.uiSettings
+            uiSetting.isZoomControlEnabled = false
+            showMap()
+        }
+    }
+
+    private fun setupMarker(searchResult: SearchResultEntity) { //검색한 위도경도
+        latitude = searchResult.locationLatLng.latitude.toDouble()
+        longitude = searchResult.locationLatLng.longitude.toDouble()
+
+        val positionLatLng = LatLng(latitude, longitude)
+
+        val cameraUpdate = CameraUpdate.scrollTo(positionLatLng).animate(CameraAnimation.Easing)
+
+        if (::naverMap.isInitialized) naverMap.moveCamera(cameraUpdate)
+        else setupMap()
+
+        val marker = Marker()
+        marker.apply {  //태그 달 수 있음.
+            position = positionLatLng
+            map = naverMap
+            icon = MarkerIcons.BLACK
+            iconTintColor = Color.RED
+        }
+    }
+
+
 
     /*
 
@@ -129,12 +215,12 @@ class CreateGroupActivity :
         binding.etKeyword.setOnKeyListener { v, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
                 val keywordList = binding.flexboxMakeGroup.getAllChips()
-                if (keywordList.size-1 == 4) showCustomToast(resources.getString(R.string.keyword_num_limit))
+                if (keywordList.size - 1 == 4) showCustomToast(resources.getString(R.string.keyword_num_limit))
                 else {
                     val et = v as EditText
                     val keyword = et.text.toString()
                     if (keyword.length >= 11) showCustomToast(resources.getString(R.string.keyword_length_limit))
-                    else{
+                    else {
                         binding.flexboxMakeGroup.addChip(keyword)
                         et.text.clear()
                     }
@@ -173,7 +259,7 @@ class CreateGroupActivity :
 
     private fun FlexboxLayout.getAllChips(): List<Keyword> {
         var keywordList: MutableList<Keyword> = mutableListOf()
-        (0 until childCount-1).mapNotNull { index ->
+        (0 until childCount - 1).mapNotNull { index ->
             val childChip = getChildAt(index) as? Chip
             keywordList.add(Keyword(name = childChip?.text.toString()))
         }
@@ -182,7 +268,7 @@ class CreateGroupActivity :
 
     /*
 
-    get color chips
+    color chips
 
      */
 
@@ -199,58 +285,43 @@ class CreateGroupActivity :
 
      */
 
-    private fun registerGroup() {
-        binding.registerGroupBtn.setOnClickListener {
+    private fun checkValidation() {
 
-            val keywordList = binding.flexboxMakeGroup.getAllChips()
-            val groupColor = getGroupColor()
-
-            val group = CreateGroupRequest(
-                name = binding.etGroupName.text.toString(),
-                color = groupColor,
-                latitude = latitude,
-                longitude = longitude,
-                keyword = keywordList
-            )
-            val userIdx = getUserIdx()
-
-            ApplicationClass.sSharedPreferences.edit()
-                .putString(ApplicationClass.GROUP_NAME, binding.etGroupName.text.toString()).apply()
-
-            CreateGroupService(this).tryPostGroup(userIdx = userIdx, createGroup = group)
-
-        }
-    }
-
-    private fun setAddressTv(fullAddress: String) {
-        binding.tvSearchLocation.text = fullAddress
-    }
-
-    private fun enableMap() {
-        setupGoogleMap()
-    }
-
-    private fun showMap() {
-        binding.llContainerMap.isVisible = false
-        mapShowing = true
-        binding.btnChangeLocation.isVisible = true
-    }
-
-    private fun closeMap() {
-        binding.llContainerMap.isVisible = true
-        mapShowing = false
-        binding.btnChangeLocation.isVisible = false
-    }
-
-    private fun searchLocation() {
-        binding.tvSearchLocation.setOnClickListener {
-            startActivity(Intent(this, GroupLocationActivity::class.java))
-        }
-        binding.btnChangeLocation.setOnClickListener {
-            if (mapShowing) startActivity(Intent(this, GroupLocationActivity::class.java))
+        if (binding.etGroupName.text.isEmpty()) {
+            showCustomToast("그룹 이름을 입력해주세요.")
+            return
         }
 
+        if (latitude == 0.0 || longitude == 0.0) {
+            showCustomToast("위치를 입력해주세요.")
+            return
+        }
+
+
+        val group = CreateGroupRequest(
+            name = binding.etGroupName.text.toString(),
+            color = getGroupColor(),
+            latitude = latitude,
+            longitude = longitude,
+            keyword = binding.flexboxMakeGroup.getAllChips()
+        )
+
+        createGroupRequest(group)
     }
+
+    private fun createGroupRequest(group: CreateGroupRequest) {
+        showLoadingDialog(this)
+        CreateGroupService(this).tryPostGroup(getUserIdx(), group)
+        ApplicationClass.sSharedPreferences.edit()
+            .putString(ApplicationClass.GROUP_NAME, binding.etGroupName.text.toString()).apply()
+    }
+
+    /*
+
+     위치 권한
+
+     */
+
 
     private fun getCurrentLocation() = with(binding) {
         if (!mapShowing) { //첫 방문
@@ -258,42 +329,6 @@ class CreateGroupActivity :
                 requestPermission()
             }
         }
-    }
-
-    private fun setupGoogleMap() {
-        val mapFragment =
-            supportFragmentManager.findFragmentById(R.id.frag_create_group_map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-    }
-
-
-    override fun onMapReady(map: GoogleMap) { //구글맵 객체 //아래 내용 없으면 세계지도 나옴.
-        this.map = map
-        if (mapShowing) {
-            currentSelectMarker = setupMarker(searchResult)
-            currentSelectMarker?.showInfoWindow()
-            showMap()
-        }
-    }
-
-    private fun setupMarker(searchResult: SearchResultEntity): Marker? { //검색한 위도경도
-        latitude = searchResult.locationLatLng.latitude.toDouble()
-        longitude = searchResult.locationLatLng.longitude.toDouble()
-
-        val positionLatLng = LatLng(latitude, longitude)
-        val markerOptions = MarkerOptions().apply {
-            position(positionLatLng)
-            title(searchResult.buildingName)
-            snippet(searchResult.fullAddress)
-        }
-        map.moveCamera(
-            CameraUpdateFactory.newLatLngZoom(
-                positionLatLng,
-                CAMERA_ZOOM_LEVEL
-            )
-        )
-
-        return map.addMarker(markerOptions)
     }
 
     private fun requestPermission() {
@@ -339,14 +374,23 @@ class CreateGroupActivity :
         }
     }
 
+
+
+    ///////server result
+
     override fun onPostGroupSuccess(response: CreateGroupResponse) {
+        dismissLoadingDialog()
         ApplicationClass.sSharedPreferences.edit()
-            .putInt(ApplicationClass.GROUP_IDX, response.result.groupIdx).apply()
+            .putInt(ApplicationClass.GROUP_IDX,  response.result.groupIdx).apply()
+        ApplicationClass.sSharedPreferences.edit()
+            .putString(ApplicationClass.GROUP_NAME,  binding.etGroupName.text.toString()).apply()
         startActivity(Intent(this, GroupActivity::class.java))
+        finish()
     }
 
     override fun onPostGroupFail(message: String?) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        dismissLoadingDialog()
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
 
 

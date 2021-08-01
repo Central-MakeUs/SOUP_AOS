@@ -4,6 +4,7 @@ import com.makeus.eatoo.config.BaseResponse
 import com.makeus.eatoo.like.model.LikeResponse
 
 interface LikeView {
+    fun onPostLikeSuccess()
     fun onPostLikeFail(message : String?)
 
     fun onPatchLikeSuccess()

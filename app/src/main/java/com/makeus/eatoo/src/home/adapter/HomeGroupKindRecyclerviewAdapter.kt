@@ -24,12 +24,12 @@ import com.makeus.eatoo.config.ApplicationClass
 import com.makeus.eatoo.src.home.model.GroupMembers
 import com.makeus.eatoo.util.EatooCharList
 
-class Home_Group_Kind_RecyclerviewAdapter(
+class HomeGroupKindRecyclerviewAdapter(
     val GroupList: ArrayList<GroupResultResponse>,
     var groupsize: Int,
     var group_status: String,
     val listener : OnGroupLongClick
-) : RecyclerView.Adapter<Home_Group_Kind_RecyclerviewAdapter.CustomViewholder>() {
+) : RecyclerView.Adapter<HomeGroupKindRecyclerviewAdapter.CustomViewholder>() {
 
     val colorArray = ApplicationClass.applicationResources.getIntArray(R.array.groupRVColor)
 

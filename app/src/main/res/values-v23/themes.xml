@@ -3,7 +3,7 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -19,7 +19,7 @@
         <item name="android:windowLightStatusBar">true</item>
 
         <!-- Customize your theme here. -->
-        <item name="colorAccent">@color/custom_purple</item>
+        <item name="colorAccent">@color/main_orange</item>
         <item name="materialCalendarTheme">@style/ThemeOverlay.App.DatePicker</item>
         <item name="materialTimePickerTheme">@style/ThemeOverlay.App.TimePicker</item>
 
@@ -70,7 +70,8 @@
 
     <style name="CustomKeywordChipStyle2" parent="Widget.MaterialComponents.Chip.Action">
         <item name="chipBackgroundColor">@color/white</item>
-        <item name="chipStrokeColor">@color/chip_stroke_color</item>
+        <item name="chipStrokeColor">@color/chip_stroke_color2</item>
+        <item name="rippleColor">@color/chip_ripple_color</item>
         <item name="chipStrokeWidth">1dp</item>
     </style>
 

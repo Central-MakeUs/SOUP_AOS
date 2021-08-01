@@ -8,6 +8,8 @@ data class StoreDetailResponse(
 ): BaseResponse()
 
 data class StoreDetailResult(
+    @SerializedName("rating")  val rating: Double,
+    @SerializedName("link")  val link: String,
     @SerializedName("getReviewImgRes")  val getReviewImgRes: List<GetReviewImgRe>,
     @SerializedName("getReviewRes")   val getReviewRes: List<GetReviewRe>,
     @SerializedName("getStoreKeywordRes")  val getStoreKeywordRes: List<GetStoreKeywordRe>,

@@ -6,6 +6,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import androidx.appcompat.widget.AppCompatToggleButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
+import androidx.core.view.isVisible
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.ApplicationClass
 import com.makeus.eatoo.databinding.DialogVoteBinding
@@ -26,7 +28,7 @@ class VoteDialog(
     val view: GroupVoteFragment
 ) : Dialog(view.requireContext()), View.OnClickListener {
 
-    lateinit var voteDetail : VoteDetailResult
+    lateinit var voteDetail: VoteDetailResult
     private lateinit var binding: DialogVoteBinding
     var votedItemList = ArrayList<Int>()
     private var toggleChecked = 0
@@ -165,19 +167,37 @@ class VoteDialog(
         ////재투표인 경우 버튼 변경
         setVoteConfirmToRetry()
 
+        /////summary
+
+        setMutiSummary(insertPoint)
+
+
+    }
+
+    private fun setMutiSummary(insertPoint: LinearLayout) {
+        val dynamicVoteSummary: View =
+            mInflater.inflate(R.layout.view_vote_dialog_summary, null)
+        val voteDate = dynamicVoteSummary.findViewById<TextView>(R.id.tv_vote_dialog_date)
+        voteDate.text = voteDetail.endTime
+
+        if (voteDetail.isAnonymous == "N") {
+            val anonymousVote = dynamicVoteSummary.findViewById<TextView>(R.id.tv_dialog_anonymous)
+            anonymousVote.visibility = View.GONE
+        }
+        insertPoint.addView(dynamicVoteSummary, insertPoint.childCount)
 
     }
 
     //////복수투표 항목입력 뷰 추가
     @SuppressLint("InflateParams")
-    private fun addVoteItemView(insertPoint : LinearLayout ) {
+    private fun addVoteItemView(insertPoint: LinearLayout) {
         val dynamicVoteView: View = mInflater.inflate(R.layout.view_multi_vote_add_item, null)
-        dynamicVoteView.id = binding.llMultiVoteContainer.childCount-1
+        dynamicVoteView.id = binding.llMultiVoteContainer.childCount - 1
         val addVoteItem = dynamicVoteView.findViewById<EditText>(R.id.et_vote_dialog_item)
         addVoteItem.setOnKeyListener { v, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
                 //항목추가 api
-                view.onVoteItemAdded(voteDetail.voteIdx , addVoteItem.text.toString())
+                view.onVoteItemAdded(voteDetail.voteIdx, addVoteItem.text.toString())
             }
             false
         }
@@ -185,7 +205,8 @@ class VoteDialog(
 
         val votedNum = dynamicVoteView.findViewById<TextView>(R.id.tv_vote_dialog_num)
         votedNum.text = String.format(
-            ApplicationClass.applicationResources.getString(R.string.dialog_vote_num), 0)
+            ApplicationClass.applicationResources.getString(R.string.dialog_vote_num), 0
+        )
 
         val voteToggle =
             dynamicVoteView.findViewById<AppCompatToggleButton>(R.id.toggle_vote_dialog)
@@ -197,17 +218,19 @@ class VoteDialog(
             }
         }
 
-        insertPoint.addView(dynamicVoteView, insertPoint.childCount-1)
+        insertPoint.addView(dynamicVoteView, insertPoint.childCount - 1)
 
     }
 
     ////복수투표 하기.
     private fun getMultiVotedItem() {
         if (binding.btnVoteDialogDone.isSelected) {
-            binding.llMultiVoteContainer.children.forEach {
-                val llChild = it as ConstraintLayout
-                val clChild = llChild.getChildAt(0) as AppCompatToggleButton
-                if (clChild.isChecked) votedItemList.add(it.id)
+            binding.llMultiVoteContainer.children.forEachIndexed { index, view ->
+                if(index != binding.llMultiVoteContainer.childCount -1 ){
+                    val llChild = view as ConstraintLayout
+                    val clChild = llChild.getChildAt(0) as AppCompatToggleButton
+                    if (clChild.isChecked) votedItemList.add(view.id)
+                }
             }
             view.onVoteFinishClick(voteDetail, votedItemList)
             dismiss()
@@ -264,13 +287,16 @@ class VoteDialog(
 
         binding.radiogroupVoteDialog.setOnCheckedChangeListener { radioGroup, i ->
             binding.llNonmutiVoteItemContainer.children.forEachIndexed { index, it ->
-                   val llChild = it as ConstraintLayout
-                   val voteItem = llChild.getChildAt(0) as? TextView
-                   val votedNum = llChild.getChildAt(1) as? TextView
-                   if(voteItem != null && votedNum != null){
-                       if (it.id == i) setItemChecked(voteItem, votedNum)
-                       else setUnItemChecked(voteItem, votedNum)
-                   }
+                if (index != binding.llNonmutiVoteItemContainer.childCount - 1) {
+                    val llChild = it as ConstraintLayout
+                    val voteItem = llChild.getChildAt(0) as? TextView
+                    val votedNum = llChild.getChildAt(1) as? TextView
+                    if (voteItem != null && votedNum != null) {
+                        if (it.id == i) setItemChecked(voteItem, votedNum)
+                        else setUnItemChecked(voteItem, votedNum)
+                    }
+                }
+
 
             }
         }
@@ -289,39 +315,60 @@ class VoteDialog(
         /////복수 투표 x 재투표 버튼
         setVoteConfirmToRetry()
 
+        setNonMutiSummary(insertPointItem)
+
     }
+
+    private fun setNonMutiSummary(insertPointItem: LinearLayout) {
+        val dynamicVoteSummary: View =
+            mInflater.inflate(R.layout.view_non_multivote_dialog_summary, null)
+        val voteDate = dynamicVoteSummary.findViewById<TextView>(R.id.tv_vote_dialog_date)
+        voteDate.text = voteDetail.endTime
+
+        if (voteDetail.isAnonymous == "N") {
+            val anonymousVote = dynamicVoteSummary.findViewById<TextView>(R.id.tv_dialog_anonymous)
+            anonymousVote.visibility = View.GONE
+        }
+        insertPointItem.addView(dynamicVoteSummary, insertPointItem.childCount)
+
+    }
+
     /////복수 투표 x 항목입력 추가
     @SuppressLint("InflateParams")
-    private fun addNonMultiVoteItemView(insertPointItem : LinearLayout , insertPointRadio : RadioGroup) {
+    private fun addNonMultiVoteItemView(
+        insertPointItem: LinearLayout,
+        insertPointRadio: RadioGroup
+    ) {
         val dynamicVoteView: View = mInflater.inflate(R.layout.view_nonmulti_vote_add_item, null)
-        dynamicVoteView.id = binding.llNonmutiVoteItemContainer.childCount-1
+        dynamicVoteView.id = binding.llNonmutiVoteItemContainer.childCount - 1
         val addVoteItem = dynamicVoteView.findViewById<EditText>(R.id.et_vote_dialog_item)
         addVoteItem.setOnKeyListener { v, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
                 //항목추가 api
-                view.onVoteItemAdded(voteDetail.voteIdx , addVoteItem.text.toString())
+                view.onVoteItemAdded(voteDetail.voteIdx, addVoteItem.text.toString())
             }
             false
         }
         val votedNum = dynamicVoteView.findViewById<TextView>(R.id.tv_vote_dialog_num)
         votedNum.text = String.format(
-            ApplicationClass.applicationResources.getString(R.string.dialog_vote_num), 0)
+            ApplicationClass.applicationResources.getString(R.string.dialog_vote_num), 0
+        )
 
-        insertPointItem.addView(dynamicVoteView, insertPointItem.childCount-1)
+        insertPointItem.addView(dynamicVoteView, insertPointItem.childCount - 1)
 
         insertPointRadio.addView(setRadioButton(binding.radiogroupVoteDialog.childCount, null))
 
         binding.radiogroupVoteDialog.setOnCheckedChangeListener { radioGroup, i ->
             binding.llNonmutiVoteItemContainer.children.forEachIndexed { index, it ->
-                if(index != binding.llNonmutiVoteItemContainer.childCount -1) {
+                if (index != binding.llNonmutiVoteItemContainer.childCount - 1) {
                     val llChild = it as ConstraintLayout
                     val voteItemEt = llChild.getChildAt(0) as? EditText
                     val voteItemTv = llChild.getChildAt(0) as? TextView
                     val dynamicVotedNum = llChild.getChildAt(1) as TextView
-                    if(voteItemEt != null) {
+                    if (voteItemEt != null) {
                         if (it.id == i) setItemChecked(voteItemEt, dynamicVotedNum)
                         else setUnItemChecked(voteItemEt, dynamicVotedNum)
-                    }else if(voteItemTv != null) {
+                    } else if (voteItemTv != null) {
                         if (it.id == i) setItemChecked(voteItemTv, dynamicVotedNum)
                         else setUnItemChecked(voteItemTv, dynamicVotedNum)
                     }
@@ -349,9 +396,11 @@ class VoteDialog(
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
         params.topMargin =
-            ApplicationClass.applicationResources.getDimension(R.dimen.vote_dialog_radio_top_margin).toInt()
+            ApplicationClass.applicationResources.getDimension(R.dimen.vote_dialog_radio_top_margin)
+                .toInt()
         params.bottomMargin =
-            ApplicationClass.applicationResources.getDimension(R.dimen.vote_dialog_radio_bottom_margin).toInt()
+            ApplicationClass.applicationResources.getDimension(R.dimen.vote_dialog_radio_bottom_margin)
+                .toInt()
         radioBtn.layoutParams = params
 
         radioBtn.isChecked = voteDetailItem?.isSelected == "Y"

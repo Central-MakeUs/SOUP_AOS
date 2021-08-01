@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/frag_current_location_map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:name="com.naver.maps.map.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/cardview_toolbar"
@@ -49,41 +49,51 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_eva_pin_fill"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/rl_address_container"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="70dp"/>
+            android:layout_marginEnd="7dp"
+            android:layout_marginTop="25dp" />
 
         <RelativeLayout
+            android:id="@+id/rl_address_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintStart_toEndOf="@id/iv_pin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="19dp"
-            android:layout_marginStart="7dp">
+            android:layout_marginTop="19dp">
 
             <TextView
                 android:id="@+id/tv_current_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
+                android:maxWidth="260dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:fontFamily="@font/roboto_bold"
-                tools:text="지번주소"/>
+                tools:text="마포구 잇투로 456"/>
 
             <TextView
                 android:id="@+id/tv_road_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxWidth="260dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:gravity="center_horizontal"
                 android:layout_below="@id/tv_current_address"
                 android:layout_centerHorizontal="true"
                 tools:text="도로명 주소"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:fontFamily="@font/roboto_medium"
-                android:layout_marginTop="7dp"/>
+                android:layout_marginTop="7dp"
+                android:layout_marginStart="5dp"/>
 
         </RelativeLayout>
 

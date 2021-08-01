@@ -3,6 +3,7 @@ package com.makeus.eatoo.src.home
 import com.makeus.eatoo.src.home.model.GroupResponse
 import com.makeus.eatoo.src.home.model.MainCharResponse
 import com.makeus.eatoo.src.home.model.MateResponse
+import com.makeus.eatoo.src.home.model.NotiCountResponse
 
 
 interface GroupView {
@@ -17,5 +18,8 @@ interface GroupView {
 
     fun onDeleteGroupSuccess()
     fun onDeleteGroupFail(message: String?)
+
+    fun onGetNotiCountSuccess(response : NotiCountResponse)
+    fun onGetNotiCountFail(message: String?)
 
 }

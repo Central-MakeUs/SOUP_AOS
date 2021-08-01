@@ -5,6 +5,7 @@ import com.makeus.eatoo.config.BaseResponse
 import com.makeus.eatoo.src.home.model.GroupResponse
 import com.makeus.eatoo.src.home.model.MainCharResponse
 import com.makeus.eatoo.src.home.model.MateResponse
+import com.makeus.eatoo.src.home.model.NotiCountResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,6 +68,23 @@ class GroupService(val view: GroupView) {
 
             override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
                 view.onDeleteGroupFail(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun tryGetNotiCount(userIdx : Int) {
+        val groupRetrofitInterface = ApplicationClass.sRetrofit.create(GroupRetrofitInterface::class.java)
+        groupRetrofitInterface.getNotiCount(userIdx).enqueue(object : Callback<NotiCountResponse> {
+            override fun onResponse(call: Call<NotiCountResponse>, response: Response<NotiCountResponse>) {
+                response.body()?.let {
+                    if(it.isSuccess)view.onGetNotiCountSuccess(response.body() as NotiCountResponse)
+                    else view.onGetNotiCountFail(it.message)
+                }
+
+            }
+
+            override fun onFailure(call: Call<NotiCountResponse>, t: Throwable) {
+                view.onGetNotiCountFail(t.message ?: "통신 오류")
             }
         })
     }

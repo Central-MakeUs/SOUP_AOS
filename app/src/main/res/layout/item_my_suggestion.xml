@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_my_suggest"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="21dp"
     tools:ignore="RtlSymmetry">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_my_sugg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginHorizontal="2dp"
+        android:layout_marginBottom="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
-        android:layout_width="match_parent"
+        android:layout_width="310dp"
         android:layout_height="115dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="23dp"
-        android:background="@drawable/background_dialog"
-        android:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/food_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_food_example"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.571" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title_txt"
@@ -42,7 +46,7 @@
             android:layout_marginStart="11dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif"
-            android:text="@string/mate_suggestion_title"
+            tools:text="@string/mate_suggestion_title"
             android:textColor="@color/black"
             android:textSize="13sp"
             android:textStyle="bold"
@@ -56,7 +60,7 @@
             android:layout_marginTop="11dp"
             android:fontFamily="sans-serif-light"
             android:lineSpacingExtra="5sp"
-            android:text="@string/mate_suggestion_restaurant"
+            tools:text="@string/mate_suggestion_restaurant"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:textStyle="normal"
@@ -69,7 +73,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:lineSpacingExtra="5sp"
-            android:text="@string/mate_suggestion_start_time"
+            tools:text="@string/mate_suggestion_start_time"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:textStyle="normal"
@@ -83,7 +87,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:lineSpacingExtra="5sp"
-            android:text="@string/mate_suggestion_end_time"
+            tools:text="@string/mate_suggestion_end_time"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:textStyle="normal"
@@ -123,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:text="@string/mate_suggestion_limit_people"
+                tools:text="@string/mate_suggestion_limit_people"
                 android:textColor="@color/black"
                 android:textSize="11sp"
                 android:textStyle="normal"
@@ -149,7 +153,7 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </androidx.cardview.widget.CardView>
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/group_name_tv"
         android:layout_width="wrap_content"
@@ -165,9 +169,9 @@
         android:textColor="@color/white"
         android:textSize="10sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout5"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout5"
+        app:layout_constraintBottom_toTopOf="@+id/cardview_my_sugg"
+        app:layout_constraintStart_toStartOf="@+id/cardview_my_sugg"
+        app:layout_constraintTop_toTopOf="@+id/cardview_my_sugg"
         tools:ignore="SmallSp" />
 
 

@@ -12,7 +12,8 @@ import com.makeus.eatoo.src.review.store_map.StoreMapActivity
 class StoreToMateSuggestDialog (
     context : Context,
     val listener : StoreToMateSuggestDialogInterface,
-    val storeName : String) : Dialog(context) {
+    val storeName : String,
+    val storeImg : String) : Dialog(context) {
 
     private lateinit var binding: DialogSuggestMateStoreBinding
 
@@ -28,7 +29,7 @@ class StoreToMateSuggestDialog (
         setCancelable(false)
 
         binding.btnDialogConfirm.setOnClickListener {
-            listener.onGotoMateSuggestClicked(storeName)
+            listener.onGotoMateSuggestClicked(storeName, storeImg)
             dismiss()
         }
         binding.btnDialogCancel.setOnClickListener {

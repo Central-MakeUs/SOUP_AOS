@@ -3,6 +3,7 @@ package com.makeus.eatoo.config
 import android.app.Application
 import android.content.SharedPreferences
 import android.content.res.Resources
+import com.makeus.eatoo.R
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -13,10 +14,10 @@ import java.util.concurrent.TimeUnit
 // 앱이 실행될때 1번만 실행이 됩니다.
 class ApplicationClass : Application() {
     //실 서버 주소
-    //val API_URL = "https://www.eatoo.site/"
+    val API_URL = "https://www.eatoo.site/"
 
     // 테스트 서버 주소
-    val API_URL = "https://www.test-eatoo.shop/"
+//    val API_URL = "https://www.test-eatoo.shop/"
 
 
     // 코틀린의 전역변수 문법
@@ -53,6 +54,7 @@ class ApplicationClass : Application() {
         initRetrofitInstance()
 
         applicationResources = resources
+
     }
 
     // 레트로핏 인스턴스를 생성하고, 레트로핏에 각종 설정값들을 지정해줍니다.

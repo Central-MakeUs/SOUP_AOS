@@ -111,7 +111,7 @@
 
                 <fragment
                     android:id="@+id/frag_create_review_map"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:name="com.naver.maps.map.MapFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="3dp" />

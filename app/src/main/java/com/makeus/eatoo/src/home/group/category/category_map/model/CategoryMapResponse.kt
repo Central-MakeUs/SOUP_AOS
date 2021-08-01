@@ -8,7 +8,7 @@ data class CategoryMapResponse(
 ) : BaseResponse()
 
 data class CategoryMapResult(
-    @SerializedName("getStoresRes") val getStoresRes: List<CategoryMapStoreInfo>,
+    @SerializedName("getStoresRes") val getStoresRes: ArrayList<CategoryMapStoreInfo>,
     @SerializedName("singleStatus") val singleStatus: String
 )
 

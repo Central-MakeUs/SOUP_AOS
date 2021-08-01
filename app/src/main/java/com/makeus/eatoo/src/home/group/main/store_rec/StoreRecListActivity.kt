@@ -3,26 +3,22 @@ package com.makeus.eatoo.src.home.group.main.store_rec
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.RadioGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityStoreRecListBinding
 import com.makeus.eatoo.like.LikeService
 import com.makeus.eatoo.like.LikeView
+import androidx.core.view.isVisible
 import com.makeus.eatoo.src.home.group.GroupActivity
 import com.makeus.eatoo.src.home.group.category.category_detail.CategoryStoreDetailActivity
-import com.makeus.eatoo.src.home.group.category.category_list.CategoryListService
-import com.makeus.eatoo.src.home.group.category.category_list.adapter.CategoryListRVAdapter
 import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialog
 import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialogInterface
-import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.MateSuggestionActivity
 import com.makeus.eatoo.src.home.group.main.store_rec.adapter.StoreRecRVAdapter
 import com.makeus.eatoo.src.home.group.main.store_rec.model.StoreRecResponse
 import com.makeus.eatoo.util.getGroupIdx
@@ -115,8 +111,8 @@ class StoreRecListActivity :
         startActivity(intent)
     }
 
-    override fun onStoreLongClicked(storeName: String) {
-        val dialog = StoreToMateSuggestDialog(this, this, storeName)
+    override fun onStoreLongClicked(storeName: String, storeImg : String) {
+        val dialog = StoreToMateSuggestDialog(this, this, storeName, storeImg)
         dialog.show()
     }
 
@@ -143,10 +139,17 @@ class StoreRecListActivity :
         }
     }
 
-    override fun onGotoMateSuggestClicked(storeName: String) {
-        val intent = Intent(this, Group_Mate_Suggetsion_Activity::class.java)
-        intent.putExtra("storeName", storeName)
+    override fun onGotoMateSuggestClicked(storeName: String, storeImg: String) {
+        val intent = Intent(this, MateSuggestionActivity::class.java)
+        intent.apply {
+            putExtra("storeName", storeName)
+            putExtra("storeImg", storeImg)
+        }
         startActivity(intent)
+    }
+
+    override fun onPostLikeSuccess() {
+
     }
 
     override fun onPostLikeFail(message: String?) {

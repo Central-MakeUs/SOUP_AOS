@@ -1,9 +1,6 @@
 package com.makeus.eatoo.src.home.group.vote.get_vote
 
-import com.makeus.eatoo.src.home.group.vote.get_vote.model.GroupVoteResponse
-import com.makeus.eatoo.src.home.group.vote.get_vote.model.NewItemAddedResponse
-import com.makeus.eatoo.src.home.group.vote.get_vote.model.VoteDetailResponse
-import com.makeus.eatoo.src.home.group.vote.get_vote.model.VotedResponse
+import com.makeus.eatoo.src.home.group.vote.get_vote.model.*
 
 interface GroupVoteView {
     fun onGetGroupVoteSuccess(response : GroupVoteResponse)
@@ -17,4 +14,7 @@ interface GroupVoteView {
 
     fun onPostNewItemSuccess(response : NewItemAddedResponse)
     fun onPostNewItemFail(message: String?)
+
+    fun onGetVotedMemberSuccess(response: VotedMemberResponse)
+    fun onGetVotedMemberFail(message: String?)
 }

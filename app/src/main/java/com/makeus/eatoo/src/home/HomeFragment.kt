@@ -7,33 +7,38 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.ApplicationClass
 import com.makeus.eatoo.config.ApplicationClass.Companion.USER_IDX
-import com.makeus.eatoo.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.makeus.eatoo.config.BaseFragment
 import com.makeus.eatoo.databinding.FragmentHomeBinding
 import com.makeus.eatoo.single_status.SingleService
 import com.makeus.eatoo.single_status.SingleView
-import com.makeus.eatoo.src.home.adapter.Home_Group_Kind_RecyclerviewAdapter
-import com.makeus.eatoo.src.home.adapter.Home_Mate_Kind_RecyclerviewAdapter
-import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
+import com.makeus.eatoo.src.home.adapter.HomeGroupKindRecyclerviewAdapter
+import com.makeus.eatoo.src.home.adapter.HomeMateKindRecyclerviewAdapter
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.MateSuggestionActivity
 import com.makeus.eatoo.src.home.model.GroupResponse
 import com.makeus.eatoo.src.home.model.MateResponse
 import com.makeus.eatoo.util.getUserIdx
 import com.makeus.eatoo.src.home.create_group.CreateGroupActivity
 import com.makeus.eatoo.src.home.group.GroupActivity
 import com.makeus.eatoo.src.home.model.MainCharResponse
+import com.makeus.eatoo.src.home.model.NotiCountResponse
+import com.makeus.eatoo.src.home.notification.NotificationActivity
+import com.makeus.eatoo.src.main.MainActivity
 import com.makeus.eatoo.src.review.create_review.create_review1.CreateReview1Activity
+import com.makeus.eatoo.src.suggestion.SuggestionFragment
 import com.makeus.eatoo.util.EatooCharList
-import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.getUserNickName
 
 
 class HomeFragment
     : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),
-    GroupView, SingleView, Home_Group_Kind_RecyclerviewAdapter.OnGroupLongClick, GroupDeleteDialogInterface{
+    GroupView, SingleView, HomeGroupKindRecyclerviewAdapter.OnGroupLongClick, GroupDeleteDialogInterface,
+View.OnClickListener{
 
     private var changeToSingle = false
     val userIdx = ApplicationClass.sSharedPreferences.getInt(USER_IDX, -1)
@@ -42,42 +47,54 @@ class HomeFragment
         super.onResume()
 
         GroupService(this).tryGetMainChar(getUserIdx())
+        GroupService(this).tryGetNotiCount(getUserIdx())
     }
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        Log.d("유전인덱스",""+getUserIdx())
-        Log.d("토큰",X_ACCESS_TOKEN)
-
-
+        setOnClickListeners()
         loadGroup()
         loadMate()
 
-//        binding.groupPlusBtn.setOnClickListener {
-//            startActivity(Intent(activity, CreateGroupActivity::class.java))
-//        }
-
-        binding.matePlusBtn.setOnClickListener {
-            startActivity(Intent(activity, Group_Mate_Suggetsion_Activity::class.java))
-        }
-
-        binding.mateOverviewBtn.setOnClickListener {
-        }
-
-        binding.cardviewReviewSuggest.setOnClickListener {
-            startActivity(Intent(activity, CreateReview1Activity::class.java))
-        }
-
         binding.usetNameHomeTv.text = getUserNickName() + binding.usetNameHomeTv.text
 
-        binding.customToolbar.rightIcon.setOnClickListener {
-            changeToSingle = binding.customToolbar.rightIcon.drawable.constantState?.equals(
-                ContextCompat.getDrawable(requireContext(), R.drawable.ic_icon)?.constantState
-            ) ?:false
-            SingleService(this).tryPatchSingleStatus(getUserIdx())
+    }
+
+    private fun setOnClickListeners() {
+        binding.customToolbar.setRightIconClickListener(this)
+        binding.mateOverviewBtn.setOnClickListener(this)
+        binding.matePlusBtn.setOnClickListener(this)
+        binding.cardviewReviewSuggest.setOnClickListener(this)
+        binding.layoutNoti.ivBell.setOnClickListener(this)
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0?.id) {
+            R.id.mate_overview_btn -> {
+                (context as MainActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host, SuggestionFragment())
+                    .commitAllowingStateLoss()
+                val bottomNavigationView =
+                    activity?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+                bottomNavigationView?.menu?.findItem(R.id.suggestionFragment)?.isChecked = true
+            }
+            R.id.mate_plus_btn -> {
+                startActivity(Intent(activity, MateSuggestionActivity::class.java))
+            }
+            R.id.cardview_review_suggest -> {
+                startActivity(Intent(activity, CreateReview1Activity::class.java))
+            }
+            R.id.iv_toolbar_right -> {
+                changeToSingle = binding.customToolbar.rightIcon.drawable.constantState?.equals(
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_icon)?.constantState
+                ) ?:false
+                SingleService(this).tryPatchSingleStatus(getUserIdx())
+            }
+            R.id.iv_bell -> {
+                startActivity(Intent(activity, NotificationActivity::class.java))
+            }
         }
     }
 
@@ -105,7 +122,7 @@ class HomeFragment
             binding.groupRecyclerview.visibility = View.VISIBLE
             val GroupSize = response.result.size
 
-            val GroupAdapter = Home_Group_Kind_RecyclerviewAdapter(
+            val GroupAdapter = HomeGroupKindRecyclerviewAdapter(
                 response.result,
                 GroupSize,
                 "BASIC",
@@ -115,7 +132,7 @@ class HomeFragment
             binding.groupRecyclerview.layoutManager = LinearLayoutManager(activity).also { it.orientation = LinearLayoutManager.HORIZONTAL }
 
             GroupAdapter.setItemClickListener(object :
-                Home_Group_Kind_RecyclerviewAdapter.ItemClickListener {
+                HomeGroupKindRecyclerviewAdapter.ItemClickListener {
                 override fun onClick(view: View, position: Int, groupIdx : Int, groupname : String, state : String) {
                     if (position == GroupSize && state == "plus") {
                         startActivity(Intent(activity, CreateGroupActivity::class.java))
@@ -173,7 +190,12 @@ class HomeFragment
         showCustomToast(message)
 
     }
-//Mate 조회
+
+    /*
+
+    mate 조회
+
+     */
     override fun onGetMateSuccess(response: MateResponse) {
         dismissLoadingDialog()
 
@@ -186,21 +208,24 @@ class HomeFragment
             binding.homeMateRecylerview.visibility = View.VISIBLE
             val MateList = response.result
 
-            val MateAdapter = Home_Mate_Kind_RecyclerviewAdapter(MateList!!)
-            binding.homeMateRecylerview.adapter = MateAdapter
-            binding.homeMateRecylerview.layoutManager = LinearLayoutManager(activity).also {
-                it.orientation = LinearLayoutManager.VERTICAL
-                @Override
-                fun canScrollVertically() : Boolean {
-                    return false
-                }
+            context?.let {
+                val MateAdapter = HomeMateKindRecyclerviewAdapter(it, MateList!!)
+                binding.homeMateRecylerview.adapter = MateAdapter
+                binding.homeMateRecylerview.layoutManager = LinearLayoutManager(activity).also {
+                    it.orientation = LinearLayoutManager.VERTICAL
+                    @Override
+                    fun canScrollVertically() : Boolean {
+                        return false
+                    }
 
-                @Override
-                fun canScrollHorizontally() : Boolean  {
-                    return false
+                    @Override
+                    fun canScrollHorizontally() : Boolean  {
+                        return false
+                    }
                 }
+                binding.homeMateRecylerview.canScrollVertically(0)
             }
-            binding.homeMateRecylerview.canScrollVertically(0)
+
 
             //binding.homeMateRecylerview.layoutManager = LinearLayoutManager(activity).also{ canScrollVertically()}
         }
@@ -213,13 +238,11 @@ class HomeFragment
     }
 
     override fun onGetMainCharSuccess(response: MainCharResponse) {
-        Log.d("homeFragment", response.toString())
         setSingleStatus(response.result.singleStatus)
         setMainChar(response.result.color, response.result.characters, response.result.singleStatus)
     }
 
     private fun setMainChar(color: Int, characters: Int, singleStatus: String) {
-        Log.d("homeFragment", "here")
         val memberColor = if(color != 0) color -1 else 0
         val memberChar = if(characters != 0) characters -1 else 0
         binding.ivMainChar.setImageResource(EatooCharList[(memberColor*5) + memberChar])
@@ -245,6 +268,20 @@ class HomeFragment
 
     override fun onDeleteGroupFail(message: String?) {
         dismissLoadingDialog()
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
+    }
+
+    override fun onGetNotiCountSuccess(response: NotiCountResponse) {
+        if(response.result.count != 0){
+            binding.layoutNoti.cardviewNotiNumContainer.isVisible = true
+            binding.layoutNoti.tvNotiNum.text = response.result.count.toString()
+        }else {
+            binding.layoutNoti.cardviewNotiNumContainer.isVisible = false
+        }
+
+    }
+
+    override fun onGetNotiCountFail(message: String?) {
         showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
 

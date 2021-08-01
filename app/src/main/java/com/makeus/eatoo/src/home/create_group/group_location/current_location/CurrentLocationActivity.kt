@@ -2,6 +2,7 @@ package com.makeus.eatoo.src.home.create_group.group_location.current_location
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -14,25 +15,25 @@ import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityCurrentLocationBinding
 import com.makeus.eatoo.reverse_geo.ReverseGeoService
 import com.makeus.eatoo.reverse_geo.ReverseGeoView
-import com.makeus.eatoo.src.home.create_group.CreateGroupActivity
+import com.naver.maps.map.overlay.Marker
 import com.makeus.eatoo.src.home.create_group.model.SearchResultEntity
 import com.makeus.eatoo.src.review.store_map.model.Document
 import com.makeus.eatoo.src.review.store_map.model.KakaoAddressResponse
 import com.makeus.googlemapsapiprac.model.LocationLatLngEntity
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
+import com.makeus.eatoo.src.home.create_group.CreateGroupActivity.Companion.PERMISSION_REQUEST_CODE
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.*
+import com.naver.maps.map.util.FusedLocationSource
+import com.naver.maps.map.util.MarkerIcons
 
 class CurrentLocationActivity
     : BaseActivity<ActivityCurrentLocationBinding>(ActivityCurrentLocationBinding::inflate),
-    ReverseGeoView, OnMapReadyCallback, GoogleMap.OnMapClickListener, View.OnClickListener {
+    ReverseGeoView, OnMapReadyCallback, View.OnClickListener {
 
-    private lateinit var map: GoogleMap
+    private lateinit var naverMap : NaverMap
+    private lateinit var locationSource: FusedLocationSource
+
     private lateinit var locationManager: LocationManager
     private lateinit var myLocationListener: CurrentLocationActivity.MyLocationListener
     private lateinit var locationLatLngEntity: LocationLatLngEntity
@@ -40,23 +41,32 @@ class CurrentLocationActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setupMap()
         setMyLocationListener()
-        setupGoogleMap()
+
         binding.customToolbar.leftIcon.setOnClickListener { finish() }
         binding.btnRegisterGroupLocation.setOnClickListener(this)
 
     }
 
-    private fun setupGoogleMap() {
+    private fun setupMap() {
+        val fm = supportFragmentManager
         val mapFragment =
-            supportFragmentManager.findFragmentById(R.id.frag_current_location_map) as SupportMapFragment
+            fm.findFragmentById(R.id.frag_current_location_map) as MapFragment?
+                ?: MapFragment.newInstance().also {
+                    fm.beginTransaction().add(R.id.frag_current_location_map, it).commit()
+                }
         mapFragment.getMapAsync(this)
     }
 
+    override fun onMapReady(map: NaverMap) {
+        naverMap = map
+        naverMap.maxZoom = 19.0
+        naverMap.minZoom = 10.0
 
-    override fun onMapReady(map: GoogleMap) { //구글맵 객체 //아래 내용 없으면 세계지도 나옴.
-        this.map = map
-        this.map.setOnMapClickListener(this)
+        locationSource = FusedLocationSource(this, PERMISSION_REQUEST_CODE)
+        naverMap.locationSource = locationSource
+
     }
 
     @SuppressLint("MissingPermission")
@@ -95,15 +105,26 @@ class CurrentLocationActivity
 
     private fun onCurrentLocationChanged(locationLatLngEntity: LocationLatLngEntity) {
 
-        map.moveCamera(
-            CameraUpdateFactory.newLatLngZoom(
-                LatLng(
-                    locationLatLngEntity.latitude.toDouble(),
-                    locationLatLngEntity.longitude.toDouble()
-                ),
-                CreateGroupActivity.CAMERA_ZOOM_LEVEL
+        val cameraUpdate = CameraUpdate.scrollTo(
+            LatLng(
+                locationLatLngEntity.latitude.toDouble(),
+                locationLatLngEntity.longitude.toDouble()
             )
-        )
+        ).animate(CameraAnimation.Easing)
+        if(::naverMap.isInitialized) naverMap.moveCamera(cameraUpdate)
+        else setupMap()
+
+        val marker = Marker()
+        marker.apply {  //태그 달 수 있음.
+            position = com.naver.maps.geometry.LatLng(
+                locationLatLngEntity.latitude.toDouble(),
+                locationLatLngEntity.longitude.toDouble()
+            )
+            map = naverMap
+            icon = MarkerIcons.BLACK
+            iconTintColor = Color.BLACK
+        }
+
         loadReverseGeoInfo(
             locationLatLngEntity.latitude.toDouble(),
             locationLatLngEntity.longitude.toDouble()
@@ -122,34 +143,25 @@ class CurrentLocationActivity
         }
     }
 
-    private fun setupMarker(title: String): Marker? { //검색한 위도경도
-
-        val positionLatLng = LatLng(
-            locationLatLngEntity.latitude.toDouble(),
-            locationLatLngEntity.longitude.toDouble()
-        )
-        val markerOptions = MarkerOptions().apply {
-            position(positionLatLng)
-            title(title)
+    override fun onClick(p0: View?) {
+        when (p0?.id) {
+            R.id.btn_register_group_location -> goBackToCreateGroup()
         }
-        map.moveCamera(
-            CameraUpdateFactory.newLatLngZoom(
-                positionLatLng,
-                CreateGroupActivity.CAMERA_ZOOM_LEVEL
-            )
-        )
-
-        return map.addMarker(markerOptions)
     }
 
-    override fun onGetAddressSuccess(response: KakaoAddressResponse?) {
-        dismissLoadingDialog()
+    private fun goBackToCreateGroup() {
+        val searchResult = SearchResultEntity(
+            buildingName = "현 위치",
+            fullAddress = if (binding.tvRoadAddress.text.isEmpty()) binding.tvCurrentAddress.text.toString() else binding.tvRoadAddress.text.toString(),
+            locationLatLng = locationLatLngEntity
+        )
+        val gson = Gson()
+        val jsonCurrentLocation = gson.toJson(searchResult)
 
-        setLocationSummaryLayout(response?.documents?.get(0))
+        ApplicationClass.sSharedPreferences.edit()
+            .putString("CURRENT_LOCATION", jsonCurrentLocation).apply()
 
-
-        val currentSelectMarker = setupMarker("내 위치")
-        currentSelectMarker?.showInfoWindow()
+        finish()
     }
 
     private fun setLocationSummaryLayout(response: Document?) {
@@ -164,42 +176,18 @@ class CurrentLocationActivity
 
     }
 
+
+    //////////server result
+
+    override fun onGetAddressSuccess(response: KakaoAddressResponse?) {
+        dismissLoadingDialog()
+        setLocationSummaryLayout(response?.documents?.get(0))
+    }
+
     override fun onGetAddressFail(message: String?) {
         dismissLoadingDialog()
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
 
-    override fun onMapClick(latlng: LatLng) {
-        locationLatLngEntity =
-            LocationLatLngEntity(latlng.latitude.toFloat(), latlng.longitude.toFloat())
-        map.clear()
-        val markerOptions = MarkerOptions().apply {
-            position(latlng)
-        }
-        map.addMarker(markerOptions)
 
-        ReverseGeoService(this).tryGetAddress(latlng.latitude, latlng.longitude)
-    }
-
-    override fun onClick(p0: View?) {
-        when (p0?.id) {
-            R.id.btn_register_group_location -> goBackToCreateGroup()
-        }
-    }
-
-    private fun goBackToCreateGroup() {
-        val searchResult = SearchResultEntity(
-            buildingName = "현 위치",
-            fullAddress = if (binding.tvRoadAddress.text.isEmpty()) binding.tvCurrentAddress.text.toString() else binding.tvRoadAddress.text.toString(),
-            locationLatLng = locationLatLngEntity
-        )
-
-        val gson = Gson()
-        val jsonCurrentLocation = gson.toJson(searchResult)
-
-
-        ApplicationClass.sSharedPreferences.edit()
-            .putString("CURRENT_LOCATION", jsonCurrentLocation).apply()
-
-        finish()
-    }
 }

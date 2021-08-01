@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_dialog_anonymous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="3dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/anonymous_vote"
+        android:textColor="@color/dialog_cancel_text"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/tv_vote_dialog_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:text="6월 1일 오후 4:00"
+        android:textColor="@color/dialog_cancel_text"
+        android:textSize="10sp" />
+
+
+</LinearLayout>

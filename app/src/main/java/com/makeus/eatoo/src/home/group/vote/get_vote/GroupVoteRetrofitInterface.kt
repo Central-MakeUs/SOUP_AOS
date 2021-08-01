@@ -35,4 +35,10 @@ interface GroupVoteRetrofitInterface {
         @Path("voteIdx") voteIdx : Int,
         @Body addedVoteItem : NewItem
     ) : Call<NewItemAddedResponse>
+
+    @GET("/app/votes/{userIdx}/{voteIdx}/members")
+    fun getVotedMember(
+        @Path("userIdx") userIdx : Int,
+        @Path("voteIdx") voteIdx : Int
+    ) : Call<VotedMemberResponse>
 }

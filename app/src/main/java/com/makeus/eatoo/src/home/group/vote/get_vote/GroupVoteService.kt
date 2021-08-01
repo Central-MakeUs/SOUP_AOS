@@ -103,4 +103,27 @@ class GroupVoteService (val view : GroupVoteView){
 
             })
     }
+    fun tryGetVotedMember(userIdx: Int, voteIdx : Int) {
+        val groupVoteRetrofitInterface = ApplicationClass.sRetrofit.create(
+            GroupVoteRetrofitInterface::class.java
+        )
+        groupVoteRetrofitInterface.getVotedMember(userIdx, voteIdx)
+            .enqueue(object :
+                Callback<VotedMemberResponse> {
+                override fun onResponse(
+                    call: Call<VotedMemberResponse>,
+                    response: Response<VotedMemberResponse>
+                ) {
+                    response.body()?.let {
+                        if (it.isSuccess) view.onGetVotedMemberSuccess(response.body() as VotedMemberResponse)
+                        else view.onGetVotedMemberFail(it.message)
+                    }
+                }
+
+                override fun onFailure(call: Call<VotedMemberResponse>, t: Throwable) {
+                    view.onGetVotedMemberFail(t.message)
+                }
+
+            })
+    }
 }

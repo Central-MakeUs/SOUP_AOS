@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityLoginBinding
@@ -20,7 +21,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
 
     private val passwordPattern : String = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&]).{8,20}.\$"
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -125,9 +126,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             Log.d("userIdx", response.result.userIdx.toString())
             putSharedPrefUser(response.result.nickName)
             putSharedPref(response.result.jwt, response.result.userIdx)
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("finish_explanation"))
             finish()
-            ExplanationActivity().finish()
-            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 

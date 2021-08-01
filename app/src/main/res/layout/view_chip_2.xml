@@ -5,8 +5,10 @@
     style="@style/CustomKeywordChipStyle2"
     android:layout_height="33dp"
     android:layout_width="wrap_content"
-    android:textColor="@color/gray_100"
+    android:textColor="@drawable/selector_mate_sugg_chip_textcolor"
     tools:text="keyword"
+    android:checkable="true"
+    app:checkedIconVisible="false"
     app:closeIconEnabled="false">
 
 </com.google.android.material.chip.Chip>

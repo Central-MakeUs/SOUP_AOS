@@ -3,6 +3,7 @@ package com.makeus.eatoo.src.home.group.main
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.eatoo.R
@@ -13,11 +14,12 @@ import com.makeus.eatoo.like.LikeView
 import com.makeus.eatoo.src.home.group.category.category_detail.CategoryStoreDetailActivity
 import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialog
 import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialogInterface
-import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.MateSuggestionActivity
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.findmate.FindMateActivity
 import com.makeus.eatoo.src.home.group.main.adapter.Group_Home_Main_Mate_Kind_RecyclerviewAdapter
 import com.makeus.eatoo.src.home.group.main.adapter.Group_Home_Main_Store_Kind_RecyclerviewAdapter
 import com.makeus.eatoo.src.home.group.main.model.GroupMainResponse
+import com.makeus.eatoo.src.home.group.main.model.MateAttendResponse
 import com.makeus.eatoo.src.home.group.main.store_rec.StoreRecListActivity
 import com.makeus.eatoo.src.review.create_review.create_review1.CreateReview1Activity
 import com.makeus.eatoo.util.getGroupIdx
@@ -27,16 +29,20 @@ import com.makeus.eatoo.util.getUserIdx
 class GroupMainFragment
     : BaseFragment<FragmentGroupMainBinding>(FragmentGroupMainBinding::bind, R.layout.fragment_group_main)
     ,GroupMainView, Group_Home_Main_Store_Kind_RecyclerviewAdapter.OnStoreClickListener,
-    StoreToMateSuggestDialogInterface, LikeView {
+    StoreToMateSuggestDialogInterface, LikeView, MateAttendDialogInterface, MateAttendView {
 
 
     override fun onResume() {
         super.onResume()
+        getGroupMain()
+
+    }
+
+    private fun getGroupMain() {
         context?.let {
             showLoadingDialog(it)
             GroupMainService(this).tryGetGroupMain(getUserIdx(), getGroupIdx())
         }
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,6 +66,14 @@ class GroupMainFragment
         }
     }
 
+    override fun onMateAttendClicked(mateIdx: Int) {
+        context?.let {
+            showLoadingDialog(it)
+            MateAttendService(this).tryPostMateAttend(getUserIdx(),mateIdx)
+        }
+
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onGetGroupMainSuccess(response: GroupMainResponse) {
         dismissLoadingDialog()
@@ -68,7 +82,7 @@ class GroupMainFragment
             binding.findingMateRecyclerview.visibility = View.GONE
             binding.findingMateNoScroll.visibility = View.VISIBLE
             binding.matePlusBtn.setOnClickListener {
-                startActivity(Intent(activity,Group_Mate_Suggetsion_Activity::class.java))
+                startActivity(Intent(activity,MateSuggestionActivity::class.java))
             }
         }
         else{
@@ -81,11 +95,15 @@ class GroupMainFragment
             }
             GroupAdapter.setItemClickListener(object :
                 Group_Home_Main_Mate_Kind_RecyclerviewAdapter.ItemClickListener {
-                override fun onClick(view: View, position: Int, mateIdx : Int) {
-                    val dialog = context?.let { MateAttendDialog(it, mateIdx) }
-                    dialog?.show()
+                override fun onClick(view: View, position: Int, mateIdx : Int, isAttended: String) {
+                    if(isAttended == "N"){
+                        val dialog = context?.let { MateAttendDialog(it, mateIdx,  this@GroupMainFragment) }
+                        dialog?.show()
+                    }
+
                 }
             })
+            GroupAdapter.notifyDataSetChanged()
 
         }
 
@@ -121,9 +139,9 @@ class GroupMainFragment
         }
     }
 
-    override fun onStoreLongClicked(storeName: String) {
+    override fun onStoreLongClicked(storeName: String, storeImg : String) {
         context?.let {
-            val dialog = StoreToMateSuggestDialog(it, this, storeName)
+            val dialog = StoreToMateSuggestDialog(it, this, storeName, storeImg)
             dialog.show()
         }
 
@@ -134,12 +152,19 @@ class GroupMainFragment
         else LikeService(this).tryPatchLike(getUserIdx(),storeIdx)
     }
 
-    override fun onGotoMateSuggestClicked(storeName: String) {
+    override fun onGotoMateSuggestClicked(storeName: String, storeImg : String) {
         context?.let {
-            val intent = Intent(it, Group_Mate_Suggetsion_Activity::class.java)
-            intent.putExtra("storeName", storeName)
+            val intent = Intent(it, MateSuggestionActivity::class.java)
+            intent.apply {
+                putExtra("storeName", storeName)
+                putExtra("storeImg", storeImg)
+            }
             startActivity(intent)
         }
+
+    }
+
+    override fun onPostLikeSuccess() {
 
     }
 
@@ -152,5 +177,16 @@ class GroupMainFragment
 
     override fun onPatchLikeFail(message: String?) {
         showCustomToast(message?:resources.getString(R.string.failed_connection))
+    }
+
+    override fun onGetMateAttendSuccess(response: MateAttendResponse) {
+        dismissLoadingDialog()
+        Log.d("메이트 참가 결과",""+response.message)
+        getGroupMain()
+    }
+
+    override fun onGetMateAttendFail(message: String?) {
+        dismissLoadingDialog()
+        Log.d("메이트 참가 결과",""+message)
     }
 }

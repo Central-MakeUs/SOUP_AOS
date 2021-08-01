@@ -19,6 +19,7 @@ import android.widget.ToggleButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.children
 import androidx.core.view.isVisible
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityCreateReview2Binding
@@ -34,15 +35,16 @@ import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.chip.Chip
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import java.net.URI
 import kotlin.math.roundToInt
 
 class CreateReview2Activity
     : BaseActivity<ActivityCreateReview2Binding>(ActivityCreateReview2Binding::inflate),
-    View.OnClickListener , CreateReview2View {
+    View.OnClickListener, CreateReview2View {
 
-    private var reviewImage = ""
     private var rating = 0.0
-    private var checkedIdx = 0
+    private var checkedIdx = -1
+    private var reviewImage: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,14 +57,15 @@ class CreateReview2Activity
         binding.rlReviewImg.setOnClickListener(this)
         binding.btnRegisterReview.setOnClickListener(this)
         binding.ivKeyword.setOnClickListener(this)
-        binding.etMenuName.addTextChangedListener(object : TextWatcher{
+        binding.etMenuName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 binding.ivMenuNameDelete.isVisible = p0.toString().isNotEmpty()
             }
+
             override fun afterTextChanged(p0: Editable?) {}
         })
-        binding.customToolbar.leftIcon.setOnClickListener { finish() }
+        binding.customToolbar.setLeftIconClickListener(this)
         binding.btnStar1.setOnClickListener(this)
         binding.btnStar2.setOnClickListener(this)
         binding.btnStar3.setOnClickListener(this)
@@ -80,6 +83,9 @@ class CreateReview2Activity
                 binding.etKeyword.visibility = View.VISIBLE
                 initKeywordChips()
             }
+            R.id.iv_toolbar_left -> {
+                finish()
+            }
             R.id.btn_star1 -> checkedIdx = 0
             R.id.btn_star2 -> checkedIdx = 1
             R.id.btn_star3 -> checkedIdx = 2
@@ -92,94 +98,113 @@ class CreateReview2Activity
         }
     }
 
+
     private fun loadGallery() {
-        //갤러리 권한?!
         getImage.launch("image/*")
     }
 
     private val getImage =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
-                loadFirebaseStorage(it)
+                reviewImage = it
+                glideUtil(this, it.toString(), roundAll(binding.ivReviewImg, 5))
+                binding.ivReviewImg.isVisible = true
+                binding.ivReviewImgIcon.isVisible = false
+                binding.tvInputReviewImg.isVisible = false
             }
         }
 
     private fun registerReview() {
 
-        val link = if(binding.etReviewLink.text.isEmpty()) "" else binding.etReviewLink.text.toString()
-        var menuName = ""
-        var shortReview = ""
-
-        if(binding.etMenuName.text.isEmpty()){
+        if (binding.etMenuName.text.isEmpty()) {
             showCustomToast("메뉴 이름을 입력해주세요")
             return
-        }else {
-            menuName = binding.etMenuName.text.toString()
         }
 
-        if(binding.etShortReview.text.isEmpty()){
+        if (binding.etShortReview.text.isEmpty()) {
             showCustomToast("한줄평을 입력해주세요")
             return
-        }else {
-            shortReview = binding.etShortReview.text.toString()
         }
 
-        if(reviewImage == "") {
+        if (reviewImage == null) {
             showCustomToast("이미지를 입력해주세요")
             return
         }
 
-        val finalRating = countRating()
-        if(finalRating == 0.0) {
+        if (checkedIdx == -1) {
             showCustomToast("별점을 입력해주세요")
             return
         }
+
+        loadFirebaseStorage(reviewImage!!)
+
+    }
+
+    private fun loadFirebaseStorage(firebaseUri: Uri) {
+        showLoadingDialog(this)
+        val storageRef: StorageReference = FirebaseStorage.getInstance().reference
+        val ref = storageRef.child("${getUserIdx()}/review/${System.currentTimeMillis()}.png")
+        ref.putFile(firebaseUri).continueWithTask { task ->
+            if (!task.isSuccessful) {
+                dismissLoadingDialog()
+                task.exception?.let {
+                    throw it
+                }
+            }
+            ref.downloadUrl
+        }.addOnCompleteListener {
+            reviewImage = it.result
+            setReviewReq()
+        }.addOnFailureListener {
+            showCustomToast("이미지를 다시 한 번 업로드 해주세요.")
+        }
+
+    }
+    private fun setReviewReq() {
+
         val storeIdx = intent.getIntExtra("storeIdx", -1)
-        if( storeIdx != -1){
+        if (storeIdx != -1) {
             val review1 = Review1Request(
                 storeIdx = storeIdx,
-                storeCategoryIdx =  intent.getIntExtra("categoryIdx", 8),
-                menuName = menuName,
-                contents = shortReview,
-                imgUrl = reviewImage,
-                rating = finalRating,
+                storeCategoryIdx = intent.getIntExtra("categoryIdx", 8),
+                menuName = binding.etMenuName.text.toString(),
+                contents = binding.etShortReview.text.toString(),
+                imgUrl = reviewImage.toString(),
+                rating = (checkedIdx + 1).toDouble(),
                 postReviewKeywordReq = binding.flexboxReview.getAllChips(),
-                link = link
+                link = if (binding.etReviewLink.text.isEmpty()) "" else binding.etReviewLink.text.toString()
             )
             registerReview1(review1)
-        }else {
+        } else {
             val review2 = Review2Request(
                 latitude = intent.getDoubleExtra("lat", -1.0),
                 longitude = intent.getDoubleExtra("lng", -1.0),
-                address = intent.getStringExtra("address")?:"",
-                storeName = intent.getStringExtra("store_name")?: "",
+                address = intent.getStringExtra("address") ?: "",
+                storeName = intent.getStringExtra("store_name") ?: "",
                 storeCategoryIdx = intent.getIntExtra("categoryIdx", 8),
-                menuName = menuName,
-                contents = shortReview,
-                imgUrl = reviewImage,
-                rating = finalRating,
-                link = link,
+                menuName = binding.etMenuName.text.toString(),
+                contents = binding.etShortReview.text.toString(),
+                imgUrl = reviewImage.toString(),
+                rating = (checkedIdx + 1).toDouble(),
+                link = if (binding.etReviewLink.text.isEmpty()) "" else binding.etReviewLink.text.toString(),
                 postReviewKeywordReq = binding.flexboxReview.getAllChips()
             )
             registerReview2(review2)
         }
 
-        resetRating()
+//        resetRating()
     }
 
     private fun registerReview1(review1: Review1Request) {
-        showLoadingDialog(this)
         CreateReview2Service(this).tryPostReview1(getUserIdx(), review1)
+        Log.d("register2", review1.toString())
     }
 
     private fun registerReview2(review2: Review2Request) {
-        showLoadingDialog(this)
         CreateReview2Service(this).tryPostReview2(getUserIdx(), review2)
+        Log.d("register2", review2.toString())
     }
 
-    private fun resetRating() {
-        rating = 0.0
-    }
 
     //keyword
 
@@ -188,12 +213,12 @@ class CreateReview2Activity
         binding.etKeyword.setOnKeyListener { v, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
                 val keywordList = binding.flexboxReview.getAllChips()
-                if (keywordList.size-1 == 4) showCustomToast(resources.getString(R.string.keyword_num_limit))
+                if (keywordList.size - 1 == 4) showCustomToast(resources.getString(R.string.keyword_num_limit))
                 else {
                     val et = v as EditText
                     val keyword = et.text.toString()
                     if (keyword.length >= 11) showCustomToast(resources.getString(R.string.keyword_length_limit))
-                    else{
+                    else {
                         binding.flexboxReview.addChip(keyword)
                         et.text.clear()
                     }
@@ -240,45 +265,28 @@ class CreateReview2Activity
     }
 
     //rating
+//    private fun countRating() : Double {
+//        if(binding.btnStar1.isChecked) rating++
+//        if(binding.btnStar2.isChecked) rating++
+//        if(binding.btnStar3.isChecked) rating++
+//        if(binding.btnStar4.isChecked) rating++
+//        if(binding.btnStar5.isChecked) rating++
+//
+//        return rating
+//    }
 
-    private fun countRating() : Double {
-        if(binding.btnStar1.isChecked) rating++
-        if(binding.btnStar2.isChecked) rating++
-        if(binding.btnStar3.isChecked) rating++
-        if(binding.btnStar4.isChecked) rating++
-        if(binding.btnStar5.isChecked) rating++
+//    private fun resetRating() {
+//        rating = 0.0
+//    }
 
-        return rating
 
-    }
 
-    private fun loadFirebaseStorage(firebaseUri : Uri) {
-        showLoadingDialog(this)
-        val userIdx = getUserIdx()
-        val storageRef: StorageReference = FirebaseStorage.getInstance().reference
-        val ref = storageRef.child("${userIdx}/profile/${System.currentTimeMillis()}.png")
-        ref.putFile(firebaseUri).continueWithTask { task ->
-            if (!task.isSuccessful) {
-                dismissLoadingDialog()
-                task.exception?.let {
-                    throw it
-                }
-            }
-            ref.downloadUrl
-        }.addOnCompleteListener {
-            reviewImage = it.result.toString()
-            glideUtil(this, reviewImage, roundAll(binding.ivReviewImg, 5))
 
-            binding.ivReviewImg.isVisible = true
-            binding.ivReviewImgIcon.isVisible = false
-            binding.tvInputReviewImg.isVisible = false
-            dismissLoadingDialog()
-        }
-    }
+    ////////server result
 
     override fun onPostReview1Success(response: ReviewResponse) {
         dismissLoadingDialog()
-        startActivity(Intent(this, MyReviewActivity::class.java))
+        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("finish_review1"))
         finish()
     }
 
@@ -288,9 +296,10 @@ class CreateReview2Activity
             showCustomToast(it)
         }
     }
+
     override fun onPostReview2Success(response: ReviewResponse) {
         dismissLoadingDialog()
-        startActivity(Intent(this, MyReviewActivity::class.java))
+        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("finish_review1"))
         finish()
     }
 

@@ -16,6 +16,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.makeus.eatoo.R
 import com.makeus.eatoo.src.home.group.GroupActivity
+import com.makeus.eatoo.src.home.notification.NotificationActivity
 
 class FcmService : FirebaseMessagingService(), FcmView {
 
@@ -60,7 +61,7 @@ class FcmService : FirebaseMessagingService(), FcmView {
 
     private fun createNotification(title : String, message : String?): Notification {
 
-        val intent = Intent(this, GroupActivity::class.java).apply {
+        val intent = Intent(this, NotificationActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(

@@ -2,8 +2,6 @@ package com.makeus.eatoo.src.home.group.category.category_list
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.INotificationSideChannel
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -20,7 +18,7 @@ import com.makeus.eatoo.src.home.group.category.category_list.adapter.CategoryLi
 import com.makeus.eatoo.src.home.group.category.category_list.model.StoreCategoryListResponse
 import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialog
 import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialogInterface
-import com.makeus.eatoo.src.home.group.groupmatesuggestion.Group_Mate_Suggetsion_Activity
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.MateSuggestionActivity
 import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.getUserIdx
 
@@ -124,8 +122,8 @@ RadioGroup.OnCheckedChangeListener, CategoryListView, CategoryListRVAdapter.OnSt
 
     }
 
-    override fun onStoreLongClicked(storeName: String) {
-        val dialog = StoreToMateSuggestDialog(requireContext(), this, storeName)
+    override fun onStoreLongClicked(storeName: String, storeImg : String) {
+        val dialog = StoreToMateSuggestDialog(requireContext(), this, storeName, storeImg)
         dialog.show()
     }
 
@@ -134,12 +132,19 @@ RadioGroup.OnCheckedChangeListener, CategoryListView, CategoryListRVAdapter.OnSt
         else LikeService(this).tryPatchLike(getUserIdx(),storeIdx)
     }
 
-    override fun onGotoMateSuggestClicked(storeName: String) {
+    override fun onGotoMateSuggestClicked(storeName: String, storeImg: String) {
         context?.let {
-            val intent = Intent(it, Group_Mate_Suggetsion_Activity::class.java)
-            intent.putExtra("storeName", storeName)
+            val intent = Intent(it, MateSuggestionActivity::class.java)
+            intent.apply {
+                putExtra("storeName", storeName)
+                putExtra("storeImg", storeImg)
+            }
             startActivity(intent)
         }
+    }
+
+    override fun onPostLikeSuccess() {
+
     }
 
     override fun onPostLikeFail(message: String?) {

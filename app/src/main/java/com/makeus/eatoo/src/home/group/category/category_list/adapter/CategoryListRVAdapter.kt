@@ -22,7 +22,7 @@ class CategoryListRVAdapter(
 
     interface OnStoreClickListener {
         fun onStoreClicked(storeIdx : Int)
-        fun onStoreLongClicked(storeName : String)
+        fun onStoreLongClicked(storeName : String, storeImg : String)
         fun onLikeClicked(storeIdx : Int, isLiked: Boolean)
     }
 
@@ -39,7 +39,7 @@ class CategoryListRVAdapter(
                 listener.onStoreClicked(item.storeIdx)
             }
             binding.clCategoryStoreList.setOnLongClickListener{
-                listener.onStoreLongClicked(item.storeName)
+                listener.onStoreLongClicked(item.storeName, item.imgUrl)
 
                 return@setOnLongClickListener true
             }
