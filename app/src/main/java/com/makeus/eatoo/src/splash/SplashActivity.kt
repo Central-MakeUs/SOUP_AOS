@@ -22,6 +22,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+//        Log.d("KakaoHash Code", Utility.getKeyHash(this))
+
 
 
         Log.d("토큰", X_ACCESS_TOKEN)

@@ -44,6 +44,7 @@ import com.naver.maps.map.MapFragment
 import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
+//import net.daum.mf.map.api.MapView
 
 
 class GroupCategoryFragment(val listener: OnListClickListener) :
@@ -54,6 +55,7 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
     CategoryMapView, View.OnClickListener, OnMapReadyCallback, Overlay.OnClickListener,
     CategoryStoreRVAdapter.OnStoreClickListener, LikeView,
     StoreToMateSuggestDialogInterface {
+
 
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: FusedLocationSource
@@ -85,8 +87,10 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        val kakaoMap = MapView(activity)
 
         setOnClickListeners()
+//        binding.rlMapView.addView(kakaoMap)
     }
 
     private fun setOnClickListeners() {
@@ -231,6 +235,8 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
                 fm.beginTransaction().add(R.id.frag_group_category, it).commit()
             }
         mapFragment?.getMapAsync(this)
+
+
 
     }
 

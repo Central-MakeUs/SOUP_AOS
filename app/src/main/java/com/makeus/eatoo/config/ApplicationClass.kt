@@ -3,6 +3,7 @@ package com.makeus.eatoo.config
 import android.app.Application
 import android.content.SharedPreferences
 import android.content.res.Resources
+import com.makeus.eatoo.R
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -53,6 +54,7 @@ class ApplicationClass : Application() {
         initRetrofitInstance()
 
         applicationResources = resources
+
     }
 
     // 레트로핏 인스턴스를 생성하고, 레트로핏에 각종 설정값들을 지정해줍니다.
