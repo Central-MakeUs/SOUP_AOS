@@ -62,6 +62,9 @@ class InviteActivity :  BaseActivity<ActivityInviteBinding>(ActivityInviteBindin
                 if(Click_status == 1){
                     InviteService(this).tryGetInviteCodeData(getUserIdx(),GroupIdx)
                 }
+                else{
+                    showCustomToast("그룹을 선택해 주세요")
+                }
             }
             binding.backBtn.setOnClickListener {
                 finish()

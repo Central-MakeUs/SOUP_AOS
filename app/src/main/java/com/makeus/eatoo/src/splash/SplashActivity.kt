@@ -11,8 +11,6 @@ import com.makeus.eatoo.config.ApplicationClass
 import com.makeus.eatoo.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivitySplashBinding
-import com.makeus.eatoo.fcm.FcmRetrofitService
-import com.makeus.eatoo.fcm.FcmView
 import com.makeus.eatoo.src.explanation.ExplanationActivity
 import com.makeus.eatoo.src.main.MainActivity
 
@@ -21,9 +19,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        Log.d("KakaoHash Code", Utility.getKeyHash(this))
-
 
 
         Log.d("토큰", X_ACCESS_TOKEN)

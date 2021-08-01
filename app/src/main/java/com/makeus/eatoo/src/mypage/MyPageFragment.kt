@@ -13,6 +13,7 @@ import com.makeus.eatoo.config.ApplicationClass.Companion.USER_IDX
 import com.makeus.eatoo.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.makeus.eatoo.config.BaseFragment
 import com.makeus.eatoo.databinding.FragmentMyPageBinding
+import com.makeus.eatoo.src.home.group.groupmatesuggestion.TimeDialogInterface
 import com.makeus.eatoo.src.mypage.finding_invite.FindInviteDialog
 import com.makeus.eatoo.src.mypage.invite.InviteActivity
 import com.makeus.eatoo.src.mypage.model.AccountDeleteResponse
@@ -31,7 +32,7 @@ import com.makeus.eatoo.util.getUserNickName
 
 class MyPageFragment
     : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page),
-    MyPageView, View.OnClickListener, AccountWithdrawalDialogInterface, QuestionDialogInterface {
+    MyPageView, View.OnClickListener, AccountWithdrawalDialogInterface, QuestionDialogInterface, LogoutInterface  {
 
     override fun onResume() {
         super.onResume()
@@ -44,8 +45,8 @@ class MyPageFragment
 
         setOnClickListeners()
 
-
         binding.nickNameTxt.text = getUserNickName() + binding.nickNameTxt.text
+
 
 
     }
@@ -63,9 +64,8 @@ class MyPageFragment
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.logout_layout -> {
-                ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
-                startActivity(Intent(activity, SplashActivity::class.java))
-                activity?.finish()
+                val dialog = LogoutDialog(this,this)
+                dialog.show()
             }
             R.id.review_layout -> {
                 startActivity(Intent(activity, MyReviewActivity::class.java))
@@ -150,6 +150,14 @@ class MyPageFragment
         }
     }
 
+    override fun Setlogout(status: String) {
+        if(status == "YES") {
+            ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
+            startActivity(Intent(activity, SplashActivity::class.java))
+            activity?.finish()
+        }
+    }
+
 
     override fun onGetMyPageSuccess(response: MyPageResponse) {
         dismissLoadingDialog()
@@ -166,6 +174,7 @@ class MyPageFragment
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
     }
 
+
     override fun onDeleteAccountSuccess(response: AccountDeleteResponse) {
         dismissLoadingDialog()
         ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
@@ -179,7 +188,9 @@ class MyPageFragment
 
     override fun onDeleteAccountFail(message: String?) {
         dismissLoadingDialog()
+
     }
+
 
 
 }

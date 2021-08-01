@@ -52,10 +52,10 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="45dp"
         android:overScrollMode="never"
         app:layout_constraintBottom_toTopOf="@+id/invite_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view">
 
@@ -140,8 +140,6 @@
 
 
             </LinearLayout>
-
-
 
 
             <!--            <com.google.android.material.progressindicator.CircularProgressIndicator-->
