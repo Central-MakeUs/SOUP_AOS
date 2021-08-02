@@ -21,7 +21,7 @@
             app:titleText="@string/current_location"
             app:leftIcon="@drawable/ic_back_btn"
             app:contentInsetStart="0dp"
-            android:layout_marginHorizontal="19dp"/>
+            android:layout_marginHorizontal="4dp"/>
 
     </androidx.cardview.widget.CardView>
 
