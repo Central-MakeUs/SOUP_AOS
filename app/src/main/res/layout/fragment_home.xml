@@ -125,6 +125,7 @@
                     android:id="@+id/group_recyclerview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:overScrollMode="never" />
 
                 <HorizontalScrollView
@@ -132,6 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:overScrollMode="never"
+                    android:visibility="gone"
                     android:scrollbars="none">
 
                     <androidx.constraintlayout.widget.ConstraintLayout

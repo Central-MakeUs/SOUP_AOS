@@ -81,7 +81,7 @@ class SignInActivity2 : BaseActivity<ActivitySingIn2Binding>(ActivitySingIn2Bind
                 }
                 else {
                     binding.emailHint.setText(R.string.sign_in_email_bottom)
-                    binding.emailHint.setTextColor(binding.emailHint.context.resources.getColor(R.color.black))
+                    binding.emailHint.setTextColor(binding.emailHint.context.resources.getColor(R.color.gray_100))
                 }
 
             }
@@ -119,7 +119,7 @@ class SignInActivity2 : BaseActivity<ActivitySingIn2Binding>(ActivitySingIn2Bind
                 }
                 else {
                     binding.passwordHint.setText(R.string.sign_in_password_bottom)
-                    binding.passwordHint.setTextColor(binding.passwordHint.context.resources.getColor(R.color.black))
+                    binding.passwordHint.setTextColor(binding.passwordHint.context.resources.getColor(R.color.gray_100))
                 }
 
             }
@@ -157,7 +157,7 @@ class SignInActivity2 : BaseActivity<ActivitySingIn2Binding>(ActivitySingIn2Bind
                 }
                 else{
                     binding.passwordCheckHint.setText(R.string.sign_in_password_bottom)
-                    binding.passwordCheckHint.setTextColor(binding.passwordCheckHint.context.resources.getColor(R.color.black))
+                    binding.passwordCheckHint.setTextColor(binding.passwordCheckHint.context.resources.getColor(R.color.gray_100))
                 }
             }
         })
