@@ -107,7 +107,8 @@ dependencies {
 
 //    implementation "com.kakao.sdk:v2-user:2.5.2" // 카카오 로그인
 //    implementation files('libs/libDaumMapAndroid.jar')
-
+    //kotlin coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5"
 
 }
 apply plugin: 'com.google.gms.google-services'

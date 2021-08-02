@@ -44,10 +44,14 @@ import com.naver.maps.map.MapFragment
 import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
-//import net.daum.mf.map.api.MapView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
-class GroupCategoryFragment(val listener: OnListClickListener) :
+
+
+class GroupCategoryFragment :
     BaseFragment<FragmentGroupCategoryBinding>(
         FragmentGroupCategoryBinding::bind,
         R.layout.fragment_group_category
@@ -57,6 +61,7 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
     StoreToMateSuggestDialogInterface {
 
 
+    private var mapFragment : MapFragment? = null
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: FusedLocationSource
 
@@ -77,22 +82,24 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
     }
 
     override fun onStop() {
-        super.onStop()
         Log.d("groupcategory", "onstop")
+//        binding.llFiller.isVisible = true
+        super.onStop()
+
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         Log.d("groupCategory", "ondestroy")
+        //binding.llFiller.isVisible = true
+        super.onDestroy()
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val kakaoMap = MapView(activity)
-
         setOnClickListeners()
-//        binding.rlMapView.addView(kakaoMap)
+
     }
 
     private fun setOnClickListeners() {
@@ -103,7 +110,14 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.ll_category_list -> {
-                listener.onListClick()
+                binding.llFiller.isVisible = true  //1
+                //mapFragment?.view?.visibility = View.GONE    //2
+                // 1 & 2 둘 다  onTest() 이전에 바뀌지 않음
+                //thread 의 문제?!
+
+                Log.d("groupcategory", binding.llFiller.isVisible.toString())  //여기서는 true 라고 뜸.
+
+                (activity as GroupActivity).onListClicked()
             }
         }
     }
@@ -232,7 +246,7 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
     private fun setUpMap() {
 
         val fm = childFragmentManager
-        val mapFragment = fm.findFragmentById(R.id.frag_group_category) as MapFragment?
+        mapFragment = fm.findFragmentById(R.id.frag_group_category) as MapFragment?
             ?: MapFragment.newInstance().also {
                 fm.beginTransaction().add(R.id.frag_group_category, it).commit()
             }

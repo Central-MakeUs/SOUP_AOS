@@ -11,7 +11,7 @@ interface GroupView {
     fun onGetGroupFail(message : String)
 
     fun onGetMateSuccess(response : MateResponse)
-    fun onGetMateFail(message : String)
+    fun onGetMateFail(code : Int, message : String?)
 
     fun onGetMainCharSuccess(response : MainCharResponse)
     fun onGetMainCharFail(message: String?)

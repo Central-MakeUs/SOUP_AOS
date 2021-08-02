@@ -19,7 +19,7 @@ class GroupViewPagerAdapter(
     private val groupActivity: GroupActivity
     ) : FragmentStateAdapter(fm) {
 
-    var fragmentList = arrayListOf<Fragment>(GroupMainFragment(), GroupCategoryFragment(groupActivity), GroupVoteFragment(), GroupMemberFragment())
+    var fragmentList = arrayListOf<Fragment>(GroupMainFragment(), GroupCategoryFragment(), GroupVoteFragment(), GroupMemberFragment())
 
     override fun getItemCount(): Int = GROUP_TAB_NUM
 

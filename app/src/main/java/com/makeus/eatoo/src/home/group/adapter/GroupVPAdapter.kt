@@ -17,7 +17,7 @@ class GroupVPAdapter(
     val fm : FragmentManager,
 private val groupActivity: GroupActivity) : FragmentStatePagerAdapter(fm) {
 
-    var fragmentList = arrayListOf<Fragment>(GroupMainFragment(), GroupCategoryFragment(groupActivity), GroupVoteFragment(), GroupMemberFragment())
+    var fragmentList = arrayListOf<Fragment>(GroupMainFragment(), GroupCategoryFragment(), GroupVoteFragment(), GroupMemberFragment())
 
     override fun getCount(): Int = 4
 

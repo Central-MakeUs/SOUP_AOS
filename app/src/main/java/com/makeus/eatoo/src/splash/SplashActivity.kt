@@ -21,9 +21,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
         super.onCreate(savedInstanceState)
 
 
-        Log.d("토큰", X_ACCESS_TOKEN)
         //디버깅용
-       // ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
+       //ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
         Handler(Looper.getMainLooper()).postDelayed({
 
             if (ApplicationClass.sSharedPreferences.contains(X_ACCESS_TOKEN)) {

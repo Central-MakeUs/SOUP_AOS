@@ -71,7 +71,7 @@
             app:layout_constraintBottom_toBottomOf="@id/tv_rating"
             app:layout_constraintEnd_toStartOf="@id/tv_rating"
             app:layout_constraintTop_toTopOf="@id/tv_rating"
-            android:src="@drawable/ic_star_32"
+            android:src="@drawable/star_20"
             android:layout_marginEnd="8dp"
             />
 

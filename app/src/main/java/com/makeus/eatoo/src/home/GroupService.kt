@@ -46,11 +46,15 @@ class GroupService(val view: GroupView) {
         val groupinerface = ApplicationClass.sRetrofit.create(GroupRetrofitInterface::class.java)
         groupinerface.getMate(userIdx).enqueue(object : Callback<MateResponse> {
             override fun onResponse(call: Call<MateResponse>, response: Response<MateResponse>) {
-                view.onGetMateSuccess(response.body() as MateResponse)
+                response.body()?.let {
+                    if(it.isSuccess)  view.onGetMateSuccess(response.body() as MateResponse)
+                    else  view.onGetMateFail(it.code, it.message)
+                }
+
             }
 
             override fun onFailure(call: Call<MateResponse>, t: Throwable) {
-                view.onGetMateFail(t.message ?: "통신 오류")
+                view.onGetMateFail(0, t.message ?: "통신 오류")
             }
         })
     }
