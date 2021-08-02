@@ -348,7 +348,7 @@
     <!--my_page-->
     <string name="my_page">마이페이지</string>
     <string name="profile">프로필</string>
-    <string name="nickname_plus">님</string>
+    <string name="nickname_plus">%s님</string>
     <string name="profile_setting">프로필 설정</string>
     <string name="review">후기</string>
     <string name="invite">초대</string>

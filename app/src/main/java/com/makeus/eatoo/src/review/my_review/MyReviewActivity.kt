@@ -1,11 +1,15 @@
 package com.makeus.eatoo.src.review.my_review
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
@@ -34,7 +38,31 @@ View.OnClickListener, MyReviewView, MyReviewRVAdapter.OnMyReviewClickListener{
         super.onCreate(savedInstanceState)
 
         setViews()
+        registerBr()
 
+    }
+
+    private val reviewBr = object : BroadcastReceiver() {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            if(p1?.action.equals("finish_my_review")) {
+                this@MyReviewActivity.finish()
+            }
+        }
+
+    }
+
+    private fun registerBr() {
+        val filter = IntentFilter("finish_my_review")
+        LocalBroadcastManager.getInstance(this).registerReceiver(reviewBr, filter)
+    }
+
+    private fun unregisterBr() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(reviewBr)
+    }
+
+    override fun onDestroy() {
+        unregisterBr()
+        super.onDestroy()
     }
 
     private fun getMyReview() {

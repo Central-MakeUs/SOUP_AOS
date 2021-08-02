@@ -218,7 +218,7 @@ class VoteDialog(
             }
         }
 
-        insertPoint.addView(dynamicVoteView, insertPoint.childCount - 1)
+        insertPoint.addView(dynamicVoteView, insertPoint.childCount - 2)
 
     }
 
@@ -354,7 +354,7 @@ class VoteDialog(
             ApplicationClass.applicationResources.getString(R.string.dialog_vote_num), 0
         )
 
-        insertPointItem.addView(dynamicVoteView, insertPointItem.childCount - 1)
+        insertPointItem.addView(dynamicVoteView, insertPointItem.childCount - 2)
 
         insertPointRadio.addView(setRadioButton(binding.radiogroupVoteDialog.childCount, null))
 

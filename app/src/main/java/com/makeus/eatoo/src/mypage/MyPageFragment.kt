@@ -45,7 +45,6 @@ class MyPageFragment
 
         setOnClickListeners()
 
-        binding.nickNameTxt.text = getUserNickName() + binding.nickNameTxt.text
 
 
 
@@ -161,9 +160,11 @@ class MyPageFragment
 
     override fun onGetMyPageSuccess(response: MyPageResponse) {
         dismissLoadingDialog()
+
         val userColor = if (response.result.color == 0) 0 else response.result.color - 1
         val userChar = if (response.result.characters == 0) 0 else response.result.characters - 1
         binding.ivUserChar.setImageResource(EatooCharList[(userColor * 5) + userChar])
+        binding.nickNameTxt.text = String.format(resources.getString(R.string.nickname_plus), response.result.nickName)
 
 //        setKeyword(response.result.getUserKeywordRes)
     }

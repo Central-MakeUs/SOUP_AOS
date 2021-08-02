@@ -68,7 +68,7 @@ class CreateReview1Activity :
 
     private val reviewBr = object : BroadcastReceiver() {
         override fun onReceive(p0: Context?, p1: Intent?) {
-            if(p1?.action.equals("finish_review1")) {
+            if (p1?.action.equals("finish_review1")) {
                 this@CreateReview1Activity.finish()
             }
         }
@@ -125,6 +125,14 @@ class CreateReview1Activity :
             setExistingReviewInfo(reviewInfo!!)
 
         }
+
+        if (binding.etStoreName.text.isNotEmpty() &&
+            binding.tvSearchLocation.text != resources.getString(R.string.input_store_location)
+            && binding.tvSearchLocation.text.isNotEmpty()
+        ) {
+            activateNextButton()
+        } else inactivateNextButton()
+
     }
 
     private fun setSearchLocation(searchResult: SearchResultEntity) {
@@ -185,12 +193,30 @@ class CreateReview1Activity :
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 binding.ivStoreNameDelete.isVisible = p0.toString().isNotEmpty()
+                if (p0.toString().isNotEmpty() && categoryIdx != 0
+                    && binding.tvSearchLocation.text != resources.getString(R.string.input_store_location)
+                ) activateNextButton()
+                 else inactivateNextButton()
             }
 
             override fun afterTextChanged(p0: Editable?) {
-            }
 
+            }
         })
+    }
+
+    private fun inactivateNextButton() {
+        binding.btnCreateReviewNext.background = ContextCompat.getDrawable(
+            this@CreateReview1Activity,
+            R.drawable.background_review_next
+        )
+    }
+
+    private fun activateNextButton() {
+        binding.btnCreateReviewNext.background = ContextCompat.getDrawable(
+            this@CreateReview1Activity,
+            R.drawable.login_btn_background
+        )
     }
 
     override fun onClick(v: View?) {
@@ -252,6 +278,8 @@ class CreateReview1Activity :
             startActivity(intent)
         }
     }
+
+
 
     /**
 
@@ -335,22 +363,8 @@ class CreateReview1Activity :
             binding.tvSearchLocation.text != resources.getString(R.string.input_store_location)
             && binding.tvSearchLocation.text.isNotEmpty()
         ) {
-            binding.btnCreateReviewNext.background = ContextCompat.getDrawable(
-                this@CreateReview1Activity,
-                R.drawable.login_btn_background
-            )
-            binding.btnCreateReviewNext.setTextColor(
-                ContextCompat.getColor(
-                    this@CreateReview1Activity,
-                    R.color.white
-                )
-            )
-        } else {
-            binding.btnCreateReviewNext.background = ContextCompat.getDrawable(
-                this@CreateReview1Activity,
-                R.drawable.background_review_next
-            )
-        }
+            activateNextButton()
+        } else inactivateNextButton()
     }
 
     /**
