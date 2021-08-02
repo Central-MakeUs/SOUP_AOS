@@ -48,6 +48,7 @@ View.OnClickListener{
 
         GroupService(this).tryGetMainChar(getUserIdx())
         GroupService(this).tryGetNotiCount(getUserIdx())
+        GroupService(this).tryGetGroupData(getUserIdx())
     }
 
     @SuppressLint("SetTextI18n")
@@ -296,7 +297,6 @@ View.OnClickListener{
     override fun onPatchSingleStatusFail(message: String?) {
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
     }
-
 
 
 

@@ -177,6 +177,7 @@ class MyPageFragment
 
     override fun onDeleteAccountSuccess(response: AccountDeleteResponse) {
         dismissLoadingDialog()
+
         ApplicationClass.sSharedPreferences.edit().putString(X_ACCESS_TOKEN, null).apply()
         ApplicationClass.sSharedPreferences.edit().putString(GROUP_IDX, null).apply()
         ApplicationClass.sSharedPreferences.edit().putString(USER_IDX, null).apply()
