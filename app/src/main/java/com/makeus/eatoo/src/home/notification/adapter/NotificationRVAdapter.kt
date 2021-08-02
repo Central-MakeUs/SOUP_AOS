@@ -88,7 +88,7 @@ class NotificationRVAdapter(
         private fun reviewNoti() {
             binding.clMateNoti.isVisible = false
             binding.clNonMateNoti.isVisible = true
-            binding.ivNonMateNoti.isVisible = false
+            binding.ivNonMateNoti.isVisible = true
             binding.tvNotiName.text = ApplicationClass.applicationResources.getString(R.string.review_noti_title)
             binding.tvNoti1.text = ApplicationClass.applicationResources.getString(R.string.review_noti_mid1)
             binding.tvNoti2.text = ApplicationClass.applicationResources.getString(R.string.review_noti_mid2)
@@ -100,7 +100,7 @@ class NotificationRVAdapter(
         private fun bindSignInNoti() {
             binding.clMateNoti.isVisible = false
             binding.clNonMateNoti.isVisible = true
-            binding.ivNonMateNoti.isVisible = false
+            binding.ivNonMateNoti.isVisible = true
             binding.tvNotiName.text = ApplicationClass.applicationResources.getString(R.string.signup_noti_title)
             binding.tvNoti1.text = String.format(
                 ApplicationClass.applicationResources.getString(R.string.signup_noti_mid1), getUserNickName())

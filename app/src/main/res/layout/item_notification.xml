@@ -155,7 +155,7 @@
                 android:visibility="invisible"
                 app:layout_constraintTop_toBottomOf="@id/tv_noti_name"
                 app:layout_constraintStart_toStartOf="@id/tv_noti_name"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:id="@+id/tv_noti1"
@@ -212,6 +212,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="17dp"
                 app:layout_constraintStart_toEndOf="@id/cl_non_mate_noti"
                 app:layout_constraintTop_toTopOf="@id/cl_non_mate_noti"/>
 
