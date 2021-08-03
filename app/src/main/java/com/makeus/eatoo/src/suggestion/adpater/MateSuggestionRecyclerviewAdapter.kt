@@ -43,7 +43,10 @@ class MateSuggestionRecyclerviewAdapter (
         holder.Date.text = MateList[position].createdAt
         holder.People.text = MateList[position].membersNumber.toString()
 
-        if(MateList[position].imgUrl != "") glideUtil(context, MateList[position].imgUrl, holder.mateImg)
+        if(MateList[position].imgUrl != "") {
+            glideUtil(context, MateList[position].imgUrl, holder.mateImg)
+            holder.mateImg.setAlpha(200)
+        }
         else holder.mateImg.setImageResource(R.drawable.group_421)
 
         holder.container.setOnLongClickListener {

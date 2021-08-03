@@ -24,6 +24,7 @@ class ExistingStoreRVAdapter(
             binding.tvStoreLocation.text = item.address
             binding.tvRating.text = item.rating.toString()
             glideUtil(context, item.imgUrl, binding.ivStore)
+            binding.ivStore.setAlpha(200)
             binding.clExistingStore.setOnClickListener{
                 listener.onReviewClicked(item)
             }

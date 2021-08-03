@@ -93,6 +93,7 @@ ReviewDetailView, View.OnClickListener{
         val categoryItem = resources.getStringArray(R.array.category_food)
         binding.tvStoreCategory.text = categoryItem[review.storeCategoryIdx-1]
         glideUtil(this, review.imgUrl, binding.ivStoreImage)
+        binding.ivStoreImage.setAlpha(200)
         binding.tvStoreName.text = review.storeName
         binding.tvStoreAddress.text = review.address
         binding.etMenuName.setText(review.menuName)

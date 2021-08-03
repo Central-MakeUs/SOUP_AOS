@@ -59,6 +59,7 @@ class MateSuggestionActivity
         if(storeImg != null) {
             binding.ivMateImg.isVisible = true
             glideUtil(this, storeImg.toString(), binding.ivMateImg)
+            binding.ivMateImg.setAlpha(400)
             binding.llImgHint.isVisible = false
             if(storeName != null)  {
                 binding.tvMateStoreNameOnImg.text = storeName

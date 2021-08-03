@@ -27,6 +27,7 @@ class StoreRecRVAdapter(
 
         fun bindItem(item: StoreRecResult) {
             glideUtil(context, item.imgUrl, binding.ivStore)
+            binding.ivStore.setAlpha(200)
             binding.tvStoreName.text = item.storeName
             binding.tvStoreLocation.text = item.address
             binding.tvStoreRating.text = item.rating.toInt().toString()

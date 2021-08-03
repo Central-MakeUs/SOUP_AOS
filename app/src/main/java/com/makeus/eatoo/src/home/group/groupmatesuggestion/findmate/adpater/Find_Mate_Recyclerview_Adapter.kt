@@ -1,6 +1,7 @@
 package com.makeus.eatoo.src.home.group.groupmatesuggestion.findmate.adpater
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -12,9 +13,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.makeus.eatoo.R
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.findmate.model.GroupMateResult
+import com.makeus.eatoo.util.glideUtil
+import com.makeus.eatoo.util.roundAll
 
 
-class Find_Mate_Recyclerview_Adapter(val MateList : ArrayList<GroupMateResult>) : RecyclerView.Adapter<Find_Mate_Recyclerview_Adapter.CustomViewholder>(){
+class Find_Mate_Recyclerview_Adapter(val context : Context,val MateList : ArrayList<GroupMateResult>) : RecyclerView.Adapter<Find_Mate_Recyclerview_Adapter.CustomViewholder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewholder {
         val inflaterview = LayoutInflater.from(parent.context).inflate(R.layout.item_group_suggstion,parent,false)
 
@@ -54,6 +57,12 @@ class Find_Mate_Recyclerview_Adapter(val MateList : ArrayList<GroupMateResult>) 
 
         }
 
+        if(MateList[position].imgUrl != "") {
+            glideUtil(context, MateList[position].imgUrl, roundAll(holder.Mateimg, 100))
+            holder.Mateimg.setAlpha(200)
+        }
+        else holder.Mateimg.setImageResource(R.drawable.group_385)
+
         holder.MateName.text = MateList[position].mateName
         holder.RestaurantName.text = MateList[position].storeName
         holder.MealTime.text = MateList[position].time
@@ -70,6 +79,7 @@ class Find_Mate_Recyclerview_Adapter(val MateList : ArrayList<GroupMateResult>) 
         val MateLayout : ConstraintLayout = view.findViewById(R.id.mate_layout)
         val Mathing_status : AppCompatTextView = view.findViewById(R.id.mate_status_tv)
         val MateName : AppCompatTextView = view.findViewById(R.id.title_txt)
+        val Mateimg : AppCompatImageView = view.findViewById(R.id.food_img)
         val RestaurantName : AppCompatTextView = view.findViewById(R.id.mate_store)
         val MealTime : AppCompatTextView = view.findViewById((R.id.meal_time_tv))
         val LimitTime : AppCompatTextView = view.findViewById((R.id.limit_time_tv))

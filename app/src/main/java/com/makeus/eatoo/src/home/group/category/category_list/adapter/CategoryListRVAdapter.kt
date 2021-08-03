@@ -29,6 +29,7 @@ class CategoryListRVAdapter(
     inner class ViewHolder(val binding : ItemCategoryListStoreBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindItem(item : GetStoresRe){
             glideUtil(context, item.imgUrl, binding.ivStore)
+            binding.ivStore.setAlpha(200)
             binding.tvStoreName.text = item.storeName
             binding.tvRating.text = item.rating.toInt().toString()
             binding.toggleStoreLike.isChecked = item.isLiked == "Y"

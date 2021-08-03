@@ -118,6 +118,7 @@ StoreDetailView, View.OnClickListener, LikeView, CompoundButton.OnCheckedChangeL
         dismissLoadingDialog()
 
         glideUtil(this, response.result.imgUrl, binding.ivStoreImage)
+        binding.ivStoreImage.setAlpha(400)
         storeImg = response.result.imgUrl
         binding.tvStoreName.text = response.result.storeName
         binding.tvStoreAddress.text = response.result.address
