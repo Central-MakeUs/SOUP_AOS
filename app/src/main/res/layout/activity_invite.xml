@@ -52,9 +52,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="45dp"
         android:overScrollMode="never"
-        app:layout_constraintBottom_toTopOf="@+id/invite_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view">
@@ -80,12 +79,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
+                android:id="@+id/group_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="35dp"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/user_name_suggestion_txt">
@@ -94,8 +92,9 @@
                     android:id="@+id/my_group_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
                     android:overScrollMode="never"
-                    android:layout_marginStart="25dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -142,6 +141,23 @@
             </LinearLayout>
 
 
+            <com.kingfisher.easyviewindicator.RecyclerViewIndicator
+                android:id="@+id/recyclerViewIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="38dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:avi_animation_enable="false"
+                app:avi_drawable="@drawable/indicator_select"
+                app:avi_drawable_unselected="@drawable/indicator_no_select"
+                app:avi_height="7dp"
+                app:avi_margin="7dp"
+                app:avi_width="7dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/group_layout" />
+
             <!--            <com.google.android.material.progressindicator.CircularProgressIndicator-->
             <!--                android:id="@+id/indicator"-->
             <!--                android:layout_width="wrap_content"-->
@@ -170,29 +186,32 @@
             <!--                app:selected_color="@color/main_color" />-->
 
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/invite_btn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="45dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/sign_in_btn_background_main_color"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="@string/inviting"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewIndicator" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.core.widget.NestedScrollView>
 
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/invite_btn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/sign_in_btn_background_main_color"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center"
-        android:text="@string/inviting"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

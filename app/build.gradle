@@ -94,10 +94,10 @@ dependencies {
 //    //toggle_btn_library
 //    implementation 'com.nex3z:toggle-button-group:1.1.9'
 
-    //circleview library
-    implementation 'com.ramotion.circlemenu:circle-menu:0.3.2'
-
-    implementation 'com.github.martinstamenkovski:ARIndicatorView:2.0.0'
+//    //circleview library
+//    implementation 'com.ramotion.circlemenu:circle-menu:0.3.2'
+//
+//    implementation 'com.github.martinstamenkovski:ARIndicatorView:2.0.0'
 
     //google gson
     implementation 'com.google.code.gson:gson:2.8.7'
@@ -107,6 +107,8 @@ dependencies {
 
 //    implementation "com.kakao.sdk:v2-user:2.5.2" // 카카오 로그인
 //    implementation files('libs/libDaumMapAndroid.jar')
+    //recyclerview_indicator
+    implementation 'com.kingfisherphuoc:easy-recyclerview-indicator:1.3'
 
 
 }
