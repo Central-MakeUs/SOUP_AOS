@@ -3,6 +3,7 @@ package com.makeus.eatoo.config
 import android.app.Application
 import android.content.SharedPreferences
 import android.content.res.Resources
+import androidx.appcompat.app.AppCompatDelegate
 import com.makeus.eatoo.R
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -54,6 +55,9 @@ class ApplicationClass : Application() {
         initRetrofitInstance()
 
         applicationResources = resources
+
+        //다크모드 미지원
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
     }
 
