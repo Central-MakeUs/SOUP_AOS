@@ -219,6 +219,7 @@
     <string name="group_date">날짜</string>
     <string name="group_diet_kind">잡곡밥 | 호박잎된장국 | 꽁치구이 | 미역초무침 | 배추김치</string>
     <string name="group_finding_mate">MATE를 찾아요!</string>
+    <string name="group_find_mate">MATE 찾기</string>
     <string name="group_mate_title">국밥 드실분</string>
     <string name="group_mate_restaurant">할매 국밥</string>
     <string name="group_time" tools:ignore="TypographyDashes">12:00-12:40</string>
