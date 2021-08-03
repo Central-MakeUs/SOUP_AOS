@@ -63,7 +63,7 @@ class StoreRecListActivity :
 
     private fun setBackButton() {
         binding.customToolbar.leftIcon.setOnClickListener {
-            startActivity(Intent(this, GroupActivity::class.java))
+            finish()
         }
     }
 

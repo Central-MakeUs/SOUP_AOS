@@ -52,7 +52,7 @@
             android:fillViewport="true"
             android:overScrollMode="never"
             app:layout_constraintTop_toBottomOf="@id/tv_vote_dialog_top_due_date"
-            app:layout_constraintBottom_toTopOf="@id/btn_vote_dialog_done">
+            app:layout_constraintBottom_toTopOf="@id/ll_vote_btn_container">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,17 +111,56 @@
         </androidx.core.widget.NestedScrollView>
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_vote_dialog_done"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ll_vote_btn_container"
             android:layout_width="0dp"
-            android:layout_height="41dp"
-            android:background="@drawable/selector_group_vote_confirm"
-            android:fontFamily="@font/roboto_regular"
-            android:text="@string/dialog_vote_confirm"
-            android:textColor="@drawable/selector_group_vote_textcolor"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+           >
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_dialog_confirm"
+                android:layout_width="0dp"
+                android:layout_height="41dp"
+                android:text="@string/dialog_confirm"
+                android:textColor="@color/white"
+                android:fontFamily="@font/roboto_regular"
+                android:background="@drawable/background_dialog_review_confirm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_dialog_cancel"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_dialog_cancel"
+                android:layout_width="0dp"
+                android:layout_height="41dp"
+                android:text="@string/dialog_cancel"
+                android:textColor="@color/dialog_cancel_text"
+                android:fontFamily="@font/roboto_regular"
+                android:background="@drawable/background_dialog_cancel"
+                app:layout_constraintEnd_toStartOf="@id/btn_dialog_confirm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_vote_dialog_done"
+                android:layout_width="0dp"
+                android:layout_height="41dp"
+                android:background="@drawable/background_dialog_vote_confirm_orange"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/dialog_vote_confirm"
+                android:visibility="visible"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

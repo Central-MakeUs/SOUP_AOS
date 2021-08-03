@@ -72,6 +72,7 @@ WishListView, WishListRVAdapter.OnStoreClickListener, RadioGroup.OnCheckedChange
     private fun getWishList(order: Int) {
         context?.let {
             showLoadingDialog(it)
+            Log.d("wishlist", categoryIdx.toString())
             WishListService(this).tryGetWishList(getUserIdx(), categoryIdx, order)
         }
     }

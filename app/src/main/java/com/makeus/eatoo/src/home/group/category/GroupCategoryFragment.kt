@@ -34,6 +34,7 @@ import com.makeus.eatoo.like.LikeService
 import com.makeus.eatoo.like.LikeView
 import com.makeus.eatoo.src.home.group.GroupActivity
 import com.makeus.eatoo.src.home.group.category.category_detail.CategoryStoreDetailActivity
+import com.makeus.eatoo.src.home.group.category.category_list.GroupCategoryListFragment
 import com.makeus.eatoo.src.home.group.category.category_map.OnListClickListener
 import com.makeus.eatoo.src.home.group.category.category_map.adapter.CategoryStoreRVAdapter
 import com.makeus.eatoo.src.home.group.category.category_map.model.CategoryMapStoreInfo
@@ -44,10 +45,14 @@ import com.naver.maps.map.MapFragment
 import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
-//import net.daum.mf.map.api.MapView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
-class GroupCategoryFragment(val listener: OnListClickListener) :
+
+
+class GroupCategoryFragment :
     BaseFragment<FragmentGroupCategoryBinding>(
         FragmentGroupCategoryBinding::bind,
         R.layout.fragment_group_category
@@ -57,6 +62,7 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
     StoreToMateSuggestDialogInterface {
 
 
+    private var mapFragment : MapFragment? = null
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: FusedLocationSource
 
@@ -77,22 +83,24 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
     }
 
     override fun onStop() {
-        super.onStop()
         Log.d("groupcategory", "onstop")
+//        binding.llFiller.isVisible = true
+        super.onStop()
+
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         Log.d("groupCategory", "ondestroy")
+        //binding.llFiller.isVisible = true
+        super.onDestroy()
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val kakaoMap = MapView(activity)
-
         setOnClickListeners()
-//        binding.rlMapView.addView(kakaoMap)
+
     }
 
     private fun setOnClickListeners() {
@@ -103,7 +111,10 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.ll_category_list -> {
-                listener.onListClick()
+                childFragmentManager.beginTransaction()
+                    .add(R.id.container, GroupCategoryListFragment())
+                    .commit()
+                binding.grpCategoryButton.isVisible = false
             }
         }
     }
@@ -232,7 +243,7 @@ class GroupCategoryFragment(val listener: OnListClickListener) :
     private fun setUpMap() {
 
         val fm = childFragmentManager
-        val mapFragment = fm.findFragmentById(R.id.frag_group_category) as MapFragment?
+        mapFragment = fm.findFragmentById(R.id.frag_group_category) as MapFragment?
             ?: MapFragment.newInstance().also {
                 fm.beginTransaction().add(R.id.frag_group_category, it).commit()
             }

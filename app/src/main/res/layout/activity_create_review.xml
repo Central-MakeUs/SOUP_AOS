@@ -17,7 +17,7 @@
             android:id="@+id/custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="19dp"
+            android:layout_marginHorizontal="4dp"
             app:contentInsetStart="0dp"
             app:leftIcon="@drawable/ic_back_btn"
             app:titleText="@string/create_review" />
@@ -51,8 +51,8 @@
                 android:id="@+id/tv_review_store_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="21dp"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="29dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/store_location"
                 android:textColor="@color/black"
@@ -65,7 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="23dp"
                 android:background="@drawable/edittext_background_radius_litle"
                 android:orientation="horizontal"
                 android:paddingTop="13dp"
@@ -103,7 +103,7 @@
                 android:layout_width="0dp"
                 android:layout_height="138dp"
                 android:layout_marginTop="9dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="23dp"
                 android:background="@drawable/edittext_background_radius_litle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_review_store_location"
@@ -147,7 +147,8 @@
                     android:id="@+id/iv_review1_img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:layout_margin="1dp"/>
 
             </FrameLayout>
 
@@ -156,7 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="33dp"
+                android:layout_marginTop="39dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/store_name"
                 android:textColor="@color/black"
@@ -216,7 +217,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="51dp"
+                android:layout_marginTop="45dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/category"
                 android:textColor="@color/black"
@@ -340,11 +341,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="40dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="30.8dp"
                 android:gravity="center"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@id/btn_create_review_next"
                 app:layout_constraintTop_toBottomOf="@+id/hsv_create_review"
                 app:layout_constraintVertical_bias="0.1"
                 app:layout_constraintVertical_chainStyle="spread"
@@ -381,8 +380,7 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_create_review_exp" />
+                app:layout_constraintStart_toStartOf="parent"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

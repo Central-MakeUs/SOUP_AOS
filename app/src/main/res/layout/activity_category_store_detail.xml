@@ -34,8 +34,9 @@
                 android:background="@color/transparent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="41dp"
-                android:layout_marginStart="21dp"/>
+                android:padding="15dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginStart="6dp"/>
 
 
             <ToggleButton

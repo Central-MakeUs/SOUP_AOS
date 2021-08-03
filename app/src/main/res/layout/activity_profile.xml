@@ -18,7 +18,7 @@
             android:id="@+id/toolbar_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="19dp"
+            android:layout_marginHorizontal="4dp"
             app:contentInsetStart="0dp"
             app:leftIcon="@drawable/ic_back_btn"
             app:titleText="@string/profile_setting" />

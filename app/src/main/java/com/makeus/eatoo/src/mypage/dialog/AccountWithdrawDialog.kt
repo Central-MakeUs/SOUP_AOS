@@ -24,7 +24,6 @@ class AccountWithdrawDialog (
 
         this.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        binding.tvQuery1.text = String.format(ApplicationClass.applicationResources.getString(R.string.new_member1), getGroupName())
 
         binding.btnDialogConfirm.setOnClickListener {
             listener.onWithdrawClicked()

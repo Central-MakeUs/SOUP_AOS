@@ -192,7 +192,6 @@ class CreateReview2Activity
             registerReview2(review2)
         }
 
-//        resetRating()
     }
 
     private fun registerReview1(review1: Review1Request) {
@@ -264,22 +263,6 @@ class CreateReview2Activity
         return keywordList
     }
 
-    //rating
-//    private fun countRating() : Double {
-//        if(binding.btnStar1.isChecked) rating++
-//        if(binding.btnStar2.isChecked) rating++
-//        if(binding.btnStar3.isChecked) rating++
-//        if(binding.btnStar4.isChecked) rating++
-//        if(binding.btnStar5.isChecked) rating++
-//
-//        return rating
-//    }
-
-//    private fun resetRating() {
-//        rating = 0.0
-//    }
-
-
 
 
     ////////server result
@@ -287,6 +270,8 @@ class CreateReview2Activity
     override fun onPostReview1Success(response: ReviewResponse) {
         dismissLoadingDialog()
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("finish_review1"))
+        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("finish_my_review"))
+        startActivity(Intent(this, MyReviewActivity::class.java))
         finish()
     }
 
@@ -300,6 +285,8 @@ class CreateReview2Activity
     override fun onPostReview2Success(response: ReviewResponse) {
         dismissLoadingDialog()
         LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("finish_review1"))
+        LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("finish_my_review"))
+        startActivity(Intent(this, MyReviewActivity::class.java))
         finish()
     }
 

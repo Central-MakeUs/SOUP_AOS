@@ -112,7 +112,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/tv_rating"
                 app:layout_constraintStart_toStartOf="@id/tv_store_name"
                 app:layout_constraintTop_toTopOf="@id/tv_rating"
-                android:src="@drawable/ic_star_32"
+                android:src="@drawable/star_20"
                 />
 
             <TextView

@@ -103,11 +103,11 @@ class GroupVoteService (val view : GroupVoteView){
 
             })
     }
-    fun tryGetVotedMember(userIdx: Int, voteIdx : Int) {
+    fun tryGetVotedMember(userIdx: Int, voteIdx : Int, voteMenuIdx : Int) {
         val groupVoteRetrofitInterface = ApplicationClass.sRetrofit.create(
             GroupVoteRetrofitInterface::class.java
         )
-        groupVoteRetrofitInterface.getVotedMember(userIdx, voteIdx)
+        groupVoteRetrofitInterface.getVotedMember(userIdx, voteIdx, voteMenuIdx)
             .enqueue(object :
                 Callback<VotedMemberResponse> {
                 override fun onResponse(

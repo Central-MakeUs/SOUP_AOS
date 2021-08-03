@@ -1,8 +1,11 @@
 package com.makeus.eatoo.src.home.group.groupmatesuggestion
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -22,8 +25,11 @@ import com.makeus.eatoo.util.getUserIdx
 import com.google.android.material.chip.Chip
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.makeus.eatoo.config.ApplicationClass
+import com.makeus.eatoo.src.explanation.ExplanationActivity
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.dialog.LeaveMateSuggDialog
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.dialog.LeaveMateSuggDialogInterface
+import com.makeus.eatoo.src.main.MainActivity
 import com.makeus.eatoo.util.glideUtil
 
 
@@ -237,10 +243,11 @@ class MateSuggestionActivity
 
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {
         dismissLoadingDialog()
-        val dialog = MateSuggestionCompleteDialog(this)
-        dialog.show()
+        Handler(Looper.getMainLooper()).postDelayed({
+            val dialog = MateSuggestionCompleteDialog(this)
+            dialog.show()
+        }, 1000)
         finish()
-
     }
 
     override fun onPostMateCreateFailure(message: String) {

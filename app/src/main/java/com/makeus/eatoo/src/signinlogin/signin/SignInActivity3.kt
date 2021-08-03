@@ -84,7 +84,7 @@ class SignInActivity3 : BaseActivity<ActivitySingIn3Binding>(ActivitySingIn3Bind
                 else {
                     binding.nextBtn.setBackgroundColor(binding.nextBtn.context.resources.getColor(
                         R.color.gray_100))
-                    binding.nickNameHint.setText(R.string.sign_in_password_bottom)
+                    binding.nickNameHint.setText(R.string.sign_in_nickname_bottom)
                     binding.nickNameHint.setTextColor(binding.nickNameHint.context.resources.getColor(R.color.gray_100))
                     binding.nextBtn.setBackgroundDrawable(binding.nextBtn.getContext().getDrawable(R.drawable.sign_in_btn_background_gray))
 

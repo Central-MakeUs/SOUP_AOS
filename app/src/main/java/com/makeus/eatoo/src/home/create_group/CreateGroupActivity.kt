@@ -7,10 +7,12 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -273,10 +275,10 @@ class CreateGroupActivity :
      */
 
     private fun getGroupColor(): Int {
-        val checkedChip =
-            binding.chipgroupMakegroup.findViewById<Chip>(binding.chipgroupMakegroup.checkedChipId).tag
+        val checkedColor
+        = binding.radiogroupCreateGroup.findViewById<RadioButton>(binding.radiogroupCreateGroup.checkedRadioButtonId).tag
 
-        return checkedChip.toString().toInt()
+        return checkedColor.toString().toInt()
     }
 
     /*

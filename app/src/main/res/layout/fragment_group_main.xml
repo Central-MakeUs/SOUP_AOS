@@ -459,7 +459,7 @@
                         android:lineSpacingExtra="7sp"
                         android:text="@string/group_main_no_store_txt3"
                         android:textColor="@color/main_color"
-                        android:textSize="13sp"
+                        android:textSize="10sp"
                         android:textStyle="normal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/appCompatTextView2"
