@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="257dp"
+            android:layout_width="275dp"
             android:layout_height="255dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -267,8 +267,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/last_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="275dp"
+        android:layout_height="255dp"
         android:layout_marginEnd="25dp"
         android:visibility="gone"
         android:background="@drawable/rectangle_group_box_main_home"

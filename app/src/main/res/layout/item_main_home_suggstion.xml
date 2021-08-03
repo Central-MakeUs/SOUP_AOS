@@ -146,7 +146,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/group_name_background"
-        android:elevation="2.5dp"
+        android:elevation="2dp"
         android:fontFamily="sans-serif"
         android:lineSpacingExtra="20sp"
         android:padding="4dp"
