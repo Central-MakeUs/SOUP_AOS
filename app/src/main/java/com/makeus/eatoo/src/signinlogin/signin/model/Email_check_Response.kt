@@ -3,14 +3,8 @@ package com.makeus.eatoo.src.signinlogin.signin.model
 import com.google.gson.annotations.SerializedName
 import com.makeus.eatoo.config.BaseResponse
 
-data class SignInResponse(
+data class Check_Response(
     @SerializedName("result")
-    val result : Result
+    val result : String
 ):BaseResponse()
 
-data class Result(
-    @SerializedName("jwt")
-    val jwt : String,
-    @SerializedName("userIdx")
-    val userIdx : Int
-)

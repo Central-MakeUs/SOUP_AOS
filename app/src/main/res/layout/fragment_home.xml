@@ -423,6 +423,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
+                    android:visibility="gone"
                     android:background="@drawable/rectangle_box_main_home"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -461,12 +462,21 @@
                     android:id="@+id/home_mate_recylerview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginHorizontal="18dp"
                     android:overScrollMode="never"
                     android:scrollbars="none" />
 
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/background_shadow"
+                app:layout_constraintBottom_toTopOf="@id/cardview_review_suggest"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_review_suggest"

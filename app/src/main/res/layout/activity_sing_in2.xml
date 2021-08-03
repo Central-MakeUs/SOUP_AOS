@@ -77,6 +77,17 @@
         app:layout_constraintStart_toStartOf="@+id/email_edt"
         app:layout_constraintTop_toTopOf="@+id/email_edt" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/warning_img"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="12dp"
+        android:visibility="gone"
+        android:src="@drawable/icon_auto_tint"
+        app:layout_constraintBottom_toBottomOf="@+id/email_edt"
+        app:layout_constraintEnd_toEndOf="@+id/email_edt"
+        app:layout_constraintTop_toTopOf="@+id/email_edt" />
+
 
     <EditText
         android:id="@+id/password_edt"
