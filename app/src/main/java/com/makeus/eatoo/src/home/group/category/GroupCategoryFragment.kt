@@ -34,6 +34,7 @@ import com.makeus.eatoo.like.LikeService
 import com.makeus.eatoo.like.LikeView
 import com.makeus.eatoo.src.home.group.GroupActivity
 import com.makeus.eatoo.src.home.group.category.category_detail.CategoryStoreDetailActivity
+import com.makeus.eatoo.src.home.group.category.category_list.GroupCategoryListFragment
 import com.makeus.eatoo.src.home.group.category.category_map.OnListClickListener
 import com.makeus.eatoo.src.home.group.category.category_map.adapter.CategoryStoreRVAdapter
 import com.makeus.eatoo.src.home.group.category.category_map.model.CategoryMapStoreInfo
@@ -110,14 +111,10 @@ class GroupCategoryFragment :
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.ll_category_list -> {
-                binding.llFiller.isVisible = true  //1
-                //mapFragment?.view?.visibility = View.GONE    //2
-                // 1 & 2 둘 다  onTest() 이전에 바뀌지 않음
-                //thread 의 문제?!
-
-                Log.d("groupcategory", binding.llFiller.isVisible.toString())  //여기서는 true 라고 뜸.
-
-                (activity as GroupActivity).onListClicked()
+                childFragmentManager.beginTransaction()
+                    .add(R.id.container, GroupCategoryListFragment())
+                    .commit()
+                binding.grpCategoryButton.isVisible = false
             }
         }
     }

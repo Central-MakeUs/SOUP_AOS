@@ -24,7 +24,6 @@ class GroupVoteRVAdapter(
 
     interface OnVoteClickListener {
         fun onVoteClicked(item : GroupVoteResult)
-        fun onVotedMemberClick(voteIdx : Int)
     }
 
     inner class ViewHolder(val binding : ItemGroupVoteBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -37,14 +36,9 @@ class GroupVoteRVAdapter(
             }
             binding.clGroupVote.setBackgroundTintList(
                 ColorStateList.valueOf(colorArray[position%3]))
+
             binding.clGroupVote.setOnClickListener {
                 listener.onVoteClicked(item)
-            }
-            binding.tvGroupVoteNum.setOnClickListener {
-                listener.onVotedMemberClick(item.voteIdx)
-            }
-            binding.tvGroupVoteNum2.setOnClickListener {
-                listener.onVotedMemberClick(item.voteIdx)
             }
 
 

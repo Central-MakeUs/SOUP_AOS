@@ -30,6 +30,8 @@ class GroupVoteFragment
     View.OnClickListener, GroupVoteView, GroupVoteRVAdapter.OnVoteClickListener,
     VoteDialogInterface {
 
+    val groupIdx = getGroupIdx()
+
     private lateinit var groupVoteAdapter: GroupVoteRVAdapter
     private lateinit var voteDialog: VoteDialog
     private var isNewItemAdded = false
@@ -117,7 +119,7 @@ class GroupVoteFragment
             voteDialog.voteDetail = response.result
             isNewItemAdded = false
         } else {
-            voteDialog = VoteDialog(this)
+            voteDialog = VoteDialog(requireContext(),this)
             voteDialog.voteDetail = response.result
             voteDialog.show()
         }
@@ -135,10 +137,11 @@ class GroupVoteFragment
 
     override fun onPostVotedFail(message: String?) {
         dismissLoadingDialog()
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
 
     override fun onPostNewItemSuccess(response: NewItemAddedResponse) {
-        dismissLoadingDialog()
+        showCustomToast("항목 추가 성공")
         isNewItemAdded = true
         GroupVoteService(this).tryGetVoteDetail(
             getUserIdx(),
@@ -150,14 +153,13 @@ class GroupVoteFragment
     }
 
     override fun onPostNewItemFail(message: String?) {
-        dismissLoadingDialog()
         showCustomToast(message ?: resources.getString(R.string.failed_connection))
         isNewItemAdded = false
     }
 
     override fun onGetVotedMemberSuccess(response: VotedMemberResponse) {
         context?.let {
-            val dialog = VotedMemberDialog(it, response.result)
+            val dialog = VotedMemberDialog(it , response.result)
             dialog.show()
         }
 
@@ -173,15 +175,12 @@ class GroupVoteFragment
 
      **/
 
-    override fun onVotedMemberClick(voteIdx: Int) {
-        GroupVoteService(this).tryGetVotedMember(getUserIdx(), voteIdx)
-    }
 
     override fun onVoteClicked(item: GroupVoteResult) {
         //투표 조회 api
         context?.let {
             showLoadingDialog(it)
-            GroupVoteService(this).tryGetVoteDetail(getUserIdx(), getGroupIdx(), item.voteIdx)
+            GroupVoteService(this).tryGetVoteDetail(getUserIdx(), groupIdx, item.voteIdx)
         }
 
     }
@@ -193,20 +192,19 @@ class GroupVoteFragment
         }
         context?.let {
             showLoadingDialog(it)
-            GroupVoteService(this).tryPostVote(
-                getUserIdx(),
-                getGroupIdx(),
-                voteDetail.voteIdx,
-                VotedRequest(votedMenuList.toList())
-            )
+            Log.d("voteDialog : post", votedMenuList.toString())
+            GroupVoteService(this).tryPostVote(getUserIdx(), groupIdx, voteDetail.voteIdx, VotedRequest(votedMenuList.toList()))
         }
     }
 
     override fun onVoteItemAdded(voteIdx: Int, newItem: String) {
         //항목추가 api
+        GroupVoteService(this).tryPostNewVoteItem(getUserIdx(), voteIdx, NewItem(newItem))
+    }
+
+    override fun onVotedMemberClicked(voteIdx: Int, voteMenuIdx: Int) {
         context?.let {
-            showLoadingDialog(it)
-            GroupVoteService(this).tryPostNewVoteItem(getUserIdx(), voteIdx, NewItem(newItem))
+            GroupVoteService(this).tryGetVotedMember(getUserIdx(), voteIdx, voteMenuIdx)
         }
     }
 }

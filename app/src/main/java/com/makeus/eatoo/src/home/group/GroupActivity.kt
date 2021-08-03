@@ -32,7 +32,7 @@ import com.makeus.eatoo.src.mypage.invite.model.InviteCodeResponse
 class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::inflate),
     SingleView, GroupMemberView, OnListClickListener ,LeaveGroupActivityInterface, View.OnClickListener{
 
-//    private lateinit var vpAdapter: GroupVPAdapter
+    //    private lateinit var vpAdapter: GroupVPAdapter
     private lateinit var viewPagerAdapter : GroupViewPagerAdapter
     private var changeToSingle = false
 
@@ -142,18 +142,6 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
     }
 
     override fun onGetInviteCodeDateFail(message: String?) {
-    }
-
-
-    fun onListClicked() {
-
-        viewPagerAdapter.fragmentList = arrayListOf<Fragment>(GroupMainFragment(), GroupCategoryListFragment(), GroupVoteFragment(), GroupMemberFragment())
-        viewPagerAdapter.notifyDataSetChanged()
-        binding.viewpagerGroup.apply {
-            adapter = viewPagerAdapter
-            currentItem = 1
-        }
-        binding.tablayoutGroup.setScrollPosition(1, 0f, true)
     }
 
     override fun onListClick() {

@@ -6,26 +6,22 @@
     android:background="@color/white">
 
     <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
-    <fragment
-        android:id="@+id/frag_group_category"
-        android:name="com.naver.maps.map.MapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-        <LinearLayout
-            android:id="@+id/ll_filler"
+        <fragment
+            android:id="@+id/frag_group_category"
+            android:name="com.naver.maps.map.MapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background_white"
-            android:orientation="vertical"
-            android:visibility="gone" />
-
+            android:layout_height="match_parent" />
     </FrameLayout>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/grp_category_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="ll_category_map, ll_category_list" />
 
     <LinearLayout
         android:id="@+id/ll_category_map"
