@@ -34,9 +34,7 @@ class Invite_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<InviteGrou
 
         holder.GroupName.text = GroupList[position].name
 
-        holder.GroupLayout.setOnClickListener {
-            itemClickListener.onClick(it,position , GroupList[position].groupIdx,GroupList[position].name)
-        }
+
 
         if (GroupList[position].membersNumber > 3) {
             holder.GroupMemberCount.text =
