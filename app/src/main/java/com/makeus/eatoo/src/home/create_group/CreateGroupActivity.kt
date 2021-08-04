@@ -217,7 +217,7 @@ class CreateGroupActivity :
         binding.etKeyword.setOnKeyListener { v, i, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
                 val keywordList = binding.flexboxMakeGroup.getAllChips()
-                if (keywordList.size - 1 == 4) showCustomToast(resources.getString(R.string.keyword_num_limit))
+                if (keywordList.size - 1 == 3) showCustomToast(resources.getString(R.string.keyword_num_limit))
                 else {
                     val et = v as EditText
                     val keyword = et.text.toString()

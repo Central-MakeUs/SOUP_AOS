@@ -131,7 +131,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="6dp"
+        android:layout_height="3dp"
         android:background="@drawable/background_shadow"
         app:layout_constraintBottom_toTopOf="@id/cardview_review_suggest"
         app:layout_constraintEnd_toEndOf="parent"

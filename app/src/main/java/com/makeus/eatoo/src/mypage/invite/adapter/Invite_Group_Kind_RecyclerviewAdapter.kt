@@ -66,29 +66,29 @@ class Invite_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<InviteGrou
 
                 if (GroupList[position].getGroupKeywordRes.size == 1) {
                     holder.GroupKeywordChip1.visibility = View.VISIBLE
-//                    holder.GroupKeywordChip2.visibility = GONE
+                    holder.GroupKeywordChip2.visibility = View.GONE
                     holder.GroupKeyword2.visibility = View.GONE
                     holder.GroupKeyword1.text = GroupList[position].getGroupKeywordRes[0].name
 
                 } else if (GroupList[position].getGroupKeywordRes.size == 2) {
                     holder.GroupKeywordChip1.visibility = View.VISIBLE
-//                    holder.GroupKeywordChip2.visibility = GONE
+                    holder.GroupKeywordChip2.visibility = View.GONE
                     holder.GroupKeyword1.text = GroupList[position].getGroupKeywordRes[0].name
                     holder.GroupKeyword2.text = GroupList[position].getGroupKeywordRes[1].name
                 } else if (GroupList[position].getGroupKeywordRes.size == 3) {
                     holder.GroupKeywordChip1.visibility = View.VISIBLE
-//                    holder.GroupKeywordChip2.visibility = VISIBLE
-//                    holder.GroupKeyword4.visibility = GONE
+                    holder.GroupKeywordChip2.visibility = View.VISIBLE
+                    holder.GroupKeyword4.visibility = View.GONE
                     holder.GroupKeyword1.text = GroupList[position].getGroupKeywordRes[0].name
                     holder.GroupKeyword2.text = GroupList[position].getGroupKeywordRes[1].name
-//                    holder.GroupKeyword3.text = GroupList[position].getGroupKeywordRes[2].name
+                    holder.GroupKeyword3.text = GroupList[position].getGroupKeywordRes[2].name
                 } else if (GroupList[position].getGroupKeywordRes.size == 4 || GroupList[position].getGroupKeywordRes.size == 5) {
                     holder.GroupKeywordChip1.visibility = View.VISIBLE
-//                    holder.GroupKeywordChip2.visibility = VISIBLE
+                    holder.GroupKeywordChip2.visibility = View.VISIBLE
                     holder.GroupKeyword1.text = GroupList[position].getGroupKeywordRes[0].name
                     holder.GroupKeyword2.text = GroupList[position].getGroupKeywordRes[1].name
-//                    holder.GroupKeyword3.text = GroupList[position].getGroupKeywordRes[2].name
-//                    holder.GroupKeyword4.text = GroupList[position].getGroupKeywordRes[3].name
+                    holder.GroupKeyword3.text = GroupList[position].getGroupKeywordRes[2].name
+                    holder.GroupKeyword4.text = GroupList[position].getGroupKeywordRes[3].name
                 }
 
             } else {
@@ -96,7 +96,7 @@ class Invite_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<InviteGrou
                 holder.GroupNameLayouttext1.text = GroupList[position].name + holder.GroupNameLayouttext1.text
                 holder.GroupNameLayouttext2.visibility = View.VISIBLE
                 holder.GroupKeywordChip1.visibility = View.GONE
-//                holder.GroupKeywordChip2.visibility = GONE
+                holder.GroupKeywordChip2.visibility = View.GONE
             }
         }
 
@@ -140,12 +140,12 @@ class Invite_Group_Kind_RecyclerviewAdapter(val GroupList : ArrayList<InviteGrou
         val GroupMember3 : AppCompatImageView = view.findViewById(R.id.group_member3)
         val GroupNameLayouttext1 : AppCompatTextView = view.findViewById(R.id.keword_recomand1)
         val GroupNameLayouttext2 : AppCompatTextView = view.findViewById(R.id.keword_recomand2)
-        val GroupKeywordChip1 : LinearLayout = view.findViewById(R.id.chip_first)
-        //        val GroupKeywordChip2 : LinearLayout = view.findViewById(R.id.chip_second)
-        val GroupKeyword1 : Chip = view.findViewById(R.id.chip1)
-        val GroupKeyword2 : Chip = view.findViewById(R.id.chip2)
-//        val GroupKeyword3 : Chip = view.findViewById(R.id.chip2_1)
-//        val GroupKeyword4 : Chip = view.findViewById(R.id.chip2_2)
+        val GroupKeywordChip1 : ConstraintLayout = view.findViewById(R.id.chip_first)
+        val GroupKeywordChip2 : ConstraintLayout = view.findViewById(R.id.chip_second)
+        val GroupKeyword1 : AppCompatTextView = view.findViewById(R.id.chip1)
+        val GroupKeyword2 : AppCompatTextView = view.findViewById(R.id.chip2)
+        val GroupKeyword3 : AppCompatTextView = view.findViewById(R.id.chip2_1)
+        val GroupKeyword4 : AppCompatTextView = view.findViewById(R.id.chip2_2)
     }
 
     interface ItemClickListener {

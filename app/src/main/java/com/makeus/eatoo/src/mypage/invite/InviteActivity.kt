@@ -1,6 +1,7 @@
 package com.makeus.eatoo.src.mypage.invite
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,8 @@ import com.makeus.eatoo.src.mypage.invite.adapter.Invite_Group_Kind_Recyclerview
 import com.makeus.eatoo.src.mypage.invite.model.InviteCodeResponse
 import com.makeus.eatoo.src.mypage.invite.model.InviteResponse
 import com.makeus.eatoo.util.getUserIdx
+import java.lang.Math.round
+import kotlin.math.round
 
 
 class InviteActivity :  BaseActivity<ActivityInviteBinding>(ActivityInviteBinding::inflate), InviteActivityView {
@@ -65,8 +68,11 @@ class InviteActivity :  BaseActivity<ActivityInviteBinding>(ActivityInviteBindin
                         super.onScrollStateChanged(binding.myGroupRecyclerview, newState)
                         when (newState) {
                             RecyclerView.SCROLL_STATE_IDLE -> {
-                                Position =
-                                    (recyclerView.layoutManager as LinearLayoutManager?)!!.findFirstCompletelyVisibleItemPosition()
+                                Position = (recyclerView.layoutManager as LinearLayoutManager?)!!.findFirstCompletelyVisibleItemPosition()
+                                Log.d("Position","" + Position )
+                                if(Position == -1){
+                                    Click_status = 0
+                                }
                                 binding.recyclerViewIndicator.setCurrentPosition(Position)
                             }
                         }
