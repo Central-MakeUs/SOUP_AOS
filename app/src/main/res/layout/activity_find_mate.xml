@@ -84,9 +84,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
+                android:layout_marginBottom="40dp"
                 android:singleLine="true"
                 android:spinnerMode="dropdown"
-                app:layout_constraintBottom_toBottomOf="@+id/suggestion_txt"
+                app:layout_constraintBottom_toTopOf="@+id/my_suggestion_layout"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <LinearLayout
