@@ -42,22 +42,9 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
         getSingleStatus()
         binding.customToolbar.title.text = getGroupName()
         setGroupViewPager()
-//        setVP()
         setOnClickListeners()
 
     }
-
-//    private fun setVP() {
-//        vpAdapter = GroupVPAdapter(supportFragmentManager, this)
-//        binding.vp.adapter = vpAdapter
-//        binding.tablayoutGroup.setupWithViewPager(binding.vp)
-//        binding.tablayoutGroup.getTabAt(0)!!.text = resources.getString(R.string.group_main)
-//        binding.tablayoutGroup.getTabAt(1)!!.text = resources.getString(R.string.group_category)
-//        binding.tablayoutGroup.getTabAt(2)!!.text = resources.getString(R.string.group_vote)
-//        binding.tablayoutGroup.getTabAt(3)!!.text = resources.getString(R.string.group_member)
-//
-//
-//    }
 
     private fun getSingleStatus() {
         GroupMemberService(this).tryGetGroupMember(getUserIdx(), getGroupIdx())

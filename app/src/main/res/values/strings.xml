@@ -338,7 +338,7 @@
     <string name="thank_input">입력 감사합니다!</string>
     <string name="duplicate_email">중복된 이메일입니다!</string>
     <string name="thank_input_password">비밀번호 입력 감사합니다!</string>
-    <string name="available_nickname">사용가능한 닉네임입니다!</string>
+    <string name="not_available_nickname">중복된 닉네임입니다!</string>
     <string name="thank_input_email">이메일 입력 감사합니다.</string>
     <string name="unregistered_email">등록되지 않은 이메일입니다.</string>
     <string name="unregistered_password">비밀번호가 맞지 않습니다.</string>

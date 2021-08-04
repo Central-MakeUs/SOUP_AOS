@@ -46,12 +46,12 @@ class ProfileService(val view : ProfileView) {
                 ) {
                     response.body()?.let {
                         if (it.isSuccess) view.onPatchProfileSuccess(response.body() as PatchProfileResponse)
-                        else view.onPatchProfileFail(it.message)
+                        else view.onPatchProfileFail(it.code, it.message)
                     }
                 }
 
                 override fun onFailure(call: Call<PatchProfileResponse>, t: Throwable) {
-                    view.onPatchProfileFail(t.message)
+                    view.onPatchProfileFail(0, t.message)
                 }
 
             })
