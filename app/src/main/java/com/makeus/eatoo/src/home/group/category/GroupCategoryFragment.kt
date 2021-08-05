@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.graphics.PointF
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -29,13 +28,12 @@ import com.makeus.googlemapsapiprac.model.LocationLatLngEntity
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
-import com.google.android.gms.maps.model.MarkerOptions
 import com.makeus.eatoo.like.LikeService
 import com.makeus.eatoo.like.LikeView
 import com.makeus.eatoo.src.home.group.GroupActivity
 import com.makeus.eatoo.src.home.group.category.category_detail.CategoryStoreDetailActivity
+import com.makeus.eatoo.src.home.group.category.category_list.CategoryListenerInterface
 import com.makeus.eatoo.src.home.group.category.category_list.GroupCategoryListFragment
-import com.makeus.eatoo.src.home.group.category.category_map.OnListClickListener
 import com.makeus.eatoo.src.home.group.category.category_map.adapter.CategoryStoreRVAdapter
 import com.makeus.eatoo.src.home.group.category.category_map.model.CategoryMapStoreInfo
 import com.makeus.eatoo.src.home.group.category.dialog.StoreToMateSuggestDialog
@@ -45,9 +43,6 @@ import com.naver.maps.map.MapFragment
 import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class GroupCategoryFragment :
     BaseFragment<FragmentGroupCategoryBinding>(
@@ -56,7 +51,7 @@ class GroupCategoryFragment :
     ),
     CategoryMapView, View.OnClickListener, OnMapReadyCallback, Overlay.OnClickListener,
     CategoryStoreRVAdapter.OnStoreClickListener, LikeView,
-    StoreToMateSuggestDialogInterface {
+    StoreToMateSuggestDialogInterface , CategoryListenerInterface {
 
 
     private var mapFragment : MapFragment? = null
@@ -79,18 +74,10 @@ class GroupCategoryFragment :
         requestPermission()
     }
 
-    override fun onStop() {
-        Log.d("groupcategory", "onstop")
-//        binding.llFiller.isVisible = true
-        super.onStop()
 
-    }
-
-    override fun onDestroy() {
-        Log.d("groupCategory", "ondestroy")
-        //binding.llFiller.isVisible = true
-        super.onDestroy()
-
+    override fun onGotoMapClicked() {
+        binding.fabGotoList.isVisible = true
+        binding.rvGroupCategory.isVisible = true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -101,17 +88,19 @@ class GroupCategoryFragment :
     }
 
     private fun setOnClickListeners() {
-        binding.llCategoryList.setOnClickListener(this)
+        binding.fabGotoList.setOnClickListener(this)
     }
 
 
     override fun onClick(p0: View?) {
         when (p0?.id) {
-            R.id.ll_category_list -> {
+            R.id.fab_goto_list -> {
                 childFragmentManager.beginTransaction()
-                    .add(R.id.container, GroupCategoryListFragment())
+                    .add(R.id.container, GroupCategoryListFragment(childFragmentManager, this))
+                    .addToBackStack(null)
                     .commit()
-                binding.grpCategoryButton.isVisible = false
+                binding.fabGotoList.isVisible = false
+                binding.rvGroupCategory.isVisible = false
             }
         }
     }

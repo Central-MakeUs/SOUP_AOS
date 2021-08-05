@@ -2,12 +2,12 @@ package com.makeus.eatoo.src.home.group.category.category_list
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.RadioGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseFragment
@@ -23,8 +23,10 @@ import com.makeus.eatoo.src.home.group.groupmatesuggestion.MateSuggestionActivit
 import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.getUserIdx
 
-class GroupCategoryListFragment
-    : BaseFragment<FragmentGroupCategoryListBinding>(FragmentGroupCategoryListBinding::bind, R.layout.fragment_group_category_list),
+class GroupCategoryListFragment(
+    val cfm: FragmentManager,
+    val listener : CategoryListenerInterface
+    ) : BaseFragment<FragmentGroupCategoryListBinding>(FragmentGroupCategoryListBinding::bind, R.layout.fragment_group_category_list),
 RadioGroup.OnCheckedChangeListener, CategoryListView, CategoryListRVAdapter.OnStoreClickListener,
     StoreToMateSuggestDialogInterface, LikeView {
 
@@ -44,6 +46,11 @@ RadioGroup.OnCheckedChangeListener, CategoryListView, CategoryListRVAdapter.OnSt
             }
         }
         getCategoryList(binding.spinnerCategory.selectedItemPosition)
+        binding.fabGotoMap.setOnClickListener {
+//            cfm.beginTransaction().remove(this).commit()
+            cfm.popBackStack()
+            listener.onGotoMapClicked()
+        }
 
 
     }

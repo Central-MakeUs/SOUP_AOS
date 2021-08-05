@@ -17,65 +17,6 @@
             android:layout_height="match_parent" />
     </FrameLayout>
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/grp_category_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="ll_category_map, ll_category_list" />
-
-    <LinearLayout
-        android:id="@+id/ll_category_map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/background_category_map"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingVertical="7dp"
-        android:paddingStart="5dp"
-        android:paddingEnd="8dp"
-        app:layout_constraintEnd_toStartOf="@id/ll_category_list"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_eva_pin_fill" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/cateogy_map"
-            android:textColor="@color/main_orange"
-            android:textSize="13sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_category_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/background_category_list"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingVertical="7dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="7dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_group_335" />
-
-    </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_group_category"
         android:layout_width="match_parent"
@@ -85,6 +26,20 @@
         android:layout_marginBottom="18dp"
         android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_goto_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabCustomSize="46dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="13dp"
+        android:src="@drawable/ic_group_340"
+        app:tint="@color/white"
+        app:backgroundTint="@color/main_orange"
+        app:layout_constraintBottom_toTopOf="@id/rv_group_category"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="fab_review" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

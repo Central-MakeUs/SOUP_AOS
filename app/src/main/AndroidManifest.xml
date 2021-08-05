@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".src.mypage.keyword.DietKeywordActivity"></activity>
+        <activity android:name=".src.mypage.keyword.DietKeywordActivity" />
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
@@ -55,12 +55,7 @@
         <activity android:name=".src.signinlogin.login.LoginActivity" />
         <activity android:name=".src.main.MainActivity" />
 
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_map_app_key" />
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_map" />
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/main_orange" />
