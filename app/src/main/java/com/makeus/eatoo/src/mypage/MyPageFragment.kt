@@ -23,6 +23,7 @@ import com.makeus.eatoo.src.mypage.dialog.AccountWithdrawDialog
 import com.makeus.eatoo.src.mypage.dialog.AccountWithdrawalDialogInterface
 import com.makeus.eatoo.src.mypage.dialog.QuestionDialog
 import com.makeus.eatoo.src.mypage.dialog.QuestionDialogInterface
+import com.makeus.eatoo.src.mypage.keyword.DietKeywordActivity
 import com.makeus.eatoo.src.review.my_review.MyReviewActivity
 import com.makeus.eatoo.src.splash.SplashActivity
 import com.makeus.eatoo.util.EatooCharList
@@ -58,6 +59,7 @@ class MyPageFragment
         binding.findInviteLayout.setOnClickListener (this)
         binding.accountSecessionLayout.setOnClickListener(this)
         binding.questionsLayout.setOnClickListener(this)
+        binding.tvEditDietKeyword.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -90,6 +92,12 @@ class MyPageFragment
                     val dialog = QuestionDialog(it, this)
                     dialog.show()
                 }
+            }
+            R.id.tv_edit_diet_keyword -> {
+                context?.let {
+                    startActivity(Intent(it, DietKeywordActivity::class.java))
+                }
+
             }
         }
     }

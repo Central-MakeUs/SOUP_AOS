@@ -64,5 +64,7 @@
 
     <!--mypage-->
     <color name="positive_orange">#ffdcd1</color>
+    <color name="keyword_pos">#ffdcd1</color>
+    <color name="keyword_neg_border">#dadada</color>
 
 </resources>

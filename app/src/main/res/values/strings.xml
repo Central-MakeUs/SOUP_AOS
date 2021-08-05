@@ -139,7 +139,6 @@
     <string name="dialog_register_new_store_exp2">등록 후 계속해서 후기를 남길 수 있습니다</string>
 
 
-
     <!--create group-->
     <string name="create_group_toolbar">그룹 만들기</string>
     <string name="create_group_suggest1">님의 MATE</string>
@@ -275,8 +274,6 @@
     <string name="delete_group2">삭제하시겠습니까?</string>
 
 
-
-
     <!--group category-->
     <string name="cateogy_map">지도</string>
     <string name="more_store_info">가게 정보 더보기 ></string>
@@ -370,6 +367,15 @@
     <string name="dialog_question_exp1">문의사항이 있다면 GOOGLE PLAY</string>
     <string name="dialog_question_exp2">STORE에 남겨주시기 바랍니다.</string>
     <string name="dialog_question_goto">구글플레이스토어 바로가기 ></string>
+    <string name="diet_keyword">식성 키워드</string>
+    <string name="input_diet_keyword1">%s님의 식성에 맞는</string>
+    <string name="input_diet_keyword2">키워드를 입력해주세요!</string>
+    <string name="input_diet_keyword3">+를 눌러 직접 입력해주세요</string>
+    <string name="diet_keyword_like">좋아하는</string>
+    <string name="diet_keyword_dislike">싫어하는</string>
+    <string name="input_keyword_et">키워드를 입력해주세요 (최대 10자)</string>
+    <string name="emphasize">강조</string>
+    <string name="edit_diet_keyword">편집</string>
 
     <!--notification-->
     <string name="notification">알림</string>

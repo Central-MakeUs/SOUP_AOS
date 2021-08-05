@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.makeus.eatoo.R
 import com.makeus.eatoo.databinding.ItemMemberBinding
 import com.makeus.eatoo.src.home.group.member.model.GroupMember
+import com.makeus.eatoo.src.home.group.member.model.MemberDietKeyword
 import com.makeus.eatoo.util.EatooCharList
 
 class MemberRVAdapter(
@@ -19,6 +20,7 @@ class MemberRVAdapter(
 
     interface OnAddMemberClickListener {
         fun onAddMemberClicked()
+        fun onMemberClicked(memberInfo : GroupMember)
     }
 
     inner class ViewHolder(val binding : ItemMemberBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -29,17 +31,18 @@ class MemberRVAdapter(
                 val memberColor = if(item.color != 0) item.color -1 else 0
                 val memberChar = if(item.characters != 0) item.characters -1 else 0
                 binding.ivMember.setImageResource(EatooCharList[(memberColor*5) + memberChar])
-                if(item.singleStatus == "OFF") {
-                    binding.ivMemberContainer.setImageResource(R.drawable.background_member_orange)
-                } else {
-                    binding.ivMemberContainer.setImageResource(R.drawable.background_member_gray)
-                }
 
                 if(item.singleStatus == "ON"){
+                    binding.ivMemberContainer.setImageResource(R.drawable.background_member_gray)
                     val grayScale = floatArrayOf(0.2989f, 0.5870f, 0.1140f,
                         0F, 0f, 0.2989f, 0.5870f, 0.1140f, 0f, 0f, 0.2989f, 0.5870f, 0.1140f, 0f, 0f, 0.0000F, 0.0000F, 0.0000F, 1f, 0f)
                     val matrix = ColorMatrixColorFilter(grayScale)
                     binding.ivMember.colorFilter= matrix
+                }else {
+                    binding.ivMemberContainer.setImageResource(R.drawable.background_member_orange)
+                }
+                binding.clCharContainer.setOnClickListener {
+                    listener.onMemberClicked(item)
                 }
 
             }else {

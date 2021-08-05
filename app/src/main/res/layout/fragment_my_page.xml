@@ -209,6 +209,19 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/tv_edit_diet_keyword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_diet_keyword"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/black"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="25dp"
+        android:textSize="12sp"
+        android:fontFamily="@font/roboto_medium"/>
+
 <!--    <androidx.appcompat.widget.AppCompatTextView-->
 <!--        android:id="@+id/appCompatTextView4"-->
 <!--        android:layout_width="wrap_content"-->

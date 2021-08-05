@@ -11,6 +11,7 @@ import com.makeus.eatoo.src.home.group.member.dialog.AddMemberDialog
 import com.makeus.eatoo.src.home.group.member.dialog.AddMemberDialogInterface
 import com.makeus.eatoo.src.home.group.member.model.GroupMember
 import com.makeus.eatoo.src.home.group.member.model.GroupMemberResponse
+import com.makeus.eatoo.src.home.group.member.model.MemberDietKeyword
 import com.makeus.eatoo.src.mypage.invite.InviteDialog
 import com.makeus.eatoo.src.mypage.invite.InviteService
 import com.makeus.eatoo.src.mypage.invite.model.InviteCodeResponse
@@ -55,6 +56,10 @@ class GroupMemberFragment : BaseFragment<FragmentGroupMemberBinding>(
         }
     }
 
+    override fun onMemberClicked(memberInfo : GroupMember) {
+        //dialog
+    }
+
 
     //////server result
 
@@ -69,7 +74,8 @@ class GroupMemberFragment : BaseFragment<FragmentGroupMemberBinding>(
                 color = 0,
                 characters = 0,
                 nickName = " ",
-                singleStatus = " "
+                singleStatus = " ",
+                getUserKeywordRes = listOf()
             )
         )
         memberAdapter = MemberRVAdapter(requireContext(), memberList.toList(), this)
