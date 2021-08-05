@@ -5,13 +5,16 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.view.View
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityExplanationBinding
+import com.makeus.eatoo.databinding.DialogFindInviteBinding
+import com.makeus.eatoo.databinding.FragmentGuide2Binding
 import com.makeus.eatoo.src.explanation.adapter.GuideViewpageradapter
 
 class ExplanationActivity : BaseActivity<ActivityExplanationBinding>(ActivityExplanationBinding::inflate) {
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,8 +24,20 @@ class ExplanationActivity : BaseActivity<ActivityExplanationBinding>(ActivityExp
         pagerAdapter.addFragment(GuideFragment2())
         pagerAdapter.addFragment(GuideFragment3())
         binding.photoGuideVp.adapter = pagerAdapter
-
+//        var current = binding.photoGuideVp.currentItem
+//        if(current == 2){
+//            binding.skipBtn.visibility = View.GONE
+//        }
+//        else{
+//            binding.skipBtn.visibility = View.VISIBLE
+//        }
         registerBr()
+
+
+//        binding.skipBtn.setOnClickListener {
+//            var current = binding.photoGuideVp.currentItem
+//            binding.photoGuideVp.setCurrentItem(2, false)
+//        }
     }
 
     private val reviewBr = object : BroadcastReceiver() {

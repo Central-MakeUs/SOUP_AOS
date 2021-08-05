@@ -16,13 +16,7 @@ class GuideFragment1 : BaseFragment<FragmentGuide1Binding>(FragmentGuide1Binding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        binding.skipBtn.setOnClickListener {
-            val fragment : Fragment = GuideFragment3()
-//            (context as ExplanationActivity).supportFragmentManager.beginTransaction()
-//                .replace(R.id.nav_host, GuideFragment3())
-//                .commitAllowingStateLoss()
-        }
+        
     }
 
 }

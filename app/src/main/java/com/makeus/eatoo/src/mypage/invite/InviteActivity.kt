@@ -73,6 +73,9 @@ class InviteActivity :  BaseActivity<ActivityInviteBinding>(ActivityInviteBindin
                                 if(Position == -1){
                                     Click_status = 0
                                 }
+                                else{
+                                    Click_status = 1
+                                }
                                 binding.recyclerViewIndicator.setCurrentPosition(Position)
                             }
                         }
