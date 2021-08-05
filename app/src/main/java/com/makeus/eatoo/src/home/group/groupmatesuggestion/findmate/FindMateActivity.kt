@@ -74,7 +74,7 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
             binding.mySuggestionNoneLayout.visibility = View.VISIBLE
         }
         else {
-            val MateAdapter = Find_Mate_Recyclerview_Adapter(response.result)
+            val MateAdapter = Find_Mate_Recyclerview_Adapter(this, response.result)
             binding.statusSpinner.visibility = View.VISIBLE
             binding.suggestionRecyclerview.visibility = View.VISIBLE
             binding.mySuggestionNoneLayout.visibility = View.GONE

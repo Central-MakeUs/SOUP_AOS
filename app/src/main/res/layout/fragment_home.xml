@@ -61,10 +61,12 @@
         android:orientation="vertical"
         android:overScrollMode="never"
         android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardview_toolbar">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardview_toolbar"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -125,16 +127,16 @@
                     android:id="@+id/group_recyclerview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:overScrollMode="never" />
+                    android:overScrollMode="never"
+                    android:visibility="gone" />
 
                 <HorizontalScrollView
                     android:id="@+id/none_group_layout_main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:overScrollMode="never"
-                    android:visibility="gone"
-                    android:scrollbars="none">
+                    android:scrollbars="none"
+                    android:visibility="gone">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
@@ -144,7 +146,7 @@
 
                         <LinearLayout
                             android:id="@+id/none_group_layout"
-                            android:layout_width="wrap_content"
+                            android:layout_width="275dp"
                             android:layout_height="255dp"
                             android:background="@drawable/main_home_background_radius"
                             android:orientation="vertical"
@@ -247,7 +249,7 @@
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/constraintLayout"
-                            android:layout_width="wrap_content"
+                            android:layout_width="275dp"
                             android:layout_height="255dp"
                             android:layout_marginStart="25dp"
                             android:layout_marginEnd="20dp"
@@ -424,6 +426,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/rectangle_box_main_home"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView11">
@@ -463,10 +466,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="18dp"
                     android:overScrollMode="never"
-                    android:scrollbars="none" />
+                    android:scrollbars="none"
+                    android:visibility="gone" />
 
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@drawable/background_shadow"
+                app:layout_constraintBottom_toTopOf="@id/cardview_review_suggest"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_review_suggest"
@@ -483,6 +495,15 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/rectangle_327"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_write_review"
+                        app:layout_constraintStart_toStartOf="@+id/tv_write_review"
+                        app:layout_constraintTop_toTopOf="@+id/tv_write_review" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_write_review"

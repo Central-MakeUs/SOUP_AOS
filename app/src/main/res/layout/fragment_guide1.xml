@@ -47,10 +47,10 @@
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
         android:textSize="16sp"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:lineSpacingExtra="14sp"
         android:gravity="center_horizontal"
-        android:text="자유롭고 명확한 의사표현을 통해"
+        android:text="@string/explanation1_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,8 +64,8 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="14sp"
-        android:text="같이 또는 혼자 자유로운 식사"
-        android:textColor="#ff4e16"
+        android:text="@string/explanation1_2"
+        android:textColor="@color/main_color"
         android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="@+id/explanation_txt"
@@ -74,19 +74,21 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/skip_btn"
-        android:layout_width="22dp"
-        android:layout_height="14dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="609dp"
         android:layout_marginBottom="97dp"
         android:fontFamily="sans-serif"
-        android:textColor="#a8a8a8"
-        android:textSize="12sp"
+        android:text="@string/skip"
+        android:textColor="@color/gray_100"
+        android:textSize="15sp"
         android:textStyle="normal"
-        android:text="skip"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.545" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

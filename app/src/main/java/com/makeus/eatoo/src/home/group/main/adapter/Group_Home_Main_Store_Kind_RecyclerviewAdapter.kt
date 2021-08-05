@@ -35,6 +35,7 @@ class Group_Home_Main_Store_Kind_RecyclerviewAdapter(
 
         fun bindItem(item: GroupStoreResponse) {
             glideUtil(context, item.imgUrl, binding.ivStore)
+            binding.ivStore.setAlpha(200)
             binding.tvStoreName.text = item.storeName
             binding.tvStoreLocation.text = item.address
             binding.tvStoreRating.text = item.rating.toInt().toString()

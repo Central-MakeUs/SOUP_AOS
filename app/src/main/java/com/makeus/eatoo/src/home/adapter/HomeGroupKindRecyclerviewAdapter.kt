@@ -11,6 +11,7 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -133,21 +134,6 @@ class HomeGroupKindRecyclerviewAdapter(
         Log.d("GroupList.size", "" + GroupList.size)
         Log.d("groupsize", "" + groupsize)
 
-//        if (GroupList[position].getGroupMembersRes[0].color == 1){
-//            holder.GroupLayout.setBackgroundResource(R.color.group_red)
-//        }
-//        else if(GroupList[position].getGroupMembersRes[0].color == 2){
-//            holder.GroupLayout.setBackgroundResource(R.color.group_orange)
-//        }
-//        else if(GroupList[position].getGroupMembersRes[0].color == 3){
-//            holder.GroupLayout.setBackgroundResource(R.color.group_orange_litle)
-//        }
-//        else if(GroupList[position].getGroupMembersRes[0].color == 4){
-//            holder.GroupLayout.setBackgroundResource(R.color.group_yellow)
-//        }
-//        else if(GroupList[position].getGroupMembersRes[0].color == 5){
-//            holder.GroupLayout.setBackgroundResource(R.color.group_yellow_litle)
-//        }
         holder.GroupLayout.setOnClickListener {
             itemClickListener.onClick(
                 it,
@@ -171,35 +157,43 @@ class HomeGroupKindRecyclerviewAdapter(
                 holder.GroupNameLayouttext1.visibility = GONE
                 holder.GroupNameLayouttext2.visibility = GONE
 
-                holder.GroupKeyword1.chipBackgroundColor = ColorStateList.valueOf(colorArray[GroupList[position].color-1])
-                holder.GroupKeyword2.chipBackgroundColor = ColorStateList.valueOf(colorArray[GroupList[position].color-1])
-
                 if (GroupList[position].getGroupKeywordRes.size == 1) {
                     holder.GroupKeywordChip1.visibility = VISIBLE
-//                    holder.GroupKeywordChip2.visibility = GONE
+                    holder.GroupKeywordChip2.visibility = GONE
                     holder.GroupKeyword2.visibility = GONE
                     holder.GroupKeyword1.text = GroupList[position].getGroupKeywordRes[0].name
 
                 } else if (GroupList[position].getGroupKeywordRes.size == 2) {
                     holder.GroupKeywordChip1.visibility = VISIBLE
-//                    holder.GroupKeywordChip2.visibility = GONE
+                    holder.GroupKeywordChip2.visibility = GONE
                     holder.GroupKeyword1.text = GroupList[position].getGroupKeywordRes[0].name
                     holder.GroupKeyword2.text = GroupList[position].getGroupKeywordRes[1].name
                 } else if (GroupList[position].getGroupKeywordRes.size == 3) {
                     holder.GroupKeywordChip1.visibility = VISIBLE
-//                    holder.GroupKeywordChip2.visibility = VISIBLE
-//                    holder.GroupKeyword4.visibility = GONE
+                    holder.GroupKeywordChip2.visibility = VISIBLE
+                    holder.GroupKeyword4.visibility = GONE
+                    //holder.GroupKeyword5.visibility = GONE
                     holder.GroupKeyword1.text = GroupList[position].getGroupKeywordRes[0].name
                     holder.GroupKeyword2.text = GroupList[position].getGroupKeywordRes[1].name
-//                    holder.GroupKeyword3.text = GroupList[position].getGroupKeywordRes[2].name
+                    holder.GroupKeyword3.text = GroupList[position].getGroupKeywordRes[2].name
                 } else if (GroupList[position].getGroupKeywordRes.size == 4 || GroupList[position].getGroupKeywordRes.size == 5) {
                     holder.GroupKeywordChip1.visibility = VISIBLE
-//                    holder.GroupKeywordChip2.visibility = VISIBLE
+                    holder.GroupKeywordChip2.visibility = VISIBLE
+                    //holder.GroupKeyword5.visibility = GONE
                     holder.GroupKeyword1.text = GroupList[position].getGroupKeywordRes[0].name
                     holder.GroupKeyword2.text = GroupList[position].getGroupKeywordRes[1].name
+                    holder.GroupKeyword3.text = GroupList[position].getGroupKeywordRes[2].name
+                    holder.GroupKeyword4.text = GroupList[position].getGroupKeywordRes[3].name
+                }
+//                else if (GroupList[position].getGroupKeywordRes.size == 5) {
+//                    holder.GroupKeywordChip1.visibility = VISIBLE
+//                    holder.GroupKeywordChip2.visibility = VISIBLE
+//                    holder.GroupKeyword1.text = GroupList[position].getGroupKeywordRes[0].name
+//                    holder.GroupKeyword2.text = GroupList[position].getGroupKeywordRes[1].name
 //                    holder.GroupKeyword3.text = GroupList[position].getGroupKeywordRes[2].name
 //                    holder.GroupKeyword4.text = GroupList[position].getGroupKeywordRes[3].name
-                }
+//                    holder.GroupKeyword5.text = GroupList[position].getGroupKeywordRes[4].name
+//                }
 
             } else {
                 holder.GroupNameLayouttext1.visibility = VISIBLE
@@ -207,7 +201,7 @@ class HomeGroupKindRecyclerviewAdapter(
                     GroupList[position].name + holder.GroupNameLayouttext1.text
                 holder.GroupNameLayouttext2.visibility = VISIBLE
                 holder.GroupKeywordChip1.visibility = GONE
-//                holder.GroupKeywordChip2.visibility = GONE
+                holder.GroupKeywordChip2.visibility = GONE
             }
         }
 
@@ -260,13 +254,13 @@ class HomeGroupKindRecyclerviewAdapter(
         val member3Container : ImageView = view.findViewById(R.id.iv_member3_container)
         val GroupNameLayouttext1: AppCompatTextView = view.findViewById(R.id.keword_recomand1)
         val GroupNameLayouttext2: AppCompatTextView = view.findViewById(R.id.keword_recomand2)
-        val GroupKeywordChip1: LinearLayout = view.findViewById(R.id.chip_first)
-
-        //        val GroupKeywordChip2 : LinearLayout = view.findViewById(R.id.chip_second)
-        val GroupKeyword1: Chip = view.findViewById(R.id.chip1)
-        val GroupKeyword2: Chip = view.findViewById(R.id.chip2)
-//        val GroupKeyword3 : Chip = view.findViewById(R.id.chip2_1)
-//        val GroupKeyword4 : Chip = view.findViewById(R.id.chip2_2)
+        val GroupKeywordChip1: ConstraintLayout = view.findViewById(R.id.chip_first)
+        val GroupKeywordChip2 : ConstraintLayout = view.findViewById(R.id.chip_second)
+        val GroupKeyword1: AppCompatTextView = view.findViewById(R.id.chip1)
+        val GroupKeyword2: AppCompatTextView = view.findViewById(R.id.chip2)
+        val GroupKeyword3 : AppCompatTextView = view.findViewById(R.id.chip2_1)
+        val GroupKeyword4 : AppCompatTextView = view.findViewById(R.id.chip2_2)
+        //val GroupKeyword5 : AppCompatTextView = view.findViewById(R.id.chip2_3)
 
     }
 

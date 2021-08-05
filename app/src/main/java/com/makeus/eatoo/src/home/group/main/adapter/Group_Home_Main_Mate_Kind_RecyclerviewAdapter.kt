@@ -31,6 +31,7 @@ class Group_Home_Main_Mate_Kind_RecyclerviewAdapter(val MateList : ArrayList<Gro
         val imageUrl: String = MateList[position].imgUrl
         if(imageUrl != "") {
             glideUtil(holder.view.context, imageUrl, roundAll(holder.Mateimg, 100))
+            holder.Mateimg.setAlpha(200)
         }
 
         if(MateList[position].status == 0 ){

@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivitySignInBinding
+import com.makeus.eatoo.src.signinlogin.signin.model.Check_Response
+import com.makeus.eatoo.src.signinlogin.signin.model.SignInResponse
 
-class SignInActivity :  BaseActivity<ActivitySignInBinding>(ActivitySignInBinding::inflate) {
+class SignInActivity :  BaseActivity<ActivitySignInBinding>(ActivitySignInBinding::inflate),SignInActivityView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,15 +22,9 @@ class SignInActivity :  BaseActivity<ActivitySignInBinding>(ActivitySignInBindin
 
         binding.nextBtn.setOnClickListener {
 
-            val intent = Intent(this, SignInActivity2::class.java)
 
-            intent.putExtra("name", binding.nameEdt.text.toString())
-            intent.putExtra("phone", binding.phoneNumberEdt.text.toString())
+            SignInActivityService(this).tryPhonecheck(binding.phoneNumberEdt.text.toString())
 
-            Log.d("인텐트 종류",""+binding.nameEdt.text+ binding.phoneNumberEdt.text)
-
-            startActivity(intent)
-            finish()
         }
 
         if (intent.hasExtra("name") &&intent.hasExtra("phone")){
@@ -92,6 +89,9 @@ class SignInActivity :  BaseActivity<ActivitySignInBinding>(ActivitySignInBindin
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 //텍스트 입력 중
 
+                binding.warningImg.visibility = View.GONE
+                binding.phoneNumberEdt.setBackgroundDrawable(binding.phoneNumberEdt.getContext().getDrawable(R.drawable.edittext_background_radius))
+
                 if( (isValidNameK(binding.nameEdt.text.toString())|| isValidName(binding.nameEdt.text.toString())||isValidNameE(binding.nameEdt.text.toString()) ) && isValidPhone(binding.phoneNumberEdt.text.toString()) ){
 
                     binding.nextBtn.isClickable = true // 버튼 클릭할수 있게
@@ -149,5 +149,35 @@ class SignInActivity :  BaseActivity<ActivitySignInBinding>(ActivitySignInBindin
         val trimmedPhone = phone?.trim().toString()
         val exp = Regex("^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})\$")
         return !trimmedPhone.isNullOrEmpty() && exp.matches(trimmedPhone)
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    override fun onGetUserSuccess(response: Check_Response) {
+        if(response.code == 1000){
+            val intent = Intent(this, SignInActivity2::class.java)
+
+            intent.putExtra("name", binding.nameEdt.text.toString())
+            intent.putExtra("phone", binding.phoneNumberEdt.text.toString())
+
+            Log.d("인텐트 종류",""+binding.nameEdt.text+ binding.phoneNumberEdt.text)
+
+            startActivity(intent)
+            finish()
+        }
+        else if(response.code == 2034){
+            binding.phoneNumberEdt.setBackgroundDrawable(binding.phoneNumberEdt.getContext().getDrawable(R.drawable.edittext_warning_background_radius))
+            binding.warningImg.visibility = View.VISIBLE
+            binding.phoneHint.setText(R.string.unregistered_phone)
+            binding.phoneHint.setTextColor(binding.phoneHint.context.resources.getColor(R.color.red))
+        }
+    }
+
+    override fun onGetUserFailure(message: String) {
+    }
+
+    override fun onPostSignUpSuccess(response: SignInResponse) {
+    }
+
+    override fun onPostSignUpFailure(message: String) {
     }
 }

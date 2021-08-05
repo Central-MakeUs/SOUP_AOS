@@ -20,6 +20,7 @@ class StoreDetailReviewRVAdapter (
 
         fun bindItem(item: GetReviewRe) {
             glideUtil(context, item.imgUrl, binding.ivMenuImg)
+            binding.ivMenuImg.setAlpha(200)
             binding.chipKeyword.text = item.menuName
             binding.tvReviewDate.text = item.createdAt
             binding.tvReviewContent.text = item.contents

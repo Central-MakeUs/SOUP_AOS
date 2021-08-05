@@ -28,6 +28,7 @@ class MyReviewRVAdapter(
             binding.tvMyreviewMenuName.text = item.menuName
             binding.tvMyreviewCreatedAt.text = item.createdAt
             glideUtil(context, item.imgUrl, binding.ivMyreview)
+            binding.ivMyreview.setAlpha(200)
             binding.cardviewMyreview.setOnClickListener{
                 listener.onMyReviewClicked(item.reviewIdx)
             }

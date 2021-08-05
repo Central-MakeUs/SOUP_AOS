@@ -160,6 +160,7 @@ class CreateReview1Activity :
             reviewInfo.imgUrl,
             roundAll(binding.ivReview1Img, 5)
         )
+        binding.ivReview1Img.setAlpha(400)
         ApplicationClass.sSharedPreferences.edit().putString("EXISTING_REVIEW_INFO", null)
             .apply()
     }

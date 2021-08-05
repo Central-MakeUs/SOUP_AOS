@@ -1,17 +1,12 @@
 package com.makeus.eatoo.src.signinlogin.signin.model
 
 import com.google.gson.annotations.SerializedName
+import com.makeus.eatoo.config.BaseResponse
 
 data class SignInResponse(
     @SerializedName("result")
-    val result : Result,
-    @SerializedName("isSuccess")
-    val isSuccess : Boolean,
-    @SerializedName("code")
-    val code : Int,
-    @SerializedName("message")
-    val message : String
-)
+    val result : Result
+):BaseResponse()
 
 data class Result(
     @SerializedName("jwt")

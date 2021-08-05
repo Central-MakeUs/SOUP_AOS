@@ -27,7 +27,7 @@
         android:gravity="center_horizontal"
         android:lineSpacingExtra="14sp"
         android:text="@string/sign_in_last_top1"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,6 +60,7 @@
         android:src="@drawable/ic_eatoo_character"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -107,7 +108,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/nick_name_hint"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="190dp"
@@ -141,6 +142,19 @@
         app:layout_constraintBottom_toTopOf="@+id/nick_name_edt"
         app:layout_constraintStart_toStartOf="@+id/nick_name_edt"
         app:layout_constraintTop_toTopOf="@+id/nick_name_edt" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/warning_img"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="12dp"
+        android:visibility="gone"
+        android:src="@drawable/icon_auto_tint"
+        app:layout_constraintBottom_toBottomOf="@+id/nick_name_edt"
+        app:layout_constraintEnd_toEndOf="@+id/nick_name_edt"
+        app:layout_constraintTop_toTopOf="@+id/nick_name_edt" />
+
 
 
 

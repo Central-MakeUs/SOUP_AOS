@@ -20,6 +20,7 @@ class StoreDetailImageRVAdapter(
 
         fun bindItem(item: GetReviewImgRe) {
             glideUtil(context, item.imgUrl, roundAll(binding.ivStoreDetailImage, 10))
+            binding.ivStoreDetailImage.setAlpha(200)
         }
 
     }

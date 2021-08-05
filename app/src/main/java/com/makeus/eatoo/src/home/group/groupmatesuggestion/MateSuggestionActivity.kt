@@ -30,6 +30,7 @@ import com.makeus.eatoo.src.explanation.ExplanationActivity
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.dialog.LeaveMateSuggDialog
 import com.makeus.eatoo.src.home.group.groupmatesuggestion.dialog.LeaveMateSuggDialogInterface
 import com.makeus.eatoo.src.main.MainActivity
+import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.glideUtil
 
 
@@ -65,6 +66,7 @@ class MateSuggestionActivity
         if(storeImg != null) {
             binding.ivMateImg.isVisible = true
             glideUtil(this, storeImg.toString(), binding.ivMateImg)
+            binding.ivMateImg.setAlpha(400)
             binding.llImgHint.isVisible = false
             if(storeName != null)  {
                 binding.tvMateStoreNameOnImg.text = storeName
@@ -228,6 +230,9 @@ class MateSuggestionActivity
         response.result.forEach {
             val chip  = LayoutInflater.from(this).inflate(R.layout.view_chip_2, null) as Chip
             chip.text = it.name
+            if(getGroupIdx() == it.groupIdx){
+                chip.isChecked = true
+            }
             chip.setOnCheckedChangeListener { compoundButton, isChecked ->
                 if(chip.isChecked) groupIdx = it.groupIdx
             }

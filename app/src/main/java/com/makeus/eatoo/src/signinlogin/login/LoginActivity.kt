@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
@@ -42,10 +43,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 // 텍스트 입력 전
             }
             //
-            @SuppressLint("ResourceAsColor")
+            @SuppressLint("ResourceAsColor", "UseCompatLoadingForDrawables")
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 //텍스트 입력 중
 
+                binding.warningImg.visibility = View.GONE
+                binding.emailEdt.setBackgroundDrawable(binding.emailEdt.getContext().getDrawable(R.drawable.edittext_background_radius))
                 if(android.util.Patterns.EMAIL_ADDRESS.matcher(binding.emailEdt.text).matches() && isValidPassword(binding.passwordEdt.text.toString())){
 
                     binding.loginBtn.isClickable = true // 버튼 클릭할수 있게
@@ -83,7 +86,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
                 Log.v( "email 텍스트 길이", " : "+binding.emailEdt.text.length )
                 Log.v( "password 텍스트 길이", " : "+binding.passwordEdt.text.length )
-
+                binding.warningImg2.visibility = View.GONE
+                binding.passwordEdt.setBackgroundDrawable(binding.passwordEdt.getContext().getDrawable(R.drawable.edittext_background_radius))
                 if(android.util.Patterns.EMAIL_ADDRESS.matcher(binding.emailEdt.text).matches() &&  isValidPassword(binding.passwordEdt.text.toString())){
 
 
@@ -117,6 +121,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     override fun onGetUserFailure(message: String) {
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onPostLoginSuccess(response: LoginResponse) {
         dismissLoadingDialog()
 //        showCustomToast(response.message)
@@ -131,6 +136,18 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("finish_explanation"))
             finish()
         }
+        if(response.code == 2005){
+            binding.emailEdt.setBackgroundDrawable(binding.emailEdt.getContext().getDrawable(R.drawable.edittext_warning_background_radius))
+            binding.warningImg.visibility = View.VISIBLE
+            binding.emailHint.setText(R.string.unregistered_email)
+            binding.emailHint.setTextColor(binding.emailHint.context.resources.getColor(R.color.red))
+        }
+        if(response.code == 2004){
+            binding.passwordEdt.setBackgroundDrawable(binding.passwordEdt.getContext().getDrawable(R.drawable.edittext_warning_background_radius))
+            binding.warningImg2.visibility = View.VISIBLE
+            binding.passwordHint.setText(R.string.unregistered_password)
+            binding.passwordHint.setTextColor(binding.passwordHint.context.resources.getColor(R.color.red))
+        }
     }
 
     override fun onPostLoginFailure(message: String) {
@@ -143,7 +160,5 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         val exp = Regex("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&]).{8,20}.\$")
         return !trimmedPassword.isNullOrEmpty() && exp.matches(trimmedPassword)
     }
-
-
 
 }
