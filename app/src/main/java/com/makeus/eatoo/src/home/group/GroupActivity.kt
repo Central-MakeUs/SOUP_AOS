@@ -1,11 +1,8 @@
 package com.makeus.eatoo.src.home.group
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.makeus.eatoo.R
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityGroupBinding
@@ -15,25 +12,17 @@ import com.makeus.eatoo.src.home.group.adapter.GroupViewPagerAdapter
 import com.makeus.eatoo.src.home.group.member.GroupMemberService
 import com.makeus.eatoo.src.home.group.member.GroupMemberView
 import com.makeus.eatoo.src.home.group.member.model.GroupMemberResponse
-import com.makeus.eatoo.src.main.MainActivity
 import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.getGroupName
 import com.makeus.eatoo.util.getUserIdx
 import com.google.android.material.tabs.TabLayoutMediator
-import com.makeus.eatoo.src.home.group.category.GroupCategoryFragment
-import com.makeus.eatoo.src.home.group.category.category_list.GroupCategoryListFragment
-import com.makeus.eatoo.src.home.group.category.category_map.OnListClickListener
-import com.makeus.eatoo.src.home.group.main.GroupMainFragment
-import com.makeus.eatoo.src.home.group.member.GroupMemberFragment
 import com.makeus.eatoo.src.home.group.member.model.GroupMemberDetailResponse
-import com.makeus.eatoo.src.home.group.vote.GroupVoteFragment
 import com.makeus.eatoo.src.mypage.invite.model.InviteCodeResponse
 
 
 class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::inflate),
-    SingleView, GroupMemberView, OnListClickListener ,LeaveGroupActivityInterface, View.OnClickListener{
+    SingleView, GroupMemberView,LeaveGroupActivityInterface, View.OnClickListener{
 
-    //    private lateinit var vpAdapter: GroupVPAdapter
     private lateinit var viewPagerAdapter : GroupViewPagerAdapter
     private var changeToSingle = false
 
@@ -138,32 +127,6 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
     override fun onGetMmeberDetailFail(message: String?) {
     }
 
-    override fun onListClick() {
-
-//        viewPagerAdapter.fragmentList = arrayListOf<Fragment>(GroupMainFragment(), GroupCategoryListFragment(), GroupVoteFragment(), GroupMemberFragment())
-//        viewPagerAdapter.notifyDataSetChanged()
-//        binding.viewpagerGroup.apply {
-//            adapter = viewPagerAdapter
-//            currentItem = 1
-//        }
-//        binding.tablayoutGroup.setScrollPosition(1, 0f, true)
-//        viewPagerAdapter.notifyItemChanged(1)
-
-//        vpAdapter.fragmentList = arrayListOf<Fragment>(GroupMainFragment(), GroupCategoryListFragment(), GroupVoteFragment(), GroupMemberFragment())
-//        binding.vp.apply {
-//            adapter = vpAdapter
-//            currentItem = 1
-//        }
-//        binding.tablayoutGroup.setScrollPosition(1, 0f, true)
-////        viewPagerAdapter.notifyDataSetChanged()
-//        vpAdapter.notifyDataSetChanged()
-
-//        val fragment = supportFragmentManager.findFragmentByTag("android:switcher:" + R.id.vp + ":" + 1) as? GroupCategoryFragment?
-//        val fragment2 = vpAdapter.instantiateItem(binding.vp, 1) as? GroupCategoryFragment
-//        if(fragment2 != null) vpAdapter.replaceFrag(fragment2)
-////        if(fragment2 != null) supportFragmentManager.beginTransaction().add(fragment2.id, GroupCategoryListFragment()).commit()
-//        Log.d("groupActivity", fragment2.toString())
-    }
 
 
 

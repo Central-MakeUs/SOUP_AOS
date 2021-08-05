@@ -10,19 +10,25 @@ import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityExplanationBinding
 import com.makeus.eatoo.src.explanation.adapter.GuideViewpageradapter
 
-class ExplanationActivity : BaseActivity<ActivityExplanationBinding>(ActivityExplanationBinding::inflate) {
+class ExplanationActivity
+    : BaseActivity<ActivityExplanationBinding>(ActivityExplanationBinding::inflate), SkipListenerInterface {
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val pagerAdapter = GuideViewpageradapter(this)
-        pagerAdapter.addFragment(GuideFragment1())
-        pagerAdapter.addFragment(GuideFragment2())
+        pagerAdapter.addFragment(GuideFragment1(this))
+        pagerAdapter.addFragment(GuideFragment2(this))
         pagerAdapter.addFragment(GuideFragment3())
         binding.photoGuideVp.adapter = pagerAdapter
 
         registerBr()
+    }
+
+    override fun onSkipClicked() {
+        binding.photoGuideVp.currentItem = 2
     }
 
     private val reviewBr = object : BroadcastReceiver() {
