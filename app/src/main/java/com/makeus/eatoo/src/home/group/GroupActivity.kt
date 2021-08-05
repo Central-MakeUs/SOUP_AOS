@@ -25,6 +25,7 @@ import com.makeus.eatoo.src.home.group.category.category_list.GroupCategoryListF
 import com.makeus.eatoo.src.home.group.category.category_map.OnListClickListener
 import com.makeus.eatoo.src.home.group.main.GroupMainFragment
 import com.makeus.eatoo.src.home.group.member.GroupMemberFragment
+import com.makeus.eatoo.src.home.group.member.model.GroupMemberDetailResponse
 import com.makeus.eatoo.src.home.group.vote.GroupVoteFragment
 import com.makeus.eatoo.src.mypage.invite.model.InviteCodeResponse
 
@@ -42,22 +43,9 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
         getSingleStatus()
         binding.customToolbar.title.text = getGroupName()
         setGroupViewPager()
-//        setVP()
         setOnClickListeners()
 
     }
-
-//    private fun setVP() {
-//        vpAdapter = GroupVPAdapter(supportFragmentManager, this)
-//        binding.vp.adapter = vpAdapter
-//        binding.tablayoutGroup.setupWithViewPager(binding.vp)
-//        binding.tablayoutGroup.getTabAt(0)!!.text = resources.getString(R.string.group_main)
-//        binding.tablayoutGroup.getTabAt(1)!!.text = resources.getString(R.string.group_category)
-//        binding.tablayoutGroup.getTabAt(2)!!.text = resources.getString(R.string.group_vote)
-//        binding.tablayoutGroup.getTabAt(3)!!.text = resources.getString(R.string.group_member)
-//
-//
-//    }
 
     private fun getSingleStatus() {
         GroupMemberService(this).tryGetGroupMember(getUserIdx(), getGroupIdx())
@@ -142,6 +130,12 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
     }
 
     override fun onGetInviteCodeDateFail(message: String?) {
+    }
+
+    override fun onGetMemberDetailSuccess(response: GroupMemberDetailResponse) {
+    }
+
+    override fun onGetMmeberDetailFail(message: String?) {
     }
 
     override fun onListClick() {

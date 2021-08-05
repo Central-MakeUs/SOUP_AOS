@@ -3,4 +3,27 @@
     <dimen name="vote_dialog_radio_top_margin">6dp</dimen>
     <dimen name="vote_dialog_radio_bottom_margin">10dp</dimen>
     <dimen name="vote_dialog_add_item_margin">31dp</dimen>
+
+    <dimen name="diet_keyword_size1">42dp</dimen>
+    <dimen name="diet_keyword_size2">58dp</dimen>
+    <dimen name="diet_keyword_size3">77dp</dimen>
+    <dimen name="diet_keyword_size4">105dp</dimen>
+    <dimen name="diet_keyword_size5">125dp</dimen>
+    <dimen name="diet_keyword_text_size1">13sp</dimen>
+    <dimen name="diet_keyword_text_size2">14sp</dimen>
+    <dimen name="diet_keyword_text_size3">15sp</dimen>
+    <dimen name="diet_keyword_text_size4">16sp</dimen>
+    <dimen name="diet_keyword_text_size5">17sp</dimen>
+
+    <dimen name="diet_keyword_dialog_size1">31.7dp</dimen>
+    <dimen name="diet_keyword_dialog_size2">43.8dp</dimen>
+    <dimen name="diet_keyword_dialog_size3">58.1dp</dimen>
+    <dimen name="diet_keyword_dialog_size4">79.3dp</dimen>
+    <dimen name="diet_keyword_dialog_size5">94.4dp</dimen>
+    <dimen name="diet_keyword_dialog_text_size1">11sp</dimen>
+    <dimen name="diet_keyword_dialog_text_size2">12sp</dimen>
+    <dimen name="diet_keyword_dialog_text_size3">13sp</dimen>
+    <dimen name="diet_keyword_dialog_text_size4">14sp</dimen>
+    <dimen name="diet_keyword_dialog_text_size5">15sp</dimen>
+
 </resources>

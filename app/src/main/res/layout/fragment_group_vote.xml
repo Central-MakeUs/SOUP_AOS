@@ -21,7 +21,6 @@
                 android:id="@+id/tv_group_vote_call"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
                 android:layout_marginTop="26dp"
                 android:fontFamily="@font/roboto_black"
                 android:text="@string/call_group_members"
@@ -55,9 +54,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_vote_suggest"
                      />
-
-
-
 
             <ImageView
                 android:id="@+id/iv_no_vote"

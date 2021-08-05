@@ -18,10 +18,10 @@
             android:id="@+id/tv_query1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/category_dialog_query1"
+            android:text="@string/dialog_register_new_store_query1"
             android:textColor="@color/main_orange"
             android:fontFamily="@font/roboto_bold"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="44dp"
@@ -31,35 +31,36 @@
             android:id="@+id/tv_query2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/category_dialog_query2"
+            android:text="@string/dialog_register_new_store_query2"
             android:textColor="@color/main_orange"
             android:fontFamily="@font/roboto_bold"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="3dp"
             app:layout_constraintTop_toBottomOf="@+id/tv_query1"/>
 
         <TextView
             android:id="@+id/tv_dialog_exp1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/category_dialog_exp1"
+            android:text="@string/dialog_register_new_store_exp1"
             android:textColor="@color/black"
             android:fontFamily="@font/roboto_regular"
-            android:textSize="12sp"
+            android:textSize="11sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="13dp"
             app:layout_constraintTop_toBottomOf="@+id/tv_query2"/>
 
         <TextView
             android:id="@+id/tv_dialog_exp2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/category_dialog_exp2"
+            android:text="@string/dialog_register_new_store_exp2"
             android:textColor="@color/black"
             android:fontFamily="@font/roboto_regular"
-            android:textSize="12sp"
+            android:textSize="11sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="3dp"
@@ -94,31 +95,23 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<ImageView
-    android:id="@+id/iv_dialog_circle"
-    android:layout_width="85dp"
-    android:layout_height="85dp"
-    android:src="@drawable/background_dialog_circle"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
+    <ImageView
+        android:id="@+id/iv_dialog_circle"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:src="@drawable/background_dialog_circle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <ImageView
         android:id="@+id/iv_dialog_circle_icon"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/ic_eva_archive_outline"
+        android:src="@drawable/ic_eva_alert_circle_outline"
         app:layout_constraintTop_toTopOf="@id/iv_dialog_circle"
         app:layout_constraintBottom_toBottomOf="@id/iv_dialog_circle"
         app:layout_constraintStart_toStartOf="@id/iv_dialog_circle"
         app:layout_constraintEnd_toEndOf="@id/iv_dialog_circle"/>
-
-
-
-
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

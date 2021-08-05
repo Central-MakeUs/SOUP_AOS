@@ -8,5 +8,5 @@ interface ProfileView {
     fun onGetProfileFail(message : String?)
 
     fun onPatchProfileSuccess(response: PatchProfileResponse)
-    fun onPatchProfileFail(message: String?)
+    fun onPatchProfileFail(code : Int, message: String?)
 }

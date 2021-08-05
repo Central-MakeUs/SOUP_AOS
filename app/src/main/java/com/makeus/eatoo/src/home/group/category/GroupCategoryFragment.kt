@@ -49,9 +49,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
-
-
 class GroupCategoryFragment :
     BaseFragment<FragmentGroupCategoryBinding>(
         FragmentGroupCategoryBinding::bind,
@@ -258,10 +255,6 @@ class GroupCategoryFragment :
         naverMap.maxZoom = 19.0
         naverMap.minZoom = 10.0
         setMyLocationListener()
-
-//        val uiSetting = naverMap.uiSettings
-//        uiSetting.isLocationButtonEnabled = true
-
 
         locationSource = FusedLocationSource(this, CreateGroupActivity.PERMISSION_REQUEST_CODE)
         naverMap.locationSource = locationSource

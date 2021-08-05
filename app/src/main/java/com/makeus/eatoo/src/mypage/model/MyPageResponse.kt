@@ -20,5 +20,7 @@ data class GetUserKeywordRe(
     @SerializedName("isPrefer") val isPrefer: String,
     @SerializedName("name") val name: String,
     @SerializedName("size") val size: Int,
+    @SerializedName("x") val x : Double,
+    @SerializedName("y") val y : Double,
     @SerializedName("userKeywordIdx") val userKeywordIdx: Int
 )
