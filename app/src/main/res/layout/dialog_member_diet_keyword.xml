@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_dialog_container"
         android:layout_width="280dp"
-        android:layout_height="344dp"
+        android:layout_height="435dp"
         android:background="@drawable/background_dialog"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

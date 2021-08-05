@@ -119,26 +119,29 @@ class GroupMemberFragment : BaseFragment<FragmentGroupMemberBinding>(
     }
 
     override fun onGetMemberDetailSuccess(response: GroupMemberDetailResponse) {
-        Log.d("groupmemberfrag", response.result.toString())
-        context?.let {
+        if(response.result.getUserKeywordRes.isNotEmpty()){
+            context?.let {
 
-            val outMetrics = DisplayMetrics()
+                val outMetrics = DisplayMetrics()
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                val display = activity?.display
-                display?.getRealMetrics(outMetrics)
-            } else {
-                @Suppress("DEPRECATION")
-                val display = activity?.windowManager?.defaultDisplay
-                @Suppress("DEPRECATION")
-                display?.getMetrics(outMetrics)
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+                    val display = activity?.display
+                    display?.getRealMetrics(outMetrics)
+                } else {
+                    @Suppress("DEPRECATION")
+                    val display = activity?.windowManager?.defaultDisplay
+                    @Suppress("DEPRECATION")
+                    display?.getMetrics(outMetrics)
+                }
+
+                var parentX = outMetrics.widthPixels
+                var parentY = outMetrics.heightPixels
+
+                val dialog = MemberDietKeywordDialog(it, response.result, parentX, parentY)
+                dialog.show()
             }
-
-            var parentX = outMetrics.widthPixels
-            var parentY = outMetrics.heightPixels
-
-            val dialog = MemberDietKeywordDialog(it, response.result, parentX, parentY)
-            dialog.show()
+        }else {
+            showCustomToast("저장된 식성키워드가 없습니다.")
         }
     }
 

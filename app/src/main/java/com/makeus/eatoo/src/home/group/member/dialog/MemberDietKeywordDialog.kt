@@ -28,6 +28,7 @@ class MemberDietKeywordDialog (
     val parentY : Int
 ) : Dialog(context) {
     private lateinit var binding: DialogMemberDietKeywordBinding
+    private var topHeightLimit = ApplicationClass.sSharedPreferences.getInt(ApplicationClass.TOP_HEIGHT_LIMIT, 0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,14 +77,12 @@ class MemberDietKeywordDialog (
 
         memberInfo.getUserKeywordRes.forEachIndexed { index, memberDietKeyword ->
 
-            if(memberDietKeyword.x != 0.0 && memberDietKeyword.y != 0.0 ){
                 //Log.d("memberKeywordDialog", "parentX : ${ parentX}, parentY : $parentY")
                 //Log.d("memberKeywordDialog", "memberDietKeyword.x : ${ memberDietKeyword.x}, memberDietKeyword.y : ${memberDietKeyword.y}")
                 val keywordX = (memberDietKeyword.x * containerWidth / parentX!!).toFloat()
-                val keywordY = (memberDietKeyword.y * containerHeight / parentY!!).toFloat()
+                val keywordY = ((memberDietKeyword.y+ topHeightLimit) * containerHeight / parentY!!).toFloat()
                 //Log.d("memberKeywordDialog", "keywordX : ${ keywordX}, keywordY : $keywordY")
                 makeKeywordCircle(memberDietKeyword, keywordX, keywordY)
-            }
         }
 
     }

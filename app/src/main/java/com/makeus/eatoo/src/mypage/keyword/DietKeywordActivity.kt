@@ -15,6 +15,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.makeus.eatoo.R
+import com.makeus.eatoo.config.ApplicationClass
+import com.makeus.eatoo.config.ApplicationClass.Companion.TOP_HEIGHT_LIMIT
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.config.BaseResponse
 import com.makeus.eatoo.databinding.ActivityDietKeywordBinding
@@ -42,6 +44,7 @@ View.OnClickListener, DietKeywordView{
     private var isAdded = false
         var parentX : Int? = 0
         var parentY : Int? = 0
+    private var topHeightLimit = ApplicationClass.sSharedPreferences.getInt(TOP_HEIGHT_LIMIT, 0)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +54,7 @@ View.OnClickListener, DietKeywordView{
         binding.tvUsernameDietKeyword.text = String.format(resources.getString(R.string.input_diet_keyword1), getUserNickName())
         binding.ivKeywordAdd.setOnClickListener(this)
         binding.registerKeywordBtn.setOnClickListener (this)
+        binding.customToolbar.setLeftIconClickListener(this)
 
 
     }
@@ -66,6 +70,7 @@ View.OnClickListener, DietKeywordView{
                     showCustomToast("키워드를 추가해주세요!")
                 }
             }
+            R.id.iv_toolbar_left -> finish()
         }
     }
 
@@ -134,7 +139,7 @@ View.OnClickListener, DietKeywordView{
             else ContextCompat.getDrawable(this@DietKeywordActivity, R.drawable.background_keyword_neg)
 
             x = locX
-            y = locY
+            y = locY + topHeightLimit
             text = name
             setTextSize(TypedValue.COMPLEX_UNIT_PX, sizeText)
 //            setOnTouchListener(myTouchListener)
@@ -155,7 +160,7 @@ View.OnClickListener, DietKeywordView{
             parentY = (view?.parent as? ViewGroup)?.height
 
             Log.d("dietKeywordAct", "parentx : $parentX, parenty : $parentY")
-            val topHeightLimit = binding.clTvContainer.height + binding.cardviewToolbar.height
+            topHeightLimit = binding.clTvContainer.height + binding.cardviewToolbar.height
             val bottomHeightLimit = parentY?.minus(binding.llRegisterBtnContainer.height)
 //            Log.d("dietKeywordAct", topHeightLimit.toString())
 //            Log.d("dietKeywordAct", bottomHeightLimit.toString())
@@ -195,24 +200,21 @@ View.OnClickListener, DietKeywordView{
      */
 
     private fun saveDietKeyword() {
-        Log.i("dietKeywordAct", dietKeywordCircleList.toString())
         dietKeywordCircleList.forEachIndexed { index, textView ->
             textView.setOnTouchListener(null)
-            Log.i("dietKeywordAct", "tv x : ${textView.x}, tv y : ${textView.y}")
             dietKeywordReqList.add(DietKeywordReq(
                 dietKeywordList[index].name,
                 dietKeywordList[index].isPrefer,
                 dietKeywordList[index].size,
                 dietKeywordCircleList[index].x.toDouble(),
-                dietKeywordCircleList[index].y.toDouble()
+                (dietKeywordCircleList[index].y- topHeightLimit).toDouble()
             ))
         }
         postKeyword(dietKeywordReqList)
     }
 
     private fun postKeyword(dietKeywordReqList : ArrayList<DietKeywordReq>) {
-        //server
-        Log.d("dietKeywordAct", dietKeywordReqList.toString())
+       // Log.d("dietKeywordAct", dietKeywordReqList.toString())
         showLoadingDialog(this)
         DietKeywordService(this).tryPostDietKeyword(getUserIdx(), dietKeywordReqList.toList())
     }
@@ -223,7 +225,7 @@ View.OnClickListener, DietKeywordView{
 
     override fun onGetDietKeywordSuccess(response: DietKeywordResponse) {
         dismissLoadingDialog()
-        Log.d("dietKeywordAct", response.result.toString())
+        //Log.d("dietKeywordAct", response.result.toString())
         response.result.forEach {
 //            dietKeywordList.add(DietKeywordInfo(it.name, it.isPrefer, it.size))
             when(it.size){
@@ -248,8 +250,11 @@ View.OnClickListener, DietKeywordView{
 
     override fun onPostDietKeywordSuccess(response: BaseResponse) {
         dismissLoadingDialog()
-        showCustomToast("키워드가 등록되었습니다. ")
+        showCustomToast("키워드가 등록되었습니다.")
         isAdded = false
+        ApplicationClass.sSharedPreferences.edit()
+            .putInt(TOP_HEIGHT_LIMIT, topHeightLimit).apply()
+        finish()
     }
 
     override fun onPostDietKeywordFail(message: String?) {

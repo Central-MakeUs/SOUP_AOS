@@ -35,6 +35,8 @@ class ApplicationClass : Application() {
         var GROUP_NAME = "GROUP_NAME"
         var USER_NICKNAME = "USER_NICKNAME"
 
+        val TOP_HEIGHT_LIMIT = "TOP_HEIGHT_LIMIT"
+
         // Retrofit 인스턴스, 앱 실행시 한번만 생성하여 사용합니다.
         lateinit var sRetrofit: Retrofit
 
