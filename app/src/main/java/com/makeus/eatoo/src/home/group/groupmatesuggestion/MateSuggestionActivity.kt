@@ -247,10 +247,8 @@ class MateSuggestionActivity
 
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {
         dismissLoadingDialog()
-        Handler(Looper.getMainLooper()).postDelayed({
-            val dialog = MateSuggestionCompleteDialog(this)
-            dialog.show()
-        }, 1000)
+        val dialog = MateSuggestionCompleteDialog(this)
+        dialog.show()
         finish()
     }
 
