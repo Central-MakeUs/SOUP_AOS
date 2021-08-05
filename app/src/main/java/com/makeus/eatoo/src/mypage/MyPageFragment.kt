@@ -96,11 +96,16 @@ class MyPageFragment
         binding.questionsLayout.setOnClickListener(this)
         binding.tvEditDietKeyword.setOnClickListener(this)
         binding.clNoKeyword.setOnClickListener (this)
+
+        binding.findInviteBtn.setOnClickListener (this)
+        binding.accountSecessionBtn.setOnClickListener (this)
+        binding.questionsBtn.setOnClickListener (this)
+        binding.logoutBtn.setOnClickListener (this)
     }
 
     override fun onClick(p0: View?) {
         when(p0?.id){
-            R.id.logout_layout -> {
+            R.id.logout_layout, R.id.logout_btn -> {
                 val dialog = LogoutDialog(this,this)
                 dialog.show()
             }
@@ -113,17 +118,17 @@ class MyPageFragment
             R.id.invite_layout -> {
                 startActivity(Intent(activity, InviteActivity::class.java))
             }
-            R.id.find_invite_layout -> {
+            R.id.find_invite_layout , R.id.find_invite_btn -> {
                 val dialog = FindInviteDialog(this)
                 dialog.show()
             }
-            R.id.account_secession_layout -> {
+            R.id.account_secession_layout, R.id.account_secession_btn -> {
                 context?.let {
                     val dialog = AccountWithdrawDialog(it, this)
                     dialog.show()
                 }
             }
-            R.id.questions_layout -> {
+            R.id.questions_layout, R.id.questions_btn -> {
                 context?.let {
                     val dialog = QuestionDialog(it, this)
                     dialog.show()
