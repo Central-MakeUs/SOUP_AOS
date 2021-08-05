@@ -1,6 +1,8 @@
 package com.makeus.eatoo.src.home.group.member
 
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.makeus.eatoo.R
@@ -9,7 +11,9 @@ import com.makeus.eatoo.databinding.FragmentGroupMemberBinding
 import com.makeus.eatoo.src.home.group.member.adapter.MemberRVAdapter
 import com.makeus.eatoo.src.home.group.member.dialog.AddMemberDialog
 import com.makeus.eatoo.src.home.group.member.dialog.AddMemberDialogInterface
+import com.makeus.eatoo.src.home.group.member.dialog.MemberDietKeywordDialog
 import com.makeus.eatoo.src.home.group.member.model.GroupMember
+import com.makeus.eatoo.src.home.group.member.model.GroupMemberDetailResponse
 import com.makeus.eatoo.src.home.group.member.model.GroupMemberResponse
 import com.makeus.eatoo.src.home.group.member.model.MemberDietKeyword
 import com.makeus.eatoo.src.mypage.invite.InviteDialog
@@ -56,12 +60,14 @@ class GroupMemberFragment : BaseFragment<FragmentGroupMemberBinding>(
         }
     }
 
-    override fun onMemberClicked(memberInfo : GroupMember) {
-        //dialog
+    override fun onMemberClicked(userIdx : Int) {
+        GroupMemberService(this).tryGetMemberDetail(getUserIdx(), userIdx)
     }
 
 
-    //////server result
+    /**
+     * server result
+     */
 
     override fun onGetGroupMemberSuccess(response: GroupMemberResponse) {
         dismissLoadingDialog()
@@ -74,8 +80,7 @@ class GroupMemberFragment : BaseFragment<FragmentGroupMemberBinding>(
                 color = 0,
                 characters = 0,
                 nickName = " ",
-                singleStatus = " ",
-                getUserKeywordRes = listOf()
+                singleStatus = " "
             )
         )
         memberAdapter = MemberRVAdapter(requireContext(), memberList.toList(), this)
@@ -111,6 +116,34 @@ class GroupMemberFragment : BaseFragment<FragmentGroupMemberBinding>(
             dialog.show()
         }
 
+    }
+
+    override fun onGetMemberDetailSuccess(response: GroupMemberDetailResponse) {
+        Log.d("groupmemberfrag", response.result.toString())
+        context?.let {
+
+            val outMetrics = DisplayMetrics()
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+                val display = activity?.display
+                display?.getRealMetrics(outMetrics)
+            } else {
+                @Suppress("DEPRECATION")
+                val display = activity?.windowManager?.defaultDisplay
+                @Suppress("DEPRECATION")
+                display?.getMetrics(outMetrics)
+            }
+
+            var parentX = outMetrics.widthPixels
+            var parentY = outMetrics.heightPixels
+
+            val dialog = MemberDietKeywordDialog(it, response.result, parentX, parentY)
+            dialog.show()
+        }
+    }
+
+    override fun onGetMmeberDetailFail(message: String?) {
+        showCustomToast(message?:resources.getString(R.string.failed_connection))
     }
 
 

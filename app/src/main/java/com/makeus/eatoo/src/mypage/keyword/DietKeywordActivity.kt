@@ -40,14 +40,9 @@ View.OnClickListener, DietKeywordView{
     private var dx: Float = 0.0f
     private var dy: Float = 0.0f
     private var isAdded = false
-
-    companion object {
-        var viewX = 0f
-        var viewY = 0f
         var parentX : Int? = 0
         var parentY : Int? = 0
 
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -162,8 +157,8 @@ View.OnClickListener, DietKeywordView{
             Log.d("dietKeywordAct", "parentx : $parentX, parenty : $parentY")
             val topHeightLimit = binding.clTvContainer.height + binding.cardviewToolbar.height
             val bottomHeightLimit = parentY?.minus(binding.llRegisterBtnContainer.height)
-            Log.d("dietKeywordAct", topHeightLimit.toString())
-            Log.d("dietKeywordAct", bottomHeightLimit.toString())
+//            Log.d("dietKeywordAct", topHeightLimit.toString())
+//            Log.d("dietKeywordAct", bottomHeightLimit.toString())
 
             when (event?.action) {
                 MotionEvent.ACTION_DOWN -> {

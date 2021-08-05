@@ -25,6 +25,7 @@ import com.makeus.eatoo.src.home.group.category.category_list.GroupCategoryListF
 import com.makeus.eatoo.src.home.group.category.category_map.OnListClickListener
 import com.makeus.eatoo.src.home.group.main.GroupMainFragment
 import com.makeus.eatoo.src.home.group.member.GroupMemberFragment
+import com.makeus.eatoo.src.home.group.member.model.GroupMemberDetailResponse
 import com.makeus.eatoo.src.home.group.vote.GroupVoteFragment
 import com.makeus.eatoo.src.mypage.invite.model.InviteCodeResponse
 
@@ -129,6 +130,12 @@ class GroupActivity : BaseActivity<ActivityGroupBinding>(ActivityGroupBinding::i
     }
 
     override fun onGetInviteCodeDateFail(message: String?) {
+    }
+
+    override fun onGetMemberDetailSuccess(response: GroupMemberDetailResponse) {
+    }
+
+    override fun onGetMmeberDetailFail(message: String?) {
     }
 
     override fun onListClick() {

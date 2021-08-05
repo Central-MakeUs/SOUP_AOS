@@ -20,12 +20,12 @@ class MemberRVAdapter(
 
     interface OnAddMemberClickListener {
         fun onAddMemberClicked()
-        fun onMemberClicked(memberInfo : GroupMember)
+        fun onMemberClicked(userIdx : Int)
     }
 
     inner class ViewHolder(val binding : ItemMemberBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindItem(item : GroupMember, position : Int) {
+        fun bindItem(item : GroupMember) {
             if(item.userIdx != -10){
                 binding.tvMemberNickname.text = item.nickName
                 val memberColor = if(item.color != 0) item.color -1 else 0
@@ -42,7 +42,7 @@ class MemberRVAdapter(
                     binding.ivMemberContainer.setImageResource(R.drawable.background_member_orange)
                 }
                 binding.clCharContainer.setOnClickListener {
-                    listener.onMemberClicked(item)
+                    listener.onMemberClicked(item.userIdx)
                 }
 
             }else {
@@ -64,7 +64,7 @@ class MemberRVAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(memberList[position], position)
+        holder.bindItem(memberList[position])
     }
 
     override fun getItemCount(): Int = memberList.size

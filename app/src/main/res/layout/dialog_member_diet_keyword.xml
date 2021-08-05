@@ -4,9 +4,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black">
+    android:background="@drawable/background_dialog_confirm_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_dialog_container"
         android:layout_width="280dp"
         android:layout_height="344dp"
         android:background="@drawable/background_dialog"
@@ -16,7 +17,7 @@
         android:layout_marginTop="43dp">
 
         <LinearLayout
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="42dp"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,7 +81,6 @@
         android:id="@+id/iv_member_container"
         android:layout_width="59dp"
         android:layout_height="59dp"
-        android:src="@drawable/background_member_orange"
         app:layout_constraintTop_toTopOf="@id/iv_dialog_circle"
         app:layout_constraintBottom_toBottomOf="@id/iv_dialog_circle"
         app:layout_constraintStart_toStartOf="@id/iv_dialog_circle"
@@ -89,9 +89,8 @@
 
     <ImageView
         android:id="@+id/iv_member"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:src="@drawable/group_390"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         app:layout_constraintTop_toTopOf="@id/iv_member_container"
         app:layout_constraintBottom_toBottomOf="@id/iv_member_container"
         app:layout_constraintStart_toStartOf="@id/iv_member_container"
