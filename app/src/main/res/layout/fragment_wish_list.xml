@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="34dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="11dp"
         android:singleLine="true"
         android:spinnerMode="dropdown"
         android:gravity="end"
