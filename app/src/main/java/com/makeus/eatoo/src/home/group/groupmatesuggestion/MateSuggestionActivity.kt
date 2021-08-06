@@ -128,6 +128,7 @@ class MateSuggestionActivity
 
     private fun checkValidation() {
         if(groupIdx == -1) {
+            Log.d("matesugg", groupIdx.toString())
             showCustomToast("그룹을 선택해주세요.")
             return
         }
@@ -227,7 +228,7 @@ class MateSuggestionActivity
 
      */
     override fun onGetGroupSuccess(response: GroupResponse) {
-        response.result.forEach {
+        response.result.forEachIndexed { index, it ->
             val chip  = LayoutInflater.from(this).inflate(R.layout.view_chip_2, null) as Chip
             chip.text = it.name
             if(getGroupIdx() == it.groupIdx){
@@ -237,6 +238,8 @@ class MateSuggestionActivity
                 if(chip.isChecked) groupIdx = it.groupIdx
             }
             binding.chipgroupMateSugg.addView(chip)
+
+            if(index == 0) groupIdx = it.groupIdx
         }
     }
 
@@ -249,7 +252,11 @@ class MateSuggestionActivity
         dismissLoadingDialog()
         val dialog = MateSuggestionCompleteDialog(this)
         dialog.show()
-        finish()
+        Handler(Looper.getMainLooper()).postDelayed({
+            dialog.dismiss()
+            finish()
+        }, 1300)
+
     }
 
     override fun onPostMateCreateFailure(message: String) {
