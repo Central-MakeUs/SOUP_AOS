@@ -53,9 +53,10 @@ WishListView, WishListRVAdapter.OnStoreClickListener, RadioGroup.OnCheckedChange
         context?.let {
             val arrayAdapter = ArrayAdapter(
                 it,
-                R.layout.mate_status_spinner_item,
+                R.layout.item_spinner,
                 spinnerItem
             )
+            arrayAdapter.setDropDownViewResource(R.layout.item_spinner_text)
             binding.spinnerWishlist.adapter = arrayAdapter
         }
 

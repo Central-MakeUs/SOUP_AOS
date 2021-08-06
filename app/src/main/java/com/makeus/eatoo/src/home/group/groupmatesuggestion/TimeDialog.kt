@@ -18,6 +18,7 @@ class TimeDialog(context: Context, val dialogInteface : TimeDialogInterface, val
 
     private lateinit var Hour : String
     private lateinit var minute : String
+    private var isTimeChanged = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +55,14 @@ class TimeDialog(context: Context, val dialogInteface : TimeDialogInterface, val
 
         binding.checkBtn.setOnClickListener {
             //startActivityForResult()
+            if(!isTimeChanged){
+                if(Hour.toInt() < 10){
+                    Hour = "0$Hour"
+                }
+                if(minute.toInt() < 10){
+                    minute = "0$minute"
+                }
+            }
             Log.d("선택된 시간",Hour + minute)
             if(Type == "start"){
                 dialogInteface.onSetStartTime(Hour, minute)
@@ -67,6 +76,8 @@ class TimeDialog(context: Context, val dialogInteface : TimeDialogInterface, val
             dismiss()
         }
         mTimePicker.setOnTimeChangedListener { timePicker, hour, min ->
+            isTimeChanged = true
+
             if(hour < 10){
                 Hour = "0$hour"
             }

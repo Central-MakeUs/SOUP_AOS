@@ -141,7 +141,7 @@
         android:layout_marginBottom="11dp"
         android:singleLine="true"
         android:spinnerMode="dropdown"
-        android:gravity="end"
+        android:background="@null"
         app:layout_constraintBottom_toTopOf="@id/rv_wishlist"
         app:layout_constraintEnd_toEndOf="parent" />
 
