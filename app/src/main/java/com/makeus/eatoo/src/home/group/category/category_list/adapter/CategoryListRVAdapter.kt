@@ -31,7 +31,7 @@ class CategoryListRVAdapter(
             glideUtil(context, item.imgUrl, binding.ivStore)
             binding.ivStore.setAlpha(200)
             binding.tvStoreName.text = item.storeName
-            binding.tvRating.text = item.rating.toInt().toString()
+            binding.tvRating.text = item.rating.toString()
             binding.toggleStoreLike.isChecked = item.isLiked == "Y"
 
             setKeyword(item)
