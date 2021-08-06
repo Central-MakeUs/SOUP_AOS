@@ -1,6 +1,8 @@
 package com.makeus.eatoo.src.review.create_review.create_review2
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.Instrumentation
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -16,6 +18,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ToggleButton
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.children
 import androidx.core.view.isVisible
@@ -100,17 +103,23 @@ class CreateReview2Activity
 
 
     private fun loadGallery() {
-        getImage.launch("image/*")
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_PICK
+        getImage.launch(intent)
     }
 
-    private val getImage =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let {
-                reviewImage = it
-                glideUtil(this, it.toString(), roundAll(binding.ivReviewImg, 5))
-                binding.ivReviewImg.isVisible = true
-                binding.ivReviewImgIcon.isVisible = false
-                binding.tvInputReviewImg.isVisible = false
+
+    private val getImage : ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+         if(result.resultCode == Activity.RESULT_OK){
+             result.data?.data?.let {
+                 reviewImage = it
+                 glideUtil(this, it.toString(), roundAll(binding.ivReviewImg, 5))
+                 binding.ivReviewImg.isVisible = true
+                 binding.ivReviewImgIcon.isVisible = false
+                 binding.tvInputReviewImg.isVisible = false
+             }
             }
         }
 

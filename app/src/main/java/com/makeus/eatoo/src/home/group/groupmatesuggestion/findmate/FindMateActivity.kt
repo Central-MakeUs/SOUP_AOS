@@ -38,8 +38,6 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.d("findmate", getGroupIdx().toString())
-        Log.d("findmate", getUserIdx().toString())
         setSpinner()
 
         binding.suggestionTxt.text = "'" +getUserNickName() + "'" + binding.suggestionTxt.text
@@ -67,7 +65,6 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
 
     override fun onGetFindMateSuccess(response: GroupMateResponse) {
         dismissLoadingDialog()
-        Log.d("findmate", response.toString())
 
         if(response.code != 1000){
             binding.suggestionRecyclerview.visibility = View.GONE
@@ -126,12 +123,10 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
 
     override fun onGetMateAttendSuccess(response: MateAttendResponse) {
         dismissLoadingDialog()
-        Log.d("메이트 참가 결과",""+response.message)
         getAllMate()
     }
 
     override fun onGetMateAttendFail(message: String?) {
         dismissLoadingDialog()
-        Log.d("메이트 참가 결과",""+message)
     }
 }

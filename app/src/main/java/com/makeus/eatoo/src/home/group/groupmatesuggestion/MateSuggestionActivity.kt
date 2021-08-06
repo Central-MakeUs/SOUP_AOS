@@ -1,6 +1,7 @@
 package com.makeus.eatoo.src.home.group.groupmatesuggestion
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -13,6 +14,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
@@ -35,6 +37,7 @@ import com.makeus.eatoo.src.home.group.groupmatesuggestion.dialog.LeaveMateSuggD
 import com.makeus.eatoo.src.main.MainActivity
 import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.glideUtil
+import com.makeus.eatoo.util.roundAll
 import java.text.SimpleDateFormat
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -118,18 +121,22 @@ class MateSuggestionActivity
         }
     }
 
-
     private fun loadGallery() {
-        getImage.launch("image/*")
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_PICK
+        getImage.launch(intent)
     }
 
-    private val getImage =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let {
-                storeImg = it
-                glideUtil(this, it.toString(), binding.ivMateImg)
-                binding.ivMateImg.isVisible = true
-                binding.llImgHint.isVisible = false
+    private val getImage : ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if(result.resultCode == Activity.RESULT_OK){
+                result.data?.data?.let {
+                    storeImg = it
+                    glideUtil(this, it.toString(), binding.ivMateImg)
+                    binding.ivMateImg.isVisible = true
+                    binding.llImgHint.isVisible = false
+                }
             }
         }
 
@@ -215,7 +222,7 @@ class MateSuggestionActivity
     }
 
     private fun requestMateSugg(mateReq: CreateMateRequest) {
-        Log.d("mateSugg", mateReq.toString())
+        //Log.d("mateSugg", mateReq.toString())
         MateSuggestionService(this).tryPostMate(mateReq, getUserIdx())
     }
 

@@ -96,7 +96,6 @@ class MyPageFragment
         binding.questionsLayout.setOnClickListener(this)
         binding.tvEditDietKeyword.setOnClickListener(this)
         binding.clNoKeyword.setOnClickListener (this)
-
         binding.findInviteBtn.setOnClickListener (this)
         binding.accountSecessionBtn.setOnClickListener (this)
         binding.questionsBtn.setOnClickListener (this)
@@ -236,7 +235,6 @@ class MyPageFragment
             override fun run() {
                 val containerHeight = binding.clDietKeywordContainer.height.toFloat()
                 val containerWidth = binding.clDietKeywordContainer.width.toFloat()
-                //Log.d("mypagefrag", "containerWidth : ${ containerWidth}, containerWidth : $containerHeight")
                 calcKeywordLocation(userKeywordRes, containerWidth, containerHeight)
             }
         })
@@ -244,12 +242,9 @@ class MyPageFragment
 
     private fun calcKeywordLocation(userKeywordRes: List<GetUserKeywordRe>, containerWidth: Float, containerHeight: Float) {
         userKeywordRes.forEachIndexed { index, userDietKeyword ->
-            if(index < 6){
-                //Log.d("mypagefrag", "parentX : ${ parentX}, parentY : $parentY")
-                //Log.d("mypagefrag", "userDietKeyword.x : ${ userDietKeyword.x}, userDietKeyword.y : ${userDietKeyword.y}")
+            if(index < 10){
                 val keywordX = (userDietKeyword.x * containerWidth / parentX!!).toFloat()
                 val keywordY = ((userDietKeyword.y + topHeightLimit)* containerHeight / parentY!!).toFloat()
-                //Log.d("mypagefrag", "keywordX : ${ keywordX}, keywordY : $keywordY")
                 makeKeywordCircle(userDietKeyword, keywordX, keywordY)
             }else return@forEachIndexed
         }

@@ -63,7 +63,6 @@ class TimeDialog(context: Context, val dialogInteface : TimeDialogInterface, val
                     minute = "0$minute"
                 }
             }
-            Log.d("선택된 시간",Hour + minute)
             if(Type == "start"){
                 dialogInteface.onSetStartTime(Hour, minute)
             }
