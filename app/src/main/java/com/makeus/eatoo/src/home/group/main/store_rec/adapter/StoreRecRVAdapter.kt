@@ -30,7 +30,7 @@ class StoreRecRVAdapter(
             binding.ivStore.setAlpha(200)
             binding.tvStoreName.text = item.storeName
             binding.tvStoreLocation.text = item.address
-            binding.tvStoreRating.text = item.rating.toInt().toString()
+            binding.tvStoreRating.text = item.rating.toString()
             binding.toggleStoreLike.isChecked = item.isLiked == "Y"
 
             binding.clStoreRec.setOnClickListener {

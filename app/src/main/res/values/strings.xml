@@ -30,7 +30,8 @@
 
 
     <!--main_suggestion-->
-    <string name="user_suggestion">님이 제안하신\nMATE 입니다:)</string>
+    <string name="user_suggestion">님이 제안하신</string>
+    <string name="user_suggestion2">MATE 입니다:)</string>
     <string name="user_suggestion_no">제안하신 MATE가 없습니다.</string>
     <string name="user_my_suggestion">내 제안</string>
     <string name="mate_suggestion_title">국밥 드실분</string>

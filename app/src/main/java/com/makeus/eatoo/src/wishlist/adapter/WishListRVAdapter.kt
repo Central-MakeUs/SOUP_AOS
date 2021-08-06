@@ -32,10 +32,9 @@ class WishListRVAdapter(
 
         fun bindItem(item: WishListResult) {
 
-
             glideUtil(context, item.imgUrl, binding.ivStore)
             binding.tvStoreName.text = item.storeName
-            binding.tvRating.text = item.rating.toInt().toString()
+            binding.tvRating.text = item.rating.toString()
             binding.toggleStoreLike.isChecked = item.isLiked == "Y"
 
             setKeyword(item)

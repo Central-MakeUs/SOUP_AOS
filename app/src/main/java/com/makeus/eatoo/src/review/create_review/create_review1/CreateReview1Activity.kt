@@ -155,6 +155,8 @@ class CreateReview1Activity :
         getStoreInfo(storeIdx)
         binding.tvSearchLocation.text = reviewInfo.address
         binding.ivReview1Img.isVisible = true
+        binding.ivMapHint.isVisible = false
+        binding.tvMapHint.isVisible = false
         glideUtil(
             this,
             reviewInfo.imgUrl,

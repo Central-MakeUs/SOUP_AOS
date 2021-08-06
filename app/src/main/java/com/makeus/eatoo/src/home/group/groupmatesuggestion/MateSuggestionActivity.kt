@@ -3,6 +3,7 @@ package com.makeus.eatoo.src.home.group.groupmatesuggestion
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,6 +13,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
@@ -32,6 +34,10 @@ import com.makeus.eatoo.src.home.group.groupmatesuggestion.dialog.LeaveMateSuggD
 import com.makeus.eatoo.src.main.MainActivity
 import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.glideUtil
+import java.text.SimpleDateFormat
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class MateSuggestionActivity
@@ -128,6 +134,7 @@ class MateSuggestionActivity
 
     private fun checkValidation() {
         if(groupIdx == -1) {
+            Log.d("matesugg", groupIdx.toString())
             showCustomToast("그룹을 선택해주세요.")
             return
         }
@@ -227,7 +234,7 @@ class MateSuggestionActivity
 
      */
     override fun onGetGroupSuccess(response: GroupResponse) {
-        response.result.forEach {
+        response.result.forEachIndexed { index, it ->
             val chip  = LayoutInflater.from(this).inflate(R.layout.view_chip_2, null) as Chip
             chip.text = it.name
             if(getGroupIdx() == it.groupIdx){
@@ -238,6 +245,8 @@ class MateSuggestionActivity
                 if(chip.isChecked) groupIdx = it.groupIdx
             }
             binding.chipgroupMateSugg.addView(chip)
+
+            if(index == 0) groupIdx = it.groupIdx
         }
     }
 
@@ -248,11 +257,13 @@ class MateSuggestionActivity
 
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {
         dismissLoadingDialog()
+        val dialog = MateSuggestionCompleteDialog(this)
+        dialog.show()
         Handler(Looper.getMainLooper()).postDelayed({
-            val dialog = MateSuggestionCompleteDialog(this)
-            dialog.show()
-        }, 1000)
-        finish()
+            dialog.dismiss()
+            finish()
+        }, 1300)
+
     }
 
     override fun onPostMateCreateFailure(message: String) {
@@ -260,19 +271,82 @@ class MateSuggestionActivity
         showCustomToast(message)
     }
 
+    fun timeFormatter(userSetTime : String): Date {
+        val timeFormat = SimpleDateFormat("HH:mm")
+        val time = timeFormat.parse(userSetTime)
+        Log.d("matesugg", time.toString())
+        return time
+    }
+
 
     @SuppressLint("SetTextI18n")
     override fun onSetStartTime(hour: String, minute: String) {
+
+        val calendar = Calendar.getInstance()
+        val currentTimeHour = calendar.get(Calendar.HOUR_OF_DAY)
+        val currentTimeMin = calendar.get(Calendar.MINUTE)
+
+        if(timeFormatter("$currentTimeHour:$currentTimeMin").after(timeFormatter("$hour:$minute"))){
+            showCustomToast("시작 시간은 현재 시간 이후 이어야 합니다.")
+            return
+        }
+        if(binding.endTimeBtn.text.isNotEmpty() &&
+            timeFormatter("$hour:$minute").after(timeFormatter(binding.endTimeBtn.text.toString()))){
+            showCustomToast("시작 시간은 끝 시간 이전 이어야 합니다.")
+            return
+        }
+        if(binding.limitTimeTv.text.isNotEmpty() && timeFormatter(binding.limitTimeTv.text.toString()).after(timeFormatter("$hour:$minute"))){
+            showCustomToast("시작 시간은 마감시간 이후 이어야 합니다.")
+            return
+        }
+
         binding.startTimeBtn.text = "$hour:$minute"
     }
 
     @SuppressLint("SetTextI18n")
     override fun onSetEndTime(hour: String, minute: String) {
+        val calendar = Calendar.getInstance()
+        val currentTimeHour = calendar.get(Calendar.HOUR_OF_DAY)
+        val currentTimeMin = calendar.get(Calendar.MINUTE)
+
+        if(timeFormatter("$currentTimeHour:$currentTimeMin").after(timeFormatter("$hour:$minute"))){
+            showCustomToast("끝 시간은 현재 시간 이후 이어야 합니다.")
+            return
+        }
+       if(binding.startTimeBtn.text.isNotEmpty() &&
+           timeFormatter(binding.startTimeBtn.text.toString()).after(timeFormatter("$hour:$minute"))){
+           showCustomToast("끝 시간은 시작 시간 이후 이어야 합니다.")
+           return
+       }
+        if(binding.limitTimeTv.text.isNotEmpty() && timeFormatter(binding.limitTimeTv.text.toString()).after(timeFormatter("$hour:$minute"))){
+            showCustomToast("끝 시간은 마감시간 이후 이어야 합니다.")
+            return
+        }
+
         binding.endTimeBtn.text = "$hour:$minute"
     }
 
     @SuppressLint("SetTextI18n")
     override fun onSetLimitTime(hour: String, minute: String) {
+
+        val calendar = Calendar.getInstance()
+        val currentTimeHour = calendar.get(Calendar.HOUR_OF_DAY)
+        val currentTimeMin = calendar.get(Calendar.MINUTE)
+
+        if(timeFormatter("$currentTimeHour:$currentTimeMin").after(timeFormatter("$hour:$minute"))){
+            showCustomToast("마감시간은 현재 시간 이후 이어야 합니다.")
+            return
+        }
+
+        if(binding.startTimeBtn.text.isNotEmpty() && timeFormatter("$hour:$minute").after(timeFormatter(binding.startTimeBtn.text.toString()))){
+            showCustomToast("마감시간은 시작 시간 이전 이어야 합니다.")
+            return
+        }
+
+        if(binding.endTimeBtn.text.isNotEmpty() && timeFormatter("$hour:$minute").after(timeFormatter(binding.endTimeBtn.text.toString()))){
+            showCustomToast("마감시간은 끝 시간 이전 이어야 합니다.")
+            return
+        }
         binding.limitTimeTv.text = "$hour:$minute"
     }
 

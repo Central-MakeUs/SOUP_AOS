@@ -285,9 +285,9 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/group_member_count_tv_background"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_group_user_white"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:src="@drawable/background_member_orange"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
