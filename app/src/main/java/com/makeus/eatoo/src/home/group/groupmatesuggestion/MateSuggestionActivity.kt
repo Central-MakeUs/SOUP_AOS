@@ -1,6 +1,7 @@
 package com.makeus.eatoo.src.home.group.groupmatesuggestion
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -12,6 +13,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
@@ -34,6 +37,7 @@ import com.makeus.eatoo.src.home.group.groupmatesuggestion.dialog.LeaveMateSuggD
 import com.makeus.eatoo.src.main.MainActivity
 import com.makeus.eatoo.util.getGroupIdx
 import com.makeus.eatoo.util.glideUtil
+import com.makeus.eatoo.util.roundAll
 import java.text.SimpleDateFormat
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -41,14 +45,14 @@ import java.util.*
 
 
 class MateSuggestionActivity
-    : BaseActivity<ActivityMateSuggestionBinding>(ActivityMateSuggestionBinding::inflate)
-    , MateSuggestionView, TimeDialogInterface, View.OnClickListener, LeaveMateSuggDialogInterface{
+    : BaseActivity<ActivityMateSuggestionBinding>(ActivityMateSuggestionBinding::inflate),
+    MateSuggestionView, TimeDialogInterface, View.OnClickListener, LeaveMateSuggDialogInterface {
 
 
-    private var groupIdx : Int = -1
-    private var storeImg : Uri? = null
-    private var Limit_people = arrayListOf<String>("")
-    private var limit_headcount : Int = 2
+    private var groupIdx: Int = -1
+    private var storeImg: Uri? = null
+    private var peopleLimitList = arrayListOf<String>("")
+    private var peopleLimitIdx = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,15 +70,15 @@ class MateSuggestionActivity
 
     private fun getIntentExtra() {
         val storeName = intent.getStringExtra("storeName")
-        if(storeName != null) binding.storeEdt.setText(storeName)
+        if (storeName != null) binding.storeEdt.setText(storeName)
 
         storeImg = intent.getStringExtra("storeImg")?.toUri()
-        if(storeImg != null) {
+        if (storeImg != null) {
             binding.ivMateImg.isVisible = true
             glideUtil(this, storeImg.toString(), binding.ivMateImg)
             binding.ivMateImg.setAlpha(400)
             binding.llImgHint.isVisible = false
-            if(storeName != null)  {
+            if (storeName != null) {
                 binding.tvMateStoreNameOnImg.text = storeName
                 binding.tvMateStoreNameOnImg.isVisible = true
             }
@@ -95,17 +99,17 @@ class MateSuggestionActivity
     }
 
     override fun onClick(p0: View?) {
-        when(p0?.id) {
+        when (p0?.id) {
             R.id.start_time_layout -> {
-                val dialog = TimeDialog(this, this,"start")
+                val dialog = TimeDialog(this, this, "start")
                 dialog.show()
             }
             R.id.end_time_layout -> {
-                val dialog = TimeDialog(this, this,"end")
+                val dialog = TimeDialog(this, this, "end")
                 dialog.show()
             }
             R.id.limit_time_layout -> {
-                val dialog = TimeDialog(this, this,"limit")
+                val dialog = TimeDialog(this, this, "limit")
                 dialog.show()
             }
             R.id.register_mate_btn -> checkValidation()
@@ -117,62 +121,66 @@ class MateSuggestionActivity
         }
     }
 
-
     private fun loadGallery() {
-        getImage.launch("image/*")
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_PICK
+        getImage.launch(intent)
     }
 
-    private val getImage =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let {
-                storeImg = it
-                glideUtil(this, it.toString(), binding.ivMateImg)
-                binding.ivMateImg.isVisible = true
-                binding.llImgHint.isVisible = false
+    private val getImage : ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if(result.resultCode == Activity.RESULT_OK){
+                result.data?.data?.let {
+                    storeImg = it
+                    glideUtil(this, it.toString(), binding.ivMateImg)
+                    binding.ivMateImg.isVisible = true
+                    binding.llImgHint.isVisible = false
+                }
             }
         }
 
     private fun checkValidation() {
-        if(groupIdx == -1) {
+        if (groupIdx == -1) {
             Log.d("matesugg", groupIdx.toString())
             showCustomToast("그룹을 선택해주세요.")
             return
         }
-        if(binding.suggestionNameEdt.text.isEmpty()){
+        if (binding.suggestionNameEdt.text.isEmpty()) {
             showCustomToast("제안명을 입력해주세요.")
             return
         }
-        if(binding.storeEdt.text.isEmpty()){
+        if (binding.storeEdt.text.isEmpty()) {
             showCustomToast("가게명을 입력해주세요.")
             return
         }
-        if(binding.startTimeBtn.text.isEmpty()){
+        if (binding.startTimeBtn.text.isEmpty()) {
             showCustomToast("식사 시작 시간을 입력해주세요.")
             return
         }
-        if(binding.endTimeBtn.text.isEmpty()){
+        if (binding.endTimeBtn.text.isEmpty()) {
             showCustomToast("식사 끝 시간을 입력해주세요.")
             return
         }
-        if(binding.limitPeopleTv.text == resources.getString(R.string.main_mate_suggestion_limit_people_hint)){
+        if(peopleLimitIdx == 0){
             showCustomToast("제한 인원을 입력해주세요.")
             return
         }
-        if(binding.limitTimeTv.text.isEmpty()){
+        if (binding.limitTimeTv.text.isEmpty()) {
             showCustomToast("마감 시간을 입력해주세요.")
             return
         }
 
-        if(storeImg != null) {
+        if (storeImg != null) {
             loadFirebaseStorage(storeImg!!)
-        }else {
+        } else {
             val mateReq = CreateMateRequest(
                 groupIdx = groupIdx,
                 name = binding.suggestionNameEdt.text.toString(),
                 storeName = binding.storeEdt.text.toString(),
                 startTime = binding.startTimeBtn.text.toString(),
                 endTime = binding.endTimeBtn.text.toString(),
-                headCount =limit_headcount,
+                headCount = peopleLimitIdx+1,
                 timeLimit = binding.limitTimeTv.text.toString(),
                 imgUrl = ""
             )
@@ -181,9 +189,9 @@ class MateSuggestionActivity
         }
 
 
-
     }
-    private fun loadFirebaseStorage(firebaseUri : Uri) {
+
+    private fun loadFirebaseStorage(firebaseUri: Uri) {
         showLoadingDialog(this)
         val storageRef: StorageReference = FirebaseStorage.getInstance().reference
         val ref = storageRef.child("${getUserIdx()}/mate/${System.currentTimeMillis()}.png")
@@ -203,7 +211,7 @@ class MateSuggestionActivity
                 storeName = binding.storeEdt.text.toString(),
                 startTime = binding.startTimeBtn.text.toString(),
                 endTime = binding.endTimeBtn.text.toString(),
-                headCount = limit_headcount,
+                headCount = peopleLimitIdx+1,
                 timeLimit = binding.limitTimeTv.text.toString(),
                 imgUrl = it.result.toString()
             )
@@ -214,7 +222,7 @@ class MateSuggestionActivity
     }
 
     private fun requestMateSugg(mateReq: CreateMateRequest) {
-        Log.d("mateSugg", mateReq.toString())
+        //Log.d("mateSugg", mateReq.toString())
         MateSuggestionService(this).tryPostMate(mateReq, getUserIdx())
     }
 
@@ -235,18 +243,18 @@ class MateSuggestionActivity
      */
     override fun onGetGroupSuccess(response: GroupResponse) {
         response.result.forEachIndexed { index, it ->
-            val chip  = LayoutInflater.from(this).inflate(R.layout.view_chip_2, null) as Chip
+            val chip = LayoutInflater.from(this).inflate(R.layout.view_chip_2, null) as Chip
             chip.text = it.name
-            if(getGroupIdx() == it.groupIdx){
+            if (getGroupIdx() == it.groupIdx) {
                 chip.isChecked = true
                 groupIdx = it.groupIdx
             }
             chip.setOnCheckedChangeListener { compoundButton, isChecked ->
-                if(chip.isChecked) groupIdx = it.groupIdx
+                if (chip.isChecked) groupIdx = it.groupIdx
             }
             binding.chipgroupMateSugg.addView(chip)
 
-            if(index == 0) groupIdx = it.groupIdx
+            if (index == 0) groupIdx = it.groupIdx
         }
     }
 
@@ -256,7 +264,6 @@ class MateSuggestionActivity
 
 
     override fun onPostMateCreateSuccess(response: CreateMateResponse) {
-        dismissLoadingDialog()
         val dialog = MateSuggestionCompleteDialog(this)
         dialog.show()
         Handler(Looper.getMainLooper()).postDelayed({
@@ -271,10 +278,9 @@ class MateSuggestionActivity
         showCustomToast(message)
     }
 
-    fun timeFormatter(userSetTime : String): Date {
+    fun timeFormatter(userSetTime: String): Date {
         val timeFormat = SimpleDateFormat("HH:mm")
         val time = timeFormat.parse(userSetTime)
-        Log.d("matesugg", time.toString())
         return time
     }
 
@@ -286,16 +292,20 @@ class MateSuggestionActivity
         val currentTimeHour = calendar.get(Calendar.HOUR_OF_DAY)
         val currentTimeMin = calendar.get(Calendar.MINUTE)
 
-        if(timeFormatter("$currentTimeHour:$currentTimeMin").after(timeFormatter("$hour:$minute"))){
+        if (timeFormatter("$currentTimeHour:$currentTimeMin").after(timeFormatter("$hour:$minute"))) {
             showCustomToast("시작 시간은 현재 시간 이후 이어야 합니다.")
             return
         }
-        if(binding.endTimeBtn.text.isNotEmpty() &&
-            timeFormatter("$hour:$minute").after(timeFormatter(binding.endTimeBtn.text.toString()))){
+        if (binding.endTimeBtn.text.isNotEmpty() &&
+            timeFormatter("$hour:$minute").after(timeFormatter(binding.endTimeBtn.text.toString()))
+        ) {
             showCustomToast("시작 시간은 끝 시간 이전 이어야 합니다.")
             return
         }
-        if(binding.limitTimeTv.text.isNotEmpty() && timeFormatter(binding.limitTimeTv.text.toString()).after(timeFormatter("$hour:$minute"))){
+        if (binding.limitTimeTv.text.isNotEmpty() && timeFormatter(binding.limitTimeTv.text.toString()).after(
+                timeFormatter("$hour:$minute")
+            )
+        ) {
             showCustomToast("시작 시간은 마감시간 이후 이어야 합니다.")
             return
         }
@@ -309,16 +319,20 @@ class MateSuggestionActivity
         val currentTimeHour = calendar.get(Calendar.HOUR_OF_DAY)
         val currentTimeMin = calendar.get(Calendar.MINUTE)
 
-        if(timeFormatter("$currentTimeHour:$currentTimeMin").after(timeFormatter("$hour:$minute"))){
+        if (timeFormatter("$currentTimeHour:$currentTimeMin").after(timeFormatter("$hour:$minute"))) {
             showCustomToast("끝 시간은 현재 시간 이후 이어야 합니다.")
             return
         }
-       if(binding.startTimeBtn.text.isNotEmpty() &&
-           timeFormatter(binding.startTimeBtn.text.toString()).after(timeFormatter("$hour:$minute"))){
-           showCustomToast("끝 시간은 시작 시간 이후 이어야 합니다.")
-           return
-       }
-        if(binding.limitTimeTv.text.isNotEmpty() && timeFormatter(binding.limitTimeTv.text.toString()).after(timeFormatter("$hour:$minute"))){
+        if (binding.startTimeBtn.text.isNotEmpty() &&
+            timeFormatter(binding.startTimeBtn.text.toString()).after(timeFormatter("$hour:$minute"))
+        ) {
+            showCustomToast("끝 시간은 시작 시간 이후 이어야 합니다.")
+            return
+        }
+        if (binding.limitTimeTv.text.isNotEmpty() && timeFormatter(binding.limitTimeTv.text.toString()).after(
+                timeFormatter("$hour:$minute")
+            )
+        ) {
             showCustomToast("끝 시간은 마감시간 이후 이어야 합니다.")
             return
         }
@@ -333,50 +347,45 @@ class MateSuggestionActivity
         val currentTimeHour = calendar.get(Calendar.HOUR_OF_DAY)
         val currentTimeMin = calendar.get(Calendar.MINUTE)
 
-        if(timeFormatter("$currentTimeHour:$currentTimeMin").after(timeFormatter("$hour:$minute"))){
+        if (timeFormatter("$currentTimeHour:$currentTimeMin").after(timeFormatter("$hour:$minute"))) {
             showCustomToast("마감시간은 현재 시간 이후 이어야 합니다.")
             return
         }
 
-        if(binding.startTimeBtn.text.isNotEmpty() && timeFormatter("$hour:$minute").after(timeFormatter(binding.startTimeBtn.text.toString()))){
+        if (binding.startTimeBtn.text.isNotEmpty() && timeFormatter("$hour:$minute").after(
+                timeFormatter(binding.startTimeBtn.text.toString())
+            )
+        ) {
             showCustomToast("마감시간은 시작 시간 이전 이어야 합니다.")
             return
         }
 
-        if(binding.endTimeBtn.text.isNotEmpty() && timeFormatter("$hour:$minute").after(timeFormatter(binding.endTimeBtn.text.toString()))){
+        if (binding.endTimeBtn.text.isNotEmpty() && timeFormatter("$hour:$minute").after(
+                timeFormatter(binding.endTimeBtn.text.toString())
+            )
+        ) {
             showCustomToast("마감시간은 끝 시간 이전 이어야 합니다.")
             return
         }
         binding.limitTimeTv.text = "$hour:$minute"
     }
 
-    fun setSpinner() {
-        for(i in 1..99) {
-            Limit_people.add((i+1).toString())
+        fun setSpinner() {
+        for(i in 2..50) {
+            peopleLimitList.add("${i}명")
         }
         val arrayAdapter = ArrayAdapter(
             this,
-            R.layout.limit_people_spinner_item,
-            Limit_people
+            R.layout.item_spinner_timelimit,
+            peopleLimitList
         )
 
+        arrayAdapter.setDropDownViewResource(R.layout.item_spinner_timelimit_text)
         binding.limitPeopleSpinner.adapter = arrayAdapter
         binding.limitPeopleSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             @SuppressLint("SetTextI18n")
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {//스피너가 선택 되었을때
-                if(i == 0){
-                    binding.limitPeopleTv.setText(R.string.main_mate_suggestion_limit_people_hint)
-                    binding.limitPeopleTv.setTextColor(binding.limitPeopleTv.context.resources.getColor(R.color.gray_100))
-                }
-                else {
-                    binding.limitPeopleTv.text = (i + 1).toString() + '명'
-                    limit_headcount = i+1
-                    binding.limitPeopleTv.setTextColor(
-                        binding.limitPeopleTv.context.resources.getColor(
-                            R.color.black
-                        )
-                    )
-                }
+                peopleLimitIdx = i
             }
 
             override fun onNothingSelected(adapterView: AdapterView<*>) {
@@ -384,6 +393,4 @@ class MateSuggestionActivity
         }
 
     }
-
-
 }

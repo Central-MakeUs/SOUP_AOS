@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="12dp"
+    android:paddingTop="13dp"
+    android:paddingBottom="13dp"
+    android:paddingEnd="11dp"
+    android:fontFamily="sans-serif"
+    android:textSize="15sp"
+    android:textStyle="normal"
+    android:textColor="@color/black"
+    android:focusable="false"
+    android:cursorVisible="false"
+    android:hint="@string/main_mate_suggestion_limit_people_hint"
+    android:background="@drawable/edittext_background_radius"
+    android:drawableRight="@drawable/ic_down_btn"
+    tools:ignore="SmallSp">
+
+</androidx.appcompat.widget.AppCompatTextView>

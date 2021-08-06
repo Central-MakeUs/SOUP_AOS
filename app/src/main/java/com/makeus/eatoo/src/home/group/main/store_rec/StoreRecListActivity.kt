@@ -84,7 +84,8 @@ class StoreRecListActivity :
     private fun setSpinner() {
         val spinnerItem = resources.getStringArray(R.array.spinner_category)
 
-        val arrayAdapter = ArrayAdapter(this, R.layout.mate_status_spinner_item, spinnerItem)
+        val arrayAdapter = ArrayAdapter(this, R.layout.item_spinner, spinnerItem)
+        arrayAdapter.setDropDownViewResource(R.layout.item_spinner_text)
         binding.spinnerStoreRec.adapter = arrayAdapter
 
 

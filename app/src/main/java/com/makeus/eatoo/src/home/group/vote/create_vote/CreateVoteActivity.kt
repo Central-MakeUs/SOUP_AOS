@@ -1,7 +1,9 @@
 package com.makeus.eatoo.src.home.group.vote.create_vote
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -10,8 +12,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.core.view.isVisible
@@ -23,9 +27,11 @@ import com.makeus.eatoo.src.home.group.vote.create_vote.model.CreateVoteRequest
 import com.makeus.eatoo.util.*
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.chip.Chip
+import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -39,6 +45,7 @@ class CreateVoteActivity
     }
 
     private val voteItemList: MutableList<Keyword> = mutableListOf()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +75,7 @@ class CreateVoteActivity
         binding.customToolbar.leftIcon.setOnClickListener { finish() }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.btn_register_vote -> checkValidity()
@@ -77,7 +85,16 @@ class CreateVoteActivity
                 initKeywordChips()
             }
             R.id.ll_vote_item_plus -> addVoteItemView()
-            R.id.tv_due_date_date -> openCalendar()
+            R.id.tv_due_date_date -> {
+                val datePicker = DatePickerDialog(this,
+                    dateSetListener,
+                    cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH),
+                    cal.get(Calendar.DAY_OF_MONTH)
+                )
+                datePicker.datePicker.minDate = cal.timeInMillis
+                datePicker.show()
+            }
             R.id.tv_due_date_time -> openClock()
         }
     }
@@ -96,8 +113,14 @@ class CreateVoteActivity
             .build()
 
         timePicker.addOnPositiveButtonClickListener {
-            binding.tvDueDateTime.text = formatTo12HTimeStamp(timePicker.hour, timePicker.minute)
-            timePicker.dismiss()
+            if(!isDueDateValid( binding.tvDueDateDate.text.toString(), formatTo12HTimeStamp(timePicker.hour, timePicker.minute))){
+                showCustomToast("마감시간은 현재시간 이후 이어야 합니다.")
+            }
+            else {
+                binding.tvDueDateTime.text = formatTo12HTimeStamp(timePicker.hour, timePicker.minute)
+                timePicker.dismiss()
+            }
+
         }
         timePicker.addOnCancelListener {
             timePicker.dismiss()
@@ -105,24 +128,25 @@ class CreateVoteActivity
         timePicker.show(supportFragmentManager, "vote_time")
     }
 
-    private fun openCalendar() {
-        val datePicker = MaterialDatePicker.Builder.datePicker()
-            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-            .setTitleText(resources.getString(R.string.vote_due_date))
-            .setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR)
-            .setTheme(R.style.ThemeOverlay_App_DatePicker)
-            .build()
 
-        datePicker.addOnPositiveButtonClickListener {
-            binding.tvDueDateDate.text = datePicker.headerText
-            datePicker.dismiss()
+    val cal: Calendar = Calendar.getInstance()
+    private val dateSetListener = object : DatePickerDialog.OnDateSetListener {
+        override fun onDateSet(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+            binding.tvDueDateDate.text = "${year}년 ${monthOfYear+1}월 ${dayOfMonth}일"
+            if(!isDueDateValid("${year}년 ${monthOfYear+1}월 ${dayOfMonth}일", binding.tvDueDateTime.text.toString())) {
+                showCustomToast("마감시간은 현재시간 이후 이어야 합니다.")
+            }
         }
-        datePicker.addOnCancelListener {
-            datePicker.dismiss()
-        }
-        datePicker.show(supportFragmentManager, "vote_calendar")
-
     }
+
+    fun isDueDateValid(userSetDate : String, userSetTime : String) : Boolean {
+        val cal = Calendar.getInstance().time
+        val timeStampFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")
+
+        val parsedDate = timeStampFormat.format(cal)
+        return timeStampFormat.parse(getDueDateTime(userSetDate, userSetTime)).after(timeStampFormat.parse(parsedDate))
+    }
+
 
     private fun listenDueDateToggle() = with(binding) {
         rlVoteDueDate.setOnClickListener {
@@ -258,8 +282,14 @@ class CreateVoteActivity
         val timeLimit : String
 
         if(binding.toggleDueDate.isChecked) {
-            hasDueDate = YES
-            timeLimit = getDueDateTime()
+            if(!isDueDateValid(binding.tvDueDateDate.text.toString(), binding.tvDueDateTime.text.toString())) {
+                showCustomToast("마감시간은 현재시간 이후 이어야 합니다.")
+                return
+            }else {
+                hasDueDate = YES
+                timeLimit = getDueDateTime(binding.tvDueDateDate.text.toString(), binding.tvDueDateTime.text.toString())
+            }
+
         }else {
             hasDueDate = NO
             timeLimit = ""
@@ -293,9 +323,9 @@ class CreateVoteActivity
 
     }
 
-    private fun getDueDateTime() : String {
-        val date = formatDateToTimeStamp(binding.tvDueDateDate.text.toString())
-        val time = formatTo24HTimeStamp(binding.tvDueDateTime.text.toString())
+    private fun getDueDateTime(userSetDate : String, userSetTime : String) : String {
+        val date = formatDateToTimeStamp(userSetDate)
+        val time = formatTo24HTimeStamp(userSetTime)
 
         return "$date $time"
     }

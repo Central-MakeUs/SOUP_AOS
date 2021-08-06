@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.AppCompatTextView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="100dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:fontFamily="sans-serif-medium"
+    android:fontFamily="@font/roboto_medium"
     android:textColor="@color/black"
     android:textSize="10sp"
     android:textStyle="normal"
+    tools:text="별점순"
+    android:drawableRight="@drawable/eva_arrow_ios_back_fill"
     tools:ignore="SmallSp">
 
 </androidx.appcompat.widget.AppCompatTextView>

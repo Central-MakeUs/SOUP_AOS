@@ -38,8 +38,6 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.d("findmate", getGroupIdx().toString())
-        Log.d("findmate", getUserIdx().toString())
         setSpinner()
 
         binding.suggestionTxt.text = "'" +getUserNickName() + "'" + binding.suggestionTxt.text
@@ -67,7 +65,6 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
 
     override fun onGetFindMateSuccess(response: GroupMateResponse) {
         dismissLoadingDialog()
-        Log.d("findmate", response.toString())
 
         if(response.code != 1000){
             binding.suggestionRecyclerview.visibility = View.GONE
@@ -107,11 +104,12 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
     fun setSpinner() {
         val arrayAdapter = ArrayAdapter(
             this,
-            R.layout.mate_status_spinner_item,
+            R.layout.item_spinner,
             spinner_item
         )
+        arrayAdapter.setDropDownViewResource(R.layout.item_spinner_text)
+        binding.statusSpinner.adapter = arrayAdapter
 
-        binding.statusSpinner.setAdapter(arrayAdapter)
         binding.statusSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {//스피너가 선택 되었을때
                 FindMateService(this@FindMateActivity).tryGetFindMateData(getUserIdx(), getGroupIdx(),i)
@@ -125,12 +123,10 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
 
     override fun onGetMateAttendSuccess(response: MateAttendResponse) {
         dismissLoadingDialog()
-        Log.d("메이트 참가 결과",""+response.message)
         getAllMate()
     }
 
     override fun onGetMateAttendFail(message: String?) {
         dismissLoadingDialog()
-        Log.d("메이트 참가 결과",""+message)
     }
 }

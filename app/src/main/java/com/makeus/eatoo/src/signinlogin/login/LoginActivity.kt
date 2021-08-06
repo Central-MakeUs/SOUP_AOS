@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.makeus.eatoo.R
+import com.makeus.eatoo.config.ApplicationClass
 import com.makeus.eatoo.config.BaseActivity
 import com.makeus.eatoo.databinding.ActivityLoginBinding
 import com.makeus.eatoo.src.explanation.ExplanationActivity
@@ -131,6 +132,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             Log.d("userIdx", response.result.userIdx.toString())
             putSharedPrefUser(response.result.nickName)
             putSharedPref(response.result.jwt, response.result.userIdx)
+            ApplicationClass.sSharedPreferences.edit()
+                .putInt(ApplicationClass.TOP_HEIGHT_LIMIT, 503).apply()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("finish_explanation"))

@@ -242,7 +242,7 @@ class GroupCategoryFragment :
     override fun onMapReady(map: NaverMap) {
         naverMap = map
         naverMap.maxZoom = 19.0
-        naverMap.minZoom = 10.0
+        naverMap.minZoom = 7.0
         setMyLocationListener()
 
         locationSource = FusedLocationSource(this, CreateGroupActivity.PERMISSION_REQUEST_CODE)

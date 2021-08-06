@@ -161,6 +161,7 @@ View.OnClickListener, DietKeywordView{
 
             Log.d("dietKeywordAct", "parentx : $parentX, parenty : $parentY")
             topHeightLimit = binding.clTvContainer.height + binding.cardviewToolbar.height
+            Log.d("dietKeywordAct", topHeightLimit.toString())
             val bottomHeightLimit = parentY?.minus(binding.llRegisterBtnContainer.height)
 //            Log.d("dietKeywordAct", topHeightLimit.toString())
 //            Log.d("dietKeywordAct", bottomHeightLimit.toString())
