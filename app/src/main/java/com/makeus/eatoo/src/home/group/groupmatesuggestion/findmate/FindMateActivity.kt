@@ -107,11 +107,12 @@ class FindMateActivity : BaseActivity<ActivityFindMateBinding>(
     fun setSpinner() {
         val arrayAdapter = ArrayAdapter(
             this,
-            R.layout.mate_status_spinner_item,
+            R.layout.item_spinner,
             spinner_item
         )
+        arrayAdapter.setDropDownViewResource(R.layout.item_spinner_text)
+        binding.statusSpinner.adapter = arrayAdapter
 
-        binding.statusSpinner.setAdapter(arrayAdapter)
         binding.statusSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {//스피너가 선택 되었을때
                 FindMateService(this@FindMateActivity).tryGetFindMateData(getUserIdx(), getGroupIdx(),i)
