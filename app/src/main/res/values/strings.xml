@@ -330,7 +330,7 @@
     <string name="sign_in_name_bottom">한글, 영문 입력 가능합니다.</string>
     <string name="sign_in_phone_bottom">본인 명의의 휴대폰 번호를 입력해주세요.</string>
     <string name="sign_in_email_bottom">이메일은 중복이 불가능합니다.</string>
-    <string name="sign_in_password_bottom">영문, 숫자 포함 8자 이상</string>
+    <string name="sign_in_password_bottom">영문, 숫자, 특수문자 포함 8자 이상</string>
     <string name="sign_in_nickname_bottom">한글, 영문, 숫자 사용가능</string>
     <string name="sign_in_explan_bottom">이메일과 비밀번호는 어플 로그인에 사용됩니다 :)</string>
     <string name="sign_in_explan_bottom2">닉네임 등 프로필은 마이페이지에서\n수정이 가능합니다.</string>

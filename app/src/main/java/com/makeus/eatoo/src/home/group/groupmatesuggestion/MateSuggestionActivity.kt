@@ -232,6 +232,7 @@ class MateSuggestionActivity
             chip.text = it.name
             if(getGroupIdx() == it.groupIdx){
                 chip.isChecked = true
+                groupIdx = it.groupIdx
             }
             chip.setOnCheckedChangeListener { compoundButton, isChecked ->
                 if(chip.isChecked) groupIdx = it.groupIdx
