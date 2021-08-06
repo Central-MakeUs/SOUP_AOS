@@ -110,7 +110,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/my_suggestion_none_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible">
 
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -141,7 +142,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView14"
                         tools:ignore="SmallSp,UnusedAttribute"
-                        tools:text="@string/group_suggestion_exp2" />
+                        android:text="@string/group_suggestion_exp2" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
